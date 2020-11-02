@@ -1,4 +1,6 @@
+import { NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-enter',
@@ -10,6 +12,9 @@ export class EnterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  onSubmit(form:NgForm){
+    console.log(form);
   }
 
 }
