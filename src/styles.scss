@@ -4,3 +4,7 @@
     --secondary_color:#226597;
     --text_color:#113f67;
 }
+html,body{
+    background-color: var(--bg_color);
+    color: var(--text_color);
+}
