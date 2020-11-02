@@ -11,6 +11,7 @@ import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostComponent } from './share/post/post.component';
+import { EnterComponent } from './auth/enter/enter.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PostComponent } from './share/post/post.component';
     ProfileDetailComponent,
     ProfileEditComponent,
     PostDetailComponent,
-    PostComponent
+    PostComponent,
+    EnterComponent
   ],
   imports: [
     BrowserModule,
