@@ -12,6 +12,7 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostComponent } from './share/post/post.component';
 import { EnterComponent } from './auth/enter/enter.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EnterComponent } from './auth/enter/enter.component';
     ProfileEditComponent,
     PostDetailComponent,
     PostComponent,
-    EnterComponent
+    EnterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
