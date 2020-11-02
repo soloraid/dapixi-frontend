@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face{
+    src: url("assets/IRANSansWeb.ttf");
+    font-family: "IRANSansWeb";
+}
+:root{
+    --bg_color:#f3f9fb;
+    --primary_color:#87c0cd;
+    --secondary_color:#226597;
+    --text_color:#113f67;
+}
+html,body{
+    background-color: var(--bg_color);
+    color: var(--text_color);
+    font-family: "IRANSansWeb";
+    text-align: right;
+}
