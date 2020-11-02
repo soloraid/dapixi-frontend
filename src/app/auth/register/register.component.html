@@ -1,0 +1,41 @@
+<form #reg_form="ngForm" (ngSubmit)="onSubmit(reg_form)">
+    <div class="row">
+        <div class="col">
+            <label for="first_name">نام:</label>
+            <input ngModel type="text" class="form-control" name="first_name" required>
+        </div>
+        <div class="col">
+            <label for="last_name">نام خانوادگی:</label>
+            <input ngModel type="text" class="form-control" name="last_name" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="user_name">نام کاربری:</label>
+        <input ngModel type="text" class="form-control" name="user_name" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">(اختیاری)شماره همراه:</label>
+        <input ngModel type="text" class="form-control" name="phone">
+    </div>
+    <div class="form-group">
+        <label for="date">تاریخ تولد:</label>
+        <input ngModel type="date" class="form-control" name="date">
+    </div>
+    <div class="form-group">
+        <label for="email">ایمیل:</label>
+        <input ngModel type="email" class="form-control" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="password">رمز عبور:</label>
+        <input ngModel type="password" class="form-control" name="password" required minlength="8">
+    </div>
+    <div class="form-group">
+        <label for="password_rep">تکرار رمز عبور:</label>
+        <input ngModel type="password" class="form-control" name="password_rep" required minlength="8">
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6 d-flex">
+            <button type="submit" class="btn">ثبت نام</button>
+        </div>
+    </div>
+</form>

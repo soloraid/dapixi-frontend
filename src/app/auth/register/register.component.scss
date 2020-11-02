@@ -1,0 +1,11 @@
+form{
+    direction: rtl;
+}
+input[type="email"],input[type="password"],input[type="date"]{
+    text-align: left;
+}
+.btn{
+    background-color: var(--secondary_color);
+    color: white;
+    width: 100%;
+}
