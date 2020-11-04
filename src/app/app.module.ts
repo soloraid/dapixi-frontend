@@ -14,6 +14,7 @@ import { PostComponent } from './share/post/post.component';
 import { EnterComponent } from './auth/enter/enter.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule } from '@angular/forms';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
