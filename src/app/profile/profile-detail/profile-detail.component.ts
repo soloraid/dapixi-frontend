@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-detail',
@@ -12,9 +14,14 @@ export class ProfileDetailComponent implements OnInit {
     username:"@a",
     email:"a@a.com"
   }
+  link:string;
   constructor() { }
 
   ngOnInit(): void {
+    this.link=window.location.href;
   }
+  // copyLink(){
+  //   console.log(window.location.href);
+  // }
 
 }
