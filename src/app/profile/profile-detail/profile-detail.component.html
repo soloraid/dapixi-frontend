@@ -1,1 +1,12 @@
-<p>profile-detail works!</p>
+<div class="row">
+    <div class="col-md-2">
+        <p class="text_muted">{{ userView.email }}</p>
+    </div>
+    <div class="col-md-8">
+        <h3>{{ userView.name }}</h3>
+        <p>{{ userView.username }}</p>
+    </div>
+    <div class="col-md-2">
+        <img [src]="userView.img" alt="" class="img-circle">
+    </div>
+</div>
