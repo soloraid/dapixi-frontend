@@ -23,6 +23,9 @@ export class ProfileDetailComponent implements OnInit {
   }
   copyLink(){
     this.copied=true;
+    setTimeout(()=>{
+      this.copied=false;
+    },3000);
   }
 
 }
