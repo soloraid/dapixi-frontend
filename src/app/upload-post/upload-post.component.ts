@@ -12,7 +12,6 @@ export class UploadPostComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // console.log(this.label);
   }
   onChange(event){
     console.log(event.target.files[0]);
