@@ -3,15 +3,36 @@
         <div class="col-lg-8">
             <form (submit)="onSubmit()">
                 <div class="row mb-2">
-                    <div class="col-md-6 col-lg-6 ">
+                    <div class="col-md-6">
                         <div class="custom-file file-box">
-                            <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg" required (change)="onChange($event)">
-                            <label #file_label for="file" class="custom-file-label file-label">تصویری انتخاب نشده است</label>
+                            <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg"
+                                required (change)="onChange($event)">
+                            <label #file_label for="file" class="custom-file-label file-label">تصویری انتخاب نشده
+                                است</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-2 col-md-3 col-lg-4 cat-lable-box pl-0">
+                                    <label for="category" class="cat-label">دسته بندی:</label>
+                                </div>
+                                <div class="col-10 col-md-9 col-lg-8">
+                                    <select class="custom-select" name="category" id="category">
+                                        <option value="">انتخاب کنید</option>
+                                        <option value="0">انتزاعی</option>
+                                        <option value="0">تیره</option>
+                                        <option value="0">مفهومی</option>
+                                        <option value="0">طبیعت</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <label for="desc">توضیحات:</label>
-                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control" [(ngModel)]="description"></textarea>
+                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"
+                    [(ngModel)]="description"></textarea>
                 <div class="row justify-content-center">
                     <button>بارگذاری</button>
                 </div>
