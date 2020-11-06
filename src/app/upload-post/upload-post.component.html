@@ -1,8 +1,21 @@
-<div class="container">
-    <form>
-        <input type="file" class="form-control" accept="image/png,image/jpeg" value="انتخاب عکس">
-        <label for="desc">توضیخات:</label>
-        <textarea name="desc" id="desc" cols="30" rows="10"></textarea>
-        <button>بارگذاری</button>
-    </form>
+<div class="container upload-box">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <form>
+                <div class="row mb-2">
+                    <div class="col-md-6 col-lg-6 ">
+                        <div class="custom-file file-box">
+                            <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg">
+                            <label for="file" class="custom-file-label file-label">تصویری انتخاب نشده است</label>
+                        </div>
+                    </div>
+                </div>
+                <label for="desc">توضیحات:</label>
+                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"></textarea>
+                <div class="row justify-content-center">
+                    <button>بارگذاری</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
