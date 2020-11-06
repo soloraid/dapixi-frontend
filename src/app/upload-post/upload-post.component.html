@@ -3,7 +3,7 @@
         <div class="col-lg-8">
             <form (submit)="onSubmit()">
                 <div class="row mb-2">
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-2">
                         <div class="custom-file file-box">
                             <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg"
                                 required (change)="onChange($event)">
@@ -19,8 +19,8 @@
                                 </div>
                                 <div class="col-10 col-md-9 col-lg-8">
                                     <select class="custom-select" name="category" id="category">
-                                        <option value="">انتخاب کنید</option>
-                                        <option value="0">انتزاعی</option>
+                                        <option value="" selected>انتخاب کنید</option>
+                                        <option value="0" disabled>انتزاعی</option>
                                         <option value="0">تیره</option>
                                         <option value="0">مفهومی</option>
                                         <option value="0">طبیعت</option>
