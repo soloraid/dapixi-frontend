@@ -22,7 +22,7 @@ export class UploadPostComponent implements OnInit {
       selected:false
     },
     {
-      id:0,
+      id:2,
       name:"منظره",
       selected:false
     }

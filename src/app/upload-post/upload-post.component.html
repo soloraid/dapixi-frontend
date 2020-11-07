@@ -29,7 +29,11 @@
                 </div>
                 <div class="row">
                     <ul class="list-inline">
-                        <li *ngFor="let cat of selectedCAts" class="list-inline-item">{{ cat.name }}</li>
+                        <li *ngFor="let cat of selectedCAts" class="list-inline-item">
+                            <a role="button">
+                                {{ cat.name }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <label for="desc">توضیحات:</label>
