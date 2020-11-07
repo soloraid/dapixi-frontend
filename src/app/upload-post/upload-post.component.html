@@ -17,17 +17,18 @@
                                 انتخاب کنید
                             </button>
                             <div class="dropdown-menu">
-                                <a 
-                                *ngFor="let cat of allCats;let i=index" 
-                                id="cat.id" 
-                                class="dropdown-item"
-                                (click)="addCat(i)"
-                                >
-                                {{ cat.name }}
+                                <a *ngFor="let cat of allCats;let i=index" id="cat.id" class="dropdown-item"
+                                    (click)="addCat(i)">
+                                    {{ cat.name }}
                                 </a>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <ul class="list-inline">
+                        <li *ngFor="let cat of selectedCAts" class="list-inline-item">{{ cat.name }}</li>
+                    </ul>
                 </div>
                 <label for="desc">توضیحات:</label>
                 <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"

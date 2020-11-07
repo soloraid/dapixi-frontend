@@ -45,8 +45,10 @@ export class UploadPostComponent implements OnInit {
   }
   addCat(index){
     console.log(index);
-    const selected={...this.addCat[index]};
+    // console.log(this.allCats[+index]);
+    const selected={...this.allCats[index]};
     this.selectedCAts.push(selected);
+    console.log(this.selectedCAts);
   }
 
 }
