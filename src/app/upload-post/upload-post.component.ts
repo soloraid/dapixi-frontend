@@ -27,7 +27,7 @@ export class UploadPostComponent implements OnInit {
       selected:false
     }
   ];
-  selectedCAts:category[]=[];
+  selectedCats:category[]=[];
   constructor() { }
 
   ngOnInit(): void {
@@ -37,8 +37,6 @@ export class UploadPostComponent implements OnInit {
     this.imgFile=event.target.files[0];
     // console.log(this.label);
     this.label.nativeElement.innerHTML=this.imgFile.name;
-
-    
   }
   onSubmit(){
     console.log(this.imgFile,this.description);
@@ -52,8 +50,17 @@ export class UploadPostComponent implements OnInit {
     console.log(index);
     this.allCats[index].selected=true;
     const selected={...this.allCats[index]};
-    this.selectedCAts.push(selected);
-    console.log(this.selectedCAts);
+    this.selectedCats.push(selected);
+    console.log(this.selectedCats);
+  }
+  removeCat(index){
+    let id=this.selectedCats[index].id;
+    this.selectedCats.splice(index,1);
+    const changeCat=this.allCats.find((c)=>{
+      return c.id===id;
+    });
+    console.log(changeCat);
+    changeCat.selected=false;
   }
 
 }

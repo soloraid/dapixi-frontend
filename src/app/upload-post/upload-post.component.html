@@ -29,8 +29,8 @@
                 </div>
                 <div class="row">
                     <ul class="list-inline">
-                        <li *ngFor="let cat of selectedCAts" class="list-inline-item cat">
-                            <a role="button">
+                        <li *ngFor="let cat of selectedCats;let i=index" class="list-inline-item cat">
+                            <a role="button" (click)="removeCat(i)">
                                 <small>{{ cat.name }}</small>
                             </a>
                         </li>
