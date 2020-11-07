@@ -1,6 +1,11 @@
 .upload-box{
     direction: rtl;
+    // border:4px var(--secondary_color) solid;
     // width: 80%;
+}
+form{
+    border:4px var(--secondary_color) solid;
+    border-radius: 10px;
 }
 .file-label{
     text-align: left;
