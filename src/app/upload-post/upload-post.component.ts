@@ -43,9 +43,12 @@ export class UploadPostComponent implements OnInit {
   onSubmit(){
     console.log(this.imgFile,this.description);
   }
-  addCat(index){
-    console.log(index);
+  addCat(id){
+    // console.log(index);
     // console.log(this.allCats[+index]);
+    const index=this.allCats.findIndex((cat)=>{
+      return cat.id=id;
+    })
     this.allCats[index].selected=true;
     const selected={...this.allCats[index]};
     this.selectedCAts.push(selected);
