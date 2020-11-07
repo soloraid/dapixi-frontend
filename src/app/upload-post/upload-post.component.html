@@ -3,7 +3,7 @@
         <div class="col-lg-8">
             <form (submit)="onSubmit()">
                 <div class="row mb-5 justify-content-between">
-                    <div class="col-md-6 mb-2">
+                    <div class="col-md-6 mb-2 pl-0">
                         <div class="custom-file file-box">
                             <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg"
                                 required (change)="onChange($event)">
@@ -29,9 +29,9 @@
                 </div>
                 <div class="row">
                     <ul class="list-inline">
-                        <li *ngFor="let cat of selectedCAts" class="list-inline-item">
+                        <li *ngFor="let cat of selectedCAts" class="list-inline-item cat">
                             <a role="button">
-                                {{ cat.name }}
+                                <small>{{ cat.name }}</small>
                             </a>
                         </li>
                     </ul>
