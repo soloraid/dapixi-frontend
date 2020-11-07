@@ -26,7 +26,8 @@ export class UploadPostComponent implements OnInit {
       name:"منظره",
       selected:false
     }
-  ]
+  ];
+  selectedCAts:category[]=[];
   constructor() { }
 
   ngOnInit(): void {
@@ -41,6 +42,11 @@ export class UploadPostComponent implements OnInit {
   }
   onSubmit(){
     console.log(this.imgFile,this.description);
+  }
+  addCat(index){
+    console.log(index);
+    const selected={...this.addCat[index]};
+    this.selectedCAts.push(selected);
   }
 
 }
