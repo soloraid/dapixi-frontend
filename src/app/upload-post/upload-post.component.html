@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <form (submit)="onSubmit()">
-                <div class="row mb-2">
+                <div class="row mb-5 justify-content-between">
                     <div class="col-md-6 mb-2">
                         <div class="custom-file file-box">
                             <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg"
@@ -11,21 +11,16 @@
                                 است</label>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-2 col-md-3 col-lg-4 cat-lable-box pl-0">
-                                    <label for="category" class="cat-label">دسته بندی:</label>
-                                </div>
-                                <div class="col-10 col-md-9 col-lg-8">
-                                    <select class="custom-select" name="category" id="category">
-                                        <option value="" selected>انتخاب کنید</option>
-                                        <option value="0" disabled>انتزاعی</option>
-                                        <option value="0">تیره</option>
-                                        <option value="0">مفهومی</option>
-                                        <option value="0">طبیعت</option>
-                                    </select>
-                                </div>
+                    <div class="col-md-5">
+                        <div class="dropdown p-0">
+                            <button class="dropdown-toggle m-0 w-100" role="button">
+                                انتخاب کنید
+                            </button>
+                            <div class="dropdown-menu">
+                                <a id="0">انتزاعی</a>
+                                <a id="1">تیره</a>
+                                <a id="2">منظره</a>
+                                <a id="3">مفهومی</a>
                             </div>
                         </div>
                     </div>
