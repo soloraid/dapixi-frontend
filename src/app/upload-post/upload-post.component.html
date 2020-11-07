@@ -14,13 +14,15 @@
                     <div class="col-md-5">
                         <div class="dropdown p-0">
                             <button class="dropdown-toggle m-0 w-100" role="button" type="button" appDropdown>
-                                انتخاب کنید
+                                 دسته‌بندی‌ها
                             </button>
-                            <div class="dropdown-menu">
-                                <a *ngFor="let cat of allCats;let i=index" id="cat.id" class="dropdown-item"
-                                    (click)="addCat(i)">
+                            <div class="dropdown-menu py-0">
+                                <button *ngFor="let cat of allCats;let i=index" id="cat.id" class="dropdown-item m-0"
+                                    (click)="addCat(i)"
+                                    [ngClass]="{'selected':cat.selected}"
+                                    [disabled]="cat.selected">
                                     {{ cat.name }}
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>

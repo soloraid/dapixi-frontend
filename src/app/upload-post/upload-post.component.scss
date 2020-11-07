@@ -9,4 +9,11 @@
 .dropdown-menu{
     width: 100%;
     text-align: center;
+    // cursor: pointer;
+}
+.selected{
+    background-color: green;
+    border-radius: 0%;
+    border-bottom: 1px gray solid;
+    color: lighten($color: gray, $amount: 10);
 }
