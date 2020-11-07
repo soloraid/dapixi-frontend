@@ -17,8 +17,8 @@
                                  دسته‌بندی‌ها
                             </button>
                             <div class="dropdown-menu py-0">
-                                <button *ngFor="let cat of allCats;let i=index" id="cat.id" class="dropdown-item m-0"
-                                    (click)="addCat(i)"
+                                <button *ngFor="let cat of allCats" id="cat.id" class="dropdown-item m-0"
+                                    (click)="addCat(cat.id)"
                                     [ngClass]="{'selected':cat.selected}"
                                     [disabled]="cat.selected">
                                     {{ cat.name }}
