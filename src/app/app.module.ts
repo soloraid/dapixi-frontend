@@ -16,6 +16,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ClipboardModule } from 'ngx-clipboard';
 import { UploadPostComponent } from './upload-post/upload-post.component';
+import { DropdownDirective } from './dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UploadPostComponent } from './upload-post/upload-post.component';
     PostComponent,
     EnterComponent,
     RegisterComponent,
-    UploadPostComponent
+    UploadPostComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
