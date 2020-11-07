@@ -13,14 +13,15 @@
                     </div>
                     <div class="col-md-5">
                         <div class="dropdown p-0">
-                            <button class="dropdown-toggle m-0 w-100" role="button" appDropdown>
+                            <button class="dropdown-toggle m-0 w-100" role="button" type="button" appDropdown>
                                 انتخاب کنید
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" id="0">انتزاعی</a>
+                                <!-- <a class="dropdown-item" id="0">انتزاعی</a>
                                 <a class="dropdown-item" id="1">تیره</a>
                                 <a class="dropdown-item" id="2">منظره</a>
-                                <a class="dropdown-item" id="3">مفهومی</a>
+                                <a class="dropdown-item" id="3">مفهومی</a> -->
+                                <a *ngFor="let cat of allCats" id="cat.id" class="dropdown-item">{{ cat.name }}</a>
                             </div>
                         </div>
                     </div>
