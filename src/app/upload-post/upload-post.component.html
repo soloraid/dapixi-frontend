@@ -40,7 +40,7 @@
                 <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"
                     [(ngModel)]="description"></textarea>
                 <div class="row justify-content-center">
-                    <button>بارگذاری</button>
+                    <button [disabled]="!imgFile || selectedCats.length===0">بارگذاری</button>
                 </div>
             </form>
         </div>

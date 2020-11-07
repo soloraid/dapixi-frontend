@@ -39,7 +39,8 @@ export class UploadPostComponent implements OnInit {
     this.label.nativeElement.innerHTML=this.imgFile.name;
   }
   onSubmit(){
-    console.log(this.imgFile,this.description);
+    console.log(this.imgFile,this.description,this.selectedCats);
+    // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
   addCat(id){
     console.log(id);
