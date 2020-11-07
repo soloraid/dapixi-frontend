@@ -7,6 +7,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UploadPostComponent } from './upload-post/upload-post.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path:"edit",
         component:ProfileEditComponent
+      },
+      {
+        path:"new",
+        component:UploadPostComponent
       }
     ]
   }
