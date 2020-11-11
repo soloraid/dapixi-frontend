@@ -1,8 +1,26 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="mt-2 col-md-12">
       <h1>صفحه اصلی</h1>
-      <button>کلیک</button>
+      <h3>آخرین پست ها</h3>
+      <hr>
+      <div class="container ui-main-posts mt-2">
+        <div class="row ">
+          <app-post></app-post>
+        </div>
+      </div>
+      <h4>پیشنهادی</h4>
+      <hr>
+      <div class="container justify-content-xl-around ui-recomm mt-2">
+        <div class="d-flex">
+          <a href="#">
+            <p class="text-justify">_TITLE_</p>
+            <img src="/assets/photodefault.jpg" alt="post_author" class="ui-sm-post">
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
