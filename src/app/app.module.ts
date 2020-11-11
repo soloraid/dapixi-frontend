@@ -14,7 +14,6 @@ import { PostComponent } from './share/post/post.component';
 import { EnterComponent } from './auth/enter/enter.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule } from '@angular/forms';
-import {InfoComponent} from './share/info/info.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,7 @@ import {InfoComponent} from './share/info/info.component';
     PostDetailComponent,
     PostComponent,
     EnterComponent,
-    RegisterComponent,
-    InfoComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
