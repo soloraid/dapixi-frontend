@@ -6,11 +6,11 @@
     </div>
     <div class="form-group">
         <label for="password">رمز عبور:</label>
-        <input ngModel type="password" class="form-control" name="password" required minlength="8">
+        <input ngModel type="password" class="form-control" name="password" required minlength="6">
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <button type="submit" class="btn mx-0">ورود</button>
+            <button type="submit" class="btn mx-0" [disabled]="enter_form.invalid">ورود</button>
             <a class="change" [routerLink]="['../register']">حساب ندارید؟ثبت نام</a>
         </div>
     </div>
