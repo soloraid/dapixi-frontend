@@ -10,15 +10,14 @@ export class AuthService {
   constructor(private _http:HttpClient) {
    }
    login(){
+    let body:FormData=new FormData();
+    body.append('grant_type','password');
+    body.append('scope','webclient');
+    body.append('username','shayan');
+    body.append('password','password');
     this._http.post(
       environment.api+"/auth/oauth/token",
-      {
-        grant_type:"password",
-        scope:"webclient",
-        username:"shayan",
-        password:"password"
-
-      },
+      body,
       {
         headers:new HttpHeaders({
           Authorization:"Basic "+this.bsicToken
