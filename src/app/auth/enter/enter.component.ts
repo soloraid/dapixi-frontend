@@ -16,7 +16,11 @@ export class EnterComponent implements OnInit {
   }
   onSubmit(form:NgForm){
     // console.log(form);
-    this._authService.login(form.value.username,form.value.password);
+    this._authService
+    .login(form.value.username,form.value.password)
+    .subscribe(data=>{
+      console.log(data);
+    })
   }
 
 }

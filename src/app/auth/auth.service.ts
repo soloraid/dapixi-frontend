@@ -15,7 +15,7 @@ export class AuthService {
     body.append('scope','webclient');
     body.append('username',username);
     body.append('password',password);
-    this._http.post(
+    return this._http.post(
       environment.api+"/auth/oauth/token",
       body,
       {
@@ -23,9 +23,7 @@ export class AuthService {
           Authorization:"Basic "+this.bsicToken
         })
       }
-      ).subscribe(data=>{
-        console.log(data);
-      })
+      )
    }
    signIn(){
      this._http.post(
