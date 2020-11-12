@@ -18,9 +18,14 @@ export class EnterComponent implements OnInit {
     // console.log(form);
     this._authService
     .login(form.value.username,form.value.password)
-    .subscribe(data=>{
+    .subscribe(
+      errorData=>{
+        console.log(errorData);
+      }
+      ,data=>{
       console.log(data);
-    })
+    }
+    )
   }
 
 }

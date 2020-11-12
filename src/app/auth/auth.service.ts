@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { catchError, tap } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { tokens } from '../share/tokens.model';
 
 @Injectable({
@@ -27,11 +27,36 @@ export class AuthService {
           Authorization: "Basic " + this.bsicToken
         })
       }
-    ).pipe(tap((data:loginResponse)=>{
+    ).pipe(
+      catchError((errorData:HttpErrorResponse)=>{
+        // let errorString:string;
+        // if(errorData.error.error_description==='Bad credentials'){
+        //   errorString="رمز عبور و شناسه کاربری مطابقت ندارند";
+        // }else if()
+        let description
+        if(errorData.error && errorData.error.error_description){
+          description=errorData.error.error_description;
+        }
+        let errorString:string='';
+        switch(description){
+          case 'Bad credentials':
+            errorString='شناسه کابری و رمز عبور مطابقت ندارند';
+            break;
+          case 'No value present':
+            errorString='کاربری با این شناسه وجود ندارد';
+            break;
+          default:
+            errorString='خطای نامشخص';
+          
+        }
+        return throwError(errorString);
+      })
+      ,tap((data:loginResponse)=>{
       const token=new tokens(data.access_token,data.refresh_token,data.expires_in,data.scope);
       this.authState.next(token);
       localStorage.setItem('token',JSON.stringify(token));
-    }))
+    })
+    )
   }
   signIn() {
     this._http.post(
