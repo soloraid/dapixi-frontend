@@ -9,7 +9,7 @@ export class AuthService {
   bsicToken="ZGFwaXhpOnRoaXNpc3NlY3JldA==";
   constructor(private _http:HttpClient) {
    }
-   login(){
+   login(username:string,password:string){
     let body:FormData=new FormData();
     body.append('grant_type','password');
     body.append('scope','webclient');
