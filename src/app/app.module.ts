@@ -18,7 +18,9 @@ import { FormsModule } from '@angular/forms';
 import {UploadPostComponent} from './upload-post/upload-post.component';
 import {DropdownDirective} from './share/dropdown.directive';
 import {ClipboardModule} from 'ngx-clipboard';
-import {HttpClientModule} from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 
 @NgModule({

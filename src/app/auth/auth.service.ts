@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment.prod'
   providedIn: 'root'
 })
 export class AuthService {
-  bsicToken:"ZGFwaXhpOnRoaXNpc3NlY3JldA==";
+  bsicToken="ZGFwaXhpOnRoaXNpc3NlY3JldA==";
   constructor(private _http:HttpClient) {
    }
    login(){
@@ -27,5 +27,20 @@ export class AuthService {
       ).subscribe(data=>{
         console.log(data);
       })
+   }
+   signIn(){
+     this._http.post(
+       environment.api+'/auth/user',
+       {
+        username: "tset1",
+        firstName: "test1",
+        lastName: "t1",
+        password:"123456",
+        mobile: "09374949025",
+        email: "aliq@gmail.com",
+        birthDate: "2000-02-04"
+       }).subscribe(data=>{
+         console.log(data);
+       })
    }
 }
