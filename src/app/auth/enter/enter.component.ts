@@ -10,22 +10,26 @@ import { AuthService } from '../auth.service';
 })
 export class EnterComponent implements OnInit {
 
-  constructor(private _authService:AuthService) { }
-
+  constructor(private _authService: AuthService) { }
+  errorMsg: string = "";
   ngOnInit(): void {
   }
-  onSubmit(form:NgForm){
+  onSubmit(form: NgForm) {
     // console.log(form);
     this._authService
-    .login(form.value.username,form.value.password)
-    .subscribe(
-      errorData=>{
-        console.log(errorData);
-      }
-      ,data=>{
-      console.log(data);
-    }
-    )
+      .login(form.value.username, form.value.password)
+      .subscribe(
+         data => {
+          console.log(data);
+        },
+        (errorData: string) => {
+          console.log(errorData);
+          this.errorMsg = errorData;
+          setTimeout(()=>{
+            this.errorMsg="";
+          },3000)
+        }
+      )
   }
 
 }
