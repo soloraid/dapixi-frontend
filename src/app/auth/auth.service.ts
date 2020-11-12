@@ -13,8 +13,8 @@ export class AuthService {
     let body:FormData=new FormData();
     body.append('grant_type','password');
     body.append('scope','webclient');
-    body.append('username','shayan');
-    body.append('password','password');
+    body.append('username',username);
+    body.append('password',password);
     this._http.post(
       environment.api+"/auth/oauth/token",
       body,
