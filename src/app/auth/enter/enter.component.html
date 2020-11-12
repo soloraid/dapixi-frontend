@@ -1,4 +1,5 @@
 <form #enter_form="ngForm" (ngSubmit)="onSubmit(enter_form)">
+    <p *ngIf="errorMsg" class="text-danger">{{ errorMsg }}</p>
     <div class="form-group">
         <label for="username">شناسه کاربری:</label>
         <input ngModel id=username type="text" class="form-control" name="username" required>
