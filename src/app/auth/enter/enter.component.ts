@@ -36,6 +36,9 @@ export class EnterComponent implements OnInit,OnDestroy {
       )
   }
   ngOnDestroy(){
-    this.loginSubs.unsubscribe();
+    if(this.loginSubs){
+
+      this.loginSubs.unsubscribe();
+    }
   }
 }

@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         <label for="phone">(اختیاری)شماره همراه:</label>
-        <input  type="tel" id="phone" class="form-control" name="phone" placeholder="0912*******" formControlName="phone">
+        <input  type="tel" id="phone" class="form-control ltr-input" name="phone" placeholder="0912*******" formControlName="phone">
         <p class="text-danger" *ngIf="regForm.controls['phone'].errors && regForm.controls['phone'].touched"><small>فرمت شماره همراه درست نمی‌باشد</small></p>
     </div>
     <div class="form-group">
@@ -29,16 +29,16 @@
     </div>
     <div class="form-group">
         <label for="email">ایمیل:</label>
-        <input  type="email" id="email" class="form-control" name="email" formControlName="email">
+        <input  type="email" id="email" class="form-control ltr-input" name="email" formControlName="email">
     </div>
     <div class="form-group">
         <label for="password">رمز عبور:</label>
-        <input  type="password" id="password" class="form-control" name="password" formControlName="password" (input)="onPasswordChange($event)">
+        <input  type="password" id="password" class="form-control ltr-input" name="password" formControlName="password" (input)="onPasswordChange($event)">
         <p class="text-danger" *ngIf="minError('password')"><small>رمز عبور حداقل باید 6 کاراکتر باشد</small></p>
     </div>
     <div class="form-group">
         <label for="password_rep">تکرار رمز عبور:</label>
-        <input  type="password" id="password_rep" class="form-control" name="password_rep" formControlName="passwordRep">
+        <input  type="password" id="password_rep" class="form-control ltr-input" name="password_rep" formControlName="passwordRep">
         <p class="text-danger" *ngIf="regForm.controls['passwordRep'].errors && regForm.controls['passwordRep'].errors.repeat && regForm.controls['passwordRep'].touched"><small>تکرار رمز عبور  با رمز عبور مطابقت ندارد</small></p>
     </div>
     <div class="row justify-content-center">
