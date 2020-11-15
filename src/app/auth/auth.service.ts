@@ -74,6 +74,9 @@ export class AuthService {
     return this._http.post(
       environment.api + '/auth/user',
       body
+    ).pipe(catchError((errorData:HttpErrorResponse)=>{
+      return throwError("کاربر با این مشخصات وجود دارد");
+    })
     )
   }
 }

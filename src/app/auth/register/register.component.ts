@@ -10,6 +10,7 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent implements OnInit {
   regForm:FormGroup;
   passwordHolder:string='';
+  errorMsg:string="";
   constructor(private _authService:AuthService) { }
 
   ngOnInit(): void {
@@ -38,9 +39,15 @@ export class RegisterComponent implements OnInit {
       this.regForm.get('phone').value,
       this.regForm.get('email').value,
       this.regForm.get('date').value
-    ).subscribe((data)=>{
+    ).subscribe(
+      (data)=>{
       console.log(data);
-    })
+    },
+      (errorData:string)=>{
+        // this.errorMsg=errorData;
+        console.log(errorData);
+      }
+    )
   }
    minError(formControlName:string){
     // console.log('v',this.regForm.controls[formControlName].errors);
