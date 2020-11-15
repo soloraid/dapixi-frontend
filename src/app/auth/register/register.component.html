@@ -18,7 +18,8 @@
     </div>
     <div class="form-group">
         <label for="phone">(اختیاری)شماره همراه:</label>
-        <input  type="number" id="phone" class="form-control" name="phone" formControlName="phone">
+        <input  type="tel" id="phone" class="form-control" name="phone" placeholder="0912*******" formControlName="phone">
+        <p class="text-danger" *ngIf="regForm.controls['phone'].errors && regForm.controls['phone'].touched"><small>فرمت شماره همراه درست نمی‌باشد</small></p>
     </div>
     <div class="form-group">
         <label for="date">تاریخ تولد:</label>
