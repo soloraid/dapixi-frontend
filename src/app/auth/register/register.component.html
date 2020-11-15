@@ -1,5 +1,5 @@
 <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
-    <p class="text-danger"> خطا: کاربر با این مشخصات وجود دارد </p>
+    <p *ngIf="errorMsg" class="text-danger">{{ errorMsg }}</p>
     <div class="row">
         <div class="col">
             <label for="first_name">نام:</label>

@@ -44,8 +44,11 @@ export class RegisterComponent implements OnInit {
       console.log(data);
     },
       (errorData:string)=>{
-        // this.errorMsg=errorData;
-        console.log(errorData);
+        this.errorMsg=errorData;
+        setTimeout(()=>{
+          this.errorMsg="";
+        },5000);
+        // console.log(errorData);
       }
     )
   }
