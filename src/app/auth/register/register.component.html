@@ -42,7 +42,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-6 text-center">
-            <button type="submit" class="btn mx-0">ثبت نام</button>
+            <button type="submit" class="btn mx-0" [disabled]="regForm.invalid">ثبت نام</button>
             <a class="change" [routerLink]="['../enter']">حساب دارید؟ورود</a>
         </div>
     </div>
