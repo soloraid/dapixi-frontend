@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit,OnDestroy {
   regForm:FormGroup;
   passwordHolder:string='';
   errorMsg:string="";
@@ -87,5 +87,9 @@ export class RegisterComponent implements OnInit {
     }else{
       return null
     }
+  }
+  ngOnDestroy(){
+    this.signUpSubs.unsubscribe();
+    this.loginSubs.unsubscribe();
   }
 }
