@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class RegisterComponent implements OnInit {
   regForm:FormGroup;
+  passwordHolder:string='';
   constructor(private _authService:AuthService) { }
 
   ngOnInit(): void {
@@ -20,9 +21,13 @@ export class RegisterComponent implements OnInit {
       'date':new FormControl('',[Validators.required,this.dateValidator.bind(this)]),
       'email':new FormControl('',[Validators.required,Validators.email]),
       'password':new FormControl('',[Validators.required,Validators.minLength(6)]),
-      'passwordRep':new FormControl('',[Validators.required,Validators.minLength(6)])
+      'passwordRep':new FormControl('',[Validators.required,Validators.minLength(6),this.passwordRepeatValidator.bind(this)])
       
     })
+  } onPasswordChange(event){
+    this.passwordHolder=event.target.value;
+    // console.log(event.target.value);
+    console.log(this.passwordHolder);
   }
   onSubmit(){
     console.log(this.regForm)
@@ -45,6 +50,13 @@ export class RegisterComponent implements OnInit {
       return {'today':true}
     }else{
       return null;
+    }
+  }
+  private passwordRepeatValidator(formControl:FormControl):{[k:string]:boolean}|null{
+    if(formControl.value!==this.passwordHolder){
+      return {'repeat':true};
+    }else{
+      return null
     }
   }
 }
