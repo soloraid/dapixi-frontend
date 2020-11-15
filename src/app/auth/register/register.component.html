@@ -7,7 +7,7 @@
         </div>
         <div class="col">
             <label for="last_name">نام خانوادگی:</label>
-            <input  type="text" id="last_name" class="form-control" name="last_name"  maxlength="3" formControlName="lastName">
+            <input  type="text" id="last_name" class="form-control" name="last_name"  maxlength="32" formControlName="lastName">
             <p class="text-danger" *ngIf="minError('lastName')"><small>نام خانوادگی حداقل باید دو کاراکتر باشد</small></p>
         </div>
     </div>

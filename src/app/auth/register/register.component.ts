@@ -27,10 +27,18 @@ export class RegisterComponent implements OnInit {
   } onPasswordChange(event){
     this.passwordHolder=event.target.value;
     // console.log(event.target.value);
-    console.log(this.passwordHolder);
+    // console.log(this.passwordHolder);
   }
   onSubmit(){
-    console.log(this.regForm)
+    this._authService.signIn(
+      this.regForm.get('userName').value,
+      this.regForm.get('firstName').value,
+      this.regForm.get('lastName').value,
+      this.regForm.get('password').value,
+      this.regForm.get('phone').value,
+      this.regForm.get('email').value,
+      this.regForm.get('date').value
+    )
   }
    minError(formControlName:string){
     // console.log('v',this.regForm.controls[formControlName].errors);
