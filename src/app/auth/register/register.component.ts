@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     // console.log(this.passwordHolder);
   }
   onSubmit(){
-    this._authService.signIn(
+    this._authService.signUp(
       this.regForm.get('userName').value,
       this.regForm.get('firstName').value,
       this.regForm.get('lastName').value,
@@ -38,7 +38,9 @@ export class RegisterComponent implements OnInit {
       this.regForm.get('phone').value,
       this.regForm.get('email').value,
       this.regForm.get('date').value
-    )
+    ).subscribe((data)=>{
+      console.log(data);
+    })
   }
    minError(formControlName:string){
     // console.log('v',this.regForm.controls[formControlName].errors);

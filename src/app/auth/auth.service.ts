@@ -58,7 +58,7 @@ export class AuthService {
       })
     )
   }
-  signIn(username: string, firstName: string, lastName: string, password: String, mobile: string = null, email: string, birthDate: string) {
+  signUp(username: string, firstName: string, lastName: string, password: String, mobile: string = null, email: string, birthDate: string) {
     let body: any = {
       username: username,
       firstName: firstName,
@@ -71,12 +71,10 @@ export class AuthService {
     if (mobile) {
       body.mobile = mobile;
     }
-    this._http.post(
+    return this._http.post(
       environment.api + '/auth/user',
       body
-    ).subscribe(data => {
-      console.log(data);
-    })
+    )
   }
 }
 interface loginResponse {
