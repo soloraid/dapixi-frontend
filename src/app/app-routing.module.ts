@@ -13,6 +13,11 @@ import {PostDetailComponent} from './post-detail/post-detail.component';
 
 const routes: Routes = [
   {
+    path:'',
+    pathMatch:'full',
+    redirectTo:'home'
+  },
+  {
     path:'home',
     component:HomeComponent
   },

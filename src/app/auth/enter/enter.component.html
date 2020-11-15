@@ -1,15 +1,17 @@
 <form #enter_form="ngForm" (ngSubmit)="onSubmit(enter_form)">
+    <p *ngIf="errorMsg" class="text-danger">{{ errorMsg }}</p>
     <div class="form-group">
-        <label for="email">ایمیل:</label>
-        <input ngModel type="email" class="form-control" name="email" required>
+        <label for="username">شناسه کاربری:</label>
+        <input ngModel id=username type="text" class="form-control" name="username" required>
     </div>
     <div class="form-group">
         <label for="password">رمز عبور:</label>
-        <input ngModel type="password" class="form-control" name="password" required minlength="8">
+        <input ngModel type="password" class="form-control" name="password" required minlength="6">
     </div>
     <div class="row justify-content-center">
-        <div class="col-6 d-flex">
-            <button type="submit" class="btn">ورود</button>
+        <div class="col-6 text-center">
+            <button type="submit" class="btn mx-0" [disabled]="enter_form.invalid">ورود</button>
+            <a class="change" [routerLink]="['../register']">حساب ندارید؟ثبت نام</a>
         </div>
     </div>
 </form>
