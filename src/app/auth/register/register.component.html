@@ -2,16 +2,19 @@
     <div class="row">
         <div class="col">
             <label for="first_name">نام:</label>
-            <input  type="text" id="first_name" class="form-control" name="first_name" formControlName="firstName" >
+            <input  type="text" id="first_name" class="form-control" name="first_name" maxlength="32" formControlName="firstName" >
+            <p class="text-danger" *ngIf="minError('firstName')"><small>نام حداقل باید دو کاراکتر باشد</small></p>
         </div>
         <div class="col">
             <label for="last_name">نام خانوادگی:</label>
-            <input  type="text" id="last_name" class="form-control" name="last_name" formControlName="lastName">
+            <input  type="text" id="last_name" class="form-control" name="last_name"  maxlength="3" formControlName="lastName">
+            <p class="text-danger" *ngIf="minError('lastName')"><small>نام خانوادگی حداقل باید دو کاراکتر باشد</small></p>
         </div>
     </div>
     <div class="form-group">
         <label for="user_name">نام کاربری:</label>
-        <input  type="text" id="user_name" class="form-control" name="user_name" formControlName="userName">
+        <input  type="text" id="user_name" class="form-control" name="user_name" maxlength="32" formControlName="userName">
+        <p class="text-danger" *ngIf="minError('userName')"><small>نام کاربری حداقل باید سه کاراکتر باشد</small></p>
     </div>
     <div class="form-group">
         <label for="phone">(اختیاری)شماره همراه:</label>
@@ -28,6 +31,7 @@
     <div class="form-group">
         <label for="password">رمز عبور:</label>
         <input  type="password" id="password" class="form-control" name="password" formControlName="password">
+        <p class="text-danger" *ngIf="minError('password')"><small>رمز عبور حداقل باید 6 کاراکتر باشد</small></p>
     </div>
     <div class="form-group">
         <label for="password_rep">تکرار رمز عبور:</label>

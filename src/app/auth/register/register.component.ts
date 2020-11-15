@@ -25,7 +25,17 @@ export class RegisterComponent implements OnInit {
     })
   }
   onSubmit(){
-    console.log(this.regForm);
+    console.log(this.regForm.controls['firstName']);
     // this._authService.signIn();
+  }
+  minError(formControlName:string){
+    // console.log('v',this.regForm.controls[formControlName].errors);
+    if(this.regForm.controls[formControlName].errors && this.regForm.controls[formControlName].errors['minlength']){
+      if(this.regForm.controls[formControlName].errors['minlength'] && this.regForm.controls[formControlName].touched){
+        return true;
+      }else{
+        return false;
+      }
+    }
   }
 }
