@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -11,7 +13,9 @@ export class RegisterComponent implements OnInit {
   regForm:FormGroup;
   passwordHolder:string='';
   errorMsg:string="";
-  constructor(private _authService:AuthService) { }
+  signUpSubs:Subscription;
+  loginSubs:Subscription;
+  constructor(private _authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     this.regForm=new FormGroup({
@@ -31,17 +35,22 @@ export class RegisterComponent implements OnInit {
     // console.log(this.passwordHolder);
   }
   onSubmit(){
-    this._authService.signUp(
+    this.signUpSubs=this._authService.signUp(
       this.regForm.get('userName').value,
       this.regForm.get('firstName').value,
       this.regForm.get('lastName').value,
-      this.regForm.get('password').value,
+      this.regForm.get('userName').value,
       this.regForm.get('phone').value,
       this.regForm.get('email').value,
       this.regForm.get('date').value
     ).subscribe(
       (data)=>{
       console.log(data);
+      this.loginSubs=this._authService
+      .login(this.regForm.get('userName').value,this.regForm.get('userName').value)
+      .subscribe((data)=>{
+        this.router.navigate(['']);
+      });
     },
       (errorData:string)=>{
         this.errorMsg=errorData;
