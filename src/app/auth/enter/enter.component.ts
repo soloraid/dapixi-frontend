@@ -1,7 +1,8 @@
 import { NgForOf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -9,15 +10,16 @@ import { AuthService } from '../auth.service';
   templateUrl: './enter.component.html',
   styleUrls: ['./enter.component.scss']
 })
-export class EnterComponent implements OnInit {
+export class EnterComponent implements OnInit,OnDestroy {
 
   constructor(private _authService: AuthService,private _router:Router) { }
   errorMsg: string = "";
+  loginSubs:Subscription;
   ngOnInit(): void {
   }
   onSubmit(form: NgForm) {
     // console.log(form);
-    this._authService
+    this.loginSubs=this._authService
       .login(form.value.username, form.value.password)
       .subscribe(
          data => {
@@ -33,5 +35,10 @@ export class EnterComponent implements OnInit {
         }
       )
   }
+  ngOnDestroy(){
+    if(this.loginSubs){
 
+      this.loginSubs.unsubscribe();
+    }
+  }
 }

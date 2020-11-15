@@ -10,7 +10,7 @@ import { tokens } from '../share/tokens.model';
 })
 export class AuthService {
   bsicToken = "ZGFwaXhpOnRoaXNpc3NlY3JldA==";
-  authState=new BehaviorSubject<tokens>(null);
+  authState = new BehaviorSubject<tokens>(null);
   constructor(private _http: HttpClient) {
   }
   login(username: string, password: string) {
@@ -28,50 +28,56 @@ export class AuthService {
         })
       }
     ).pipe(
-      catchError((errorData:HttpErrorResponse)=>{
+      catchError((errorData: HttpErrorResponse) => {
         // let errorString:string;
         // if(errorData.error.error_description==='Bad credentials'){
         //   errorString="رمز عبور و شناسه کاربری مطابقت ندارند";
         // }else if()
         let description
-        if(errorData.error && errorData.error.error_description){
-          description=errorData.error.error_description;
+        if (errorData.error && errorData.error.error_description) {
+          description = errorData.error.error_description;
         }
-        let errorString:string='';
-        switch(description){
+        let errorString: string = '';
+        switch (description) {
           case 'Bad credentials':
-            errorString='شناسه کابری و رمز عبور مطابقت ندارند';
+            errorString = 'شناسه کابری و رمز عبور مطابقت ندارند';
             break;
           case 'No value present':
-            errorString='کاربری با این شناسه وجود ندارد';
+            errorString = 'کاربری با این شناسه وجود ندارد';
             break;
           default:
-            errorString='خطای نامشخص';
-          
+            errorString = 'خطای نامشخص';
+
         }
         return throwError(errorString);
       })
-      ,tap((data:loginResponse)=>{
-      const token=new tokens(data.access_token,data.refresh_token,data.expires_in,data.scope);
-      this.authState.next(token);
-      localStorage.setItem('token',JSON.stringify(token));
-    })
+      , tap((data: loginResponse) => {
+        const token = new tokens(data.access_token, data.refresh_token, data.expires_in, data.scope);
+        this.authState.next(token);
+        localStorage.setItem('token', JSON.stringify(token));
+      })
     )
   }
-  signIn() {
-    this._http.post(
+  signUp(username: string, firstName: string, lastName: string, password: String, mobile: string = null, email: string, birthDate: string) {
+    let body: any = {
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      password: password,
+      // mobile: mobile,
+      email: email,
+      birthDate: birthDate
+    }
+    if (mobile) {
+      body.mobile = mobile;
+    }
+    return this._http.post(
       environment.api + '/auth/user',
-      {
-        username: "tset1",
-        firstName: "test1",
-        lastName: "t1",
-        password: "123456",
-        mobile: "09374949025",
-        email: "aliq@gmail.com",
-        birthDate: "2000-02-04"
-      }).subscribe(data => {
-        console.log(data);
-      })
+      body
+    ).pipe(catchError((errorData:HttpErrorResponse)=>{
+      return throwError("خطا: کاربر با این مشخصات وجود دارد یا خطایی رخ داده‌است");
+    })
+    )
   }
 }
 interface loginResponse {

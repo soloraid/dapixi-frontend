@@ -16,3 +16,10 @@ input[type="email"],input[type="password"],input[type="date"]{
         text-decoration: underline;
     }
 }
+input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched{
+    border: 2px solid red;
+}
+
+.ltr-input {
+    direction: ltr;
+}
