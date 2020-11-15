@@ -13,7 +13,7 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostComponent } from './share/post/post.component';
 import { EnterComponent } from './auth/enter/enter.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {UploadPostComponent} from './upload-post/upload-post.component';
 import {DropdownDirective} from './share/dropdown.directive';
@@ -43,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     ClipboardModule,
     HttpClientModule
   ],
