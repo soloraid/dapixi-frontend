@@ -11,12 +11,14 @@
           </div>
         </div>
       </div>
-      <h4>پیشنهادی</h4>
-      <hr>
-      <div class="container justify-content-xl-around ui-recomm mt-2">
-        <div class="row">
-          <div class="col-xl-2 d-flex">
-            <app-post></app-post>
+      <div *ngIf="isAuth" class="rec">
+        <h4>پیشنهادی</h4>
+        <hr>
+        <div class="container justify-content-xl-around ui-recomm mt-2">
+          <div class="row">
+            <div class="col-xl-2 d-flex">
+              <app-post></app-post>
+            </div>
           </div>
         </div>
       </div>

@@ -9,11 +9,21 @@ import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UploadPostComponent } from './upload-post/upload-post.component';
+import {PostDetailComponent} from './post-detail/post-detail.component';
 
 const routes: Routes = [
   {
+    path:'',
+    pathMatch:'full',
+    redirectTo:'home'
+  },
+  {
     path:'home',
     component:HomeComponent
+  },
+  {
+    path: 'post-detail',
+    component:  PostDetailComponent
   },
   {
     path:"auth",
