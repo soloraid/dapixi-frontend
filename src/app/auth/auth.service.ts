@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
-import { tokens } from '../share/tokens.model';
+import { Tokens } from '../share/tokens.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   bsicToken = "ZGFwaXhpOnRoaXNpc3NlY3JldA==";
-  authState = new BehaviorSubject<tokens>(null);
+  authState = new BehaviorSubject<Tokens>(null);
   constructor(private _http: HttpClient) {
   }
   login(username: string, password: string) {
@@ -52,7 +52,8 @@ export class AuthService {
         return throwError(errorString);
       })
       , tap((data: loginResponse) => {
-        const token = new tokens(data.access_token, data.refresh_token, data.expires_in, data.scope);
+        const expireDate=new Date(new Date().getTime()+data.expires_in*1000)
+        const token = new Tokens(data.access_token, data.refresh_token,expireDate, data.scope);
         this.authState.next(token);
         localStorage.setItem('token', JSON.stringify(token));
       })

@@ -1,7 +1,11 @@
-export class tokens{
-    constructor(private _access:string,public refresh:string,public expireIn:number,public scope:string){
+export class Tokens{
+    constructor(private _access:string,public refresh:string,public expireDate:Date,public scope:string){
     }
     get access(){
-        return this._access;
+        if(new Date>this.expireDate){
+            return this._access;
+        }else{
+            return null
+        }
     }
 }

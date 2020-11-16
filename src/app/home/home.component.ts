@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { tokens } from '../share/tokens.model';
+import { Tokens } from '../share/tokens.model';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit,OnDestroy {
   constructor(private _authService:AuthService) { }
 
   ngOnInit(): void {
-    this.authSubsc=this._authService.authState.subscribe((token:tokens)=>{
+    this.authSubsc=this._authService.authState.subscribe((token:Tokens)=>{
       this.isAuth= !!token;
     })
   }
