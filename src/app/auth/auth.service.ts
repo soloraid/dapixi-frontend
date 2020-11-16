@@ -94,6 +94,8 @@ export class AuthService {
       const tokens=new Tokens(tokensTemp._access,tokensTemp._refresh,new Date(tokensTemp._expireDate),tokensTemp.scope);
       if(tokens.access){
         this.authState.next(tokens);
+        const expireDuration=new Date(tokensTemp._expireDate).getTime()-new Date().getTime();
+        this.autoLogOut(expireDuration);
       }else{
         localStorage.removeItem('tokens');
       }
