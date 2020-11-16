@@ -11,6 +11,7 @@ import { Tokens } from '../share/tokens.model';
 export class AuthService {
   bsicToken = "ZGFwaXhpOnRoaXNpc3NlY3JldA==";
   authState = new BehaviorSubject<Tokens>(null);
+  logOutTimer;
   constructor(private _http: HttpClient) {
   }
   login(username: string, password: string) {
@@ -52,7 +53,9 @@ export class AuthService {
         return throwError(errorString);
       })
       , tap((data: loginResponse) => {
-        const expireDate=new Date(new Date().getTime()+data.expires_in*1000)
+        const expireDuration=data.expires_in*1000;
+        const expireDate=new Date(new Date().getTime()+expireDuration);
+        this.autoLogOut(expireDuration);
         const token = new Tokens(data.access_token, data.refresh_token,expireDate, data.scope);
         this.authState.next(token);
         localStorage.setItem('tokens', JSON.stringify(token));
@@ -98,6 +101,15 @@ export class AuthService {
   }
   logOut(){
     this.authState.next(null);
+    localStorage.removeItem('tokens');
+    if(this.logOutTimer){
+      clearTimeout(this.logOutTimer);
+    }
+  }
+  private autoLogOut(expireDuration:number){
+    this.logOutTimer=setTimeout(()=>{
+      this.logOut();
+    },expireDuration)
   }
 }
 interface loginResponse {
