@@ -79,6 +79,9 @@ export class AuthService {
     })
     )
   }
+  logOut(){
+    this.authState.next(null);
+  }
 }
 interface loginResponse {
   access_token: string;
