@@ -4,7 +4,7 @@
       <a href="#"><span class="" ></span></a>
       <ul class="navbar-nav mr-auto row-cols-sm-1">
         <li *ngIf="!isAuth"><a  href="#" routerLink="auth" class="nav-item">ثبت نام/ورود</a></li>
-        <li *ngIf="isAuth"><a  href="#" class="nav-item">خروج</a></li>
+        <li *ngIf="isAuth"><a (click)="onLogOut()"  href="#" class="nav-item">خروج</a></li>
         <li><a href="#" class="nav-item"><i class=""></i>ارتباط با ما</a></li>
       </ul>
     </div>

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { tokens } from '../share/tokens.model';
+import { Tokens } from '../share/tokens.model';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +14,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
   isAuth:boolean;
   authSubsc:Subscription
   ngOnInit(): void {
-    this.authSubsc=this._authService.authState.subscribe((token:tokens)=>{
+    this.authSubsc=this._authService.authState.subscribe((token:Tokens)=>{
       this.isAuth= !!token;
     })
+  }
+  onLogOut(){
+    this._authService.logOut();
   }
   ngOnDestroy(){
     this.authSubsc.unsubscribe();

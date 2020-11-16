@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
-import { tokens } from '../share/tokens.model';
+import { Tokens } from '../share/tokens.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   bsicToken = "ZGFwaXhpOnRoaXNpc3NlY3JldA==";
-  authState = new BehaviorSubject<tokens>(null);
+  authState = new BehaviorSubject<Tokens>(null);
+  logOutTimer;
   constructor(private _http: HttpClient) {
   }
   login(username: string, password: string) {
@@ -52,9 +53,12 @@ export class AuthService {
         return throwError(errorString);
       })
       , tap((data: loginResponse) => {
-        const token = new tokens(data.access_token, data.refresh_token, data.expires_in, data.scope);
+        const expireDuration=data.expires_in*1000;
+        const expireDate=new Date(new Date().getTime()+expireDuration);
+        this.autoLogOut(expireDuration);
+        const token = new Tokens(data.access_token, data.refresh_token,expireDate, data.scope);
         this.authState.next(token);
-        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('tokens', JSON.stringify(token));
       })
     )
   }
@@ -78,6 +82,36 @@ export class AuthService {
       return throwError("خطا: کاربر با این مشخصات وجود دارد یا خطایی رخ داده‌است");
     })
     )
+  }
+  autoLogIn(){
+    const tokensTemp:{
+      _access:string,
+      _refresh:string,
+      _expireDate:string,
+      scope:string
+    }=JSON.parse(localStorage.getItem('tokens'));
+    if(tokensTemp){
+      const tokens=new Tokens(tokensTemp._access,tokensTemp._refresh,new Date(tokensTemp._expireDate),tokensTemp.scope);
+      if(tokens.access){
+        this.authState.next(tokens);
+        const expireDuration=new Date(tokensTemp._expireDate).getTime()-new Date().getTime();
+        this.autoLogOut(expireDuration);
+      }else{
+        localStorage.removeItem('tokens');
+      }
+    }
+  }
+  logOut(){
+    this.authState.next(null);
+    localStorage.removeItem('tokens');
+    if(this.logOutTimer){
+      clearTimeout(this.logOutTimer);
+    }
+  }
+  private autoLogOut(expireDuration:number){
+    this.logOutTimer=setTimeout(()=>{
+      this.logOut();
+    },expireDuration)
   }
 }
 interface loginResponse {
