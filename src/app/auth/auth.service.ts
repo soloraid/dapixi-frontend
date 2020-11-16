@@ -55,7 +55,7 @@ export class AuthService {
         const expireDate=new Date(new Date().getTime()+data.expires_in*1000)
         const token = new Tokens(data.access_token, data.refresh_token,expireDate, data.scope);
         this.authState.next(token);
-        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('tokens', JSON.stringify(token));
       })
     )
   }
@@ -79,6 +79,22 @@ export class AuthService {
       return throwError("خطا: کاربر با این مشخصات وجود دارد یا خطایی رخ داده‌است");
     })
     )
+  }
+  autoLogIn(){
+    const tokensTemp:{
+      _access:string,
+      _refresh:string,
+      _expireDate:string,
+      scope:string
+    }=JSON.parse(localStorage.getItem('tokens'));
+    if(tokensTemp){
+      const tokens=new Tokens(tokensTemp._access,tokensTemp._refresh,new Date(tokensTemp._expireDate),tokensTemp.scope);
+      if(tokens.access){
+        this.authState.next(tokens);
+      }else{
+        localStorage.removeItem('tokens');
+      }
+    }
   }
   logOut(){
     this.authState.next(null);
