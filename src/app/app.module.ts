@@ -18,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UploadPostComponent} from './upload-post/upload-post.component';
 import {DropdownDirective} from './share/dropdown.directive';
 import {ClipboardModule} from 'ngx-clipboard';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, ɵHttpInterceptingHandler } from '@angular/common/http';
+import { AuthInterceptorInterceptor } from './auth/auth-interceptor.interceptor';
 
 
 
@@ -47,7 +48,12 @@ import { HttpClientModule } from '@angular/common/http';
     ClipboardModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide:HTTP_INTERCEPTORS,
+      useClass:AuthInterceptorInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
