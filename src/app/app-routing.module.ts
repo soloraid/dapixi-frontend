@@ -10,6 +10,7 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
 import { ProfileComponent } from './profile/profile.component';
 import { UploadPostComponent } from './upload-post/upload-post.component';
 import {PostDetailComponent} from './post-detail/post-detail.component';
+import { profile } from 'console';
 
 const routes: Routes = [
   {
@@ -45,21 +46,54 @@ const routes: Routes = [
       }
     ]
   },
+  // {
+  //   path:":id",
+  //   component:ProfileComponent,
+  //   children:[
+  //     {
+  //       path:"",
+  //       pathMatch:"full",
+  //       component:ProfileDetailComponent
+  //     },
+  //     {
+  //       path:"edit",
+  //       component:ProfileEditComponent
+  //     },
+  //     {
+  //       path:"new",
+  //       component:UploadPostComponent
+  //     }
+  //   ]
+  // }
   {
-    path:":id",
+    path:'user',
     component:ProfileComponent,
     children:[
       {
-        path:"",
-        pathMatch:"full",
-        component:ProfileDetailComponent
+        path:'',
+        redirectTo:'profile',
+        pathMatch:'full'
       },
       {
-        path:"edit",
+        path:'profile',
+        component:ProfileDetailComponent,
+        // children:[
+        //   {
+        //     path:'edit',
+        //     component:ProfileEditComponent
+        //   }
+        // ]
+      },
+      {
+        path:'profile/edit',
         component:ProfileEditComponent
       },
       {
-        path:"new",
+        path:':id',
+        component:ProfileDetailComponent
+      },
+      {
+        path:'new',
         component:UploadPostComponent
       }
     ]
