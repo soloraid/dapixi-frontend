@@ -6,12 +6,26 @@
             </button>
             <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
         </div>
-        <div class="col-6 col-md-7 col-lg-8 pl-5 d-felx align-items-center">
-            <h3 class="name">{{ userView.name }}</h3>
-            <p>{{ userView.username }}</p>
+        <div *ngIf="userView" class="col-6 col-md-7 col-lg-8 pl-5 d-felx align-items-center">
+            <h3 class="name">{{ userView.firstName }}</h3>
+            <p class="mb-1">@{{ userView.username }}</p>
+            <p class="m-0"><small>{{ userView.birthDate }}</small></p>
         </div>
         <div class="col-4 col-md-3 col-lg-2">
-            <img [src]="userView.img" alt="" class="img-fluid rounded-circle profile-img">
+            <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
+        </div>
+    </div>
+    <hr>
+    <div *ngIf="currnetUser" class="row current">
+        <div class="col-12 pl-5 mt-2">
+            <p>
+                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                {{ userView.email }}
+            </p>
+            <p>
+                <i class="fa fa-mobile fa-2x" aria-hidden="true"></i>
+                {{ userView.email }}
+            </p>
         </div>
     </div>
 </div>

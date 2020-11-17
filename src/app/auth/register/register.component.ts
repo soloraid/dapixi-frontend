@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit,OnDestroy {
       this.regForm.get('userName').value,
       this.regForm.get('firstName').value,
       this.regForm.get('lastName').value,
-      this.regForm.get('userName').value,
+      this.regForm.get('password').value,
       this.regForm.get('phone').value,
       this.regForm.get('email').value,
       this.regForm.get('date').value
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit,OnDestroy {
       (data)=>{
       console.log(data);
       this.loginSubs=this._authService
-      .login(this.regForm.get('userName').value,this.regForm.get('userName').value)
+      .login(this.regForm.get('userName').value,this.regForm.get('password').value)
       .subscribe((data)=>{
         this.router.navigate(['']);
       });
