@@ -26,12 +26,6 @@ export class ProfileDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.link = window.location.href;
-    // console.log(this.link);
-    // console.log(this.currnetUser);
-    // if(this.currnetUser){
-    //   const index=this.link.indexOf('/profile');
-    //   this.link=this.link.slice(0,index);
-    // }
     this._rout.params.subscribe(() => {
       this.id = this._rout.snapshot.params['id'];
       if (this.id) {
@@ -49,13 +43,7 @@ export class ProfileDetailComponent implements OnInit {
         this.userView=user;
       })
     }
-    // this.http.get(environment.api + "/auth/user/1", {
-    //   headers: new HttpHeaders({
-    //     Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDUyNDA3ODYsInVzZXJfbmFtZSI6InNoYXlhbiIsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJBRE1JTiJdLCJqdGkiOiIyNTM4ZDBkOC0yZTQ4LTQ4MTgtYWI0Yy1jMTIxMDc0MWRmMWIiLCJjbGllbnRfaWQiOiJkYXBpeGkiLCJzY29wZSI6WyJ3ZWJjbGllbnQiXX0.n1JaNIri4KzScGOsCq2n1INOdrubk88BfHXmpkdOits"
-    //   })
-    // }).subscribe(data=>{
-    //   console.log(data)
-    // })
+
   }
   copyLink() {
     this.copied = true;
