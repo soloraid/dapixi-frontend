@@ -26,10 +26,12 @@ export class ProfileDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.link = window.location.href;
-    if(this.currnetUser){
-      const index=this.link.indexOf('/profile');
-      this.link=this.link.slice(0,index);
-    }
+    // console.log(this.link);
+    // console.log(this.currnetUser);
+    // if(this.currnetUser){
+    //   const index=this.link.indexOf('/profile');
+    //   this.link=this.link.slice(0,index);
+    // }
     this._rout.params.subscribe(() => {
       this.id = this._rout.snapshot.params['id'];
       if (this.id) {
@@ -39,6 +41,8 @@ export class ProfileDetailComponent implements OnInit {
     if (this.currnetUser) {
       this._profile.getProfile().subscribe((user: User) => {
         this.userView = user;
+        const index=this.link.indexOf('profile');
+        this.link=this.link.slice(0,index)+this.userView.profileId;
       })
     }else{
       this._profile.getProfileById(this.id).subscribe((user:User)=>{
