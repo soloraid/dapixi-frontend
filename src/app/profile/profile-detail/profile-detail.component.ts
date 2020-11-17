@@ -11,20 +11,21 @@ import { ProfileService } from '../profile.service';
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent implements OnInit {
-  userView = {
-    img: "https://via.placeholder.com/150",
-    name: "علی قیومی",
-    username: "@a",
-    email: "a@a.com"
-  }
+  userView:User
+  // = {
+  //   img: "https://via.placeholder.com/150",
+  //   name: "علی قیومی",
+  //   username: "@a",
+  //   email: "a@a.com"
+  // }
   copied: boolean = false;
   link: string;
   constructor(public http: HttpClient,private _profile:ProfileService) { }
 
   ngOnInit(): void {
     this.link = window.location.href;
-    this._profile.getProfile().subscribe((data)=>{
-      console.log(data);
+    this._profile.getProfile().subscribe((user:User)=>{
+      this.userView=user;
     })
     // this.http.get(environment.api + "/auth/user/1", {
     //   headers: new HttpHeaders({
@@ -46,8 +47,8 @@ interface User{
   username:string,
   firstName: string,
   lastName: string,
-  mobile: string,
-  email: string,
+  mobile?: string,
+  email?: string,
   birthDate: string,
-  profileId: string
+  profileId?: string
 }

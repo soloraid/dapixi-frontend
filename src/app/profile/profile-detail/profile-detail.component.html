@@ -7,11 +7,11 @@
             <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
         </div>
         <div class="col-6 col-md-7 col-lg-8 pl-5 d-felx align-items-center">
-            <h3 class="name">{{ userView.name }}</h3>
-            <p>{{ userView.username }}</p>
+            <h3 *ngIf="userView" class="name">{{ userView.firstName }}</h3>
+            <p *ngIf="userView">{{ userView.username }}</p>
         </div>
         <div class="col-4 col-md-3 col-lg-2">
-            <img [src]="userView.img" alt="" class="img-fluid rounded-circle profile-img">
+            <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
         </div>
     </div>
 </div>
