@@ -10,7 +10,7 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
 import { ProfileComponent } from './profile/profile.component';
 import { UploadPostComponent } from './upload-post/upload-post.component';
 import {PostDetailComponent} from './post-detail/post-detail.component';
-import { profile } from 'console';
+
 
 const routes: Routes = [
   {
