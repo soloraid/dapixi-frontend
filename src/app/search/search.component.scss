@@ -1,0 +1,40 @@
+/*.btn-success {
+  background-color: var(--secondary_color);
+  color: var(--text_color);
+}*/
+
+
+input[type=text] {
+  width: 140px;
+  box-sizing: border-box;
+  border: 2px solid var(--bg_color);
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  background-image: url('../../assets/searchicon1.jpg');
+  background-size: 15px;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.8s;
+  text-align: right;
+}
+
+
+input[type=text]:hover {
+  width: 200px;
+}
+
+input[type=text]:focus {
+  width: 65%;
+}
+
+button {
+  background-color: var(--secondary_color);
+  color: var(--text_color);
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--primary_color);
+  width: 70px;
+}
