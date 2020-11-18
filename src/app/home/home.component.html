@@ -5,9 +5,9 @@
       <h3>آخرین پست ها</h3>
       <hr>
       <div class="container ui-main-posts mt-2">
-        <div class="row ">
-          <div class="col-xl-5">
-            <app-post></app-post>
+        <div class="row " *ngIf="isEmpty">
+          <div class="col-xl-5 clearfix" *ngFor="let post of postView">
+            <app-post [post]="post"></app-post>
           </div>
         </div>
       </div>
