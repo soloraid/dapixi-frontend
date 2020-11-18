@@ -20,6 +20,7 @@ import {DropdownDirective} from './share/dropdown.directive';
 import {ClipboardModule} from 'ngx-clipboard';
 import { HttpClientModule, HTTP_INTERCEPTORS, ɵHttpInterceptingHandler } from '@angular/common/http';
 import { AuthInterceptorInterceptor } from './auth/auth-interceptor.interceptor';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -38,7 +39,8 @@ import { AuthInterceptorInterceptor } from './auth/auth-interceptor.interceptor'
     EnterComponent,
     RegisterComponent,
     UploadPostComponent,
-    DropdownDirective
+    DropdownDirective,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
