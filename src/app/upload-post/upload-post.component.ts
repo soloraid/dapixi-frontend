@@ -10,6 +10,7 @@ import { PostService } from '../share/post.service';
 
 export class UploadPostComponent implements OnInit {
   imgFile:File;
+  title:string;
   description:string;
   @ViewChild('file_label') label:ElementRef;
   allCats:category[];
@@ -38,7 +39,8 @@ export class UploadPostComponent implements OnInit {
     this.label.nativeElement.innerHTML=this.imgFile.name;
   }
   onSubmit(){
-    console.log(this.imgFile,this.description,this.selectedCats);
+    console.log(this.imgFile,this.description,this.title);
+    // this._postService.addPsot(this.imgFile,this.)
     // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
   addCat(id){

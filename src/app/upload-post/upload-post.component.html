@@ -3,6 +3,10 @@
         <div class="col-lg-8">
             <h3>آپلود پست جدید</h3>
             <form class="p-5 my-4" (submit)="onSubmit()">
+                <div class="form-group">
+                    <label for="title" >عنوان:</label>
+                    <input type="text" name="title" id="title" class="form-control" [(ngModel)]="title">
+                </div>
                 <div class="row mb-5 justify-content-between">
                     <div class="col-md-6 mb-2 pl-0">
                         <div class="custom-file file-box">
