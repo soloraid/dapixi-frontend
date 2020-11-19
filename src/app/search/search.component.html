@@ -1,7 +1,7 @@
 <div class="row-cols-lg-1">
   <form class="form-inline" action="/action_page.php">
     <input class="form-control mr-sm-1" type="text"
-           placeholder=" . . .جستوجو" #inputData>
-    <button class="btn" type="submit" (click)="onSearch(inputData.value)"x>تایید</button>
+           placeholder=" . . .جستوجو" [(ngModel)]="searchUser" name="input">
+    <button class="btn" type="submit"  (click)="onSearch()">تایید</button>
   </form>
 </div>
