@@ -28,7 +28,7 @@ const routes: Routes = [
     component: PostDetailComponent
   },
   {
-    path: 'search/result',
+    path: 'search-result/:name',
     component: SearchResultComponent
   },
   {

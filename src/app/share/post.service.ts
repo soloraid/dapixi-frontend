@@ -13,6 +13,7 @@ export class PostService {
   getLatestPost() {
      return this.http.get(environment.api + '/photo/latest/posts');
   }
+
   getCategories(){
     return this.http.get(environment.api+'/photo/categories');
   }
@@ -26,6 +27,19 @@ export class PostService {
   }
   addCategories(id:string,cats:string[]){
     return this.http.patch(environment.api+'/photo/posts/'+id+'/categories',cats);
+
+
+  getPostByID(id: string) {
+    return this.http.get(environment.api + '/photo/posts/' + id);
+  }
+
+  getPostByUserName(userName: string) {
+    return this.http.get(environment.api + '/photo/search/posts', {
+      params: {
+        user: userName
+      }
+    });
+
   }
 }
 

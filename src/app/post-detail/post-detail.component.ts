@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {PostDetailService} from './post-detail.service';
 import {Post} from '../share/post/post.module';
 import {environment} from '../../environments/environment.prod';
+import {PostService} from '../share/post.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-post-detail',
@@ -9,16 +10,20 @@ import {environment} from '../../environments/environment.prod';
   styleUrls: ['./post-detail.component.scss']
 })
 export class PostDetailComponent implements OnInit {
-  post: Post;
+  id: string;
   postUrl: string;
   isEmpty = true;
-  constructor(private postDetailService: PostDetailService) {
+  constructor(private postService: PostService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.post = this.postDetailService.post;
-    this.postUrl = environment.api + '/photo' + this.post.imageUrl;
-    this.isEmpty = false;
+
+    this.id = this.route.snapshot.params['id'];
+    console.log(this.id);
+    this.postService.getPostByID(this.id).subscribe((post: Post) => {
+      this.postUrl = environment.api + '/photo' + post.imageUrl;
+      this.isEmpty = false;
+    });
   }
 
 }
