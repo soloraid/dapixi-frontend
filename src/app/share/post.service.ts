@@ -12,6 +12,18 @@ export class PostService {
   getLatestPost() {
      return this.http.get(environment.api + '/photo/latest/posts');
   }
+
+  getPostByID(id: string) {
+    return this.http.get(environment.api + '/photo/posts/' + id);
+  }
+
+  getPostByUserName(userName: string) {
+    return this.http.get(environment.api + '/photo/search/posts', {
+      params: {
+        user: userName
+      }
+    });
+  }
 }
 
 
