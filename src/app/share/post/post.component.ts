@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from './post.module';
 import {environment} from '../../../environments/environment.prod';
+import {Router} from '@angular/router';
+import {PostDetailService} from '../../post-detail/post-detail.service';
 
 @Component({
   selector: 'app-post',
@@ -13,7 +15,7 @@ export class PostComponent implements OnInit {
   postUrl: string;
   isEmpty = true;
 
-  constructor() {
+  constructor(private router: Router, private postDetailService: PostDetailService) {
   }
 
   ngOnInit(): void {
@@ -24,4 +26,8 @@ export class PostComponent implements OnInit {
 
   }
 
+  navigateToDetail(post: Post): void{
+    this.postDetailService.post = post;
+    this.router.navigate(['/post-detail', post.id],);
+  }
 }
