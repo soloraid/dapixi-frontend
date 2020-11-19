@@ -16,6 +16,8 @@ export class UploadPostComponent implements OnInit {
   allCats:category[];
   selectedCats:category[]=[];
   catSubsc:Subscription;
+  uploadSubc:Subscription;
+  addCatSubsc:Subscription;
   constructor(private _postService:PostService) { }
 
   ngOnInit(): void {
@@ -40,8 +42,17 @@ export class UploadPostComponent implements OnInit {
   }
   onSubmit(){
     console.log(this.imgFile,this.description,this.title);
-    this._postService.addPsot(this.imgFile,this.title,this.description).subscribe((data)=>{
-      console.log(data);
+    this.uploadSubc=this._postService.addPsot(this.imgFile,this.title,this.description)
+    .subscribe((postData:PostData)=>{
+      console.log(postData);
+      let cats:string[]=this.selectedCats.map((cat)=>{
+        return cat.name;
+      })
+      this.addCatSubsc=this._postService
+      .addCategories(postData.id,cats)
+      .subscribe((data)=>{
+        console.log(data);
+      })
     })
     // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
@@ -72,4 +83,15 @@ interface category{
   id:number;
   name:string;
   selected:boolean;
+}
+interface PostData {
+  id: string;
+  username: string;
+  title: string;
+  description: string;
+  creationDate: string;
+  imageUrl: string;
+  userRating: number;
+  averageRating: number;
+  categories: string[];
 }

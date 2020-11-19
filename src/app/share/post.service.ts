@@ -24,6 +24,9 @@ export class PostService {
     return this.http.post(environment.api+'/photo/posts',body);
 
   }
+  addCategories(id:string,cats:string[]){
+    return this.http.patch(environment.api+'/photo/posts/'+id+'/categories',cats);
+  }
 }
 
 
