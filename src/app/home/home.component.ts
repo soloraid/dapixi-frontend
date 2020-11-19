@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   authSubsc: Subscription;
   postView: Post[] = [];
-  isEmpty = false;
+  isEmpty = true;
 
   // tslint:disable-next-line:variable-name
   constructor(private _authService: AuthService, private postService: PostService) {
@@ -25,12 +25,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.isAuth = !!token;
     });
     this.postService.getLatestPost().subscribe(posts => {
-      console.log(posts);
+      // console.log(posts);
       // tslint:disable-next-line:forin
       for (let index in posts) {
         this.postView.push(posts[index]);
       }
-      this.isEmpty = true;
+      this.isEmpty = false;
     });
   }
 

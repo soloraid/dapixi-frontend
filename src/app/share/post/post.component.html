@@ -1,5 +1,5 @@
 <div class="d-flex justify-content mb-2">
-  <div class="p-2">
+  <div class="p-2" *ngIf="!isEmpty">
     <a href="#">
       <p class="text-justify float-left" role="button">{{ post.title }}</p>
       <img src="{{ postUrl }}" alt="post_author" class="w-100 uiPost">
