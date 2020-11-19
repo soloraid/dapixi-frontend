@@ -1,10 +1,11 @@
 <nav class="mb-5">
-  <div class="navbar-nav navbar-expand-lg uiNav container-fluid">
+  <div class="navbar-nav navbar-expand-sm uiNav container-fluid">
     <div class="collapse navbar-collapse">
       <a href="#"><span class="" ></span></a>
       <ul class="navbar-nav mr-auto row-cols-sm-1">
         <li *ngIf="!isAuth"><a  href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a></li>
         <li *ngIf="isAuth"><a (click)="onLogOut()"  href="" class="nav-item">خروج</a></li>
+        <li *ngIf="isAuth"><a routerLink="user/new"  href="" class="nav-item">پست جدید</a></li>
         <li *ngIf="isAuth"><a routerLink="user"  href="" class="nav-item">پروفایل</a></li>
         <li><a href="#" class="nav-item"><i class=""></i>ارتباط با ما</a></li>
       </ul>

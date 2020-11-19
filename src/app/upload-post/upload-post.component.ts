@@ -1,4 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { PostService } from '../share/post.service';
 
 @Component({
   selector: 'app-upload-post',
@@ -6,31 +9,31 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./upload-post.component.scss']
 })
 
-export class UploadPostComponent implements OnInit {
+export class UploadPostComponent implements OnInit,OnDestroy {
   imgFile:File;
+  title:string;
   description:string;
   @ViewChild('file_label') label:ElementRef;
-  allCats:category[]=[
-    {
-      id:0,
-      name:"انتزاعی",
-      selected:false
-    },
-    {
-      id:1,
-      name:"تیره",
-      selected:false
-    },
-    {
-      id:2,
-      name:"منظره",
-      selected:false
-    }
-  ];
+  allCats:category[];
   selectedCats:category[]=[];
-  constructor() { }
+  catSubsc:Subscription;
+  uploadSubc:Subscription;
+  addCatSubsc:Subscription;
+  constructor(private _postService:PostService,private _router:Router) { }
 
   ngOnInit(): void {
+    this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
+      console.log(cats);
+      this.allCats=cats.map((cat,index):category=>{
+        const newCat:category={
+          id:index,
+          name:cat,
+          selected:false
+        }
+        return  newCat
+      });
+      console.log(this.allCats);
+    })
   }
   onChange(event){
     console.log(event.target.files[0]);
@@ -39,7 +42,20 @@ export class UploadPostComponent implements OnInit {
     this.label.nativeElement.innerHTML=this.imgFile.name;
   }
   onSubmit(){
-    console.log(this.imgFile,this.description,this.selectedCats);
+    console.log(this.imgFile,this.description,this.title);
+    this.uploadSubc=this._postService.addPsot(this.imgFile,this.title,this.description)
+    .subscribe((postData:PostData)=>{
+      console.log(postData);
+      let cats:string[]=this.selectedCats.map((cat)=>{
+        return cat.name;
+      })
+      this.addCatSubsc=this._postService
+      .addCategories(postData.id,cats)
+      .subscribe((data)=>{
+        console.log(data);
+      })
+      this._router.navigate(['./post-detail',postData.id]);
+    })
     // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
   addCat(id){
@@ -63,10 +79,32 @@ export class UploadPostComponent implements OnInit {
     console.log(changeCat);
     changeCat.selected=false;
   }
+  ngOnDestroy(){
+    if(this.addCatSubsc){
+      this.addCatSubsc.unsubscribe();
+    }
+    if(this.catSubsc){
+      this.catSubsc.unsubscribe();
+    }
+    if(this.uploadSubc){
+      this.uploadSubc.unsubscribe();
+    }
+  }
 
 }
 interface category{
   id:number;
   name:string;
   selected:boolean;
+}
+interface PostData {
+  id: string;
+  username: string;
+  title: string;
+  description: string;
+  creationDate: string;
+  imageUrl: string;
+  userRating: number;
+  averageRating: number;
+  categories: string[];
 }

@@ -3,21 +3,25 @@
         <div class="col-lg-8">
             <h3>آپلود پست جدید</h3>
             <form class="p-5 my-4" (submit)="onSubmit()">
+                <div class="form-group">
+                    <label for="title" >عنوان:</label>
+                    <input type="text" name="title" id="title" class="form-control" required [(ngModel)]="title">
+                </div>
                 <div class="row mb-5 justify-content-between">
                     <div class="col-md-6 mb-2 pl-0">
                         <div class="custom-file file-box">
                             <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg"
                                 required (change)="onChange($event)">
-                            <label #file_label for="file" class="custom-file-label file-label">تصویری انتخاب نشده
+                            <label #file_label for="file" class="custom-file-label file-label text-danger">تصویری انتخاب نشده
                                 است</label>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5 cats">
                         <div class="dropdown p-0">
                             <button class="dropdown-toggle m-0 w-100" role="button" type="button" appDropdown>
                                  دسته‌بندی‌ها
                             </button>
-                            <div class="dropdown-menu py-0">
+                            <div *ngIf="allCats" class="dropdown-menu py-0 cat-menu">
                                 <button *ngFor="let cat of allCats" id="cat.id" class="dropdown-item m-0"
                                     (click)="addCat(cat.id)"
                                     [ngClass]="{'selected':cat.selected}"
@@ -39,9 +43,10 @@
                 </div>
                 <label for="desc">توضیحات:</label>
                 <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"
+                    required
                     [(ngModel)]="description"></textarea>
                 <div class="row justify-content-center">
-                    <button [disabled]="!imgFile || selectedCats.length===0">بارگذاری</button>
+                    <button [disabled]="!imgFile || !title || !description">بارگذاری</button>
                 </div>
             </form>
         </div>

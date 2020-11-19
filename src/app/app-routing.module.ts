@@ -94,12 +94,12 @@ const routes: Routes = [
         component: ProfileEditComponent
       },
       {
-        path: ':id',
-        component: ProfileDetailComponent
-      },
-      {
         path: 'new',
         component: UploadPostComponent
+      },
+      {
+        path: ':id',
+        component: ProfileDetailComponent
       }
     ]
   }
