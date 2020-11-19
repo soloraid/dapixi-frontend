@@ -12,7 +12,7 @@ import { ProfileService } from '../profile.service';
 })
 export class ProfileDetailComponent implements OnInit {
   userView: User;
-  id: string;
+  username: string;
   currnetUser: boolean = true;
   // = {
   //   img: "https://via.placeholder.com/150",
@@ -27,8 +27,8 @@ export class ProfileDetailComponent implements OnInit {
   ngOnInit(): void {
     this.link = window.location.href;
     this._rout.params.subscribe(() => {
-      this.id = this._rout.snapshot.params['id'];
-      if (this.id) {
+      this.username = this._rout.snapshot.params['username'];
+      if (this.username) {
         this.currnetUser = false;
       }
     })
@@ -39,7 +39,7 @@ export class ProfileDetailComponent implements OnInit {
         this.link=this.link.slice(0,index)+this.userView.profileId;
       })
     }else{
-      this._profile.getProfileById(this.id).subscribe((user:User)=>{
+      this._profile.getProfileByUsername(this.username).subscribe((user:User)=>{
         this.userView=user;
       })
     }

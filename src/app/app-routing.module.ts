@@ -98,7 +98,7 @@ const routes: Routes = [
         component: UploadPostComponent
       },
       {
-        path: ':id',
+        path: ':username',
         component: ProfileDetailComponent
       }
     ]
