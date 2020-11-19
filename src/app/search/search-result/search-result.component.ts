@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from '../search.service';
-import {ActivatedRoute} from '@angular/router';
 import {Post} from '../../share/post/post.module';
-import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-search-result',
