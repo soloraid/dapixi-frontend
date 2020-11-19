@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { PostService } from '../share/post.service';
 
 @Component({
   selector: 'app-upload-post',
@@ -10,27 +12,24 @@ export class UploadPostComponent implements OnInit {
   imgFile:File;
   description:string;
   @ViewChild('file_label') label:ElementRef;
-  allCats:category[]=[
-    {
-      id:0,
-      name:"انتزاعی",
-      selected:false
-    },
-    {
-      id:1,
-      name:"تیره",
-      selected:false
-    },
-    {
-      id:2,
-      name:"منظره",
-      selected:false
-    }
-  ];
+  allCats:category[];
   selectedCats:category[]=[];
-  constructor() { }
+  catSubsc:Subscription;
+  constructor(private _postService:PostService) { }
 
   ngOnInit(): void {
+    this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
+      console.log(cats);
+      this.allCats=cats.map((cat,index):category=>{
+        const newCat:category={
+          id:index,
+          name:cat,
+          selected:false
+        }
+        return  newCat
+      });
+      console.log(this.allCats);
+    })
   }
   onChange(event){
     console.log(event.target.files[0]);

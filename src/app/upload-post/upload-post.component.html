@@ -17,7 +17,7 @@
                             <button class="dropdown-toggle m-0 w-100" role="button" type="button" appDropdown>
                                  دسته‌بندی‌ها
                             </button>
-                            <div class="dropdown-menu py-0">
+                            <div *ngIf="allCats" class="dropdown-menu py-0">
                                 <button *ngFor="let cat of allCats" id="cat.id" class="dropdown-item m-0"
                                     (click)="addCat(cat.id)"
                                     [ngClass]="{'selected':cat.selected}"

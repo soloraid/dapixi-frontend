@@ -12,6 +12,9 @@ export class PostService {
   getLatestPost() {
      return this.http.get(environment.api + '/photo/latest/posts');
   }
+  getCategories(){
+    return this.http.get(environment.api+'/photo/categories');
+  }
 }
 
 
