@@ -1,17 +1,20 @@
 <div class="container ui-detail ">
-  <div class="row">
+  <div class="row" *ngIf="!isEmpty">
     <div class="col-xl-8 mt-5">
       <section>
-        <img src="/assets/photodefault.jpg" alt="hzxh" style="max-width: 100%" class="uiPost">
+        <img src="{{postUrl}}" alt="{{post.title}}" style="max-width: 100%" class="uiPost">
       </section>
     </div>
     <div class="col-xl-3 mt-5">
       <div class="col-sm-12 float-right detail">
-        <h2><a href="#">اسم کاربر</a></h2>
-        <p>نوع عکس: انتزاعی</p>
+        <h2><a>{{post.username}}</a></h2>
+        <h6>{{post.categories}} :نوع عکس
+        </h6>
+
       </div>
       <div class="float-right mt-5 ui-content">
         <p>توضیحات</p>
+        <p>{{post.description}}</p>
       </div>
     </div>
     <div>
