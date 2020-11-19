@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SearchService} from '../search.service';
 import {Post} from '../../share/post/post.module';
+import {ActivatedRoute} from '@angular/router';
+import {PostService} from '../../share/post.service';
 
 @Component({
   selector: 'app-search-result',
@@ -8,22 +9,32 @@ import {Post} from '../../share/post/post.module';
   styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit {
-  posts: Post[] = [];
+  posts: Post[];
+  userName: string;
   isEmptyPosts = true;
   p = 1;
 
-  constructor(private searchService: SearchService) { }
+  constructor(private postService: PostService, private route: ActivatedRoute) {
+  }
 
 
   ngOnInit(): void {
-    this.searchService.resultSubject.subscribe(posts => {
-      this.posts = posts;
-      if (posts.length !== 0) {
+
+    this.route.params.subscribe((params) => {
+      this.userName = params.name;
+      this.postService.getPostByUserName(this.userName).subscribe((posts: Post[]) => {
         console.log(posts);
-        this.isEmptyPosts = false;
-      } else {
-        this.isEmptyPosts = true;
-      }
+        this.posts = posts;
+        if (posts.length !== 0) {
+          console.log(posts);
+          this.isEmptyPosts = false;
+        } else {
+          this.isEmptyPosts = true;
+        }
+      });
     });
+
   }
+
 }
+
