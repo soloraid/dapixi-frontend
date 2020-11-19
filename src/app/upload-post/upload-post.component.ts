@@ -40,7 +40,9 @@ export class UploadPostComponent implements OnInit {
   }
   onSubmit(){
     console.log(this.imgFile,this.description,this.title);
-    // this._postService.addPsot(this.imgFile,this.)
+    this._postService.addPsot(this.imgFile,this.title,this.description).subscribe((data)=>{
+      console.log(data);
+    })
     // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
   addCat(id){
