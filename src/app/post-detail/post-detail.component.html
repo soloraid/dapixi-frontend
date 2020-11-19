@@ -7,7 +7,10 @@
     </div>
     <div class="col-xl-3 mt-5">
       <div class="col-sm-12 float-right detail">
-        <h2><a>{{post.username}}</a></h2>
+        <h2><a>{{post.title}}</a></h2>
+        <p>
+          <a href="" [routerLink]="['/user',post.username]">@{{post.username}}</a>
+        </p>
         <h6>{{post.categories}} :نوع عکس
         </h6>
 
