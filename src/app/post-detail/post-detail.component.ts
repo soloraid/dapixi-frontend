@@ -10,6 +10,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./post-detail.component.scss']
 })
 export class PostDetailComponent implements OnInit {
+  post: Post;
   id: string;
   postUrl: string;
   isEmpty = true;
@@ -22,6 +23,7 @@ export class PostDetailComponent implements OnInit {
     console.log(this.id);
     this.postService.getPostByID(this.id).subscribe((post: Post) => {
       this.postUrl = environment.api + '/photo' + post.imageUrl;
+      this.post = post;
       this.isEmpty = false;
     });
   }
