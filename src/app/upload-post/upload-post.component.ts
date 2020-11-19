@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PostService } from '../share/post.service';
 
@@ -8,7 +8,7 @@ import { PostService } from '../share/post.service';
   styleUrls: ['./upload-post.component.scss']
 })
 
-export class UploadPostComponent implements OnInit {
+export class UploadPostComponent implements OnInit,OnDestroy {
   imgFile:File;
   title:string;
   description:string;
@@ -76,6 +76,17 @@ export class UploadPostComponent implements OnInit {
     });
     console.log(changeCat);
     changeCat.selected=false;
+  }
+  ngOnDestroy(){
+    if(this.addCatSubsc){
+      this.addCatSubsc.unsubscribe();
+    }
+    if(this.catSubsc){
+      this.catSubsc.unsubscribe();
+    }
+    if(this.uploadSubc){
+      this.uploadSubc.unsubscribe();
+    }
   }
 
 }
