@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PostService } from '../share/post.service';
 
@@ -18,7 +19,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   catSubsc:Subscription;
   uploadSubc:Subscription;
   addCatSubsc:Subscription;
-  constructor(private _postService:PostService) { }
+  constructor(private _postService:PostService,private _router:Router) { }
 
   ngOnInit(): void {
     this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
@@ -53,6 +54,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
       .subscribe((data)=>{
         console.log(data);
       })
+      this._router.navigate(['./post-detail',postData.id]);
     })
     // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
