@@ -36,7 +36,7 @@ export class ProfileDetailComponent implements OnInit {
       this._profile.getProfile().subscribe((user: User) => {
         this.userView = user;
         const index=this.link.indexOf('profile');
-        this.link=this.link.slice(0,index)+this.userView.profileId;
+        this.link=this.link.slice(0,index)+this.userView.username;
       })
     }else{
       this._profile.getProfileByUsername(this.username).subscribe((user:User)=>{
@@ -59,6 +59,5 @@ interface User {
   lastName: string,
   mobile?: string,
   email?: string,
-  birthDate: string,
-  profileId?: string
+  birthDate: string
 }
