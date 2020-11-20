@@ -12,6 +12,7 @@ import {UploadPostComponent} from './upload-post/upload-post.component';
 import {PostDetailComponent} from './post-detail/post-detail.component';
 import {SearchResultComponent} from './search/search-result/search-result.component';
 import { AuthGuard } from './share/auth.guard';
+import { ReAuthGuard } from './share/re-auth.guard';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent,
+    canActivate:[ReAuthGuard],
     children: [
       {
         path: '',
@@ -52,25 +54,7 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path:":id",
-  //   component:ProfileComponent,
-  //   children:[
-  //     {
-  //       path:"",
-  //       pathMatch:"full",
-  //       component:ProfileDetailComponent
-  //     },
-  //     {
-  //       path:"edit",
-  //       component:ProfileEditComponent
-  //     },
-  //     {
-  //       path:"new",
-  //       component:UploadPostComponent
-  //     }
-  //   ]
-  // }
+  
   {
     path: 'user',
     component: ProfileComponent,
