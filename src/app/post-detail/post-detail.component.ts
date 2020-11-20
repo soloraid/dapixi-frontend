@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Post} from '../share/post/post.module';
-import {environment} from '../../environments/environment.prod';
+import {environment} from '../../environments/environment';
 import {PostService} from '../share/post.service';
 import {ActivatedRoute} from '@angular/router';
 
