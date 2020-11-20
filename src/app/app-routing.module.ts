@@ -11,6 +11,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {UploadPostComponent} from './upload-post/upload-post.component';
 import {PostDetailComponent} from './post-detail/post-detail.component';
 import {SearchResultComponent} from './search/search-result/search-result.component';
+import { AuthGuard } from './share/auth.guard';
 
 
 const routes: Routes = [
@@ -77,11 +78,13 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'profile',
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate:[AuthGuard]
       },
       {
         path: 'profile',
         component: ProfileDetailComponent,
+        canActivate:[AuthGuard]
         // children:[
         //   {
         //     path:'edit',
@@ -91,11 +94,13 @@ const routes: Routes = [
       },
       {
         path: 'profile/edit',
-        component: ProfileEditComponent
+        component: ProfileEditComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 'new',
-        component: UploadPostComponent
+        component: UploadPostComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: ':username',
