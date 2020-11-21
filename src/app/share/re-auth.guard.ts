@@ -17,7 +17,7 @@ export class ReAuthGuard implements CanActivate {
         take(1),
         map((token:Tokens)=>{
           if(!token){
-            return false
+            return true;
           }else{
             return this._router.createUrlTree(['/']);
           }
