@@ -18,22 +18,23 @@ export class EnterComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
   }
   onSubmit(form: NgForm) {
-    // console.log(form);
-    this.loginSubs=this._authService
-      .login(form.value.username, form.value.password)
-      .subscribe(
-         data => {
-          console.log(data);
-          this._router.navigate(['/'])
-        },
-        (errorData: string) => {
-          console.log(errorData);
-          this.errorMsg = errorData;
-          setTimeout(()=>{
-            this.errorMsg="";
-          },3000)
-        }
-      )
+    console.log(form);
+    console.log(!!form.value['remember']);
+    // this.loginSubs=this._authService
+    //   .login(form.value.username, form.value.password)
+    //   .subscribe(
+    //      data => {
+    //       console.log(data);
+    //       this._router.navigate(['/'])
+    //     },
+    //     (errorData: string) => {
+    //       console.log(errorData);
+    //       this.errorMsg = errorData;
+    //       setTimeout(()=>{
+    //         this.errorMsg="";
+    //       },3000)
+    //     }
+    //   )
   }
   ngOnDestroy(){
     if(this.loginSubs){

@@ -8,6 +8,11 @@
         <label for="password">رمز عبور:</label>
         <input ngModel type="password" class="form-control" name="password" required minlength="6">
     </div>
+    <div class="form-check pr-2">
+        <input ngModel type="checkbox" class="form-check-input" name="remember" id="remember">
+        <label for="remember" class="form-check-label mr-4">مرا به خاطر بسپار</label>
+    </div>
+    
     <div class="row justify-content-center">
         <div class="col-12 col-sm-7 col-md-8 col-xl-6 text-center">
             <button type="submit" class="btn mx-0" [disabled]="enter_form.invalid">ورود</button>
