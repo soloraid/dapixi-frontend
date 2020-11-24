@@ -9,8 +9,10 @@ input[type="email"],input[type="password"],input[type="date"]{
     color: white;
     width: 100%;
 }
-.change{
+.form-link{
     cursor: pointer;
+    display: block;
+    padding-bottom: 0.5rem;
     color: var(--text_color);
     :hover{
         text-decoration: underline;
