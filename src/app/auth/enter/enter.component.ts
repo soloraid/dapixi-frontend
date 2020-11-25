@@ -51,9 +51,9 @@ export class EnterComponent implements OnInit,OnDestroy {
         (errorData: string) => {
           console.log(errorData);
           this.errorMsg = errorData;
-          setTimeout(()=>{
-            this.errorMsg="";
-          },3000)
+          // setTimeout(()=>{
+          //   this.errorMsg="";
+          // },5000)
         }
       )
   }

@@ -1,5 +1,8 @@
 <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
-    <p *ngIf="errorMsg" class="text-danger">{{ errorMsg }}</p>
+    <div *ngIf="errorMsg"  class="alert alert-danger pt-0 pr-1 ">
+        <a (click)="errorMsg=''" class="text-danger m-0 p-0 error-toggler">X</a>
+        <p  class="text-danger my-0 pr-2">{{ errorMsg }}</p>
+    </div>
     <div class="row mb-4">
         <div class="col-12 col-sm-6">
             <label for="first_name">نام:</label>
