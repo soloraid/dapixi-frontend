@@ -31,7 +31,7 @@ export class EnterComponent implements OnInit,OnDestroy {
 
   }
   onSubmit() {
-    // console.log(this.form);
+    console.log(this.enterForm.value);
     // console.log(!!form.value['remember']);
     const username=this.enterForm.value.username;
     const password=this.enterForm.value.password;
