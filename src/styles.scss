@@ -15,6 +15,9 @@ html,body{
     text-align: right;
     // direction: rtl;
 }
+a{
+  cursor: pointer;
+}
 .uiNav {
   background-color: var(--primary_color);
   font-family: "IRANSansWeb";

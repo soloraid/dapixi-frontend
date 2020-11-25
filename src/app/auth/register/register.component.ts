@@ -54,9 +54,9 @@ export class RegisterComponent implements OnInit,OnDestroy {
     },
       (errorData:string)=>{
         this.errorMsg=errorData;
-        setTimeout(()=>{
-          this.errorMsg="";
-        },5000);
+        // setTimeout(()=>{
+        //   this.errorMsg="";
+        // },5000);
         // console.log(errorData);
       }
     )

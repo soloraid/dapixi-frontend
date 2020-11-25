@@ -16,15 +16,15 @@ export class EnterComponent implements OnInit,OnDestroy {
   errorMsg: string = "";
   @ViewChild('enter_form',{static:false}) enterForm:NgForm;
   username:string;
-  password:String;
+  // password:String;
   hasRemember:boolean=false;
   loginSubs:Subscription;
   ngOnInit(): void {
     const username=localStorage.getItem('username');
-    const password=localStorage.getItem('password');
-    if(username && password){
+    // const password=localStorage.getItem('password');
+    if(username){
       this.username=username;
-      this.password=password;
+      // this.password=password;
       this.hasRemember=true;
     }
     // console.log(this.enterForm);
@@ -51,9 +51,9 @@ export class EnterComponent implements OnInit,OnDestroy {
         (errorData: string) => {
           console.log(errorData);
           this.errorMsg = errorData;
-          setTimeout(()=>{
-            this.errorMsg="";
-          },3000)
+          // setTimeout(()=>{
+          //   this.errorMsg="";
+          // },5000)
         }
       )
   }
@@ -65,6 +65,6 @@ export class EnterComponent implements OnInit,OnDestroy {
   }
   private remember(username:string,password:string){
     localStorage.setItem('username',username);
-    localStorage.setItem('password',password);
+    // localStorage.setItem('password',password);
   }
 }
