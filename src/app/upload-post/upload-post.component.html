@@ -4,7 +4,7 @@
             <h3>آپلود پست جدید</h3>
             <form class="p-5 my-4" (submit)="onSubmit()">
                 <div class="form-group">
-                    <label for="title" >عنوان:</label>
+                    <label for="title">عنوان:</label>
                     <input type="text" name="title" id="title" class="form-control" required [(ngModel)]="title">
                 </div>
                 <div class="row mb-5 justify-content-between">
@@ -12,20 +12,20 @@
                         <div class="custom-file file-box">
                             <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg"
                                 required (change)="onChange($event)">
-                            <label #file_label for="file" class="custom-file-label file-label text-danger">تصویری انتخاب نشده
+                            <label #file_label for="file" class="custom-file-label file-label text-danger">تصویری انتخاب
+                                نشده
                                 است</label>
                         </div>
                     </div>
                     <div class="col-md-5 cats">
                         <div class="dropdown p-0">
                             <button class="dropdown-toggle m-0 w-100" role="button" type="button" appDropdown>
-                                 دسته‌بندی‌ها
+                                دسته‌بندی‌ها
                             </button>
                             <div *ngIf="allCats" class="dropdown-menu py-0 cat-menu">
                                 <button *ngFor="let cat of allCats" id="cat.id" class="dropdown-item m-0"
-                                    (click)="addCat(cat.id)"
-                                    [ngClass]="{'selected':cat.selected}"
-                                    [disabled]="cat.selected">
+                                    (click)="addCat(cat.id)" [ngClass]="{'selected':cat.selected}"
+                                    [disabled]="cat.selected || selectedCats.length===4">
                                     {{ cat.name }}
                                 </button>
                             </div>
@@ -33,17 +33,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    <ul class="list-inline">
-                        <li *ngFor="let cat of selectedCats;let i=index" class="list-inline-item cat">
-                            <a role="button" (click)="removeCat(i)">
-                                <small>{{ cat.name }}</small>
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="col-12">
+                        <div>
+                            <h6>
+                                دسته‌بندی‌ها
+                                <span [ngClass]="{'text-danger':selectedCats.length===4}">{{selectedCats.length}}/4:</span>
+                            </h6>
+                        </div>
+                        <ul class="list-inline">
+                            <li *ngFor="let cat of selectedCats;let i=index" class="list-inline-item cat">
+                                <a role="button" (click)="removeCat(i)">
+                                    <small>{{ cat.name }}</small>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <label for="desc">توضیحات:</label>
-                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"
-                    required
+                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control" required
                     [(ngModel)]="description"></textarea>
                 <div class="row justify-content-center">
                     <button [disabled]="!imgFile || !title || !description">بارگذاری</button>

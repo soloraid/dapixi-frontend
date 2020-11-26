@@ -58,17 +58,22 @@ export class UploadPostComponent implements OnInit,OnDestroy {
     })
     // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
-  addCat(id){
+  addCat(id):boolean{
     console.log(id);
     // console.log(this.allCats[+index]);
-    const index=this.allCats.findIndex((cat)=>{
-      return cat.id===id;
-    });
-    console.log(index);
-    this.allCats[index].selected=true;
-    const selected={...this.allCats[index]};
-    this.selectedCats.push(selected);
-    console.log(this.selectedCats);
+    if(this.selectedCats.length<4){
+      const index=this.allCats.findIndex((cat)=>{
+        return cat.id===id;
+      });
+      console.log(index);
+      this.allCats[index].selected=true;
+      const selected={...this.allCats[index]};
+      this.selectedCats.push(selected);
+      console.log(this.selectedCats);
+      return true;
+    }else{
+      return false;
+    }
   }
   removeCat(index){
     let id=this.selectedCats[index].id;
