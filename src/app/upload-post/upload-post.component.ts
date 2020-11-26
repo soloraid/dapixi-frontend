@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PostService } from '../share/post.service';
@@ -13,6 +13,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   imgFile:File;
   title:string="";
   description:string="";
+  //catOpen:boolean=false;
   @ViewChild('file_label') label:ElementRef;
   allCats:category[];
   selectedCats:category[]=[];
@@ -35,6 +36,12 @@ export class UploadPostComponent implements OnInit,OnDestroy {
       console.log(this.allCats);
     })
   }
+  //   @HostListener('document:click',['$event']) closCat(event){
+  //     console.log((<HTMLElement>event.target).tagName);
+  //   if((<HTMLElement>event.target).tagName.){
+  //     // this.catOpen=false;
+  //   }
+  // }
   onChange(event){
     console.log(event.target.files[0]);
     this.imgFile=event.target.files[0];
@@ -95,6 +102,9 @@ export class UploadPostComponent implements OnInit,OnDestroy {
       this.uploadSubc.unsubscribe();
     }
   }
+  // toggleCats(){
+  //   this.catOpen=!this.catOpen;
+  // }
 
 }
 interface category{
