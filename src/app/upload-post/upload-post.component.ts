@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PostService } from '../share/post.service';
@@ -11,8 +11,9 @@ import { PostService } from '../share/post.service';
 
 export class UploadPostComponent implements OnInit,OnDestroy {
   imgFile:File;
-  title:string;
-  description:string;
+  title:string="";
+  description:string="";
+  //catOpen:boolean=false;
   @ViewChild('file_label') label:ElementRef;
   allCats:category[];
   selectedCats:category[]=[];
@@ -35,6 +36,12 @@ export class UploadPostComponent implements OnInit,OnDestroy {
       console.log(this.allCats);
     })
   }
+  //   @HostListener('document:click',['$event']) closCat(event){
+  //     console.log((<HTMLElement>event.target).tagName);
+  //   if((<HTMLElement>event.target).tagName.){
+  //     // this.catOpen=false;
+  //   }
+  // }
   onChange(event){
     console.log(event.target.files[0]);
     this.imgFile=event.target.files[0];
@@ -58,17 +65,22 @@ export class UploadPostComponent implements OnInit,OnDestroy {
     })
     // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
-  addCat(id){
+  addCat(id):boolean{
     console.log(id);
     // console.log(this.allCats[+index]);
-    const index=this.allCats.findIndex((cat)=>{
-      return cat.id===id;
-    });
-    console.log(index);
-    this.allCats[index].selected=true;
-    const selected={...this.allCats[index]};
-    this.selectedCats.push(selected);
-    console.log(this.selectedCats);
+    if(this.selectedCats.length<4){
+      const index=this.allCats.findIndex((cat)=>{
+        return cat.id===id;
+      });
+      console.log(index);
+      this.allCats[index].selected=true;
+      const selected={...this.allCats[index]};
+      this.selectedCats.push(selected);
+      console.log(this.selectedCats);
+      return true;
+    }else{
+      return false;
+    }
   }
   removeCat(index){
     let id=this.selectedCats[index].id;
@@ -90,6 +102,9 @@ export class UploadPostComponent implements OnInit,OnDestroy {
       this.uploadSubc.unsubscribe();
     }
   }
+  // toggleCats(){
+  //   this.catOpen=!this.catOpen;
+  // }
 
 }
 interface category{

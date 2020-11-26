@@ -1,26 +1,71 @@
+div[class^="row"],div[class^="col"]{
+    @media (max-width:370px){
+        position: static;
+    }
+}
 .upload-box{
     direction: rtl;
+    position: relative;
     // border:4px var(--secondary_color) solid;
     // width: 80%;
 }
 form{
     border:4px var(--secondary_color) solid;
     border-radius: 10px;
+    @media (max-width:370px){
+        // position: relative;
+        overflow-wrap: break-word;;
+    }
 }
 .file-label{
     text-align: left;
     overflow: hidden;
 }
+.dropdown{
+    max-width: 100%;
+    @media (max-width:370px){
+        position: static;
+    }
+    
+}
 .dropdown-menu{
-    width: 100%;
+    width: 100% !important;
     text-align: center;
-    // cursor: pointer;
+    // overflow-x: hidden;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    @media (max-width:370px){
+        position: absolute;
+        top: 20%;
+        font-size: 0.8rem;
+    }
+}
+.dropdown-toggle{
+    white-space: normal;
+    @media (max-width:345px){
+        font-size: 0.8rem;
+    }
+
+}
+.dropdown-item{
+    word-wrap: normal;
+    overflow-wrap: break-word;
+    max-width: 100% !important;
+    
 }
 .selected{
     background-color: green;
     border-radius: 0%;
     border-bottom: 1px gray solid;
     color: lighten($color: gray, $amount: 10);
+}
+.selected-cats{
+    max-width: 100%;
+   ul{
+       max-width: 100%;
+    
+   }
 }
 ul{
     padding-right: 15px;;
@@ -31,15 +76,18 @@ ul{
     border-radius: 10px;
     margin: 5px;
     padding: 2px 10px;
+    max-width: 100%;
+    // overflow: hidden;
+    word-wrap:normal;
+    overflow-wrap: break-word;
 
 }
-.cat-menu{
-    max-height: 400px;
-    overflow-y: auto;
-}
+
 .cats{
     z-index: 2;
 }
 input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched{
     border: 2px solid red;
 }
+
+
