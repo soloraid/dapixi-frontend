@@ -11,8 +11,8 @@ import { PostService } from '../share/post.service';
 
 export class UploadPostComponent implements OnInit,OnDestroy {
   imgFile:File;
-  title:string;
-  description:string;
+  title:string="";
+  description:string="";
   @ViewChild('file_label') label:ElementRef;
   allCats:category[];
   selectedCats:category[]=[];

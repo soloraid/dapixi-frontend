@@ -4,8 +4,12 @@
             <h3>آپلود پست جدید</h3>
             <form class="p-5 my-4" (submit)="onSubmit()">
                 <div class="form-group">
-                    <label for="title">عنوان:</label>
-                    <input type="text" name="title" id="title" class="form-control" required [(ngModel)]="title">
+                    <label for="title">
+                        عنوان:
+                        <span [ngClass]="{'text-danger':title.length===40}"><small>({{title.length}}/40)</small></span>
+                    </label>
+                    <input type="text" name="title" id="title" class="form-control" required minlength="1"
+                        maxlength="40" [(ngModel)]="title">
                 </div>
                 <div class="row mb-5 justify-content-between">
                     <div class="col-md-6 mb-2 pl-0">
@@ -36,8 +40,9 @@
                     <div class="col-12">
                         <div>
                             <h6>
-                                دسته‌بندی‌ها
-                                <span [ngClass]="{'text-danger':selectedCats.length===4}">{{selectedCats.length}}/4:</span>
+                                دسته‌بندی‌ها:
+                                <span
+                                    [ngClass]="{'text-danger':selectedCats.length===4}"><small>({{selectedCats.length}}/4)</small></span>
                             </h6>
                         </div>
                         <ul class="list-inline">
@@ -49,9 +54,13 @@
                         </ul>
                     </div>
                 </div>
-                <label for="desc">توضیحات:</label>
-                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control" required
-                    [(ngModel)]="description"></textarea>
+                <label for="desc">
+                    توضیحات:
+                    <span [ngClass]="{'text-danger':description.length===250}"><small>({{description.length}}/250)</small></span>
+
+                </label>
+                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control" required minlength="1"
+                    maxlength="250" [(ngModel)]="description"></textarea>
                 <div class="row justify-content-center">
                     <button [disabled]="!imgFile || !title || !description">بارگذاری</button>
                 </div>
