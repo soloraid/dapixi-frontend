@@ -5,8 +5,10 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class DropdownDirective {
 
-  @HostListener('click') toggling(event:Event){
-    this.element.nativeElement.nextElementSibling.classList.toggle('show');
+  @HostListener('document:click',['$event']) toggling(event:Event){
+      
+      this.element.nativeElement.nextElementSibling.classList.toggle('show');
+    
   }
   constructor(private element:ElementRef) { }
 

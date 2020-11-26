@@ -1,3 +1,8 @@
+div[class^="row"],div[class^="col"]{
+    @media (max-width:370px){
+        position: static;
+    }
+}
 .upload-box{
     direction: rtl;
     position: relative;
@@ -7,13 +12,20 @@
 form{
     border:4px var(--secondary_color) solid;
     border-radius: 10px;
+    @media (max-width:370px){
+        // position: relative;
+        overflow-wrap: break-word;;
+    }
 }
 .file-label{
     text-align: left;
     overflow: hidden;
 }
 .dropdown{
-    // max-width: 100%;
+    max-width: 100%;
+    @media (max-width:370px){
+        position: static;
+    }
     
 }
 .dropdown-menu{
@@ -23,22 +35,11 @@ form{
     max-height: 400px;
     overflow-x: hidden;
     overflow-y: auto;
-    @media (max-width:370px) {
-        // position: absolute;
-        // top: 0px;
-        // overflow-y: hidden;
+    @media (max-width:370px){
+        position: absolute;
+        top: 20%;
+        font-size: 0.8rem;
     }
-    // border-right: none;
-    
-    // &::-webkit-scrollbar{
-    //     width: 2px;
-    // }
-    // &::-webkit-scrollbar-track{
-    //     width: 2px;
-    // }
-
-    // white-space: normal;
-    // cursor: pointer;
 }
 .dropdown-toggle{
     white-space: normal;
@@ -49,7 +50,7 @@ form{
 }
 .dropdown-item{
     word-wrap: normal;
-    // overflow-wrap: anywhere;
+    overflow-wrap: break-word;
     max-width: 100% !important;
     
 }
