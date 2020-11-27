@@ -9,6 +9,11 @@ div[class^="row"],div[class^="col"]{
     // border:4px var(--secondary_color) solid;
     // width: 80%;
 }
+.btn{
+    background-color: var(--secondary_color);
+    color: white;
+    width: 100%;
+}
 form{
     border:4px var(--secondary_color) solid;
     border-radius: 10px;
