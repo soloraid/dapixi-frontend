@@ -15,6 +15,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   description:string="";
   //catOpen:boolean=false;
   @ViewChild('file_label') label:ElementRef;
+  fileErr:boolean=false;
   allCats:category[];
   selectedCats:category[]=[];
   catSubsc:Subscription;
@@ -43,10 +44,22 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   //   }
   // }
   onChange(event){
-    console.log(event.target.files[0]);
-    this.imgFile=event.target.files[0];
+    console.log(event.target.files);
+    
+    const files=event.target.files;
+    let labelStr="تصویری انتخاب نشده است";
+    if(files.length){
+      this.imgFile=event.target.files[0];
+      // console.log(this.imgFile.type.startsWith('image'));
+      if(this.imgFile.type.startsWith('image')){
+        labelStr=this.imgFile.name;
+      }else{
+        this.imgFile=null;
+        this.fileErr=true;
+      }
+    }
+    this.label.nativeElement.innerHTML=labelStr;
     // console.log(this.label);
-    this.label.nativeElement.innerHTML=this.imgFile.name;
   }
   onSubmit(){
     console.log(this.imgFile,this.description,this.title);

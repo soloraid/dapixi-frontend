@@ -9,17 +9,17 @@
                         <span [ngClass]="{'text-danger':title.length===40}"><small>({{title.length}}/40)</small></span>
                     </label>
                     <input type="text" name="title" id="title" class="form-control" required minlength="1"
-                        maxlength="40" [(ngModel)]="title">
-                </div>
+                        maxlength="40" [(ngModel)]="title">                </div>
                 <div class="row mb-5 justify-content-between">
                     <div class="col-md-6 mb-3 ">
                         <div class="custom-file file-box">
-                            <input type="file" id="file" class="custom-file-input" accept="image/png,image/jpeg"
+                            <input type="file" id="file" class="custom-file-input" accept="image/*"
                                 required (change)="onChange($event)">
                             <label #file_label for="file" class="custom-file-label file-label text-danger">تصویری انتخاب
                                 نشده
                                 است</label>
                         </div>
+                        <p *ngIf="fileErr"><small class="text-danger">فایل انتخاب شده مجاز نمی‌باشد</small></p>
                     </div>
                     <div class="col-md-5 cats">
                         <div class="dropdown p-0">
@@ -62,7 +62,7 @@
                 <textarea name="desc" id="desc" cols="30" rows="10" class="form-control" required minlength="1"
                     maxlength="250" [(ngModel)]="description"></textarea>
                 <div class="row justify-content-center">
-                    <button [disabled]="!imgFile || !title || !description">بارگذاری</button>
+                    <button [disabled]="!imgFile || !title">بارگذاری</button>
                 </div>
             </form>
         </div>
