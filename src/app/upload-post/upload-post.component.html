@@ -3,13 +3,14 @@
         <div class="col-11 col-sm-12 col-md-10 col-lg-8">
             <h3>آپلود پست جدید</h3>
             <form class="p-5 my-4" (submit)="onSubmit()">
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label for="title">
                         عنوان:
                         <span [ngClass]="{'text-danger':title.length===40}"><small>({{title.length}}/40)</small></span>
                     </label>
                     <input type="text" name="title" id="title" class="form-control" required minlength="1"
-                        maxlength="40" [(ngModel)]="title"> </div>
+                        maxlength="40" [(ngModel)]="title" autofocus>
+                </div>
                 <div class="row mb-5 justify-content-between">
                     <div class="col-md-6 mb-3 ">
                         <div class="custom-file file-box">
@@ -60,7 +61,7 @@
                         [ngClass]="{'text-danger':description.length===250}"><small>({{description.length}}/250)</small></span>
 
                 </label>
-                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control" required minlength="1"
+                <textarea name="desc" id="desc" cols="30" rows="10" class="form-control"  minlength="1"
                     maxlength="250" [(ngModel)]="description"></textarea>
                 <div class="row justify-content-center">
                     <div class="col-sm-6">
