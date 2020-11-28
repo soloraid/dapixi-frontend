@@ -29,7 +29,8 @@ export class RegisterComponent implements OnInit,OnDestroy {
       'passwordRep':new FormControl('',[Validators.required,Validators.minLength(6),this.passwordRepeatValidator.bind(this)])
       
     })
-  } onPasswordChange(event){
+  } 
+  onPasswordChange(event){
     this.passwordHolder=event.target.value;
     // console.log(event.target.value);
     // console.log(this.passwordHolder);
