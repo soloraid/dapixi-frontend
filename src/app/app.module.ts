@@ -23,6 +23,7 @@ import {AuthInterceptorInterceptor} from './auth/auth-interceptor.interceptor';
 import {SearchComponent} from './search/search.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ResetComponent } from './auth/reset/reset.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     DropdownDirective,
     SearchComponent,
     SearchResultComponent,
+    ResetComponent,
   ],
   imports: [
     BrowserModule,
