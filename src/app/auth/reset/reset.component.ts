@@ -22,6 +22,16 @@ export class ResetComponent implements OnInit {
     // console.log(event.target.value);
     // console.log(this.passwordHolder);
   }
+  minError(formControlName:string){
+    // console.log('v',this.resetForm.controls[formControlName].errors);
+    if(this.resetForm.controls[formControlName].errors && this.resetForm.controls[formControlName].errors['minlength']){
+      if(this.resetForm.controls[formControlName].errors['minlength'] && this.resetForm.controls[formControlName].touched){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  }
   onSubmit(){
     console.log(this.resetForm);
   }
