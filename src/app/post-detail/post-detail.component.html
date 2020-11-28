@@ -1,26 +1,19 @@
-<div class="container ui-detail ">
-  <div class="row" *ngIf="!isEmpty">
-    <div class="col-xl-8 mt-5">
-      <section>
-        <img src="{{postUrl}}" alt="{{post.title}}" style="max-width: 100%" class="uiPost">
-      </section>
-    </div>
-    <div class="col-xl-3 mt-5">
-      <div class="col-sm-12 float-right detail">
-        <h2><a>{{post.title}}</a></h2>
+<div class="container-fluid">
+  <div class="card ui-detail">
+    <div class="card-body">
+      <div class="card-header shadow-lg detail">
+        <h2 class="card-title"><a>{{post.title}}</a></h2>
         <p>
-          <a href="" [routerLink]="['/user',post.username]">@{{post.username}}</a>
+          <a href="" [routerLink]="['/user',post.username]" class="card-link">@{{post.username}}</a>
         </p>
-        <h6>{{post.categories}} :نوع عکس
-        </h6>
-
+        <h5>{{post.categories}} :نوع عکس</h5>
       </div>
-      <div class="float-right mt-5 ui-content">
-        <p>توضیحات</p>
-        <p>{{post.description}}</p>
+      <div class="card-img-top shadow-lg"><img src="{{postUrl}}" alt="{{post.title}}" class="uiPost"></div>
+      <div class="card-text ui-content">
+        <p> :توضیحات</p>
+        <p>{{post.description}}
+        </p>
       </div>
-    </div>
-    <div>
     </div>
   </div>
 </div>

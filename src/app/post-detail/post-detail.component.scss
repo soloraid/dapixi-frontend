@@ -1,26 +1,27 @@
 .uiPost {
   height: auto;
   width: 100%;
-  border-radius: 20px;
+  border-radius: 2px;
   border-color: var(--secondary_color);
-  padding: 5px;
-  margin: 5px;
+  padding: 1px;
+  margin: 1px;
 }
 
 .detail {
   background-color: ivory;
-  border-radius: 4px;
-  padding: 20px;
-  margin: 10px;
+  border-radius: 2px;
+  padding: 4px;
+  margin: 4px;
 }
 
 .ui-detail {
   background-color: purple;
   border-color: orange;
   border-style: solid;
-  border-width: 3px;
-  border-radius: 40px;
-  padding: 10px;
+  border-width: 4px;
+  border-radius: 10px;
+  padding: 1px;
+  margin: 1px;
   /*height: 550px;
   width: 1200px;*/
 
@@ -28,10 +29,10 @@
 
 .ui-content {
   background-color: whitesmoke;
-  height: 210px;
-  width: 260px;
+  height: auto;
   border-radius: 4px;
-  padding: 10px;
+  padding: 4px;
+  margin: 4px;
 }
 
 
