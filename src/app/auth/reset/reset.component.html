@@ -1,1 +1,19 @@
-<p>reset works!</p>
+<form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+    <!-- <div *ngIf="errorMsg"  class="alert alert-danger pt-0 pr-1 ">
+        <a (click)="errorMsg=''" class="text-danger m-0 p-0 error-toggler">X</a>
+        <p  class="text-danger my-0 pr-2">{{ errorMsg }}</p>
+    </div> -->
+    <div class="form-group">
+        <label for="password">رمز عبور حدید:</label>
+        <input type="password" class="form-control" name="password" formControlName="password">
+    </div>
+    <div class="form-group">
+        <label for="password_rep">تکرار رمز عبور:</label>
+        <input  type="password" class="form-control" name="password_rep" formControlName="passwordRep">
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-7 col-md-8 col-xl-6 text-center">
+            <button type="submit" class="btn mx-0">تایید</button>
+        </div>
+    </div>
+</form>
