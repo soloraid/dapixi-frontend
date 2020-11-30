@@ -24,6 +24,14 @@ import {SearchComponent} from './search/search.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ResetComponent } from './auth/reset/reset.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainNavComponent } from './header/main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -44,6 +52,7 @@ import { ResetComponent } from './auth/reset/reset.component';
     SearchComponent,
     SearchResultComponent,
     ResetComponent,
+    MainNavComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,14 @@ import { ResetComponent } from './auth/reset/reset.component';
     ReactiveFormsModule,
     ClipboardModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [
     {

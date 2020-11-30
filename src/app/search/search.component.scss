@@ -5,7 +5,7 @@
 
 
 input[type=text] {
-  width: 140px;
+  width: 40px;
   box-sizing: border-box;
   border: 2px solid var(--bg_color);
   border-radius: 4px;
@@ -22,12 +22,15 @@ input[type=text] {
 
 
 input[type=text]:hover {
-  width: 200px;
+  width: 150px;
+}
+input[type=text]::-webkit-search-cancel-button:hover {
+  -webkit-appearance: searchfield-cancel-button;
 }
 
-input[type=text]:focus {
+/*input[type=text]:focus {
   width: 65%;
-}
+}*/
 
 button {
   background-color: var(--secondary_color);
@@ -36,5 +39,5 @@ button {
   border-style: solid;
   border-width: 1px;
   border-color: var(--primary_color);
-  width: 70px;
+  width: 50px;
 }

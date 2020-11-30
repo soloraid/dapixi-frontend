@@ -23,10 +23,8 @@ export class SearchResultComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.userName = params.name;
       this.postService.getPostByUserName(this.userName).subscribe((posts: Post[]) => {
-        console.log(posts);
         this.posts = posts;
         if (posts.length !== 0) {
-          console.log(posts);
           this.isEmptyPosts = false;
         } else {
           this.isEmptyPosts = true;
