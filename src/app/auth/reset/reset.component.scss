@@ -1,0 +1,11 @@
+form{
+    direction: rtl;
+}
+.btn{
+    background-color: var(--secondary_color);
+    color: white;
+    width: 100%;
+}
+input.ng-invalid.ng-touched{
+    border: 2px solid red;
+}
