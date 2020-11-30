@@ -1,0 +1,54 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav side-mat-toolbar" fixedInViewport
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [ngClass]="{hidden: !(isHandset$ | async)}"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="mat-tool">فهرست</mat-toolbar>
+    <mat-nav-list (click)="drawer.toggle()">
+      <a mat-list-item *ngIf="!isAuth" href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a>
+      <a mat-list-item *ngIf="isAuth" routerLink="user/new" href="" class="nav-item">پست جدید</a>
+      <a mat-list-item *ngIf="isAuth" routerLink="user" href="" class="nav-item">پروفایل</a>
+      <a mat-list-item href="#" class="nav-item">ارتباط با ما</a>
+      <a mat-list-item *ngIf="isAuth" (click)="onLogOut()" href="" class="nav-item">خروج</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="main-page">
+    <mat-toolbar class="uiNav">
+      <mat-toolbar-row>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <div [ngClass]="{hidden: (isHandset$ | async)}">
+          <a mat-list-item *ngIf="!isAuth" href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a>
+          <a mat-list-item *ngIf="isAuth" (click)="onLogOut()" href="" class="nav-item">خروج</a>
+          <a mat-list-item *ngIf="isAuth" routerLink="user/new" href="" class="nav-item">پست جدید</a>
+          <a mat-list-item *ngIf="isAuth" routerLink="user" href="" class="nav-item">پروفایل</a>
+          <a mat-list-item href="#" class="nav-item">ارتباط با ما</a>
+        </div>
+        <span class="spacer"></span>
+        <a href="#" routerLink="home" class="navbar-brand"><img
+          src="/assets/default.png" alt="LogoBrand" class="responsive"
+          style="border-radius: 10px"></a>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12">
+              <span class="spacer"></span>
+              <app-search></app-search>
+            </div>
+          </div>
+        </div>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <br><br><br>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

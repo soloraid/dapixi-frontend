@@ -1,0 +1,51 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.hidden {
+  display: none;
+}
+
+.spacer {
+   flex: 1 1 auto;
+}
+
+.mat-toolbar a {
+  display: inline-block;
+  margin: 40px 10px 0 0;
+  color: purple;
+}
+
+.responsive {
+  width: 100%;
+  max-width: 117px;
+  height: auto;
+}
+
+.side-mat-toolbar {
+  background-image: linear-gradient(to bottom,var(--secondary_color),var(--primary_color));
+}
+
+.side-mat-toolbar .mat-list-item {
+  font-family: "IRANSansWeb";
+  color: var(--text_color);
+}
+
+.side-mat-toolbar .mat-tool {
+  font-family: "IRANSansWeb";
+  color: var(--text_color);
+}
