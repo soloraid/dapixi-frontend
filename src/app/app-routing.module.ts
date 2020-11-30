@@ -13,6 +13,7 @@ import {PostDetailComponent} from './post-detail/post-detail.component';
 import {SearchResultComponent} from './search/search-result/search-result.component';
 import { AuthGuard } from './share/auth.guard';
 import { ReAuthGuard } from './share/re-auth.guard';
+import { ResetComponent } from './auth/reset/reset.component';
 
 
 const routes: Routes = [
@@ -51,6 +52,10 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
+      },
+      {
+        path: 'reset',
+        component:ResetComponent
       }
     ]
   },

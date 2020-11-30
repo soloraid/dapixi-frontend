@@ -1,0 +1,21 @@
+<form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+    <!-- <div *ngIf="errorMsg"  class="alert alert-danger pt-0 pr-1 ">
+        <a (click)="errorMsg=''" class="text-danger m-0 p-0 error-toggler">X</a>
+        <p  class="text-danger my-0 pr-2">{{ errorMsg }}</p>
+    </div> -->
+    <div class="form-group">
+        <label for="password">رمز عبور حدید:</label>
+        <input type="password" class="form-control" name="password" formControlName="password" (input)="onPasswordChange($event)">
+        <p class="text-danger" *ngIf="minError('password')"><small>رمز عبور حداقل باید 6 کاراکتر باشد</small></p>
+    </div>
+    <div class="form-group">
+        <label for="password_rep">تکرار رمز عبور:</label>
+        <input  type="password" class="form-control" name="password_rep" formControlName="passwordRep">
+        <p class="text-danger" *ngIf="resetForm.controls['passwordRep'].errors && resetForm.controls['passwordRep'].errors.repeat && resetForm.controls['passwordRep'].touched"><small>تکرار رمز عبور  با رمز عبور مطابقت ندارد</small></p>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-7 col-md-8 col-xl-6 text-center">
+            <button type="submit" class="btn mx-0">تایید</button>
+        </div>
+    </div>
+</form>

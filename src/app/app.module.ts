@@ -23,6 +23,7 @@ import {AuthInterceptorInterceptor} from './auth/auth-interceptor.interceptor';
 import {SearchComponent} from './search/search.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ResetComponent } from './auth/reset/reset.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './header/main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -50,6 +51,7 @@ import { MatListModule } from '@angular/material/list';
     DropdownDirective,
     SearchComponent,
     SearchResultComponent,
+    ResetComponent,
     MainNavComponent,
   ],
   imports: [
