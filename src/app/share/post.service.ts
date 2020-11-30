@@ -1,14 +1,17 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BindingForm} from '@angular/compiler/src/compiler_util/expression_converter';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private _router:Router) {
   }
 
   getLatestPost() {
@@ -33,7 +36,16 @@ export class PostService {
   }
 
   getPostByID(id: string) {
-    return this.http.get(environment.api + '/photo/posts/' + id);
+    return this.http.get(environment.api + '/photo/posts/' + id)
+    .pipe(
+      catchError((errData:HttpErrorResponse)=>{
+        console.log(errData);
+        if(errData.status==404){
+          this._router.navigate(['/404']);
+        }
+        return throwError(errData);
+      })
+    );
   }
 
   getPostByUserName(userName: string) {
