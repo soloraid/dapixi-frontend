@@ -26,7 +26,6 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <div [ngClass]="{hidden: (isHandset$ | async)}">
-
           <a mat-list-item *ngIf="!isAuth" href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a>
           <a mat-list-item *ngIf="isAuth" (click)="onLogOut()" href="" class="nav-item">خروج</a>
           <a mat-list-item *ngIf="isAuth" routerLink="user/new" href="" class="nav-item">پست جدید</a>
@@ -35,27 +34,27 @@
           <!-- <app-search matt-list-item></app-search> -->
         </div>
         <span class="spacer"></span>
-        <app-search></app-search>
+        <app-search class="d-none d-sm-block"></app-search>
         <a href="#" routerLink="home" class="navbar-brand p-0 m-0 ">
           <img
           src="/assets/default.png" alt="LogoBrand" class="responsive p-0 m-0 d-none d-sm-inline"
           style="border-radius: 10px">
           <img
-          src="/assets/default_small.png" alt="LogoBrand" class="responsive p-0 m-0 d-inline d-sm-none"
+          src="/assets/default_smal.png" alt="LogoBrand" class="responsive p-0 m-0 d-inline d-sm-none"
           style="border-radius: 10px">
         </a>
       </mat-toolbar-row>
-      <!-- <mat-toolbar-row> -->
-        <!-- <div class="container-fluid">
+      <mat-toolbar-row class="d-block d-sm-none">
+        <div class="container-fluid">
           <div class="row">
-            <div class="col-sm-12">
-              <span class="spacer"></span>
+            <div class="col-sm-12 d-flex justify-content-center">
+              <!-- <span class="spacer"></span> -->
               <app-search></app-search>
             </div>
           </div>
-        </div> -->
+        </div>
 
-      <!-- </mat-toolbar-row> -->
+      </mat-toolbar-row>
     </mat-toolbar>
     <br><br><br>
     <ng-content></ng-content>
