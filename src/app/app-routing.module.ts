@@ -14,6 +14,7 @@ import {SearchResultComponent} from './search/search-result/search-result.compon
 import { AuthGuard } from './share/auth.guard';
 import { ReAuthGuard } from './share/re-auth.guard';
 import { ResetComponent } from './auth/reset/reset.component';
+import { Error404Component } from './error404/error404.component';
 
 
 const routes: Routes = [
@@ -96,6 +97,10 @@ const routes: Routes = [
         component: ProfileDetailComponent
       }
     ]
+  },
+  {
+    path:'**',
+    component:Error404Component
   }
 ];
 

@@ -24,6 +24,7 @@ import {SearchComponent} from './search/search.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ResetComponent } from './auth/reset/reset.component';
+import { Error404Component } from './error404/error404.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ResetComponent } from './auth/reset/reset.component';
     SearchComponent,
     SearchResultComponent,
     ResetComponent,
+    Error404Component,
   ],
   imports: [
     BrowserModule,
