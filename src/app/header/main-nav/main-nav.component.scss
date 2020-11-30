@@ -45,11 +45,17 @@
 }
 
 .side-mat-toolbar .mat-list-item {
-  font-family: "IRANSansWeb";
+  font-family: "IRANSansWeb" !important;
   color: var(--text_color);
 }
 
 .side-mat-toolbar .mat-tool {
-  font-family: "IRANSansWeb";
+  font-family: "IRANSansWeb" !important;
   color: var(--text_color);
+}
+.nav-item{
+  font-family: "IRANSansWeb" !important;
+  padding-bottom: 2.5rem;
+  display: inline-block;
+  margin-right: 50px !important;
 }

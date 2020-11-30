@@ -25,7 +25,7 @@
           *ngIf="isHandset$ | async">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <div [ngClass]="{hidden: (isHandset$ | async)}">
+        <div [ngClass]="{hidden: (isHandset$ | async)}" class="pt-0">
           <a mat-list-item *ngIf="!isAuth" href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a>
           <a mat-list-item *ngIf="isAuth" (click)="onLogOut()" href="" class="nav-item">خروج</a>
           <a mat-list-item *ngIf="isAuth" routerLink="user/new" href="" class="nav-item">پست جدید</a>
@@ -35,7 +35,7 @@
         </div>
         <span class="spacer"></span>
         <app-search class="d-none d-sm-block"></app-search>
-        <a href="#" routerLink="home" class="navbar-brand p-0 m-0 ">
+        <a href="#" routerLink="home" class="navbar-brand p-0 m-0 ml-1">
           <img
           src="/assets/default.png" alt="LogoBrand" class="responsive p-0 m-0 d-none d-sm-inline"
           style="border-radius: 10px">
