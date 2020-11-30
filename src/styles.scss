@@ -13,8 +13,13 @@ html,body{
     color: var(--text_color);
     font-family: "IRANSansWeb";
     text-align: right;
+    height: 100%;
     // direction: rtl;
 }
+body {
+  margin: 0;
+}
+
 a{
   cursor: pointer;
 }
@@ -22,6 +27,10 @@ a{
   background-color: var(--primary_color);
   font-family: "IRANSansWeb";
   text-align: right;
+  border-radius: 4px;
+  padding: 2px;
+  max-width: 100vw;
+  max-height: 100vh;
 }
 
 button {
@@ -54,4 +63,12 @@ button {
   color:white;
   scrollbar-base-color:gold;
   padding:15px;
+}
+
+.main-page {
+  background-color: var(--bg_color);
+  color: var(--text_color);
+  font-family: "IRANSansWeb";
+  text-align: right;
+  height: 100%;
 }
