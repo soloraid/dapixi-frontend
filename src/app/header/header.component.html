@@ -1,32 +1,3 @@
-<nav class="mb-5">
-  <div class="navbar-nav navbar-expand-sm uiNav container-fluid">
-    <div class="collapse navbar-collapse">
-      <a href="#"><span class="" ></span></a>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <ul class="navbar-nav mr-auto">
-              <li *ngIf="!isAuth"><a  href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a></li>
-              <li *ngIf="isAuth"><a (click)="onLogOut()"  href="" class="nav-item">خروج</a></li>
-              <li *ngIf="isAuth"><a routerLink="user/new"  href="" class="nav-item">پست جدید</a></li>
-              <li *ngIf="isAuth"><a routerLink="user"  href="" class="nav-item">پروفایل</a></li>
-              <!--        <li><a href="#" class="nav-item"><i class=""></i>ارتباط با ما</a></li>-->
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="navbar-header row-cols-lg-1">
-      <ul class="navbar-nav">
-        <li>
-          <app-search></app-search>
-        </li>
-        <li><a href="#" routerLink="home" class="navbar-brand"><img
-          src="/assets/dapixiLogo3.png" alt="LogoBrand" style="max-height: 70px"></a>
-        </li>
-
-      </ul>
-    </div>
-  </div>
-</nav>
+<app-main-nav>
+    <ng-content></ng-content>
+</app-main-nav>
