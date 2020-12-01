@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable, Subscription} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
@@ -13,16 +13,15 @@ import {Tokens} from '../../share/tokens.model';
 export class MainNavComponent {
   isAuth: boolean;
   authSubsc: Subscription;
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 860px)')
     .pipe(
       map(result => result.matches),
-      shareReplay()
+      shareReplay(),
     );
 
   // tslint:disable-next-line:variable-name
   constructor(private breakpointObserver: BreakpointObserver, private _authService: AuthService) {
   }
-
 
 
   ngOnInit(): void {

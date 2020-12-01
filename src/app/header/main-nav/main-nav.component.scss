@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 260px;
 }
 
 .sidenav .mat-toolbar {
@@ -29,11 +29,15 @@
   margin: 40px 10px 0 0;
   color: purple;
 }
-
+.navbar-brand{
+  // width: 100%;
+  height: 100%;
+}
 .responsive {
-  width: 100%;
+  max-width: 100%;
   max-width: 117px;
-  height: auto;
+  max-height: 100%;
+  // height: auto;
 }
 
 .side-mat-toolbar {
@@ -41,11 +45,17 @@
 }
 
 .side-mat-toolbar .mat-list-item {
-  font-family: "IRANSansWeb";
+  font-family: "IRANSansWeb" !important;
   color: var(--text_color);
 }
 
 .side-mat-toolbar .mat-tool {
-  font-family: "IRANSansWeb";
+  font-family: "IRANSansWeb" !important;
   color: var(--text_color);
+}
+.nav-item{
+  font-family: "IRANSansWeb" !important;
+  padding-bottom: 2.5rem;
+  display: inline-block;
+  margin-right: 50px !important;
 }
