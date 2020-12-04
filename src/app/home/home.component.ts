@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   authSubsc: Subscription;
   postView: Post[] = [];
   isEmpty = true;
+  p = 1;
+  p2 = 1;
 
   // tslint:disable-next-line:variable-name
   constructor(private _authService: AuthService, private postService: PostService) {

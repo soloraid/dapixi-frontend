@@ -1,29 +1,58 @@
-<div class="container">
-  <div class="row">
-    <div class="mt-2 col-md-12">
-      <h1>صفحه اصلی</h1>
-      <h3>آخرین پست ها</h3>
-      <hr>
-      <div class="container ui-main-posts mt-2" *ngIf="!isEmpty">
-        <div class="row ">
-          <div class="col-xl-5 clearfix" *ngFor="let post of postView">
+<div class="container-fluid">
+
+  <div class="mt-2 d-flex flex-column">
+    <h3>صفحه اصلی</h3>
+    <br><br>
+    <h3>پیشنهادی ها</h3>
+    <hr>
+    <div *ngIf="isAuth" class="ui-recomm">
+
+      <div class="justify-content-sm-around  mt-0">
+        <pagination-controls
+          id="pagination1"
+          previousLabel="قبلی"
+          nextLabel="بعدی"
+          responsive="true"
+          [autoHide]="true"
+          (pageChange)="p = $event"></pagination-controls>
+        <div class="d-flex flex-fill justify-content-between p-3">
+          <div class="p-2" *ngFor="let post of postView |
+    paginate: { id: 'pagination1', itemsPerPage: 3, currentPage: p }">
             <app-post [post]="post"></app-post>
           </div>
         </div>
       </div>
-      <!--<div *ngIf="isAuth" class="rec">
-        <h4>پیشنهادی</h4>
-        <hr>
-        <div class="container justify-content-xl-around ui-recomm mt-2">
-          <div class="row">
-            <div class="col-xl-2 d-flex">
-              <app-post></app-post>
-            </div>
-          </div>
-        </div>
-      </div>-->
     </div>
+    <div class="ui-main-posts mt-5" *ngIf="!isEmpty">
+      <h3>آخرین پست ها</h3>
+      <hr>
+      <div class="d-flex justify-content-center">
+        <pagination-controls
+          previousLabel="قبلی"
+          nextLabel="بعدی"
+          responsive="true"
+          [autoHide]="true"
+          (pageChange)="p2 = $event"></pagination-controls>
+      </div>
+      <hr>
+      <div class="row ">
+        <div class="col-xl-4 w-100 clearfix" *ngFor="let post of postView |
+paginate: { itemsPerPage: 9, currentPage: p2 }">
+          <app-post [post]="post" class="flex-fill"></app-post>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <pagination-controls
+          previousLabel="قبلی"
+          nextLabel="بعدی"
+          responsive="true"
+          [autoHide]="true"
+          (pageChange)="p2 = $event"></pagination-controls>
+      </div>
+    </div>
+
   </div>
+
 </div>
 
 
