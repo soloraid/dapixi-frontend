@@ -35,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 import { Error404Component } from './error404/error404.component';
+import { Error500Component } from './error500/error500.component';
 
 
 
@@ -58,6 +59,7 @@ import { Error404Component } from './error404/error404.component';
     ResetComponent,
     MainNavComponent,
     Error404Component,
+    Error500Component,
   ],
   imports: [
     BrowserModule,
