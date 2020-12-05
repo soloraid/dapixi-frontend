@@ -3,6 +3,7 @@ import {Post} from '../share/post/post.module';
 import {environment} from '../../environments/environment';
 import {PostService} from '../share/post.service';
 import {ActivatedRoute} from '@angular/router';
+import {LoaderService} from '../share/loader/loader.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -14,7 +15,8 @@ export class PostDetailComponent implements OnInit {
   id: string;
   postUrl: string;
   isEmpty = true;
-  constructor(private postService: PostService, private route: ActivatedRoute) {
+  constructor(private postService: PostService, private route: ActivatedRoute,
+              public loaderService: LoaderService) {
   }
 
   ngOnInit(): void {
