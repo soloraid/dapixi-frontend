@@ -4,6 +4,7 @@ import {AuthService} from '../auth/auth.service';
 import {Tokens} from '../share/tokens.model';
 import {Post} from '../share/post/post.module';
 import {PostService} from '../share/post.service';
+import {LoaderService} from '../share/loader/loader.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   p2 = 1;
 
   // tslint:disable-next-line:variable-name
-  constructor(private _authService: AuthService, private postService: PostService) {
+  constructor(private _authService: AuthService,
+              private postService: PostService,
+              public loaderService: LoaderService) {
   }
 
   ngOnInit(): void {

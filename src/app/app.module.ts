@@ -36,6 +36,9 @@ import { MatListModule } from '@angular/material/list';
 
 import { Error404Component } from './error404/error404.component';
 import { Error500Component } from './error500/error500.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {InterceptorService} from './share/loader/interceptor.service';
+
 
 
 
@@ -75,12 +78,18 @@ import { Error500Component } from './error500/error500.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
       multi: true
     }
   ],

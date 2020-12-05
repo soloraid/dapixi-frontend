@@ -1,5 +1,8 @@
 <div class="container-fluid">
   <div id="grad" class="card ui-detail shadow-lg">
+    <div *ngIf="loaderService.isLoading | async" class="loader-container">
+      <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
+    </div>
     <div class="card-body">
       <div class="card-header detail">
         <h4 class="card-title"><a>{{post.title}}</a></h4>
