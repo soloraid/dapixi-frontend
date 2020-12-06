@@ -12,13 +12,23 @@
     &-contact{
         text-align: left;
     }
+    &-img-box{
+        position: relative;
+    }
 }
-.share-button{
+.profile-button{
     padding: 0;
     text-align: center;
     
     width: 40px;
     height: 40px;
+}
+.edit-button{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    bottom: 0;
+    right: -10px;
 }
 .current{
     text-align: left;

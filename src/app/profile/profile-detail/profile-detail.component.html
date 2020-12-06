@@ -1,7 +1,7 @@
 <div class="container profile">
     <div class="row align-items-center p-2">
         <div class="col-2">
-            <button class="share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
+            <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </button>
             <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
@@ -12,7 +12,12 @@
             <p class="m-0"><small>{{ userView.birthDate }}</small></p>
         </div>
         <div class="col-4 col-md-3 col-lg-2">
-            <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
+            <div class="profile-img-box">
+                <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
+                <button *ngIf="currnetUser" class="profile-button edit-button mb-0" ngxClipboard [cbContent]="link" [routerLink]='["edit"]'>
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </div>
     <hr>
@@ -24,7 +29,7 @@
             </p>
             <p>
                 <i class="fa fa-mobile fa-2x" aria-hidden="true"></i>
-                {{ userView.email }}
+                {{ userView.mobile }}
             </p>
         </div>
     </div>
