@@ -6,7 +6,10 @@
     <h3>صفحه اصلی</h3>
     <br><br>
     <div *ngIf="isAuth" class="ui-recomm">
-      <h3>پیشنهادی ها</h3>
+      <div class="d-flex justify-content-between">
+        <a href="" class="more-link">...مشاهده بیش‌تر</a>
+        <h3>پیشنهادی ها</h3>
+      </div>
       <hr>
       <div class="d-flex flex-fill justify-content-between p-3">
         <div class="p-2" *ngFor="let post of postView |
@@ -25,7 +28,10 @@
       </div>
     </div>
     <div class="ui-main-posts mt-5" *ngIf="!isEmpty">
-      <h3>آخرین پست ها</h3>
+      <div class="d-flex justify-content-between">
+        <a href="" class="more-link">...مشاهده بیش‌تر</a>
+        <h3>آخرین پست‌ها</h3>
+      </div>
       <hr>
       <div class="d-flex justify-content-center">
         <pagination-controls
