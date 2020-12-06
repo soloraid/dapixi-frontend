@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.authSubsc = this._authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
     });
-    this.postService.getLatestPost().subscribe(posts => {
+    this.postService.getLatestPost(9).subscribe(posts => {
       // console.log(posts);
       // tslint:disable-next-line:forin
       for (let index in posts) {

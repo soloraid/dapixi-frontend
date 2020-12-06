@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BindingForm} from '@angular/compiler/src/compiler_util/expression_converter';
 import { catchError } from 'rxjs/operators';
@@ -14,8 +14,12 @@ export class PostService {
   constructor(private http: HttpClient,private _router:Router) {
   }
 
-  getLatestPost() {
-    return this.http.get(environment.api + '/photo/latest/posts');
+  getLatestPost(number:number=50) {
+    let params=new HttpParams();
+     params=params.append('size',String(number));
+    return this.http.get(environment.api + '/photo/latest/posts',{
+      params:params
+    });
   }
 
   getCategories() {
