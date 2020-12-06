@@ -5,4 +5,7 @@
     &:hover{
         background-color: var(--secondary_color);
     }
+    &:disabled{
+        background-color: darken($color: #fff, $amount: 20);
+    }
 }
