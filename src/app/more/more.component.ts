@@ -12,32 +12,47 @@ import { Post } from '../share/post/post.module';
   styleUrls: ['./more.component.scss']
 })
 export class MoreComponent implements OnInit {
-  title:String="";
+  title: String = "";
   postView: Post[] = [];
-  postObserv:Observable<any>;
-  postSubs:Subscription;
+  postObserv: Observable<any>;
+  postSubs: Subscription;
   isEmpty = true;
-  p = 1;
-  p2 = 1;
-  constructor(private _rout:ActivatedRoute,private _postService:PostService,public loaderService:LoaderService) { }
+  value: number = 15;
+  page = 0;
+  first: boolean = true;
+  end = false;
+  constructor(private _rout: ActivatedRoute, private _postService: PostService, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    const type=this._rout.snapshot.params['type'];
-    switch(type){
+    const type = this._rout.snapshot.params['type'];
+    switch (type) {
       case 'latest':
-        this.title='آخرین پست‌ها'
-        this.postObserv=this._postService.getLatestPost(15);
+        this.title = 'آخرین پست‌ها'
+        this.postObserv = this._postService.getLatestPost(this.value, this.page);
         break;
       case 'recomended':
-        this.title='پست‌های پیشنهادی'
+        this.title = 'پست‌های پیشنهادی'
         break;
     }
     console.log(this.title);
-    this.postObserv.subscribe((posts:Post[])=>{
-      posts.forEach((post:Post)=>{
-        this.postView.push(post);
-      })
+    this.subs();
+
+  }
+  private subs() {
+    this.postObserv.subscribe((posts: Post[]) => {
+      if (posts.length) {
+        posts.forEach((post: Post) => {
+          this.postView.push(post);
+        })
+      }else{
+        this.end=true;
+      }
     })
   }
-
+  getmore() {
+    this.first = false;
+    this.page += 1;
+    this.postObserv = this._postService.getLatestPost(this.value, this.page);
+    this.subs();
+  }
 }
