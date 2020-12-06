@@ -7,7 +7,7 @@
     <br><br>
     <div *ngIf="isAuth" class="ui-recomm">
       <div class="d-flex justify-content-between">
-        <a href="" class="more-link">...مشاهده بیش‌تر</a>
+        <a [routerLink]='["/more","recomended"]' class="more-link">...مشاهده بیش‌تر</a>
         <h3>پیشنهادی ها</h3>
       </div>
       <hr>
@@ -29,7 +29,7 @@
     </div>
     <div class="ui-main-posts mt-5" *ngIf="!isEmpty">
       <div class="d-flex justify-content-between">
-        <a [routerLink]='["/more","home"]' class="more-link">...مشاهده بیش‌تر</a>
+        <a [routerLink]='["/more","latest"]' class="more-link">...مشاهده بیش‌تر</a>
         <h3>آخرین پست‌ها</h3>
       </div>
       <hr>
