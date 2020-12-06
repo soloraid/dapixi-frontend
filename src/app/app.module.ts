@@ -38,6 +38,7 @@ import { Error404Component } from './error404/error404.component';
 import { Error500Component } from './error500/error500.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {InterceptorService} from './share/loader/interceptor.service';
+import { MoreComponent } from './more/more.component';
 
 
 
@@ -63,6 +64,7 @@ import {InterceptorService} from './share/loader/interceptor.service';
     MainNavComponent,
     Error404Component,
     Error500Component,
+    MoreComponent,
   ],
   imports: [
     BrowserModule,
