@@ -26,7 +26,7 @@ export class MoreComponent implements OnInit {
     switch(type){
       case 'latest':
         this.title='آخرین پست‌ها'
-        this.postObserv=this._postService.getLatestPost();
+        this.postObserv=this._postService.getLatestPost(15);
         break;
       case 'recomended':
         this.title='پست‌های پیشنهادی'

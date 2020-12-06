@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {BindingForm} from '@angular/compiler/src/compiler_util/expression_converter';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { BindingForm } from '@angular/compiler/src/compiler_util/expression_converter';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
@@ -11,14 +11,15 @@ import { throwError } from 'rxjs';
 })
 export class PostService {
 
-  constructor(private http: HttpClient,private _router:Router) {
+  constructor(private http: HttpClient, private _router: Router) {
   }
 
-  getLatestPost(number:number=50) {
-    let params=new HttpParams();
-     params=params.append('size',String(number));
-    return this.http.get(environment.api + '/photo/latest/posts',{
-      params:params
+  getLatestPost(number: number = 50, page: number = 0) {
+    let params = new HttpParams();
+    params = params.append('size', String(number));
+    params=params.append('page',String(page));
+    return this.http.get(environment.api + '/photo/latest/posts', {
+      params: params
     });
   }
 
@@ -41,15 +42,15 @@ export class PostService {
 
   getPostByID(id: string) {
     return this.http.get(environment.api + '/photo/posts/' + id)
-    .pipe(
-      catchError((errData:HttpErrorResponse)=>{
-        console.log(errData);
-        if(errData.status==404){
-          this._router.navigate(['/404']);
-        }
-        return throwError(errData);
-      })
-    );
+      .pipe(
+        catchError((errData: HttpErrorResponse) => {
+          console.log(errData);
+          if (errData.status == 404) {
+            this._router.navigate(['/404']);
+          }
+          return throwError(errData);
+        })
+      );
   }
 
   getPostByUserName(userName: string) {
