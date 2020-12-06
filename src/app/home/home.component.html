@@ -29,7 +29,7 @@
     </div>
     <div class="ui-main-posts mt-5" *ngIf="!isEmpty">
       <div class="d-flex justify-content-between">
-        <a href="" class="more-link">...مشاهده بیش‌تر</a>
+        <a [routerLink]='["/more","home"]' class="more-link">...مشاهده بیش‌تر</a>
         <h3>آخرین پست‌ها</h3>
       </div>
       <hr>
