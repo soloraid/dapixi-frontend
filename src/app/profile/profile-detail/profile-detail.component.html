@@ -1,5 +1,5 @@
 <div class="container profile">
-    <div class="row align-items-center p-2">
+    <div class="row align-items-center p-2" *ngIf="isPresent">
         <div class="col-2">
             <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
@@ -48,11 +48,11 @@
     <hr>
     <div *ngIf="currnetUser" class="row current">
         <div class="col-12 pl-5 mt-2">
-            <p>
+            <p *ngIf="isPresent">
                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                {{ userView.email }}
+                {{ userView.email}}
             </p>
-            <p>
+            <p *ngIf="isPresent">
                 <i class="fa fa-mobile fa-2x" aria-hidden="true"></i>
                 {{ userView.mobile }}
             </p>

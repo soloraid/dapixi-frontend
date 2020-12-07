@@ -15,6 +15,7 @@ export class ProfileDetailComponent implements OnInit {
   userView: User;
   username: string;
   currnetUser: boolean = true;
+  isPresent:boolean=false;
   // = {
   //   img: "https://via.placeholder.com/150",
   //   name: "علی قیومی",
@@ -38,10 +39,12 @@ export class ProfileDetailComponent implements OnInit {
         this.userView = user;
         const index=this.link.indexOf('profile');
         this.link=this.link.slice(0,index)+this.userView.username;
+        this.isPresent=true;
       })
     }else{
       this._profile.getProfileByUsername(this.username).subscribe((user:User)=>{
         this.userView=user;
+        this.isPresent=true;
       })
     }
 
