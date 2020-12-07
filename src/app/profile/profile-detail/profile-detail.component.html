@@ -70,7 +70,7 @@
     </div> -->
     <div class="row">
         <div class="col-xl-4" *ngFor="let post of userPosts |
-        paginate: { id: 'pagination1', itemsPerPage: 9, currentPage: p1 }">
+        paginate: { id: 'pagination1', itemsPerPage: 9, currentPage: p }">
             <app-post [post]="post"></app-post>
         </div>
     </div>
@@ -81,7 +81,7 @@
           nextLabel="بعدی"
           responsive="true"
           [autoHide]="true"
-          (pageChange)="pn = $event">
+          (pageChange)="p = $event">
         </pagination-controls>
     </div>
 </div>

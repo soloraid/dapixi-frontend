@@ -23,7 +23,7 @@ export class ProfileDetailComponent implements OnInit {
   userPosts: Post[] = [];
   postsSubs: Subscription;
   p1 = 1;
-  pn = 1;
+  p = 1;
   // = {
   //   img: "https://via.placeholder.com/150",
   //   name: "علی قیومی",
