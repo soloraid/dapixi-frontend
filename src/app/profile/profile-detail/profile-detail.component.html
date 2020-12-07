@@ -7,9 +7,9 @@
             <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
         </div>
         <div class="col-4 col-md-5 col-lg-6 py-4">
-            <div class="row no-gutters d-felx justify-content-center">
+            <div class="row no-gutters d-felx justify-content-around">
                 <div class="col-4 text-center">
-                    <a href="">
+                    <a class="follow-link">
                         <div>
                             <h1>15</h1>
                             <p>دنبال شوندگان</p>
@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="">
+                    <a class="follow-link">
                         <div>
                             <h1>15</h1>
                             <p>دنبال کنندگان</p>
@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button class="w-100">دنبال کردن</button>
+                    <button class="w-100" [ngClass]="{'outline-btn':currnetUser}">{{ currnetUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
                 </div>
             </div>
         </div>

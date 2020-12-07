@@ -33,6 +33,18 @@
 .current{
     text-align: left;
 }
+.follow-link{
+    p{
+        transition: transform 0.1s ease-in;
+    }
+    &:hover{
+        text-decoration: none;
+        color: inherit;
+        p{
+            transform: scale(1.05) !important;
+        }
+    }
+}
 @media (max-width:536px){
     .name{
         font-size: 1rem;
