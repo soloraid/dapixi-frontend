@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from "../../../environments/environment.prod"
@@ -22,7 +23,7 @@ export class ProfileDetailComponent implements OnInit {
   // }
   copied: boolean = false;
   link: string;
-  constructor(public http: HttpClient, private _profile: ProfileService, private _rout: ActivatedRoute) { }
+  constructor(public http: HttpClient, private _profile: ProfileService, private _rout: ActivatedRoute,private _router:Router) { }
 
   ngOnInit(): void {
     this.link = window.location.href;
@@ -50,6 +51,11 @@ export class ProfileDetailComponent implements OnInit {
     setTimeout(() => {
       this.copied = false;
     }, 3000);
+  }
+  onBtnClick(){
+    if(this.currnetUser){
+      this._router.navigate(['edit'],{relativeTo:this._rout})
+    }
   }
 
 }

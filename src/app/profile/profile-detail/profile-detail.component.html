@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button class="w-100" [ngClass]="{'outline-btn':currnetUser}">{{ currnetUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
+                    <button class="w-100" [ngClass]="{'outline-btn':currnetUser}" (click)="onBtnClick()">{{ currnetUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
                 </div>
             </div>
         </div>
