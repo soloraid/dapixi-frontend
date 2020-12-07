@@ -45,7 +45,6 @@
             </div>
         </div>
     </div>
-    <hr>
     <div *ngIf="loginUser" class="row current">
         <div class="col-12 pl-5 mt-2">
             <p *ngIf="isPresent">
@@ -56,6 +55,12 @@
                 <i class="fa fa-mobile fa-2x" aria-hidden="true"></i>
                 {{ userView.mobile }}
             </p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xl-4" *ngFor="let post of userPosts">
+            <app-post [post]="post"></app-post>
         </div>
     </div>
 </div>
