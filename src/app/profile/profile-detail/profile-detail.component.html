@@ -6,7 +6,32 @@
             </button>
             <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
         </div>
-        <div *ngIf="userView" class="col-6 col-md-7 col-lg-8 pl-5 d-felx align-items-center">
+        <div class="col-4 col-md-5 col-lg-6 py-4">
+            <div class="row no-gutters d-felx justify-content-center">
+                <div class="col-4 text-center">
+                    <a href="">
+                        <div>
+                            <h1>15</h1>
+                            <p>دنبال شوندگان</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-4 text-center">
+                    <a href="">
+                        <div>
+                            <h1>15</h1>
+                            <p>دنبال کنندگان</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button class="w-100">دنبال کردن</button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="userView" class="col-2 col-md-2 col-lg-2 pl-5 d-felx align-items-center">
             <h3 class="name">{{ userView.firstName }}</h3>
             <p class="mb-1">@{{ userView.username }}</p>
             <p class="m-0"><small>{{ userView.birthDate }}</small></p>
@@ -14,9 +39,9 @@
         <div class="col-4 col-md-3 col-lg-2">
             <div class="profile-img-box">
                 <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
-                <button *ngIf="currnetUser" class="profile-button edit-button mb-0" ngxClipboard [cbContent]="link" [routerLink]='["edit"]'>
+                <!-- <button *ngIf="currnetUser" class="profile-button edit-button mb-0" ngxClipboard [cbContent]="link" [routerLink]='["edit"]'>
                     <i class="fa fa-pencil" aria-hidden="true"></i>
-                </button>
+                </button> -->
             </div>
         </div>
     </div>
