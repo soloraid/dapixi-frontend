@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button class="w-100" [ngClass]="{'outline-btn':currnetUser}" (click)="onBtnClick()">{{ currnetUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
+                    <button class="w-100" [ngClass]="{'outline-btn':loginUser}" (click)="onBtnClick()">{{ loginUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
                 </div>
             </div>
         </div>
@@ -39,14 +39,14 @@
         <div class="col-4 col-md-3 col-lg-2">
             <div class="profile-img-box">
                 <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
-                <!-- <button *ngIf="currnetUser" class="profile-button edit-button mb-0" ngxClipboard [cbContent]="link" [routerLink]='["edit"]'>
+                <!-- <button *ngIf="loginUser" class="profile-button edit-button mb-0" ngxClipboard [cbContent]="link" [routerLink]='["edit"]'>
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </button> -->
             </div>
         </div>
     </div>
     <hr>
-    <div *ngIf="currnetUser" class="row current">
+    <div *ngIf="loginUser" class="row current">
         <div class="col-12 pl-5 mt-2">
             <p *ngIf="isPresent">
                 <i class="fa fa-envelope-o" aria-hidden="true"></i>

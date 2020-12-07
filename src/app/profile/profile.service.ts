@@ -15,7 +15,7 @@ export class ProfileService {
     return this._http.get(environment.api+'/user/profile');
   }
   getProfileByUsername(username:string){
-    return this._http.get(environment.api+'/user/'+username)
+    return this._http.get(environment.api+'/user/u/'+username)
     .pipe(catchError((errData:HttpErrorResponse)=>{
       console.log(errData);
       if(errData.status==404){

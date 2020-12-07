@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { environment } from "../../../environments/environment.prod"
 import { ProfileService } from '../profile.service';
 
@@ -14,7 +15,7 @@ import { ProfileService } from '../profile.service';
 export class ProfileDetailComponent implements OnInit {
   userView: User;
   username: string;
-  currnetUser: boolean = true;
+  loginUser: boolean = true;
   isPresent:boolean=false;
   // = {
   //   img: "https://via.placeholder.com/150",
@@ -24,17 +25,21 @@ export class ProfileDetailComponent implements OnInit {
   // }
   copied: boolean = false;
   link: string;
-  constructor(public http: HttpClient, private _profile: ProfileService, private _rout: ActivatedRoute,private _router:Router) { }
+  constructor(public http: HttpClient, private _profile: ProfileService, private _rout: ActivatedRoute,private _router:Router,private _authService:AuthService) { }
 
   ngOnInit(): void {
     this.link = window.location.href;
     this._rout.params.subscribe(() => {
       this.username = this._rout.snapshot.params['username'];
       if (this.username) {
-        this.currnetUser = false;
+        this.loginUser = false;
+        if(this.username===this._authService.authState.value.username){
+          console.log(this._authService.authState.value.username);
+          this._router.navigate(['/user/profile']);
+        }
       }
     })
-    if (this.currnetUser) {
+    if (this.loginUser) {
       this._profile.getProfile().subscribe((user: User) => {
         this.userView = user;
         const index=this.link.indexOf('profile');
@@ -56,7 +61,7 @@ export class ProfileDetailComponent implements OnInit {
     }, 3000);
   }
   onBtnClick(){
-    if(this.currnetUser){
+    if(this.loginUser){
       this._router.navigate(['edit'],{relativeTo:this._rout})
     }
   }
