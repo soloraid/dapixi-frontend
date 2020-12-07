@@ -45,6 +45,9 @@
         }
     }
 }
+.pagination{
+    z-index: 2;
+}
 @media (max-width:536px){
     .name{
         font-size: 1rem;

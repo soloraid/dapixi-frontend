@@ -22,6 +22,8 @@ export class ProfileDetailComponent implements OnInit {
   isPresent: boolean = false;
   userPosts: Post[] = [];
   postsSubs: Subscription;
+  p1 = 1;
+  pn = 1;
   // = {
   //   img: "https://via.placeholder.com/150",
   //   name: "علی قیومی",
@@ -87,6 +89,9 @@ export class ProfileDetailComponent implements OnInit {
     if (this.loginUser) {
       this._router.navigate(['edit'], { relativeTo: this._rout })
     }
+  }
+  wtf(){
+    console.log("f");
   }
 
 }
