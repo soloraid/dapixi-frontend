@@ -1,8 +1,4 @@
 <div class="container profile">
-    <!-- <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
-        <i class="fa fa-share-alt" aria-hidden="true"></i>
-    </button> -->
-    <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
     <div class="row align-items-center p-2 rtl" *ngIf="isPresent">
         <!-- <div class="col-2 col-md-1">
             <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
@@ -13,9 +9,9 @@
         <div class="col-4 col-md-3 col-lg-3">
             <div class="profile-img-box">
                 <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
-                <!-- <button *ngIf="loginUser" class="profile-button edit-button mb-0" ngxClipboard [cbContent]="link" [routerLink]='["edit"]'>
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                </button> -->
+                <button *ngIf="loginUser" class="profile-button upload-button mb-0" ngxClipboard [cbContent]="link" [routerLink]='["edit"]'>
+                    <i class="fa fa-camera" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
         <div *ngIf="userView" class="d-none d-sm-block col-sm-4 col-md-3 col-lg-2 pl-5 d-felx align-items-center">
@@ -56,9 +52,9 @@
     </div> -->
     <div class="row my-3 rtl d-block d-sm-none">
         <div class="col-12 pr-5">
-            <h3 class="name">{{ userView.firstName }}</h3>
-            <p class="mb-1">@{{ userView.username }}</p>
-            <p class="m-0"><small>{{ userView.birthDate }}</small></p>
+            <h3 *ngIf="isPresent" class="name">{{ userView.firstName }}</h3>
+            <p *ngIf="isPresent" class="mb-1">@{{ userView.username }}</p>
+            <p *ngIf="isPresent" class="m-0"><small>{{ userView.birthDate }}</small></p>
         </div>
     </div>
     <div *ngIf="loginUser" class="row current">
@@ -73,10 +69,18 @@
             </p>
         </div>
     </div>
-    <div class="row d-felx justify-content-center">
-        <div class="col-8">
+    <div class="row no-gutters rtl d-felx justify-content-center">
+        <div class="col-6">
             <button class="w-100" [ngClass]="{'outline-btn':loginUser}"
                 (click)="onBtnClick()">{{ loginUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
+        </div>
+        <div class="col-2 d-felx justify-content-end pr-2">
+            <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-12 text-center">
+            <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
         </div>
     </div>
     <hr>
