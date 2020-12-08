@@ -3,43 +3,13 @@
         <i class="fa fa-share-alt" aria-hidden="true"></i>
     </button> -->
     <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
-    <div class="row align-items-center p-2" *ngIf="isPresent">
+    <div class="row align-items-center p-2 rtl" *ngIf="isPresent">
         <!-- <div class="col-2 col-md-1">
             <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
             </button>
             <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
         </div> -->
-        <div class="col-8 col-sm-4 col-md-6 col-lg-7 py-4">
-            <div class="row no-gutters d-felx justify-content-around">
-                <div class="col-1 col-sm-4 text-center">
-                    <a class="follow-link">
-                        <div>
-                            <h1>15</h1>
-                            <p>دنبال شوندگان</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-1 col-sm-4 text-center">
-                    <a class="follow-link">
-                        <div>
-                            <h1>15</h1>
-                            <p>دنبال کنندگان</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <button class="w-100" [ngClass]="{'outline-btn':loginUser}" (click)="onBtnClick()">{{ loginUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="userView" class="d-none d-sm-block col-sm-4 col-md-3 col-lg-2 pl-5 d-felx align-items-center">
-            <h3 class="name">{{ userView.firstName }}</h3>
-            <p class="mb-1">@{{ userView.username }}</p>
-            <p class="m-0"><small>{{ userView.birthDate }}</small></p>
-        </div>
         <div class="col-4 col-md-3 col-lg-3">
             <div class="profile-img-box">
                 <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
@@ -47,6 +17,48 @@
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </button> -->
             </div>
+        </div>
+        <div *ngIf="userView" class="d-none d-sm-block col-sm-4 col-md-3 col-lg-2 pl-5 d-felx align-items-center">
+            <h3 class="name">{{ userView.firstName }}</h3>
+            <p class="mb-1">@{{ userView.username }}</p>
+            <p class="m-0"><small>{{ userView.birthDate }}</small></p>
+        </div>
+        <div class="col-8 col-sm-4 col-md-6 col-lg-7 py-4">
+            <div class="row no-gutters d-felx justify-content-around rtl">
+                <div class="col-6 col-sm-4 text-center">
+                    <a class="follow-link">
+                        <div>
+                            <h1>15</h1>
+                            <p>دنبال کنندگان</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 text-center">
+                    <a class="follow-link">
+                        <div>
+                            <h1>15</h1>
+                            <p>دنبال شوندگان</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- <div class="row">
+                                                                    <div class="col-12">
+                                                                        <button class="w-100" [ngClass]="{'outline-btn':loginUser}" (click)="onBtnClick()">{{ loginUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
+                                                                    </div>
+                                                                </div> -->
+        </div>
+    </div>
+    <!-- <div class="row d-felx justify-content-center">
+        <div class="col-8">
+            <button class="w-100" [ngClass]="{'outline-btn':loginUser}" (click)="onBtnClick()">{{ loginUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
+        </div>
+    </div> -->
+    <div class="row my-3 rtl d-block d-sm-none">
+        <div class="col-12 pr-5">
+            <h3 class="name">{{ userView.firstName }}</h3>
+            <p class="mb-1">@{{ userView.username }}</p>
+            <p class="m-0"><small>{{ userView.birthDate }}</small></p>
         </div>
     </div>
     <div *ngIf="loginUser" class="row current">
@@ -59,6 +71,12 @@
                 <i class="fa fa-mobile fa-2x" aria-hidden="true"></i>
                 {{ userView.mobile }}
             </p>
+        </div>
+    </div>
+    <div class="row d-felx justify-content-center">
+        <div class="col-8">
+            <button class="w-100" [ngClass]="{'outline-btn':loginUser}"
+                (click)="onBtnClick()">{{ loginUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
         </div>
     </div>
     <hr>
@@ -79,13 +97,8 @@
         </div>
     </div>
     <div class="d-flex justify-content-center pagination" (click)="wtf()">
-        <pagination-controls
-          id="pagination1"
-          previousLabel="قبلی"
-          nextLabel="بعدی"
-          responsive="true"
-          [autoHide]="true"
-          (pageChange)="p = $event">
+        <pagination-controls id="pagination1" previousLabel="قبلی" nextLabel="بعدی" responsive="true" [autoHide]="true"
+            (pageChange)="p = $event">
         </pagination-controls>
     </div>
 </div>
