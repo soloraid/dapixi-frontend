@@ -71,7 +71,7 @@ export class ProfileDetailComponent implements OnInit {
         this.userView = user;
         this.isPresent = true;
         this.getPosts();
-        this.getCount();
+        this.getCount(this.username);
 
       })
     }
@@ -85,14 +85,15 @@ export class ProfileDetailComponent implements OnInit {
       console.log(posts);
     })
   }
-  getCount(){
-    this.followsunbs=this._profile.getFollowers()
+  getCount(username:string=""){
+    console.log(username);
+    this.followsunbs=this._profile.getFollowers(username)
     .pipe(
       map((followersCount:number)=>{
         return {followers:followersCount}
       }),
       mergeMap(followerObj=>{
-        return this._profile.getFollowing()
+        return this._profile.getFollowing(username)
         .pipe(
           map((followingCount:number)=>{
             return {
@@ -104,6 +105,7 @@ export class ProfileDetailComponent implements OnInit {
       })
     )
     .subscribe(data=>{
+      console.log(data);
       this.followers=data.followers;
       this.following=data.following;
     });
