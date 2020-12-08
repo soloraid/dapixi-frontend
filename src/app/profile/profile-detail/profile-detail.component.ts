@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {  Subscription } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { PostService } from 'src/app/share/post.service';
 import { Post } from 'src/app/share/post/post.module';
@@ -22,6 +23,9 @@ export class ProfileDetailComponent implements OnInit {
   isPresent: boolean = false;
   userPosts: Post[] = [];
   postsSubs: Subscription;
+  followers:number;
+  following:number;
+  followsunbs:Subscription
   p1 = 1;
   p = 1;
   // = {
@@ -60,12 +64,14 @@ export class ProfileDetailComponent implements OnInit {
         this.link = this.link.slice(0, index) + this.userView.username;
         this.isPresent = true;
         this.getPosts();
+        this.getCount();
       })
     } else {
       this._profile.getProfileByUsername(this.username).subscribe((user: User) => {
         this.userView = user;
         this.isPresent = true;
         this.getPosts();
+        this.getCount();
 
       })
     }
@@ -79,20 +85,42 @@ export class ProfileDetailComponent implements OnInit {
       console.log(posts);
     })
   }
+  getCount(){
+    this.followsunbs=this._profile.getFollowers()
+    .pipe(
+      map((followersCount:number)=>{
+        return {followers:followersCount}
+      }),
+      mergeMap(followerObj=>{
+        return this._profile.getFollowing()
+        .pipe(
+          map((followingCount:number)=>{
+            return {
+              following:followingCount,
+              followers:followerObj.followers
+            };
+          })
+        )
+      })
+    )
+    .subscribe(data=>{
+      this.followers=data.followers;
+      this.following=data.following;
+    });
+    // this.followsunbs=this._profile.getFollowing()
+    // .subscribe(data=>console.log(data));
+  }
   copyLink() {
     this.copied = true;
     setTimeout(() => {
       this.copied = false;
     }, 3000);
   }
-  onBtnClick() {
-    if (this.loginUser) {
-      this._router.navigate(['edit'], { relativeTo: this._rout })
-    }
-  }
-  wtf(){
-    console.log("f");
-  }
+  // onBtnClick() {
+  //   if (this.loginUser) {
+  //     this._router.navigate(['edit'], { relativeTo: this._rout })
+  //   }
+  // }
 
 }
 interface User {

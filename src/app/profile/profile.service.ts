@@ -24,4 +24,10 @@ export class ProfileService {
       return throwError(errData);
     }));
   }
+  getFollowers(){
+    return this._http.get(environment.api+'/user/profile/followers/count');
+  }
+  getFollowing(){
+    return this._http.get(environment.api+'/user/profile/followed-users/count');
+  }
 }
