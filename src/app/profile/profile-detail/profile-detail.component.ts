@@ -11,6 +11,7 @@ import { Post } from 'src/app/share/post/post.module';
 import { Tokens } from 'src/app/share/tokens.model';
 import { environment } from "../../../environments/environment.prod"
 import { ProfileService } from '../profile.service';
+import {LoaderService} from '../../share/loader/loader.service';
 
 @Component({
   selector: 'app-profile-detail',
@@ -42,13 +43,15 @@ export class ProfileDetailComponent implements OnInit,OnDestroy {
   // }
   copied: boolean = false;
   link: string;
+
   constructor(
     public http: HttpClient,
     private _profile: ProfileService,
     private _rout: ActivatedRoute,
     private _router: Router,
     private _authService: AuthService,
-    private _postService: PostService
+    private _postService: PostService, 
+    public loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {

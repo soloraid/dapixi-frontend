@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } fro
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PostService } from '../share/post.service';
+import {LoaderService} from '../share/loader/loader.service';
 
 @Component({
   selector: 'app-upload-post',
@@ -21,7 +22,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   catSubsc:Subscription;
   uploadSubc:Subscription;
   addCatSubsc:Subscription;
-  constructor(private _postService:PostService,private _router:Router) { }
+  constructor(private _postService:PostService,private _router:Router, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
@@ -45,7 +46,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   // }
   onChange(event){
     console.log(event.target.files);
-    
+
     const files=event.target.files;
     let labelStr="تصویری انتخاب نشده است";
     if(files.length){
