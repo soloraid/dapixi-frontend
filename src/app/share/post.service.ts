@@ -56,6 +56,25 @@ export class PostService {
     return this.http.get(environment.api + '/search/u/'+userName);
 
   }
+
+
+
+
+
+  putRate(id: string, rating: string ) {
+    const body = new FormData();
+    body.append('rate', rating);
+    return this.http.put(environment.api + '/photo/posts/' + id + '/ratings', body);
+  }
+
+  deleteRate(id: string) {
+    return this.http.delete(environment.api + '/photo/posts/' + id + '/ratings/reset');
+  }
+
+  getUsersRatePost(id: string) {
+    return this.http.get(environment.api + '/photo/posts/' + id + '/ratings/users');
+  }
+
   getPostsByUsername(username:string){
     let params=new HttpParams();
     params=params.append('user',username);
