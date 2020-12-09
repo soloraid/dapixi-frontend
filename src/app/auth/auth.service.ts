@@ -90,13 +90,16 @@ export class AuthService {
       console.log(description)
       switch (description) {
         case `Username ${username} has already been used`:
-          errorString = 'کاربر با این شناسه وجود دارد';
+          errorString = `کاربر با این شناسه وجود دارد`;
           break;
-        // case 'No value present':
-        //   errorString = 'کاربری با این شناسه وجود ندارد';
-        //   break;
+        case `Mobile ${mobile} has already been used!`:
+          errorString = 'کاربری با این شماره همراه قبلا ثبت نام کرده‌است';
+          break;
+        case `Email ${email} has already been used!`:
+          errorString='کاربری با این ایمیل قبلا ثبت نام کرده است'
+          break;
         default:
-          errorString = 'خطای نامشخص';
+          errorString = 'خطای نامشخص لطفا بعدا تلاش کنید';
 
       }
       return throwError(errorString);
