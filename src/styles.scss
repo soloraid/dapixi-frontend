@@ -43,6 +43,17 @@ button {
   padding: 5px 30px 5px 30px;
 
 }
+.outline-btn{
+  background-color: transparent;
+  border: 2px solid var(--secondary_color);
+  transition: background-color 0.3s ease-in;
+  &:hover{
+      background-color: var(--secondary_color);
+  }
+  &:disabled{
+      background-color: darken($color: #fff, $amount: 20);
+  }
+}
 
 .ui-recomm {
   height:auto;

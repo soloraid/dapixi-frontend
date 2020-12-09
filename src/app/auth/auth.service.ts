@@ -56,7 +56,9 @@ export class AuthService {
         const expireDuration=data.expires_in*1000;
         const expireDate=new Date(new Date().getTime()+expireDuration);
         this.autoLogOut(expireDuration);
-        const token = new Tokens(data.access_token, data.refresh_token,expireDate, data.scope);
+        const token = new Tokens(data.access_token, data.refresh_token,expireDate, data.scope,username);
+        // token.username=username;
+         console.log(token);
         this.authState.next(token);
         localStorage.setItem('tokens', JSON.stringify(token));
       })
@@ -88,10 +90,11 @@ export class AuthService {
       _access:string,
       _refresh:string,
       _expireDate:string,
-      scope:string
+      scope:string,
+      username:string
     }=JSON.parse(localStorage.getItem('tokens'));
     if(tokensTemp){
-      const tokens=new Tokens(tokensTemp._access,tokensTemp._refresh,new Date(tokensTemp._expireDate),tokensTemp.scope);
+      const tokens=new Tokens(tokensTemp._access,tokensTemp._refresh,new Date(tokensTemp._expireDate),tokensTemp.scope,tokensTemp.username);
       if(tokens.access){
         this.authState.next(tokens);
         const expireDuration=new Date(tokensTemp._expireDate).getTime()-new Date().getTime();

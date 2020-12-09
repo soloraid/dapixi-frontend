@@ -20,19 +20,19 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.route.params.subscribe((params) => {
-      this.userName = params.name;
-      this.postService.getPostByUserName(this.userName).subscribe((posts: Post[]) => {
-        this.posts = posts;
-        if (posts.length !== 0) {
-          this.isEmptyPosts = false;
-        } else {
-          this.isEmptyPosts = true;
-        }
-      });
-    });
+  //   this.route.params.subscribe((params) => {
+  //     this.userName = params.name;
+  //     this.postService.getPostByUserName(this.userName).subscribe((posts: Post[]) => {
+  //       this.posts = posts;
+  //       if (posts.length !== 0) {
+  //         this.isEmptyPosts = false;
+  //       } else {
+  //         this.isEmptyPosts = true;
+  //       }
+  //     });
+  //   });
 
-  }
+   }
 
 }
 

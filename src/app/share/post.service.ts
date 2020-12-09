@@ -52,13 +52,35 @@ export class PostService {
       );
   }
 
-  getPostByUserName(userName: string) {
-    return this.http.get(environment.api + '/photo/search/posts', {
-      params: {
-        user: userName
-      }
-    });
+  getProfileByUserName(userName: string) {
+    return this.http.get(environment.api + '/search/u/'+userName);
 
+  }
+
+
+
+
+
+  putRate(id: string, rating: string ) {
+    const body = new FormData();
+    body.append('rate', rating);
+    return this.http.put(environment.api + '/photo/posts/' + id + '/ratings', body);
+  }
+
+  deleteRate(id: string) {
+    return this.http.delete(environment.api + '/photo/posts/' + id + '/ratings/reset');
+  }
+
+  getUsersRatePost(id: string) {
+    return this.http.get(environment.api + '/photo/posts/' + id + '/ratings/users');
+  }
+
+  getPostsByUsername(username:string){
+    let params=new HttpParams();
+    params=params.append('user',username);
+    return this.http.get(environment.api+"/photo/posts/user",{
+      params:params
+    })
   }
 
   putRate(id: string, rating: string ) {
