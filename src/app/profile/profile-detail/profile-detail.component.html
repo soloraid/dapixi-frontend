@@ -1,4 +1,7 @@
 <div class="container profile">
+  <div *ngIf="loaderService.isLoading | async">
+    <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+  </div>
     <div class="row align-items-center p-2">
         <div class="col-2">
             <button class="share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
