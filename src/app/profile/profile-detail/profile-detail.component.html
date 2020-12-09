@@ -13,7 +13,7 @@
             <p class="mb-1">@{{ userView.username }}</p>
             <p class="m-0"><small>{{ userView.birthDate }}</small></p>
         </div>
-        <div class="col-8 col-sm-4 col-md-6 col-lg-7 follow-box">
+        <div *ngIf="isAuth" class="col-8 col-sm-4 col-md-6 col-lg-7 follow-box">
             <div class="row no-gutters  rtl">
                 <div class="col-6 col-sm-4 text-center">
                     <a class="follow-link d-block">

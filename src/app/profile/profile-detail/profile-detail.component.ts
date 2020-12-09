@@ -1,14 +1,15 @@
 import { Location } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SrvRecord } from 'dns';
-import {  Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { PostService } from 'src/app/share/post.service';
 import { Post } from 'src/app/share/post/post.module';
+import { Tokens } from 'src/app/share/tokens.model';
 import { environment } from "../../../environments/environment.prod"
 import { ProfileService } from '../profile.service';
 
@@ -22,14 +23,16 @@ export class ProfileDetailComponent implements OnInit {
   username: string;
   loginUser: boolean = true;
   isPresent: boolean = false;
-  pictureUrl:string="../../../assets/avatar-default.png"
+  pictureUrl: string = "../../../assets/avatar-default.png"
   userPosts: Post[] = [];
-  followers:number;
-  following:number;
-  mainSubs:Subscription;
+  followers: number;
+  following: number;
+  isAuth: boolean = false;
+  authSubs: Subscription;
+  mainSubs: Subscription;
   postsSubs: Subscription;
-  followsunbs:Subscription;
-  pictureSubs:Subscription;
+  followsunbs: Subscription;
+  pictureSubs: Subscription;
   p1 = 1;
   p = 1;
   // = {
@@ -42,11 +45,11 @@ export class ProfileDetailComponent implements OnInit {
   link: string;
   constructor(
     public http: HttpClient,
-    private _profile: ProfileService, 
-    private _rout: ActivatedRoute, 
-    private _router: Router, 
+    private _profile: ProfileService,
+    private _rout: ActivatedRoute,
+    private _router: Router,
     private _authService: AuthService,
-    private _postService:PostService
+    private _postService: PostService
   ) { }
 
   ngOnInit(): void {
@@ -55,25 +58,30 @@ export class ProfileDetailComponent implements OnInit {
       this.username = this._rout.snapshot.params['username'];
       if (this.username) {
         this.loginUser = false;
-        if (this.username === this._authService.authState.value.username) {
+        if (this._authService.authState.value && this.username === this._authService.authState.value.username) {
           console.log(this._authService.authState.value.username);
           this._router.navigate(['/user/profile']);
         }
       }
     })
-    let getObv:Observable<any>;
+    this.authSubs = this._authService.authState.subscribe((data: Tokens) => {
+      if (data) {
+        this.isAuth = true;
+      }
+    })
+    let getObv: Observable<any>;
     if (this.loginUser) {
-      getObv=this._profile.getProfile();
+      getObv = this._profile.getProfile();
       // this._profile.getProfile().subscribe((user: User) => {
       //   this.userView = user;
-        // const index = this.link.indexOf('profile');
-        // this.link = this.link.slice(0, index) + this.userView.username;
+      // const index = this.link.indexOf('profile');
+      // this.link = this.link.slice(0, index) + this.userView.username;
       //   this.isPresent = true;
       //   this.getPosts();
       //   this.getCount();
       // })
     } else {
-      getObv=this._profile.getProfileByUsername(this.username);
+      getObv = this._profile.getProfileByUsername(this.username);
       // this._profile.getProfileByUsername(this.username).subscribe((user: User) => {
       //   this.userView = user;
       //   this.isPresent = true;
@@ -82,59 +90,66 @@ export class ProfileDetailComponent implements OnInit {
 
       // })
     }
-    this.mainSubs=getObv.subscribe((user:User)=>{
-      this.userView=user;
-      this.isPresent=true;
+    this.mainSubs = getObv.subscribe((user: User) => {
+      this.userView = user;
+      this.isPresent = true;
       this.getPosts();
-      this.getCount();
       this.getPicture();
-      if(this.loginUser){
+      if (this.loginUser) {
         const index = this.link.indexOf('profile');
         this.link = this.link.slice(0, index) + this.userView.username;
+        this.getCount();
+
       }
     })
     //this.getPosts();
 
   }
   private getPosts() {
-    this.postsSubs = this._postService.getPostsByUsername(this.userView.username).subscribe((posts:Post[])=>{
+    this.postsSubs = this._postService.getPostsByUsername(this.userView.username).subscribe((posts: Post[]) => {
       // console.log(posts)
-      this.userPosts=posts;
+      this.userPosts = posts;
       this.userPosts.reverse();
       //console.log(posts);
     })
   }
-  private getCount(username:string=""){
+  private getCount(username: string = "") {
     console.log(username);
-    this.followsunbs=this._profile.getFollowers(username)
-    .pipe(
-      map((followersCount:number)=>{
-        return {followers:followersCount}
-      }),
-      mergeMap(followerObj=>{
-        return this._profile.getFollowing(username)
-        .pipe(
-          map((followingCount:number)=>{
-            return {
-              following:followingCount,
-              followers:followerObj.followers
-            };
-          })
-        )
-      })
-    )
-    .subscribe(data=>{
-      //console.log(data);
-      this.followers=data.followers;
-      this.following=data.following;
-    });
+    this.followsunbs = this._profile.getFollowers(username)
+      .pipe(
+        map((followersCount: number) => {
+          return { followers: followersCount }
+        }),
+        mergeMap(followerObj => {
+          return this._profile.getFollowing(username)
+            .pipe(
+              map((followingCount: number) => {
+                return {
+                  following: followingCount,
+                  followers: followerObj.followers
+                };
+              })
+            )
+        })
+      )
+      .subscribe(data => {
+        //console.log(data);
+        this.followers = data.followers;
+        this.following = data.following;
+      });
     // this.followsunbs=this._profile.getFollowing()
     // .subscribe(data=>console.log(data));
   }
-  private getPicture(){
-    this.pictureSubs=this._profile.getProfilePic(this.userView.username).subscribe((picData:PictureData)=>{
-      this.pictureUrl=environment.api+"/photo/"+ picData.imageUrl;
-    });
+  private getPicture() {
+    this.pictureSubs = this._profile.getProfilePic(this.userView.username)
+      .subscribe(
+        (picData: PictureData) => {
+          this.pictureUrl = environment.api + "/photo/" + picData.imageUrl;
+        },
+        (errorData: HttpErrorResponse) => {
+          this.pictureUrl = "../../../assets/avatar-default.png"
+        }
+      );
   }
   copyLink() {
     this.copied = true;
@@ -157,7 +172,7 @@ interface User {
   email?: string,
   birthDate: string
 }
-interface PictureData{
-  username:string,
-  imageUrl:string
+interface PictureData {
+  username: string,
+  imageUrl: string
 }
