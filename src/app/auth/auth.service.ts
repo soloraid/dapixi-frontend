@@ -81,8 +81,25 @@ export class AuthService {
       environment.api + '/auth/user',
       body
     ).pipe(catchError((errorData:HttpErrorResponse)=>{
-      console.log(errorData);
-      return throwError("خطا: کاربر با این مشخصات وجود دارد یا خطایی رخ داده‌است");
+      console.log(errorData.error.message);
+      let description
+      if (errorData.error && errorData.error.message) {
+        description = errorData.error.message;
+      }
+      let errorString: string = '';
+      console.log(description)
+      switch (description) {
+        case `Username ${username} has already been used`:
+          errorString = 'کاربر با این شناسه وجود دارد';
+          break;
+        // case 'No value present':
+        //   errorString = 'کاربری با این شناسه وجود ندارد';
+        //   break;
+        default:
+          errorString = 'خطای نامشخص';
+
+      }
+      return throwError(errorString);
     })
     )
   }
