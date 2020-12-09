@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SrvRecord } from 'dns';
 import {  Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -21,6 +22,7 @@ export class ProfileDetailComponent implements OnInit {
   username: string;
   loginUser: boolean = true;
   isPresent: boolean = false;
+  pictureUrl:string="../../../assets/dapixiLogo.png"
   userPosts: Post[] = [];
   followers:number;
   following:number;
@@ -130,7 +132,9 @@ export class ProfileDetailComponent implements OnInit {
     // .subscribe(data=>console.log(data));
   }
   private getPicture(){
-    this.pictureSubs=this._profile.getProfilePic(this.userView.username).subscribe((data)=>console.log(data));
+    this.pictureSubs=this._profile.getProfilePic(this.userView.username).subscribe((picData:PictureData)=>{
+      this.pictureUrl=environment.api+"/photo/"+ picData.imageUrl;
+    });
   }
   copyLink() {
     this.copied = true;
@@ -152,4 +156,8 @@ interface User {
   mobile?: string,
   email?: string,
   birthDate: string
+}
+interface PictureData{
+  username:string,
+  imageUrl:string
 }

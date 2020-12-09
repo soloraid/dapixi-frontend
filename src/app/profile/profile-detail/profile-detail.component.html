@@ -2,7 +2,7 @@
     <div class="row align-items-center p-2 rtl" *ngIf="isPresent">
         <div class="col-4 col-md-3 col-lg-3">
             <div class="profile-img-box">
-                <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
+                <img src="{{ pictureUrl }}" alt="" class="img-fluid profile-img">
                 <button *ngIf="loginUser" class="profile-button upload-button mb-0" ngxClipboard [cbContent]="link">
                     <i class="fa fa-camera" aria-hidden="true"></i>
                 </button>
