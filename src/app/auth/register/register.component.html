@@ -48,6 +48,9 @@
         <div class="col-sm-6 text-center">
             <button type="submit" class="btn mx-0" [disabled]="regForm.invalid">ثبت نام</button>
             <a class="change" [routerLink]="['../enter']">حساب دارید؟ورود</a>
+          <div *ngIf="loaderService.isLoading | async">
+            <mat-spinner diameter="40" color="warn" style="right:40%"></mat-spinner>
+          </div>
         </div>
     </div>
 </form>

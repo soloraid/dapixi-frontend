@@ -21,6 +21,10 @@
             <button type="submit" class="btn mx-0" [disabled]="enter_form.invalid">ورود</button>
             <a class="form-link" [routerLink]="['../register']">حساب ندارید؟ثبت نام</a>
             <a class="form-link" href="" [routerLink]="['../reset']">رمز عبور خود را فراموش کرده‌اید؟</a>
+            <div *ngIf="loaderService.isLoading | async">
+              <mat-spinner diameter="40" color="warn" style="right:40%"></mat-spinner>
+            </div>
         </div>
     </div>
+
 </form>
