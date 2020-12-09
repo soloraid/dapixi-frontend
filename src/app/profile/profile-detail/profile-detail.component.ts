@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from "../../../environments/environment.prod"
 import { ProfileService } from '../profile.service';
+import {LoaderService} from '../../share/loader/loader.service';
 
 @Component({
   selector: 'app-profile-detail',
@@ -22,7 +23,9 @@ export class ProfileDetailComponent implements OnInit {
   // }
   copied: boolean = false;
   link: string;
-  constructor(public http: HttpClient, private _profile: ProfileService, private _rout: ActivatedRoute) { }
+  constructor(public http: HttpClient, private _profile: ProfileService,
+              private _rout: ActivatedRoute,
+              public loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.link = window.location.href;

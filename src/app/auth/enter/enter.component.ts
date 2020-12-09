@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
+import {LoaderService} from '../../share/loader/loader.service';
 
 @Component({
   selector: 'app-enter',
@@ -12,7 +13,7 @@ import { AuthService } from '../auth.service';
 })
 export class EnterComponent implements OnInit,OnDestroy {
 
-  constructor(private _authService: AuthService,private _router:Router) { }
+  constructor(private _authService: AuthService,private _router:Router, public loaderService: LoaderService) { }
   errorMsg: string = "";
   @ViewChild('enter_form',{static:false}) enterForm:NgForm;
   username:string;
