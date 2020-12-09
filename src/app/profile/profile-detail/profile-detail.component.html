@@ -1,22 +1,24 @@
 <div class="container profile">
-    <div class="row align-items-center p-2 rtl" *ngIf="isPresent">
+    <div class="row  p-2 rtl" *ngIf="isPresent">
         <div class="col-4 col-md-3 col-lg-3">
             <div class="profile-img-box">
-                <img src="{{ pictureUrl }}" alt="" class="img-fluid profile-img">
+                <div class="img-box">
+                    
+                </div>
                 <button *ngIf="loginUser" class="profile-button upload-button mb-0" ngxClipboard [cbContent]="link">
                     <i class="fa fa-camera" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
-        <div *ngIf="userView" class="d-none d-sm-block col-sm-4 col-md-3 col-lg-2 pl-5 d-felx align-items-center">
+        <div *ngIf="userView" class="d-none d-sm-flex flex-column  col-sm-4 col-md-3 col-lg-2 pl-5  justify-content-center">
             <h3 class="name">{{ userView.firstName }}</h3>
             <p class="mb-1">@{{ userView.username }}</p>
             <p class="m-0"><small>{{ userView.birthDate }}</small></p>
         </div>
-        <div class="col-8 col-sm-4 col-md-6 col-lg-7 py-4">
-            <div class="row no-gutters d-felx justify-content-around rtl">
+        <div class="col-8 col-sm-4 col-md-6 col-lg-7 follow-box">
+            <div class="row no-gutters  rtl">
                 <div class="col-6 col-sm-4 text-center">
-                    <a class="follow-link">
+                    <a class="follow-link d-block">
                         <div>
                             <h1>{{ followers }}</h1>
                             <p>دنبال کنندگان</p>
@@ -24,7 +26,7 @@
                     </a>
                 </div>
                 <div class="col-6 col-sm-4 text-center">
-                    <a class="follow-link">
+                    <a class="follow-link d-block">
                         <div>
                             <h1>{{ following }}</h1>
                             <p>دنبال شوندگان</p>
