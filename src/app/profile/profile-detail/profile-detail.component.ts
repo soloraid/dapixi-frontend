@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Route } from '@angular/compiler/src/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SrvRecord } from 'dns';
 import { Observable, Subscription } from 'rxjs';
@@ -18,7 +18,7 @@ import { ProfileService } from '../profile.service';
   templateUrl: './profile-detail.component.html',
   styleUrls: ['./profile-detail.component.scss']
 })
-export class ProfileDetailComponent implements OnInit {
+export class ProfileDetailComponent implements OnInit,OnDestroy {
   userView: User;
   username: string;
   loginUser: boolean = true;
@@ -157,6 +157,16 @@ export class ProfileDetailComponent implements OnInit {
     setTimeout(() => {
       this.copied = false;
     }, 3000);
+  }
+  ngOnDestroy(){
+  
+    this.authSubs.unsubscribe();
+    this.mainSubs.unsubscribe();
+    this.postsSubs.unsubscribe();
+    this.pictureSubs.unsubscribe();
+    if(this.followsunbs){
+      this.followsunbs.unsubscribe();
+    }
   }
   // onBtnClick() {
   //   if (this.loginUser) {
