@@ -22,7 +22,7 @@ export class ProfileDetailComponent implements OnInit {
   username: string;
   loginUser: boolean = true;
   isPresent: boolean = false;
-  pictureUrl:string="../../../assets/dapixiLogo.png"
+  pictureUrl:string="../../../assets/avatar-default.png"
   userPosts: Post[] = [];
   followers:number;
   following:number;

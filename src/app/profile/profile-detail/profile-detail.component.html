@@ -1,12 +1,12 @@
 <div class="container profile">
     <div class="row  p-2 rtl" *ngIf="isPresent">
-        <div class="col-4 col-md-3 col-lg-3">
+        <div class="col-4 col-md-3 col-lg-3 profile-img-col">
             <div class="profile-img-box">
-                <img src="{{ pictureUrl }}" alt="" class="img-fluid rounded-circle profile-img">
-                <button *ngIf="loginUser" class="profile-button upload-button mb-0" ngxClipboard [cbContent]="link">
-                    <i class="fa fa-camera" aria-hidden="true"></i>
-                </button>
+                <img src="{{ pictureUrl }}" alt="" class="profile-img">
             </div>
+            <button *ngIf="loginUser" class="profile-button upload-button mb-0" ngxClipboard [cbContent]="link">
+                <i class="fa fa-camera" aria-hidden="true"></i>
+            </button>
         </div>
         <div *ngIf="userView" class="d-none d-sm-flex flex-column  col-sm-4 col-md-3 col-lg-2 pl-5  justify-content-center">
             <h3 class="name">{{ userView.firstName }}</h3>
