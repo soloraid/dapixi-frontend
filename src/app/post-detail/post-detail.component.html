@@ -3,13 +3,50 @@
     <div *ngIf="loaderService.isLoading | async" class="loader-container">
       <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
     </div>
-    <div class="card-body">
+    <div class="card-body" *ngIf="!isEmpty">
       <div class="card-header detail">
-        <h4 class="card-title"><a>{{post.title}}</a></h4>
+        <h6 class="card-title"><a>{{post.title}}</a></h6>
         <p>
-          <a href="" [routerLink]="['/user',post.username]" class="card-link">@{{post.username}}</a>
+          <a href="" [routerLink]="['/user',post.username]" class="card-link">{{post.username}}</a>
         </p>
-        <h5>{{post.categories}} :نوع عکس</h5>
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12" *ngIf="isAuth">
+              <div class="rating">
+                <input (click)="setRating('5')" type="radio" name="rating" id="r1"
+                       [checked]="post.userRating === 5">
+                <label for="r1"></label>
+                <input (click)="setRating('4')" type="radio" name="rating" id="r2"
+                       [checked]="post.userRating === 4">
+                <label for="r2"></label>
+                <input (click)="setRating('3')" type="radio" name="rating" id="r3"
+                       [checked]="post.userRating === 3">
+                <label for="r3"></label>
+                <input (click)="setRating('2')" type="radio" name="rating" id="r4"
+                       [checked]="post.userRating === 2">
+                <label for="r4"></label>
+                <input (click)="setRating('1')" type="radio" name="rating" id="r5"
+                       [checked]="post.userRating === 1">
+                <label for="r5"></label>
+              </div>
+              <div class="unRate">
+                <input (click)="deleteRating()" [checked]="post.userRating !== 0"
+                       type="radio" id="deleteRate" name="unRate" value="0">
+                <label for="deleteRate" title="text" class="label-unRate">UnStar</label>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <h5>{{post.averageRating | number:'1.1-3'}}  میانگین امتیاز</h5>
+            </div>
+            <div class="col-md-12">
+              <h5>{{post.categories}} :نوع عکس</h5>
+            </div>
+          </div>
+        </div>
+
+
+
       </div>
       <div class="row">
         <div class="card-img-top col-md-5"><img src="{{postUrl}}" alt="{{post.title}}" class="uiPost"></div>

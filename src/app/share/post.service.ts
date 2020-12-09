@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { BindingForm } from '@angular/compiler/src/compiler_util/expression_converter';
-import { catchError } from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +16,9 @@ export class PostService {
   getLatestPost(number: number = 50, page: number = 0) {
     let params = new HttpParams();
     params = params.append('size', String(number));
-    params=params.append('page',String(page));
+    params = params.append('page', String(page));
     return this.http.get(environment.api + '/photo/latest/posts', {
-      params: params
+      params
     });
   }
 
@@ -28,7 +27,7 @@ export class PostService {
   }
 
   addPsot(file: File, title: string, description: string) {
-    let body = new FormData();
+    const body = new FormData();
     body.append('file', file);
     body.append('title', title);
     body.append('description', description);
@@ -60,6 +59,20 @@ export class PostService {
       }
     });
 
+  }
+
+  putRate(id: string, rating: string ) {
+    const body = new FormData();
+    body.append('rate', rating);
+    return this.http.put(environment.api + '/photo/posts/' + id + '/ratings', body);
+  }
+
+  deleteRate(id: string) {
+    return this.http.delete(environment.api + '/photo/posts/' + id + '/ratings/reset');
+  }
+
+  getUsersRatePost(id: string) {
+    return this.http.get(environment.api + '/photo/posts/' + id + '/ratings/users');
   }
 }
 
