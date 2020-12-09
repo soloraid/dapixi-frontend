@@ -81,6 +81,7 @@ export class AuthService {
       environment.api + '/auth/user',
       body
     ).pipe(catchError((errorData:HttpErrorResponse)=>{
+      console.log(errorData);
       return throwError("خطا: کاربر با این مشخصات وجود دارد یا خطایی رخ داده‌است");
     })
     )
