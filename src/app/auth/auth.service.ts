@@ -11,6 +11,7 @@ import { Tokens } from '../share/tokens.model';
 export class AuthService {
   bsicToken = "ZGFwaXhpOnRoaXNpc3NlY3JldA==";
   authState = new BehaviorSubject<Tokens>(null);
+  confirmation=new BehaviorSubject<string>(null);
   logOutTimer;
   constructor(private _http: HttpClient) {
   }

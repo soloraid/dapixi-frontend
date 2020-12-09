@@ -47,6 +47,8 @@ export class RegisterComponent implements OnInit,OnDestroy {
     ).subscribe(
       (data)=>{
       console.log(data);
+      this._authService.confirmation.next(this.regForm.get('email').value);
+      this.router.navigate(['/auth/confirm'])
       // this.loginSubs=this._authService
       // .login(this.regForm.get('userName').value,this.regForm.get('password').value)
       // .subscribe((data)=>{
