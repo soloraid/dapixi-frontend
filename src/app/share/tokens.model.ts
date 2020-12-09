@@ -1,5 +1,5 @@
 export class Tokens{
-    constructor(private _access:string,private _refresh:string,private _expireDate:Date,public scope:string){
+    constructor(private _access:string,private _refresh:string,private _expireDate:Date,public scope:string,public username:string){
     }
     get access(){
         if(new Date()<this._expireDate){

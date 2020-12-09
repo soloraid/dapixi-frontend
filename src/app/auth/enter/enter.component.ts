@@ -42,7 +42,7 @@ export class EnterComponent implements OnInit,OnDestroy {
          data => {
           console.log(data);
           if(this.enterForm.value['remember']){
-            this.remember(username,password);
+            this.remember(username);
           }else{
             localStorage.removeItem('username');
             localStorage.removeItem('password');
@@ -64,7 +64,7 @@ export class EnterComponent implements OnInit,OnDestroy {
       this.loginSubs.unsubscribe();
     }
   }
-  private remember(username:string,password:string){
+  private remember(username:string){
     localStorage.setItem('username',username);
     // localStorage.setItem('password',password);
   }
