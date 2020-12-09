@@ -1,15 +1,9 @@
 <div class="container profile">
     <div class="row align-items-center p-2 rtl" *ngIf="isPresent">
-        <!-- <div class="col-2 col-md-1">
-            <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </button>
-            <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
-        </div> -->
         <div class="col-4 col-md-3 col-lg-3">
             <div class="profile-img-box">
                 <img src="../../../assets/dapixiLogo.png" alt="" class="img-fluid rounded-circle profile-img">
-                <button *ngIf="loginUser" class="profile-button upload-button mb-0" ngxClipboard [cbContent]="link" [routerLink]='["edit"]'>
+                <button *ngIf="loginUser" class="profile-button upload-button mb-0" ngxClipboard [cbContent]="link">
                     <i class="fa fa-camera" aria-hidden="true"></i>
                 </button>
             </div>
@@ -38,18 +32,8 @@
                     </a>
                 </div>
             </div>
-            <!-- <div class="row">
-                                                                    <div class="col-12">
-                                                                        <button class="w-100" [ngClass]="{'outline-btn':loginUser}" (click)="onBtnClick()">{{ loginUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
-                                                                    </div>
-                                                                </div> -->
         </div>
     </div>
-    <!-- <div class="row d-felx justify-content-center">
-        <div class="col-8">
-            <button class="w-100" [ngClass]="{'outline-btn':loginUser}" (click)="onBtnClick()">{{ loginUser ? "ویرایش پروفایل" : "دنبال کردن" }}</button>
-        </div>
-    </div> -->
     <div class="row my-3 rtl d-block d-sm-none">
         <div class="col-12 pr-5">
             <h3 *ngIf="isPresent" class="name">{{ userView.firstName }}</h3>
@@ -84,16 +68,6 @@
         </div>
     </div>
     <hr>
-    <!-- <div class="d-flex justify-content-center pagination" (click)="wtf()">
-        <pagination-controls
-          id="pagination1"
-          previousLabel="قبلی"
-          nextLabel="بعدی"
-          responsive="true"
-          [autoHide]="true"
-          (pageChange)="pn = $event">
-        </pagination-controls>
-    </div> -->
     <div class="row">
         <div class="col-md-6 col-lg-4" *ngFor="let post of userPosts |
         paginate: { id: 'pagination1', itemsPerPage: 9, currentPage: p }">

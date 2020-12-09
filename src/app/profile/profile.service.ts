@@ -46,4 +46,12 @@ export class ProfileService {
       params:params
     });
   }
+  getProfilePic(username:string){
+    let params=new HttpParams();
+    params=params.append('username',username);
+    return this._http.get(environment.api+'/photo/profile/picture',{
+      params:params
+    })
+
+  }
 }

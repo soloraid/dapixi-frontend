@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {  Subscription } from 'rxjs';
+import {  Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { PostService } from 'src/app/share/post.service';
@@ -22,10 +22,12 @@ export class ProfileDetailComponent implements OnInit {
   loginUser: boolean = true;
   isPresent: boolean = false;
   userPosts: Post[] = [];
-  postsSubs: Subscription;
   followers:number;
   following:number;
-  followsunbs:Subscription
+  mainSubs:Subscription;
+  postsSubs: Subscription;
+  followsunbs:Subscription;
+  pictureSubs:Subscription;
   p1 = 1;
   p = 1;
   // = {
@@ -57,24 +59,38 @@ export class ProfileDetailComponent implements OnInit {
         }
       }
     })
+    let getObv:Observable<any>;
     if (this.loginUser) {
-      this._profile.getProfile().subscribe((user: User) => {
-        this.userView = user;
+      getObv=this._profile.getProfile();
+      // this._profile.getProfile().subscribe((user: User) => {
+      //   this.userView = user;
+        // const index = this.link.indexOf('profile');
+        // this.link = this.link.slice(0, index) + this.userView.username;
+      //   this.isPresent = true;
+      //   this.getPosts();
+      //   this.getCount();
+      // })
+    } else {
+      getObv=this._profile.getProfileByUsername(this.username);
+      // this._profile.getProfileByUsername(this.username).subscribe((user: User) => {
+      //   this.userView = user;
+      //   this.isPresent = true;
+      //   this.getPosts();
+      //   this.getCount(this.username);
+
+      // })
+    }
+    this.mainSubs=getObv.subscribe((user:User)=>{
+      this.userView=user;
+      this.isPresent=true;
+      this.getPosts();
+      this.getCount();
+      this.getPicture();
+      if(this.loginUser){
         const index = this.link.indexOf('profile');
         this.link = this.link.slice(0, index) + this.userView.username;
-        this.isPresent = true;
-        this.getPosts();
-        this.getCount();
-      })
-    } else {
-      this._profile.getProfileByUsername(this.username).subscribe((user: User) => {
-        this.userView = user;
-        this.isPresent = true;
-        this.getPosts();
-        this.getCount(this.username);
-
-      })
-    }
+      }
+    })
     //this.getPosts();
 
   }
@@ -82,10 +98,11 @@ export class ProfileDetailComponent implements OnInit {
     this.postsSubs = this._postService.getPostsByUsername(this.userView.username).subscribe((posts:Post[])=>{
       // console.log(posts)
       this.userPosts=posts;
-      console.log(posts);
+      this.userPosts.reverse();
+      //console.log(posts);
     })
   }
-  getCount(username:string=""){
+  private getCount(username:string=""){
     console.log(username);
     this.followsunbs=this._profile.getFollowers(username)
     .pipe(
@@ -105,12 +122,15 @@ export class ProfileDetailComponent implements OnInit {
       })
     )
     .subscribe(data=>{
-      console.log(data);
+      //console.log(data);
       this.followers=data.followers;
       this.following=data.following;
     });
     // this.followsunbs=this._profile.getFollowing()
     // .subscribe(data=>console.log(data));
+  }
+  private getPicture(){
+    this.pictureSubs=this._profile.getProfilePic(this.userView.username).subscribe((data)=>console.log(data));
   }
   copyLink() {
     this.copied = true;
