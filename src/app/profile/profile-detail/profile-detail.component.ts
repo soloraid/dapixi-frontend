@@ -67,6 +67,7 @@ export class ProfileDetailComponent implements OnInit {
     this.authSubs = this._authService.authState.subscribe((data: Tokens) => {
       if (data) {
         this.isAuth = true;
+        this.getCount(this.username);
       }
     })
     let getObv: Observable<any>;
@@ -98,7 +99,7 @@ export class ProfileDetailComponent implements OnInit {
       if (this.loginUser) {
         const index = this.link.indexOf('profile');
         this.link = this.link.slice(0, index) + this.userView.username;
-        this.getCount();
+        // this.getCount();
 
       }
     })
