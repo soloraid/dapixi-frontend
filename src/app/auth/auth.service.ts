@@ -11,6 +11,7 @@ import { Tokens } from '../share/tokens.model';
 export class AuthService {
   bsicToken = "ZGFwaXhpOnRoaXNpc3NlY3JldA==";
   authState = new BehaviorSubject<Tokens>(null);
+  confirmation=new BehaviorSubject<string>(null);
   logOutTimer;
   constructor(private _http: HttpClient) {
   }
@@ -81,7 +82,28 @@ export class AuthService {
       environment.api + '/auth/user',
       body
     ).pipe(catchError((errorData:HttpErrorResponse)=>{
-      return throwError("خطا: کاربر با این مشخصات وجود دارد یا خطایی رخ داده‌است");
+      console.log(errorData.error.message);
+      let description
+      if (errorData.error && errorData.error.message) {
+        description = errorData.error.message;
+      }
+      let errorString: string = '';
+      console.log(description)
+      switch (description) {
+        case `Username ${username} has already been used`:
+          errorString = `کاربر با این شناسه وجود دارد`;
+          break;
+        case `Mobile ${mobile} has already been used!`:
+          errorString = 'کاربری با این شماره همراه قبلا ثبت نام کرده‌است';
+          break;
+        case `Email ${email} has already been used!`:
+          errorString='کاربری با این ایمیل قبلا ثبت نام کرده است'
+          break;
+        default:
+          errorString = 'خطای نامشخص لطفا بعدا تلاش کنید';
+
+      }
+      return throwError(errorString);
     })
     )
   }

@@ -1,7 +1,7 @@
 import { NgForOf } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import {LoaderService} from '../../share/loader/loader.service';
@@ -13,7 +13,7 @@ import {LoaderService} from '../../share/loader/loader.service';
 })
 export class EnterComponent implements OnInit,OnDestroy {
 
-  constructor(private _authService: AuthService,private _router:Router, public loaderService: LoaderService) { }
+  constructor(private _authService: AuthService,private _router:Router,private _rout:ActivatedRoute,public loaderService:LoaderService) { }
   errorMsg: string = "";
   @ViewChild('enter_form',{static:false}) enterForm:NgForm;
   username:string;
@@ -27,6 +27,10 @@ export class EnterComponent implements OnInit,OnDestroy {
       this.username=username;
       // this.password=password;
       this.hasRemember=true;
+    }
+    const usernameFirst=this._rout.snapshot.paramMap['username'];
+    if(usernameFirst){
+      this.username=usernameFirst;
     }
     // console.log(this.enterForm);
 
