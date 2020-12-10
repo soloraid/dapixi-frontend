@@ -98,6 +98,12 @@ export class PostService {
   getUsersRatePost(id: string) {
     return this.http.get(environment.api + '/photo/posts/' + id + '/ratings/users');
   }
+
+  uploadProfilePhoto(image: File) {
+    let body = new FormData();
+    body.append('file', image);
+    return this.http.post( environment.api + '/photo/profile/picture', body);
+  }
 }
 
 
