@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { environment } from '../../../src/environments/environment'
+import { environment } from '../../../src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,34 +24,48 @@ export class ProfileService {
         return throwError(errData);
       }));
   }
-  getFollowers(username: string = "") {
+  getFollowers(username: string = '') {
     let params = new HttpParams();
     if (username.length) {
       // console.log(username);
-      params=params.append('username', username);
-      console.log('r',params)
+      params = params.append('username', username);
+      console.log('r', params);
     }
     return this._http.get(environment.api + '/user/profile/followers/count', {
-      params: params
+      params
     });
   }
-  getFollowing(username: string = "") {
+  getFollowing(username: string = '') {
     let params = new HttpParams();
     if (username.length) {
       //  console.log('du',username);
-      params=params.append('username', 'hashem');
+      params = params.append('username', 'hashem');
       // console.log('d',params)
     }
-    return this._http.get(environment.api + '/user/profile/followed-users/count',{
-      params:params
+    return this._http.get(environment.api + '/user/profile/followed-users/count', {
+      params
     });
   }
-  getProfilePic(username:string){
-    let params=new HttpParams();
-    params=params.append('username',username);
-    return this._http.get(environment.api+'/photo/profile/picture',{
-      params:params
-    })
+  getProfilePic(username: string){
+    let params = new HttpParams();
+    params = params.append('username', username);
+    return this._http.get(environment.api + '/photo/profile/picture', {
+      params
+    });
 
+  }
+
+  follow(username: string) {
+    // @ts-ignore
+    return this._http.post( environment.api + '/user/u/' + username + '/follow');
+  }
+
+  unfollow(username: string) {
+    // @ts-ignore
+    return this._http.post( environment.api + '/user/u/' + username + '/unfollow');
+  }
+
+  isFollowedUser(username: string) {
+    return this._http.get(environment.api + '/user/u/' + username + '/followed');
   }
 }
