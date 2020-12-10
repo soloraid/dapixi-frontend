@@ -15,8 +15,8 @@ export class RegisterComponent implements OnInit,OnDestroy {
   passwordHolder:string='';
   errorMsg:string="";
   signUpSubs:Subscription;
-  loginSubs:Subscription;
-  constructor(private _authService:AuthService,private router:Router, public loaderService: LoaderService) { }
+  // loginSubs:Subscription;
+  constructor(private _authService:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     this.regForm=new FormGroup({
@@ -48,11 +48,13 @@ export class RegisterComponent implements OnInit,OnDestroy {
     ).subscribe(
       (data)=>{
       console.log(data);
-      this.loginSubs=this._authService
-      .login(this.regForm.get('userName').value,this.regForm.get('password').value)
-      .subscribe((data)=>{
-        this.router.navigate(['']);
-      });
+      this._authService.confirmation.next(this.regForm.get('email').value);
+      this.router.navigate(['/auth/confirm'])
+      // this.loginSubs=this._authService
+      // .login(this.regForm.get('userName').value,this.regForm.get('password').value)
+      // .subscribe((data)=>{
+      //   this.router.navigate(['']);
+      // });
     },
       (errorData:string)=>{
         this.errorMsg=errorData;
@@ -93,9 +95,9 @@ export class RegisterComponent implements OnInit,OnDestroy {
   ngOnDestroy(){
     if(this.signUpSubs){
       this.signUpSubs.unsubscribe();
-      if(this.loginSubs){
-        this.loginSubs.unsubscribe();
-      }
+      // if(this.loginSubs){
+      //   this.loginSubs.unsubscribe();
+      // }
     }
   }
 }
