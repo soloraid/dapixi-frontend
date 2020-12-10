@@ -30,6 +30,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   following: number;
   isFollowed: boolean;
   isAuth = false;
+  selectedFile: File = null;
   authSubs: Subscription;
   mainSubs: Subscription;
   postsSubs: Subscription;
@@ -206,6 +207,13 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     this._profile.unfollow(this.userView.username).subscribe(() => {
       this.getCount(this.userView.username);
       this.isFollowed = false;
+    });
+  }
+
+  onChange(event): void {
+    this.selectedFile = (event.target.files[0] as File);
+    this._postService.uploadProfilePhoto(this.selectedFile).subscribe( () => {
+      this.getPicture();
     });
   }
 }

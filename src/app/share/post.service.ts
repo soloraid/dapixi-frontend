@@ -22,6 +22,26 @@ export class PostService {
     });
   }
 
+  getFollowedPost(number: number = 50, page: number = 0) {
+    let params = new HttpParams();
+    params = params.append('size', String(number));
+    params = params.append('page', String(page));
+    return this.http.get(environment.api + '/photo/followed/posts', {
+      params
+    });
+  }
+
+  getHighRatedPost(number: number = 50, page: number = 0) {
+    let params = new HttpParams();
+    params = params.append('size', String(number));
+    params = params.append('page', String(page));
+    /*params = params.append('from', '2020-10-1');
+    params = params.append('to', '2020-12-9');*/
+    return this.http.get(environment.api + '/photo/hot/posts', {
+      params
+    });
+  }
+
   getCategories() {
     return this.http.get(environment.api + '/photo/categories');
   }
@@ -77,6 +97,12 @@ export class PostService {
 
   getUsersRatePost(id: string) {
     return this.http.get(environment.api + '/photo/posts/' + id + '/ratings/users');
+  }
+
+  uploadProfilePhoto(image: File) {
+    let body = new FormData();
+    body.append('file', image);
+    return this.http.post( environment.api + '/photo/profile/picture', body);
   }
 }
 

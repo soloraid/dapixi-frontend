@@ -41,6 +41,7 @@ import {InterceptorService} from './share/loader/interceptor.service';
 import { MoreComponent } from './more/more.component';
 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { ConfirmComponent } from './auth/confirm/confirm.component';
 
@@ -88,7 +89,8 @@ import { ConfirmComponent } from './auth/confirm/confirm.component';
     MatIconModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTabsModule
   ],
   providers: [
     {
