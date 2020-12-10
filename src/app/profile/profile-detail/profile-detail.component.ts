@@ -1,33 +1,35 @@
-import { Location } from '@angular/common';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Route } from '@angular/compiler/src/core';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
-import { AuthService } from 'src/app/auth/auth.service';
-import { PostService } from 'src/app/share/post.service';
-import { Post } from 'src/app/share/post/post.module';
-import { Tokens } from 'src/app/share/tokens.model';
-import { environment } from "../../../environments/environment.prod"
-import { ProfileService } from '../profile.service';
+import {Location} from '@angular/common';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Route} from '@angular/compiler/src/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable, Subscription} from 'rxjs';
+import {map, mergeMap} from 'rxjs/operators';
+import {AuthService} from 'src/app/auth/auth.service';
+import {PostService} from 'src/app/share/post.service';
+import {Post} from 'src/app/share/post/post.module';
+import {Tokens} from 'src/app/share/tokens.model';
+import {environment} from '../../../environments/environment.prod';
+import {ProfileService} from '../profile.service';
 import {LoaderService} from '../../share/loader/loader.service';
+import {User} from '../../share/user/user.mudole';
 
 @Component({
   selector: 'app-profile-detail',
   templateUrl: './profile-detail.component.html',
   styleUrls: ['./profile-detail.component.scss']
 })
-export class ProfileDetailComponent implements OnInit,OnDestroy {
+export class ProfileDetailComponent implements OnInit, OnDestroy {
   userView: User;
   username: string;
-  loginUser: boolean = true;
-  isPresent: boolean = false;
-  pictureUrl: string = "../../../assets/avatar-default.png"
+  loginUser = true;
+  isPresent = false;
+  pictureUrl = '../../../assets/avatar-default.png';
   userPosts: Post[] = [];
   followers: number;
   following: number;
-  isAuth: boolean = false;
+  isFollowed: boolean;
+  isAuth = false;
   authSubs: Subscription;
   mainSubs: Subscription;
   postsSubs: Subscription;
@@ -41,7 +43,7 @@ export class ProfileDetailComponent implements OnInit,OnDestroy {
   //   username: "@a",
   //   email: "a@a.com"
   // }
-  copied: boolean = false;
+  copied = false;
   link: string;
 
   constructor(
@@ -50,14 +52,15 @@ export class ProfileDetailComponent implements OnInit,OnDestroy {
     private _rout: ActivatedRoute,
     private _router: Router,
     private _authService: AuthService,
-    private _postService: PostService, 
+    private _postService: PostService,
     public loaderService: LoaderService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.link = window.location.href;
     this._rout.params.subscribe(() => {
-      this.username = this._rout.snapshot.params['username'];
+      this.username = this._rout.snapshot.params.username;
       if (this.username) {
         this.loginUser = false;
         if (this._authService.authState.value && this.username === this._authService.authState.value.username) {
@@ -65,13 +68,13 @@ export class ProfileDetailComponent implements OnInit,OnDestroy {
           this._router.navigate(['/user/profile']);
         }
       }
-    })
+    });
     this.authSubs = this._authService.authState.subscribe((data: Tokens) => {
       if (data) {
         this.isAuth = true;
         this.getCount(this.username);
       }
-    })
+    });
     let getObv: Observable<any>;
     if (this.loginUser) {
       getObv = this._profile.getProfile();
@@ -95,6 +98,9 @@ export class ProfileDetailComponent implements OnInit,OnDestroy {
     }
     this.mainSubs = getObv.subscribe((user: User) => {
       this.userView = user;
+      this._profile.isFollowedUser(user.username).subscribe((data: boolean) => {
+        this.isFollowed = data;
+      });
       this.isPresent = true;
       this.getPosts();
       this.getPicture();
@@ -104,24 +110,26 @@ export class ProfileDetailComponent implements OnInit,OnDestroy {
         // this.getCount();
 
       }
-    })
-    //this.getPosts();
+    });
+    // this.getPosts();
 
   }
+
   private getPosts() {
     this.postsSubs = this._postService.getPostsByUsername(this.userView.username).subscribe((posts: Post[]) => {
       // console.log(posts)
       this.userPosts = posts;
       this.userPosts.reverse();
-      //console.log(posts);
-    })
+      // console.log(posts);
+    });
   }
-  private getCount(username: string = "") {
+
+  private getCount(username: string = ''): void {
     console.log(username);
     this.followsunbs = this._profile.getFollowers(username)
       .pipe(
         map((followersCount: number) => {
-          return { followers: followersCount }
+          return {followers: followersCount};
         }),
         mergeMap(followerObj => {
           return this._profile.getFollowing(username)
@@ -132,60 +140,77 @@ export class ProfileDetailComponent implements OnInit,OnDestroy {
                   followers: followerObj.followers
                 };
               })
-            )
+            );
         })
       )
       .subscribe(data => {
-        //console.log(data);
+        // console.log(data);
         this.followers = data.followers;
         this.following = data.following;
       });
     // this.followsunbs=this._profile.getFollowing()
     // .subscribe(data=>console.log(data));
   }
-  private getPicture() {
+
+  private getPicture(): void {
     this.pictureSubs = this._profile.getProfilePic(this.userView.username)
       .subscribe(
         (picData: PictureData) => {
-          this.pictureUrl = environment.api + "/photo/" + picData.imageUrl;
+          this.pictureUrl = environment.api + '/photo/' + picData.imageUrl;
         },
         (errorData: HttpErrorResponse) => {
-          this.pictureUrl = "../../../assets/avatar-default.png"
+          this.pictureUrl = '../../../assets/avatar-default.png';
         }
       );
   }
+
   copyLink() {
     this.copied = true;
     setTimeout(() => {
       this.copied = false;
     }, 3000);
   }
-  ngOnDestroy(){
-  
-    this.authSubs.unsubscribe();
-    this.mainSubs.unsubscribe();
-    this.postsSubs.unsubscribe();
-    this.pictureSubs.unsubscribe();
-    if(this.followsunbs){
+
+  ngOnDestroy(): void {
+    if (this.authSubs) {
+      this.authSubs.unsubscribe();
+    }
+    if (this.mainSubs) {
+      this.mainSubs.unsubscribe();
+    }
+    if (this.postsSubs) {
+      this.postsSubs.unsubscribe();
+    }
+    if (this.pictureSubs) {
+      this.pictureSubs.unsubscribe();
+    }
+    if (this.followsunbs) {
       this.followsunbs.unsubscribe();
     }
   }
+
   // onBtnClick() {
   //   if (this.loginUser) {
   //     this._router.navigate(['edit'], { relativeTo: this._rout })
   //   }
   // }
 
+  requestToFollow(): void {
+    this._profile.follow(this.userView.username).subscribe(() => {
+      this.getCount(this.userView.username);
+      this.isFollowed = true;
+    });
+  }
+
+  requestToUnfollow(): void {
+    this._profile.unfollow(this.userView.username).subscribe(() => {
+      this.getCount(this.userView.username);
+      this.isFollowed = false;
+    });
+  }
 }
-interface User {
-  username: string,
-  firstName: string,
-  lastName: string,
-  mobile?: string,
-  email?: string,
-  birthDate: string
-}
+
 interface PictureData {
-  username: string,
-  imageUrl: string
+  username: string;
+  imageUrl: string;
 }
