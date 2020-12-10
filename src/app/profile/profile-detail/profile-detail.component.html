@@ -4,12 +4,24 @@
     </div>
     <div class="row  p-2 rtl" *ngIf="isPresent">
         <div class="col-4 col-md-3 col-lg-3 profile-img-col">
-            <div class="profile-img-box">
+          <div class="avatar-upload">
+            <div class="avatar-edit">
+              <input *ngIf="isAuth && loginUser" (change)="onChange($event)"type='file' id="imageUpload" accept="image/*" />
+              <label for="imageUpload"></label>
+            </div>
+            <div class="avatar-preview">
+              <div id="imagePreview" [ngStyle]="{'background-image':'url(' + pictureUrl + ')'}" >
+              </div>
+            </div>
+          </div>
+            <!--<div class="profile-img-box">
                 <img src="{{ pictureUrl }}" alt="" class="profile-img">
             </div>
+          <input type="file" id="file" class="custom-file-input" accept="image/*" required
+                 (change)="onChange($event)">
             <button *ngIf="loginUser" class="profile-button upload-button mb-0" ngxClipboard [cbContent]="link">
-                <i class="fa fa-camera" aria-hidden="true"></i>
-            </button>
+                <i class="fa fa-camera" aria-hidden="false"></i>
+            </button>-->
         </div>
         <div *ngIf="userView" class="d-none d-sm-flex flex-column  col-sm-4 col-md-3 col-lg-2 pl-5  justify-content-center">
             <h3 class="name">{{ userView.firstName }}</h3>
@@ -59,8 +71,8 @@
     <div class="row no-gutters rtl d-felx justify-content-center">
         <div class="col-6">
             <button class="w-100 outline-btn main-btn" [routerLink]="['edit']" *ngIf="loginUser">ویرایش پروفایل</button>
-            <button class="w-100 main-btn" *ngIf="!loginUser && !isFollowed && isAuth" (click)="requestToFollow()">دنبال کردن</button>
-            <button class="w-100 main-btn" *ngIf="!loginUser && isFollowed && isAuth" (click)="requestToUnfollow()">دنبال نکردن</button>
+            <button class="w-100 main-btn" *ngIf="!loginUser && !isFollowed" (click)="requestToFollow()" [hidden]="!isAuth">دنبال کردن</button>
+            <button class="w-100 main-btn" *ngIf="!loginUser && isFollowed" (click)="requestToUnfollow()" [hidden]="!isAuth">دنبال نکردن</button>
         </div>
         <div class="col-2 d-felx justify-content-end pr-2">
             <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
