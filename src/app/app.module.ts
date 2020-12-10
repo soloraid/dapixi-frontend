@@ -39,7 +39,11 @@ import { Error500Component } from './error500/error500.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {InterceptorService} from './share/loader/interceptor.service';
 import { MoreComponent } from './more/more.component';
+
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 import { ConfirmComponent } from './auth/confirm/confirm.component';
+
 
 
 
@@ -83,7 +87,8 @@ import { ConfirmComponent } from './auth/confirm/confirm.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   providers: [
     {

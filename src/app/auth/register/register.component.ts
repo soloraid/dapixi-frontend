@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, NgForm, Validators } from '@angula
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
+import {LoaderService} from '../../share/loader/loader.service';
 
 @Component({
   selector: 'app-register',
@@ -27,9 +28,9 @@ export class RegisterComponent implements OnInit,OnDestroy {
       'email':new FormControl('',[Validators.required,Validators.email]),
       'password':new FormControl('',[Validators.required,Validators.minLength(6)]),
       'passwordRep':new FormControl('',[Validators.required,Validators.minLength(6),this.passwordRepeatValidator.bind(this)])
-      
+
     })
-  } 
+  }
   onPasswordChange(event){
     this.passwordHolder=event.target.value;
     // console.log(event.target.value);

@@ -11,6 +11,11 @@
                     <input type="text" name="title" id="title" class="form-control" required minlength="1"
                         maxlength="40" [(ngModel)]="title" autofocus>
                 </div>
+              <div class="mb-5" *ngIf="(loaderService.isLoading | async) && imgFile && title">
+                <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+                <hr>
+                <h6>آپلود عکس. . .</h6>
+              </div>
                 <div class="row mb-5 justify-content-between">
                     <div class="col-md-6 mb-3 ">
                         <div class="custom-file file-box">

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
+import {LoaderService} from '../../share/loader/loader.service';
 
 @Component({
   selector: 'app-enter',

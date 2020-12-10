@@ -1,4 +1,7 @@
 <div class="container profile">
+    <div *ngIf="loaderService.isLoading | async">
+        <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+    </div>
     <div class="row  p-2 rtl" *ngIf="isPresent">
         <div class="col-4 col-md-3 col-lg-3 profile-img-col">
             <div class="profile-img-box">
@@ -56,7 +59,8 @@
     <div class="row no-gutters rtl d-felx justify-content-center">
         <div class="col-6">
             <button class="w-100 outline-btn main-btn" [routerLink]="['edit']" *ngIf="loginUser">ویرایش پروفایل</button>
-            <button class="w-100 main-btn" *ngIf="!loginUser">دنبال کردن</button>
+            <button class="w-100 main-btn" *ngIf="!loginUser && !isFollowed && isAuth" (click)="requestToFollow()">دنبال کردن</button>
+            <button class="w-100 main-btn" *ngIf="!loginUser && isFollowed && isAuth" (click)="requestToUnfollow()">دنبال نکردن</button>
         </div>
         <div class="col-2 d-felx justify-content-end pr-2">
             <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
