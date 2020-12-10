@@ -40,6 +40,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {InterceptorService} from './share/loader/interceptor.service';
 import { MoreComponent } from './more/more.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -83,7 +84,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatIconModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTabsModule
   ],
   providers: [
     {
