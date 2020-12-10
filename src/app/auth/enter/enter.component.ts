@@ -13,7 +13,7 @@ import {LoaderService} from '../../share/loader/loader.service';
 })
 export class EnterComponent implements OnInit,OnDestroy {
 
-  constructor(private _authService: AuthService,private _router:Router,private _rout:ActivatedRoute) { }
+  constructor(private _authService: AuthService,private _router:Router,private _rout:ActivatedRoute,public loaderService:LoaderService) { }
   errorMsg: string = "";
   @ViewChild('enter_form',{static:false}) enterForm:NgForm;
   username:string;

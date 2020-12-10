@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit,OnDestroy {
   errorMsg:string="";
   signUpSubs:Subscription;
   // loginSubs:Subscription;
-  constructor(private _authService:AuthService,private router:Router) { }
+  constructor(private _authService:AuthService,private router:Router,public loaderService:LoaderService) { }
 
   ngOnInit(): void {
     this.regForm=new FormGroup({
