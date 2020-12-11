@@ -46,6 +46,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ConfirmComponent } from './auth/confirm/confirm.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { InfoComponent } from './info/info.component';
 
 
 
@@ -74,6 +75,7 @@ import {MatInputModule} from '@angular/material/input';
     Error500Component,
     MoreComponent,
     ConfirmComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

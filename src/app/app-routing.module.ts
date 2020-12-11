@@ -1,5 +1,5 @@
 import { registerLocaleData } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { EnterComponent } from './auth/enter/enter.component';
@@ -18,6 +18,7 @@ import { Error404Component } from './error404/error404.component';
 import { Error500Component } from './error500/error500.component';
 import { MoreComponent } from './more/more.component';
 import { ConfirmComponent } from './auth/confirm/confirm.component';
+import { InfoComponent } from './info/info.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'more/:type',
     component: MoreComponent
+  },
+  {
+    path:'info',
+    component:InfoComponent
   },
   {
     path: 'post-detail/:id',
