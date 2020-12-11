@@ -4,7 +4,7 @@
 }*/
 
 
-input[type=text] {
+/*input[type=text] {
   width: 40px;
   box-sizing: border-box;
   border: 2px solid var(--bg_color);
@@ -28,9 +28,9 @@ input[type=text]::-webkit-search-cancel-button:hover {
   -webkit-appearance: searchfield-cancel-button;
 }
 
-/*input[type=text]:focus {
+!*input[type=text]:focus {
   width: 65%;
-}*/
+}*!
 
 button {
   background-color: var(--secondary_color);
@@ -41,4 +41,13 @@ button {
   border-color: var(--primary_color);
   // width: 30px;
   width: auto;
+}*/
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 90%;
 }

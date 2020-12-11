@@ -5,4 +5,5 @@ export class User {
   mobile?: string;
   email?: string;
   birthDate: string;
+  profileImageUrl?: string;
 }

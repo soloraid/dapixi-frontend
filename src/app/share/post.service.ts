@@ -73,7 +73,7 @@ export class PostService {
   }
 
   getProfileByUserName(userName: string) {
-    return this.http.get(environment.api + '/search/u/'+userName);
+    return this.http.get(environment.api + '/user/search/u/'+userName);
 
   }
 
