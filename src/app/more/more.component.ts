@@ -33,6 +33,9 @@ export class MoreComponent implements OnInit {
       case 'recomended':
         this.title = 'پست‌های پیشنهادی'
         break;
+      case 'Followed':
+        this.title = 'پست‌های دنبال‌شوندگان';
+        this.postObserv=this._postService.getFollowedPost(this.value,this.page);
     }
     console.log(this.title);
     this.subs();

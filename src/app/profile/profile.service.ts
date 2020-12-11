@@ -39,7 +39,7 @@ export class ProfileService {
     let params = new HttpParams();
     if (username.length) {
       //  console.log('du',username);
-      params = params.append('username', 'hashem');
+      params = params.append('username', username);
       // console.log('d',params)
     }
     return this._http.get(environment.api + '/user/profile/followed-users/count', {
