@@ -1,31 +1,29 @@
-<div class="container">
+<div class="container-fluid">
   <h4>نتایج جستجو</h4>
   <hr>
-  <div class="container-fluid" *ngIf="!isEmptyPosts; else noInfo">
-    <div class="d-flex justify-content-center">
-      <pagination-controls
-        previousLabel="قبلی"
-        nextLabel="بعدی"
-        responsive="true"
-        [autoHide]="true"
-        (pageChange)="p = $event"></pagination-controls>
-    </div>
-    <div class="row">
-      <div class="col-sm-4" *ngFor="let item of posts |
-    paginate: { itemsPerPage: 9, currentPage: p }">
-        <app-post [post]="item"></app-post>
+  <section class="container" *ngIf="!isEmptyUsers; else noInfo">
+    <div class="row active-with-click">
+      <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let user of users">
+        <article class="material-card Deep-Purple">
+          <h2>
+            <span>{{user.firstName}} {{user.lastName}}</span>
+            <strong>
+              <i class="fa fa-fw fa-user-circle"></i>
+              {{user.username}}
+            </strong>
+          </h2>
+          <div class="mc-content">
+            <div class="img-container">
+              <img class="avatar-preview" [src]="user.profileImageUrl">
+            </div>
+          </div>
+          <a class="mc-btn-action" [routerLink]="['/user',user.username]">
+            <i class="fa fa-address-card"></i>
+          </a>
+        </article>
       </div>
     </div>
-    <div class="d-flex justify-content-center">
-      <pagination-controls
-        previousLabel="قبلی"
-        nextLabel="بعدی"
-        responsive="true"
-        [autoHide]="true"
-        (pageChange)="p = $event">
-      </pagination-controls>
-    </div>
-  </div>
+  </section>
   <ng-template #noInfo>
     <div class="alert alert-danger" role="alert">
       <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
@@ -34,4 +32,3 @@
   </ng-template>
 
 </div>
-
