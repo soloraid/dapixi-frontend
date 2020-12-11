@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { strict } from 'assert';
 import { Observable, Subscription } from 'rxjs';
 import { LoaderService } from '../share/loader/loader.service';
@@ -21,7 +21,7 @@ export class MoreComponent implements OnInit,OnDestroy {
   page = 0;
   first: boolean = true;
   end = false;
-  constructor(private _rout: ActivatedRoute, private _postService: PostService, public loaderService: LoaderService) { }
+  constructor(private _rout: ActivatedRoute, private _postService: PostService, public loaderService: LoaderService,private _router:Router) { }
 
   ngOnInit(): void {
     const type = this._rout.snapshot.params['type'];
@@ -41,9 +41,11 @@ export class MoreComponent implements OnInit,OnDestroy {
         this.title="محبوب‌ترین پست‌ها";
         this.postObserv=this._postService.getHighRatedPost(this.value,this.page);
         break;
+      default:
+        this._router.navigate(['404']);
     }
     console.log(this.title);
-    this.subs();
+    this.postObserv && this.subs();
 
   }
   private subs() {
