@@ -1,4 +1,9 @@
-<form class="form-inline" action="/action_page.php">
-  <input class="form-control mr-sm-1" type="text" placeholder=" . . .جستجو" [(ngModel)]="searchUser" name="input">
-  <button class="btn mx-1" type="submit" (click)="onSearch()">تایید</button>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label style="font-family: 'IRANSansWeb';color: var(--text_color) ">جستجو</mat-label>
+    <input matInput type="search" placeholder=" نام کاربر" [(ngModel)]="searchUser" name="input">
+    <button mat-button matSuffix mat-icon-button (click)="onSearch()">
+      <mat-icon aria-hidden="false" aria-label="search icon" style="color: var(--text_color)">search</mat-icon>
+    </button>
+  </mat-form-field>
 </form>
