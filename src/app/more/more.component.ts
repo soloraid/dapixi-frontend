@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { strict } from 'assert';
 import { Observable, Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { Post } from '../share/post/post.module';
   templateUrl: './more.component.html',
   styleUrls: ['./more.component.scss']
 })
-export class MoreComponent implements OnInit {
+export class MoreComponent implements OnInit,OnDestroy {
   title: String = "";
   postView: Post[] = [];
   postObserv: Observable<any>;
@@ -32,6 +32,14 @@ export class MoreComponent implements OnInit {
         break;
       case 'recomended':
         this.title = 'پست‌های پیشنهادی'
+        break;
+      case 'followed':
+        this.title = 'پست‌های دنبال‌شوندگان';
+        this.postObserv=this._postService.getFollowedPost(this.value,this.page);
+        break;
+      case 'highrated':
+        this.title="محبوب‌ترین پست‌ها";
+        this.postObserv=this._postService.getHighRatedPost(this.value,this.page);
         break;
     }
     console.log(this.title);
@@ -54,5 +62,8 @@ export class MoreComponent implements OnInit {
     this.page += 1;
     this.postObserv = this._postService.getLatestPost(this.value, this.page);
     this.subs();
+  }
+  ngOnDestroy(){
+    this.postSubs && this.postSubs.unsubscribe();
   }
 }
