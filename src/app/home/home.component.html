@@ -19,7 +19,7 @@
       <mat-tab label="پست های با امتیاز بالا" >
         <div class="ui-main-posts" *ngIf="isHighRated; else noInfo" >
           <div class="d-flex justify-content-between">
-            <a [routerLink]='["/more","Followed"]' class="more-link">...مشاهده بیش‌تر</a>
+            <a [routerLink]='["/more","highrated"]' class="more-link">...مشاهده بیش‌تر</a>
             <!--<h3>پست های با امتیاز بالا</h3>-->
           </div>
           <hr>
@@ -33,7 +33,7 @@
       <mat-tab label="پست های دنبال شوندگان" *ngIf="isAuth">
         <div class="ui-main-posts" *ngIf="isFollowed; else noInfo" >
           <div class="d-flex justify-content-between">
-            <a [routerLink]='["/more","Followed"]' class="more-link">...مشاهده بیش‌تر</a>
+            <a [routerLink]='["/more","followed"]' class="more-link">...مشاهده بیش‌تر</a>
             <!--<h3>پست های دنبال شوندگان</h3>-->
           </div>
           <hr>
