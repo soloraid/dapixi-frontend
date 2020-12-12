@@ -47,6 +47,12 @@ import { ConfirmComponent } from './auth/confirm/confirm.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { InfoComponent } from './info/info.component';
+import { CommentComponent } from './comment/comment.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 
@@ -76,6 +82,7 @@ import { InfoComponent } from './info/info.component';
     MoreComponent,
     ConfirmComponent,
     InfoComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,7 +103,11 @@ import { InfoComponent } from './info/info.component';
     MatProgressBarModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatTableModule,
+    MatTooltipModule
   ],
   providers: [
     {

@@ -19,6 +19,8 @@ import { Error500Component } from './error500/error500.component';
 import { MoreComponent } from './more/more.component';
 import { ConfirmComponent } from './auth/confirm/confirm.component';
 import { InfoComponent } from './info/info.component';
+import {CommentComponent} from './comment/comment.component';
+
 
 
 const routes: Routes = [
@@ -30,6 +32,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'comment',
+    component: CommentComponent,
   },
   {
     path: 'more/:type',
