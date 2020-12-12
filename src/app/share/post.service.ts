@@ -104,6 +104,14 @@ export class PostService {
     body.append('file', image);
     return this.http.post( environment.api + '/photo/profile/picture', body);
   }
+  addComment(id:string,content:string){
+    const comment={
+      photoId:id,
+      content:content
+    }
+    // console.log('m',comment);
+    return this.http.post(environment.api+'/photo/comments/posts',comment);
+  }
 }
 
 

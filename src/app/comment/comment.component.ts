@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { PostService } from '../share/post.service';
 import { Tokens } from '../share/tokens.model';
 import { User } from '../share/user/user.mudole';
 
@@ -19,7 +20,8 @@ export class CommentComponent implements OnInit {
   authSubs:Subscription;
   id:string;
   comment:string="";
-  constructor(private _authService:AuthService,private _rout:ActivatedRoute) { }
+  sendSubs:Subscription;
+  constructor(private _authService:AuthService,private _rout:ActivatedRoute,private _postService:PostService) { }
 
   ngOnInit(): void {
     this.authSubs=this._authService.authState.subscribe((token:Tokens)=>{
@@ -32,6 +34,9 @@ export class CommentComponent implements OnInit {
   onSubmit(cForm:NgForm){
     console.log(this.id);
     console.log(this.comment);
+    this.sendSubs=this._postService.addComment(this.id,this.comment).subscribe((data)=>{
+      console.log(data);
+    })
   }
 
 }
