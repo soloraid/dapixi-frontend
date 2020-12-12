@@ -112,6 +112,13 @@ export class PostService {
     // console.log('m',comment);
     return this.http.post(environment.api+'/photo/comments/posts',comment);
   }
+  getComments(id:string){
+    let params=new HttpParams();
+    params=params.append('photoId',id);
+    return this.http.get(environment.api+'/photo/comments/posts',{
+      params:params
+    });
+  }
 }
 
 

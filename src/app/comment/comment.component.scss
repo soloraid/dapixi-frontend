@@ -78,3 +78,14 @@
 .disable_ripple:focus{
   background: #b3b1b1 !important;
 }
+.toggler{
+  text-align: left;
+  display: inline-block;
+  width: 100%;
+  color: black;
+  text-decoration: none;
+  &:hover{
+    color: black;
+    text-decoration: none;
+  }
+}

@@ -2,8 +2,8 @@
   <form #cForm ngForm *ngIf="isAuth" class="formComment" (ngSubmit)="onSubmit(cForm)">
     <mat-form-field class="full-width">
       <mat-label>نظر بده</mat-label>
-      <input matInput type="text"  [(ngModel)]="comment" name="comment" required>
-      <button mat-button matSuffix mat-icon-button type="submit" [disabled]="comment===''">
+      <input matInput type="text"  [(ngModel)]="sendingComment" name="comment" required>
+      <button mat-button matSuffix mat-icon-button type="submit" [disabled]="sendingComment===''">
         <mat-icon aria-hidden="false" aria-label="done icon" style="color: var(--text_color)">cloud_done</mat-icon>
       </button>
     </mat-form-field>
@@ -13,11 +13,13 @@
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header class="disable_ripple">
         <mat-panel-title>
-          مشاهده نظرات . . .
+          <a (click)="toggle()" class="toggler" >
+            مشاهده نظرات . . .
+          </a>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="d-flex flex-row comment-row m-t-0">
-        <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
+        <!-- <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div> -->
         <div class="comment-text w-100">
           <h6>هاشم</h6>
           <span class="m-b-15 d-block align-content-md-center">. . . چه خوبه </span>
@@ -28,6 +30,18 @@
           </div>
         </div>
       </div>
+      <!-- <div class="d-flex flex-row comment-row m-t-0">
+        <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
+        <div class="comment-text w-100">
+          <h6>هاشم</h6>
+          <span class="m-b-15 d-block align-content-md-center">. . . چه خوبه </span>
+          <div>
+            <span class="text-muted float-right">April 14, 2019</span>
+            <button matTooltip="ویرایش" aria-label="Button that displays a tooltip when focused or hovered over" type="button" class="btn btn-cyan btn-circle"><mat-icon>edit_attributes</mat-icon></button>
+            <button matTooltip="پاک کردن" aria-label="Button that displays a tooltip when focused or hovered over" type="button" class="btn btn-danger btn-circle"><mat-icon>delete</mat-icon></button>
+          </div>
+        </div>
+      </div> -->
       <mat-divider></mat-divider>
     </mat-expansion-panel>
   </mat-accordion>

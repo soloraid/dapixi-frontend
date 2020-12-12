@@ -19,8 +19,11 @@ export class CommentComponent implements OnInit {
   isAuth:boolean;
   authSubs:Subscription;
   id:string;
-  comment:string="";
+  sendingComment:string="";
   sendSubs:Subscription;
+  isOpen:boolean=false;
+  getSubs:Subscription;
+  comments:Comment[];
   constructor(private _authService:AuthService,private _rout:ActivatedRoute,private _postService:PostService) { }
 
   ngOnInit(): void {
@@ -33,10 +36,22 @@ export class CommentComponent implements OnInit {
   }
   onSubmit(cForm:NgForm){
     console.log(this.id);
-    console.log(this.comment);
-    this.sendSubs=this._postService.addComment(this.id,this.comment).subscribe((data)=>{
+    console.log(this.sendingComment);
+    this.sendSubs=this._postService.addComment(this.id,this.sendingComment).subscribe((data)=>{
       console.log(data);
     })
+  }
+  toggle(){
+    this.isOpen=!this.isOpen;
+    this.getComments();
+  }
+  private getComments(){
+    if(this.isOpen){
+      this.getSubs=this._postService.getComments(this.id).subscribe((comments:Comment[])=>{
+        this.comments=comments;
+        console.log(comments);
+      })
+    }
   }
 
 }
@@ -45,4 +60,12 @@ interface DateUser {
   username: string;
   imageUrl: string;
   comment: string;
+}
+interface Comment {
+  id: string;
+  photoId: string;
+  username: string;
+  content: string;
+  creationDate: string;
+  updateDate: string;
 }
