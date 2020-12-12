@@ -46,6 +46,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { ConfirmComponent } from './auth/confirm/confirm.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { CommentComponent } from './comment/comment.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -74,6 +79,7 @@ import {MatInputModule} from '@angular/material/input';
     Error500Component,
     MoreComponent,
     ConfirmComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +100,11 @@ import {MatInputModule} from '@angular/material/input';
     MatProgressBarModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatTableModule,
+    MatTooltipModule
   ],
   providers: [
     {
