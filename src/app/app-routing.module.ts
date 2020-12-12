@@ -18,6 +18,7 @@ import { Error404Component } from './error404/error404.component';
 import { Error500Component } from './error500/error500.component';
 import { MoreComponent } from './more/more.component';
 import { ConfirmComponent } from './auth/confirm/confirm.component';
+import {CommentComponent} from './comment/comment.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'comment',
+    component: CommentComponent,
   },
   {
     path: 'more/:type',
