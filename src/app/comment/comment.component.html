@@ -18,17 +18,18 @@
           </a>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="d-flex flex-row comment-row m-t-0">
+      <div class="d-flex flex-row comment-row m-t-0" *ngFor="let comment of comments">
         <!-- <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div> -->
         <div class="comment-text w-100">
-          <h6>هاشم</h6>
-          <span class="m-b-15 d-block align-content-md-center">. . . چه خوبه </span>
+          <h6>{{ comment.username }}</h6>
+          <span class="m-b-15 d-block align-content-md-center">{{ comment.content }}</span>
           <div>
-            <span class="text-muted float-right">April 14, 2019</span>
+            <span class="text-muted float-right">{{ comment.creationDate }}</span>
             <button matTooltip="ویرایش" aria-label="Button that displays a tooltip when focused or hovered over" type="button" class="btn btn-cyan btn-circle"><mat-icon>edit_attributes</mat-icon></button>
             <button matTooltip="پاک کردن" aria-label="Button that displays a tooltip when focused or hovered over" type="button" class="btn btn-danger btn-circle"><mat-icon>delete</mat-icon></button>
           </div>
         </div>
+        
       </div>
       <!-- <div class="d-flex flex-row comment-row m-t-0">
         <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
