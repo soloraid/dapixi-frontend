@@ -1,4 +1,9 @@
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { Tokens } from '../share/tokens.model';
+import { User } from '../share/user/user.mudole';
 
 @Component({
   selector: 'app-comment',
@@ -8,9 +13,14 @@ import { Component, OnInit } from '@angular/core';
 export class CommentComponent implements OnInit {
   panelOpenState = false;
   commentsOfUsers: DateUser;
-  constructor() { }
+  isAuth:boolean;
+  authSubs:Subscription
+  constructor(private _authService:AuthService) { }
 
   ngOnInit(): void {
+    this.authSubs=this._authService.authState.subscribe((token:Tokens)=>{
+      this.isAuth=!!token;
+    })
   }
 
 }

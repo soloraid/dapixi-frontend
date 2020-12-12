@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <form class="formComment">
+  <form *ngIf="isAuth" class="formComment">
     <mat-form-field class="full-width">
       <mat-label>نظر بده</mat-label>
       <input matInput type="text" placeholder="سایت بسیار عالی">
