@@ -1,1 +1,151 @@
-<p>profile-edit works!</p>
+<div class="container">
+  <mat-vertical-stepper class="stepperForm">
+    <mat-step [stepControl]="firstFormGroup" label="نام و نام خانوادگی" state="name" optional>
+      <form [formGroup]="firstFormGroup" class="form-container float-right">
+        <div class="float-left">
+          <mat-form-field class="full-width">
+            <mat-label>نام</mat-label>
+            <input matInput placeholder="نام , نام خانوادگی" formControlName="firstCtrl" class="float-left" optional>
+          </mat-form-field>
+          <div>
+            <button mat-button matTooltip="بعدی" matStepperNext><mat-icon>keyboard_arrow_down</mat-icon></button>
+            <button mat-button matTooltip="عدم تغییر" matStepperNext><mat-icon>not_interested</mat-icon></button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="نام کاربری" state="username" optional>
+      <form [formGroup]="secondFormGroup">
+        <div class="float-left">
+          <mat-form-field hintLabel="حداقل ۳ کاراکتر">
+            <mat-label>نام کاربر</mat-label>
+            <input matInput formControlName="secondCtrl" placeholder="..."
+                   required>
+          </mat-form-field>
+          <div>
+            <button mat-button matTooltip="قبلی" matStepperPrevious><mat-icon>keyboard_arrow_up</mat-icon></button>
+            <button mat-button matTooltip="بعدی" matStepperNext><mat-icon>keyboard_arrow_down</mat-icon></button>
+            <button mat-button matTooltip="عدم تغییر" matStepperNext><mat-icon>not_interested</mat-icon></button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="ایمیل" state="email" optional>
+      <form [formGroup]="thirdFormGroup">
+
+        <div class="float-left">
+          <mat-form-field>
+            <mat-label>ایمیل</mat-label>
+            <input matInput formControlName="thirdCtrl" placeholder="googlee@gmail.com"
+                   required>
+            <mat-error></mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matTooltip="قبلی" matStepperPrevious><mat-icon>keyboard_arrow_up</mat-icon></button>
+            <button mat-button matTooltip="بعدی" matStepperNext><mat-icon>keyboard_arrow_down</mat-icon></button>
+            <button mat-button matTooltip="عدم تغییر" matStepperNext><mat-icon>not_interested</mat-icon></button>
+          </div>
+        </div>
+
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fourthFormGroup" label="شماره همراه" state="phone" optional>
+      <form [formGroup]="fourthFormGroup">
+
+        <div class="float-left">
+          <mat-form-field>
+            <mat-label>شماره همراه</mat-label>
+            <input matInput formControlName="fourthCtrl"
+                   required>
+            <!--<mat-icon matPrefix>phone_enable</mat-icon>-->
+          </mat-form-field>
+          <div>
+            <button mat-button matTooltip="قبلی" matStepperPrevious><mat-icon>keyboard_arrow_up</mat-icon></button>
+            <button mat-button matTooltip="بعدی" matStepperNext><mat-icon>keyboard_arrow_down</mat-icon></button>
+            <button mat-button matTooltip="عدم تغییر" matStepperNext><mat-icon>not_interested</mat-icon></button>
+          </div>
+        </div>
+
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="fifthFormGroup" label="تاریخ تولد"  state="birthDate" optional>
+      <form [formGroup]="fifthFormGroup">
+
+        <div class="float-left">
+          <mat-form-field>
+            <mat-label><mat-icon>date_range</mat-icon></mat-label>
+            <input matInput formControlName="fifthCtrl" placeholder="Ex.: 2020-1-1"
+                   required>
+          </mat-form-field>
+          <div>
+            <button mat-button matTooltip="قبلی" matStepperPrevious><mat-icon>keyboard_arrow_up</mat-icon></button>
+            <button mat-button matTooltip="بعدی" matStepperNext><mat-icon>keyboard_arrow_down</mat-icon></button>
+            <button mat-button matTooltip="عدم تغییر" matStepperNext><mat-icon>not_interested</mat-icon></button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="sixthFormGroup" label="رمز عبور" state="password" optional>
+      <div class="float-left">
+        <form [formGroup]="sixthFormGroup">
+
+          <mat-form-field>
+            <mat-label>رمز فعلی</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="sixthCtrl"
+                   required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+        <form>
+          <mat-form-field hintLabel="حداقل ۶ کاراکتر">
+            <mat-label>رمز جدید</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="sixthCtrl"
+                   required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+        <form>
+          <mat-form-field>
+            <mat-label>تکرار رمز جدید</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="sixthCtrl"
+                   required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <div>
+            <button mat-button matTooltip="قبلی" matStepperPrevious><mat-icon>keyboard_arrow_up</mat-icon></button>
+            <button mat-button matTooltip="بعدی" matStepperNext><mat-icon>keyboard_arrow_down</mat-icon></button>
+            <button mat-button matTooltip="عدم تغییر" matStepperNext><mat-icon>not_interested</mat-icon></button>
+          </div>
+        </form>
+      </div>
+    </mat-step>
+    <mat-step label="پایان" state="doneall">
+      <div class="float-left">
+        <p>برای ثبت تغییرات دکمه تایید را بزنید</p>
+        <div>
+          <button mat-button matStepperPrevious><mat-icon>keyboard_arrow_up</mat-icon></button>
+          <button mat-button><mat-icon>cloud_done</mat-icon></button>
+        </div>
+      </div>
+    </mat-step>
+
+    <ng-template matStepperIcon="name"><mat-icon>drive_file_rename_outline</mat-icon></ng-template>
+    <ng-template matStepperIcon="username"><mat-icon>supervised_user_circle</mat-icon></ng-template>
+    <ng-template matStepperIcon="email"><mat-icon>alternate_email</mat-icon></ng-template>
+    <ng-template matStepperIcon="phone"><mat-icon>smartphone</mat-icon></ng-template>
+    <ng-template matStepperIcon="birthDate"><mat-icon>date_range</mat-icon></ng-template>
+    <ng-template matStepperIcon="password"><mat-icon>security</mat-icon></ng-template>
+    <ng-template matStepperIcon="doneall"><mat-icon>donut_small</mat-icon></ng-template>
+    <ng-template matStepperIcon="done"><mat-icon>done_all</mat-icon></ng-template>
+
+  </mat-vertical-stepper>
+
+
+</div>
+
