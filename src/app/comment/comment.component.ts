@@ -39,7 +39,10 @@ export class CommentComponent implements OnInit {
     console.log(this.sendingComment);
     this.sendSubs=this._postService.addComment(this.id,this.sendingComment).subscribe((data)=>{
       console.log(data);
-    })
+    });
+    if(this.isOpen){
+      this.getComments();
+    }
   }
   toggle(){
     this.isOpen=!this.isOpen;
