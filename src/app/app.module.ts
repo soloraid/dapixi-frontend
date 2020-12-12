@@ -52,6 +52,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 
@@ -107,7 +108,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatExpansionModule,
     MatCardModule,
     MatTableModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatStepperModule
   ],
   providers: [
     {
