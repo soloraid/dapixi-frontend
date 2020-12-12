@@ -59,7 +59,7 @@
 .unRate:not(:checked) > label:before {
   content: '✘ ';
 }
-.unRate > input:checked ~ .label-unRate, {
+.unRate > input:checked ~ .label-unRate {
   color: var(--secondary_color);
 }
 
