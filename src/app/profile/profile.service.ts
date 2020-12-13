@@ -76,7 +76,7 @@ export class ProfileService {
       params=params.append('firstName', firstName);
     }
     if (lastName !== '') {
-      params=params.set('lastName',lastName);
+      params=params.append('lastName',lastName);
     }
     console.log(params);
     return this._http.patch(environment.api + '/user/profile','',{
