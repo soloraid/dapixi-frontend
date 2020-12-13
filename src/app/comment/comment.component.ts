@@ -23,6 +23,7 @@ export class CommentComponent implements OnInit {
   sendSubs:Subscription;
   isOpen:boolean=false;
   getSubs:Subscription;
+  nocomment:boolean=false;
   comments:Comment[];
   constructor(private _authService:AuthService,private _rout:ActivatedRoute,private _postService:PostService) { }
 
@@ -38,6 +39,7 @@ export class CommentComponent implements OnInit {
     console.log(this.id);
     console.log(this.sendingComment);
     this.sendSubs=this._postService.addComment(this.id,this.sendingComment).subscribe((data)=>{
+      // this.sendingComment="";
       console.log(data);
     });
     if(this.isOpen){
@@ -46,12 +48,20 @@ export class CommentComponent implements OnInit {
   }
   toggle(){
     this.isOpen=!this.isOpen;
-    this.getComments();
+    if(!this.comments){
+
+      this.getComments();
+    }
   }
   private getComments(){
     if(this.isOpen){
       this.getSubs=this._postService.getComments(this.id).subscribe((comments:Comment[])=>{
-        this.comments=comments;
+        if(comments.length){
+          this.comments=comments;
+          this.nocomment=false;
+        }else{
+          this.nocomment=true;
+        }
         console.log(comments);
       })
     }
