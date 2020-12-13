@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
@@ -137,6 +137,42 @@ export class AuthService {
     this.logOutTimer=setTimeout(()=>{
       this.logOut();
     },expireDuration)
+  }
+  forgetPassword(email:string){
+    // console.log(email);
+    let params=new HttpParams();
+    params=params.append('email',email);
+    return this._http.post(environment.api+'/auth/user/forgot-password/','',{params:params})
+    .pipe(catchError((errorData:HttpErrorResponse)=>{
+      console.log(errorData);
+      let description
+      if (errorData.error && errorData.error.message) {
+        description = errorData.error.message;
+      }
+      if (errorData.error && errorData.error.error_description) {
+        description = errorData.error.error_description;
+      }
+      let errorString: string = '';
+      console.log(description)
+      switch (description) {
+        case `No User with email ${email} Exists!`:
+          console.log('here');
+          errorString = `چنین ایمیلی ثبت نشده‌است`;
+          break;
+        case 'You should verify your email first - go to your email and verify':
+          errorString = 'ابتدا باید ایمیل خود را تایید کنید';
+          break;
+        // case `Email ${email} has already been used!`:
+        //   errorString='کاربری با این ایمیل قبلا ثبت نام کرده است'
+        //   break;
+        default:
+          errorString = 'خطای نامشخص لطفا بعدا تلاش کنید';
+
+      }
+      console.log(errorString);
+      return throwError(errorString);
+    })
+    )
   }
 }
 interface loginResponse {

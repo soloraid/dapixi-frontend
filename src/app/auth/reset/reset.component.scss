@@ -6,6 +6,14 @@ form{
     color: white;
     width: 100%;
 }
+input{
+    direction: ltr;
+}
 input.ng-invalid.ng-touched{
     border: 2px solid red;
+}
+.confirm{
+    font-size: 1.5rem;
+    direction: rtl;
+    text-align: justify;
 }
