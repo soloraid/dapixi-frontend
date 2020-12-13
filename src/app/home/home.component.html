@@ -45,21 +45,19 @@
           </div>
         </div>
       </mat-tab>
-      <!--<mat-tab label="پیشنهادی ها" *ngIf="isAuth">
-        <div  class="ui-main-posts">
+      <mat-tab label="پیشنهادی ها" *ngIf="isAuth">
+        <div  class="ui-main-posts" *ngIf="isRecommender; else noInfo">
           <div class="d-flex justify-content-between">
             <a [routerLink]='["/more","recomended"]' class="more-link">...مشاهده بیش‌تر</a>
-            &lt;!&ndash;<h3>پیشنهادی ها</h3>&ndash;&gt;
           </div>
           <hr>
           <div class="d-flex flex-fill justify-content-between p-3 mt-5">
-            <div class="p-2" *ngFor="let post of postView |
-      paginate: { id: 'pagination1', itemsPerPage: 3, currentPage: p }">
+            <div class="p-2" *ngFor="let post of postRecommender">
               <app-post [post]="post"></app-post>
             </div>
           </div>
         </div>
-      </mat-tab>-->
+      </mat-tab>
       <mat-tab label="آخرین پست‌ها">
         <div class="ui-main-posts" *ngIf="!isEmpty; else noInfo">
           <div class="d-flex justify-content-between">
