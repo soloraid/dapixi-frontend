@@ -106,6 +106,7 @@ export class ProfileEditComponent implements OnInit {
       });
       this.editSubs.push(passSubs);
     }
+    this.router.navigate(['/user/profile']);
   }
 
   private dateValidator(formControl: FormControl): { [k: string]: boolean } | null {
