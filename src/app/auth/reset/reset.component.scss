@@ -6,6 +6,9 @@ form{
     color: white;
     width: 100%;
 }
+input{
+    direction: ltr;
+}
 input.ng-invalid.ng-touched{
     border: 2px solid red;
 }

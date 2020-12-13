@@ -1,4 +1,8 @@
 <form [formGroup]="resetForm" (ngSubmit)="onSubmit()" *ngIf="!confirm">
+    <div *ngIf="errMsg"  class="alert alert-danger pt-0 pr-1 ">
+        <a (click)="errMsg=''" class="text-danger m-0 p-0 error-toggler">X</a>
+        <p  class="text-danger my-0 pr-2">{{ errMsg }}</p>
+    </div>
     <div class="mb-5">
         <h6>
             ایمیل خود را وارد کنید تا رمز عبور یک بار مصرف برای شما ارسال شود.
