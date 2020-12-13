@@ -15,11 +15,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   authSubsc: Subscription;
   postView: Post[] = [];
+  postRecommender: Post[] = [];
   followedPosts: Post[] = [];
   highRatedPosts: Post[] = [];
   isEmpty = true;
   isFollowed = false;
   isHighRated = false;
+  isRecommender = false;
   p = 1;
 
 
@@ -50,6 +52,19 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.isFollowed = true;
         } else {
           this.isFollowed = false;
+        }
+      });
+
+      this.postService.getRecommenderPosts(3).subscribe(posts => {
+        // tslint:disable-next-line:forin
+        for (const index in posts) {
+          this.postRecommender.push(posts[index]);
+        }
+        console.log(this.postRecommender);
+        if (this.postRecommender.length > 0) {
+          this.isRecommender = true;
+        } else {
+          this.isRecommender = false;
         }
       });
     }
