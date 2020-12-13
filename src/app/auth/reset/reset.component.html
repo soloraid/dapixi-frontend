@@ -14,7 +14,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-12 col-sm-7 col-md-8 col-xl-6 text-center">
-            <button type="submit" class="btn mx-0" [disabled]="resetForm.invalid">تایید</button>
+            <button type="submit" class="btn mx-0" [disabled]="resetForm.invalid || (loaderService.isLoading | async)">تایید</button>
           <div *ngIf="loaderService.isLoading | async">
             <mat-spinner diameter="40" color="warn" style="right:40%"></mat-spinner>
           </div>
