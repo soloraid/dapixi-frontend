@@ -16,51 +16,49 @@ import { User } from '../share/user/user.mudole';
 export class CommentComponent implements OnInit {
   panelOpenState = false;
   commentsOfUsers: DateUser;
-  isAuth:boolean;
-  authSubs:Subscription;
-  id:string;
-  sendingComment:string="";
-  sendSubs:Subscription;
-  isOpen:boolean=false;
-  getSubs:Subscription;
-  nocomment:boolean=false;
-  comments:Comment[];
-  constructor(private _authService:AuthService,private _rout:ActivatedRoute,private _postService:PostService) { }
+  isAuth: boolean;
+  authSubs: Subscription;
+  id: string;
+  sendingComment: string = "";
+  sendSubs: Subscription;
+  isOpen: boolean = false;
+  getSubs: Subscription;
+  nocomment: boolean = false;
+  comments: Comment[];
+  constructor(private _authService: AuthService, private _rout: ActivatedRoute, private _postService: PostService) { }
 
   ngOnInit(): void {
-    this.authSubs=this._authService.authState.subscribe((token:Tokens)=>{
-      this.isAuth=!!token;
+    this.authSubs = this._authService.authState.subscribe((token: Tokens) => {
+      this.isAuth = !!token;
     });
-    this._rout.params.subscribe((data)=>{
-      this.id=this._rout.snapshot.params['id'];
+    this._rout.params.subscribe((data) => {
+      this.id = this._rout.snapshot.params['id'];
     })
   }
-  onSubmit(cForm:NgForm){
+  onSubmit(cForm: NgForm) {
     console.log(this.id);
     console.log(this.sendingComment);
-    this.sendSubs=this._postService.addComment(this.id,this.sendingComment).subscribe((data)=>{
+    this.sendSubs = this._postService.addComment(this.id, this.sendingComment).subscribe((data) => {
       // this.sendingComment="";
       console.log(data);
     });
-    if(this.isOpen){
-      this.getComments();
-    }
-  }
-  toggle(){
-    this.isOpen=!this.isOpen;
-    if(!this.comments){
 
-      this.getComments();
-    }
+    this.getComments();
+
   }
-  private getComments(){
-    if(this.isOpen){
-      this.getSubs=this._postService.getComments(this.id).subscribe((comments:Comment[])=>{
-        if(comments.length){
-          this.comments=comments;
-          this.nocomment=false;
-        }else{
-          this.nocomment=true;
+  toggle() {
+    this.isOpen = !this.isOpen;
+    this.getComments();
+  }
+  private getComments() {
+    console.log(this.isOpen);
+    if (this.isOpen) {
+      this.getSubs = this._postService.getComments(this.id).subscribe((comments: Comment[]) => {
+        if (comments.length) {
+          this.comments = comments;
+          this.nocomment = false;
+        } else {
+          this.nocomment = true;
         }
         console.log(comments);
       })

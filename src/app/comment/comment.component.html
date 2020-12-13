@@ -11,11 +11,9 @@
   <mat-accordion>
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
-      <mat-expansion-panel-header class="disable_ripple">
+      <mat-expansion-panel-header class="disable_ripple" (click)="toggle()">
         <mat-panel-title>
-          <a (click)="toggle()" class="toggler" >
             مشاهده نظرات . . .
-          </a>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div class="d-flex flex-row comment-row mb-3 py-1 m-t-0" *ngFor="let comment of comments">
