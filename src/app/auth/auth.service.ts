@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { Tokens } from '../share/tokens.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   authState = new BehaviorSubject<Tokens>(null);
   confirmation=new BehaviorSubject<string>(null);
   logOutTimer;
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient,private _router:Router,private _rout:ActivatedRoute) {
   }
   login(username: string, password: string) {
     let body: FormData = new FormData();
@@ -129,6 +130,9 @@ export class AuthService {
   logOut(){
     this.authState.next(null);
     localStorage.removeItem('tokens');
+    // console.log(this._rout.component);
+    
+    this._router.navigate([''],{relativeTo:this._rout})
     if(this.logOutTimer){
       clearTimeout(this.logOutTimer);
     }
