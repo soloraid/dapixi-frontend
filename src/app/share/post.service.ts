@@ -119,6 +119,15 @@ export class PostService {
       params:params
     });
   }
+
+  getRecommenderPosts(number: number = 50, page: number = 0) {
+    let params = new HttpParams();
+    params = params.append('size', String(number));
+    params = params.append('page', String(page));
+    return this.http.get(environment.api + '/photo/recommended/posts', {
+      params
+    });
+  }
 }
 
 
