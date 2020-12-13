@@ -44,6 +44,7 @@ export class CommentComponent implements OnInit {
     });
 
     this.getComments();
+    this.sendingComment="";
 
   }
   toggle() {
