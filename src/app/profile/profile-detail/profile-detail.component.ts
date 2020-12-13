@@ -72,6 +72,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     });
     this.authSubs = this._authService.authState.subscribe((data: Tokens) => {
       if (data) {
+        // console.log("here??");
         this.isAuth = true;
         this.getCount(this.username);
       }
