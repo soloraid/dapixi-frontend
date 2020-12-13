@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import { environment } from '../../../src/environments/environment';
 
 @Injectable({
@@ -67,5 +67,52 @@ export class ProfileService {
 
   isFollowedUser(username: string) {
     return this._http.get(environment.api + '/user/u/' + username + '/followed');
+  }
+
+  editProfileFirstLastName(firstName: string, lastName: string) {
+    const params = new HttpParams();
+    if (firstName !== '') {
+      params.append('firstName', firstName);
+    }
+    if (lastName !== '') {
+      params.append('lastName', lastName);
+    }
+    return this._http.patch(environment.api + '/user/profile', {
+      params
+    });
+  }
+
+  editProfileEmail(email: string) {
+    const param = new HttpParams();
+    param.append('email', email);
+    return this._http.patch(environment.api + '/user/profile/email' , {
+      param
+    });
+  }
+
+  editProfilePhone(phoneNumber: string) {
+    const param = new HttpParams();
+    param.append('mobile', phoneNumber);
+    return this._http.patch(environment.api + '/user/profile/mobile' , {
+      param
+    });
+
+  }
+
+  editProfileDate(birthDate: string) {
+    const param = new HttpParams();
+    param.append('birthDate', birthDate);
+    return this._http.patch(environment.api + '/user/profile/birth-date' , {
+      param
+    });
+  }
+
+  editProfilePassword(newPassword: string) {
+    const param = new HttpParams();
+    param.append('password', newPassword);
+    return this._http.patch(environment.api + '/user/profile/credential' , {
+      param
+    });
+
   }
 }
