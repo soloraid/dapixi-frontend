@@ -29,7 +29,7 @@
         <div *ngIf="!(isHandset$ | async)"
              class="pt-0">
           <a *ngIf="!isAuth" href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a>
-          <a *ngIf="isAuth" (click)="onLogOut()" href="" class="nav-item">خروج</a>
+          <a *ngIf="isAuth" (click)="onLogOut()"  class="nav-item">خروج</a>
           <a *ngIf="isAuth" routerLink="user/new" href="" class="nav-item">پست جدید</a>
           <a *ngIf="isAuth" routerLink="user" href="" class="nav-item">پروفایل</a>
           <a href="#" routerLink="info" class="nav-item">درباره ما</a>
