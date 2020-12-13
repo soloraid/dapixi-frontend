@@ -11,35 +11,38 @@ import { Post } from '../share/post/post.module';
   templateUrl: './more.component.html',
   styleUrls: ['./more.component.scss']
 })
-export class MoreComponent implements OnInit,OnDestroy {
-  title: String = "";
+export class MoreComponent implements OnInit, OnDestroy {
+  title: String = '';
+  typePost: string;
   postView: Post[] = [];
   postObserv: Observable<any>;
   postSubs: Subscription;
   isEmpty = true;
-  value: number = 15;
+  value = 15;
   page = 0;
-  first: boolean = true;
+  first = true;
   end = false;
-  constructor(private _rout: ActivatedRoute, private _postService: PostService, public loaderService: LoaderService,private _router:Router) { }
+  constructor(private _rout: ActivatedRoute, private _postService: PostService, public loaderService: LoaderService, private _router: Router) { }
 
   ngOnInit(): void {
-    const type = this._rout.snapshot.params['type'];
+    this.typePost = this._rout.snapshot.params.type;
+    const type = this._rout.snapshot.params.type;
     switch (type) {
       case 'latest':
-        this.title = 'آخرین پست‌ها'
+        this.title = 'آخرین پست‌ها';
         this.postObserv = this._postService.getLatestPost(this.value, this.page);
         break;
       case 'recomended':
-        this.title = 'پست‌های پیشنهادی'
+        this.title = 'پست‌های پیشنهادی';
+        this.postObserv = this._postService.getRecommenderPosts(this.value, this.page);
         break;
       case 'followed':
         this.title = 'پست‌های دنبال‌شوندگان';
-        this.postObserv=this._postService.getFollowedPost(this.value,this.page);
+        this.postObserv = this._postService.getFollowedPost(this.value, this.page);
         break;
       case 'highrated':
-        this.title="محبوب‌ترین پست‌ها";
-        this.postObserv=this._postService.getHighRatedPost(this.value,this.page);
+        this.title = 'محبوب‌ترین پست‌ها';
+        this.postObserv = this._postService.getHighRatedPost(this.value, this.page);
         break;
       default:
         this._router.navigate(['404']);
@@ -53,16 +56,31 @@ export class MoreComponent implements OnInit,OnDestroy {
       if (posts.length) {
         posts.forEach((post: Post) => {
           this.postView.push(post);
-        })
+        });
       }else{
-        this.end=true;
+        this.end = true;
       }
-    })
+    });
   }
   getmore() {
     this.first = false;
     this.page += 1;
-    this.postObserv = this._postService.getLatestPost(this.value, this.page);
+    switch (this.typePost) {
+      case 'latest':
+        this.postObserv = this._postService.getLatestPost(this.value, this.page);
+        break;
+      case 'recomended':
+        this.postObserv = this._postService.getRecommenderPosts(this.value, this.page);
+        break;
+      case 'followed':
+        this.postObserv = this._postService.getFollowedPost(this.value, this.page);
+        break;
+      case 'highrated':
+        this.postObserv = this._postService.getHighRatedPost(this.value, this.page);
+        break;
+      default:
+        this._router.navigate(['404']);
+    }
     this.subs();
   }
   ngOnDestroy(){
