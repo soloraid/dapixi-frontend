@@ -3,7 +3,7 @@
     <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
   </div>
   <div class="mt-2 d-flex flex-column">
-    <h4>صفحه اصلی</h4>
+    <!-- <h4>صفحه اصلی</h4> -->
     <br>
     <ng-template #noInfo>
       <br>
@@ -24,7 +24,7 @@
           </div>
           <hr>
           <div class="row ">
-            <div class="col-xl-4 w-100 clearfix" *ngFor="let post of highRatedPosts">
+            <div class="col-md-6 col-lg-4 w-100 clearfix" *ngFor="let post of highRatedPosts">
               <app-post [post]="post" class="flex-fill"></app-post>
             </div>
           </div>
@@ -39,7 +39,7 @@
           <hr>
 
           <div class="row ">
-            <div class="col-xl-4 w-100 clearfix" *ngFor="let post of followedPosts">
+            <div class="col-md-6 col-lg-4 w-100 clearfix" *ngFor="let post of followedPosts">
               <app-post [post]="post" class="flex-fill"></app-post>
             </div>
           </div>
@@ -68,7 +68,7 @@
           </div>
           <hr>
           <div class="row ">
-            <div class="col-xl-4 w-100 clearfix" *ngFor="let post of postView">
+            <div class="col-md-6 col-lg-4 w-100 clearfix" *ngFor="let post of postView">
               <app-post [post]="post" class="flex-fill"></app-post>
             </div>
           </div>
