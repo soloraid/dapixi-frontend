@@ -14,10 +14,10 @@
             <input matInput placeholder="نام خانوادگی" formControlName="lastName" class="float-left" optional>
           </mat-form-field>
           <div>
-            <button mat-button matTooltip="بعدی" matStepperNext (click)="changeName()" >
+            <button mat-button matTooltip="بعدی" matStepperNext (click)="changeName()">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext >
+            <button mat-button matTooltip="عدم تغییر" matStepperNext>
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
@@ -30,8 +30,7 @@
         <div class="float-left">
           <mat-form-field>
             <mat-label>ایمیل</mat-label>
-            <input matInput formControlName="email" placeholder="googlee@gmail.com"
-                   required>
+            <input matInput formControlName="email" placeholder="googlee@gmail.com" required>
             <mat-error></mat-error>
           </mat-form-field>
           <div>
@@ -41,7 +40,7 @@
             <button mat-button matTooltip="بعدی" matStepperNext (click)="changeEmail()">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext >
+            <button mat-button matTooltip="عدم تغییر" matStepperNext>
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
@@ -64,7 +63,7 @@
             <button mat-button matTooltip="بعدی" matStepperNext (click)="changePhone()">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext >
+            <button mat-button matTooltip="عدم تغییر" matStepperNext>
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
@@ -80,8 +79,7 @@
             <mat-label>
               <mat-icon>date_range</mat-icon>
             </mat-label>
-            <input matInput formControlName="date" placeholder="Ex.: 2020-1-1"
-                   required>
+            <input matInput formControlName="date" type="date" placeholder="Ex.: 2020-1-1" required>
           </mat-form-field>
           <div>
             <button mat-button matTooltip="قبلی" matStepperPrevious>
@@ -90,7 +88,7 @@
             <button mat-button matTooltip="بعدی" matStepperNext (click)="changeDate()">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext >
+            <button mat-button matTooltip="عدم تغییر" matStepperNext>
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
@@ -102,15 +100,25 @@
         <form [formGroup]="passwordForm">
           <mat-form-field hintLabel="حداقل ۶ کاراکتر">
             <mat-label>رمز جدید</mat-label>
-            <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="password"
-                   required>
+            <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="password" required>
             <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide1">
+              [attr.aria-pressed]="hide1">
               <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>
+          <div>
+            <button mat-button matTooltip="قبلی" matStepperPrevious>
+              <mat-icon>keyboard_arrow_up</mat-icon>
+            </button>
+            <button mat-button matTooltip="بعدی" matStepperNext (click)="changePassword()">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <button mat-button matTooltip="عدم تغییر" matStepperNext>
+              <mat-icon>not_interested</mat-icon>
+            </button>
+          </div>
         </form>
-        <form [formGroup]="passwordForm">
+        <!-- <form [formGroup]="passwordForm">
           <mat-form-field hintLabel="حداقل ۶ کاراکتر">
             <mat-label>تکرار رمز جدید</mat-label>
             <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="passwordRep"
@@ -131,7 +139,7 @@
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
-        </form>
+        </form> -->
       </div>
     </mat-step>
     <mat-step label="پایان" state="doneall">
@@ -146,9 +154,11 @@
           </button>
         </div>
       </div>
-      <div *ngIf="errorMsg"  class="alert alert-danger pt-0 pr-1 ">
-        <a (click)="errorMsg=''" class="text-danger m-0 p-0 error-toggler"><mat-icon>error</mat-icon></a>
-        <p  class="text-danger my-0 pr-2">{{ errorMsg }}</p>
+      <div *ngIf="errorMsg" class="alert alert-danger pt-0 pr-1 ">
+        <a (click)="errorMsg=''" class="text-danger m-0 p-0 error-toggler">
+          <mat-icon>error</mat-icon>
+        </a>
+        <p class="text-danger my-0 pr-2">{{ errorMsg }}</p>
       </div>
     </mat-step>
 
@@ -181,4 +191,3 @@
 
 
 </div>
-

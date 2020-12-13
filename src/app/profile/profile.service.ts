@@ -93,27 +93,27 @@ export class ProfileService {
   }
 
   editProfilePhone(phoneNumber: string) {
-    const param = new HttpParams();
-    param.append('mobile', phoneNumber);
-    return this._http.patch(environment.api + '/user/profile/mobile' , {
-      param
+    let param = new HttpParams();
+    param=param.append('mobile', phoneNumber);
+    return this._http.patch(environment.api + '/user/profile/mobile','', {
+      params:param
     });
 
   }
 
   editProfileDate(birthDate: string) {
-    const param = new HttpParams();
-    param.append('birthDate', birthDate);
-    return this._http.patch(environment.api + '/user/profile/birth-date' , {
-      param
+    let param = new HttpParams();
+    param=param.append('birthDate', birthDate);
+    return this._http.patch(environment.api + '/user/profile/birth-date' , '',{
+      params:param
     });
   }
 
   editProfilePassword(newPassword: string) {
-    const param = new HttpParams();
-    param.append('password', newPassword);
-    return this._http.patch(environment.api + '/user/profile/credential' , {
-      param
+    let param = new HttpParams();
+    param=param.append('password', newPassword);
+    return this._http.patch(environment.api + '/user/profile/credentials' ,'',{
+      params:param
     });
 
   }

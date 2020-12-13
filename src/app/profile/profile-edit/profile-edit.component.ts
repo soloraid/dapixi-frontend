@@ -79,20 +79,33 @@ export class ProfileEditComponent implements OnInit {
       console.log(this.email);
 
 
-      let emaolSubs: Subscription = this.profileService.editProfileEmail(this.email)
+      let emailSubs: Subscription = this.profileService.editProfileEmail(this.email)
         .subscribe(data => {
           console.log(data);
         });
+        this.editSubs.push(emailSubs);
     }
-    // if (this.isChangePhone) {
-    //   this.profileService.editProfilePhone(this.phoneForm.get('phone').value);
-    // }
-    // if (this.isChangeDate) {
-    //   this.profileService.editProfileDate(this.dateForm.get('date').value);
-    // }
-    // if (this.isChangePassword) {
-    //   this.profileService.editProfilePassword(this.passwordForm.get('password').value);
-    // }
+    if (this.isChangePhone) {
+      let phoneSubs=this.profileService.editProfilePhone(this.phone)
+      .subscribe(data=>{
+        console.log(data);
+      });
+      this.editSubs.push(phoneSubs);
+    }
+    if (this.isChangeDate) {
+      let dateSubs=this.profileService.editProfileDate(this.date)
+      .subscribe(data=>{
+        console.log(data);
+      });
+      this.editSubs.push(dateSubs);
+    }
+    if (this.isChangePassword) {
+      let passSubs:Subscription=this.profileService.editProfilePassword(this.password)
+      .subscribe(data=>{
+        console.log(data)
+      });
+      this.editSubs.push(passSubs);
+    }
   }
 
   private dateValidator(formControl: FormControl): { [k: string]: boolean } | null {
