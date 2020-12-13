@@ -14,10 +14,10 @@
             <input matInput placeholder="نام خانوادگی" formControlName="lastName" class="float-left" optional>
           </mat-form-field>
           <div>
-            <button mat-button matTooltip="بعدی" matStepperNext>
+            <button mat-button matTooltip="بعدی" matStepperNext (click)="changeName()" >
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext (click)="changeName()">
+            <button mat-button matTooltip="عدم تغییر" matStepperNext >
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
@@ -38,10 +38,10 @@
             <button mat-button matTooltip="قبلی" matStepperPrevious>
               <mat-icon>keyboard_arrow_up</mat-icon>
             </button>
-            <button mat-button matTooltip="بعدی" matStepperNext>
+            <button mat-button matTooltip="بعدی" matStepperNext (click)="changeEmail()">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext (click)="changeEmail()">
+            <button mat-button matTooltip="عدم تغییر" matStepperNext >
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
@@ -61,10 +61,10 @@
             <button mat-button matTooltip="قبلی" matStepperPrevious>
               <mat-icon>keyboard_arrow_up</mat-icon>
             </button>
-            <button mat-button matTooltip="بعدی" matStepperNext>
+            <button mat-button matTooltip="بعدی" matStepperNext (click)="changePhone()">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext (click)="changePhone()">
+            <button mat-button matTooltip="عدم تغییر" matStepperNext >
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
@@ -87,10 +87,10 @@
             <button mat-button matTooltip="قبلی" matStepperPrevious>
               <mat-icon>keyboard_arrow_up</mat-icon>
             </button>
-            <button mat-button matTooltip="بعدی" matStepperNext>
+            <button mat-button matTooltip="بعدی" matStepperNext (click)="changeDate()">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext (click)="changeDate()">
+            <button mat-button matTooltip="عدم تغییر" matStepperNext >
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
@@ -124,10 +124,10 @@
             <button mat-button matTooltip="قبلی" matStepperPrevious>
               <mat-icon>keyboard_arrow_up</mat-icon>
             </button>
-            <button mat-button matTooltip="بعدی" matStepperNext>
+            <button mat-button matTooltip="بعدی" matStepperNext (click)="changePassword()">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
-            <button mat-button matTooltip="عدم تغییر" matStepperNext (click)="changePassword()">
+            <button mat-button matTooltip="عدم تغییر" matStepperNext >
               <mat-icon>not_interested</mat-icon>
             </button>
           </div>
