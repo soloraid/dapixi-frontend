@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <h4>نتایج جستجو</h4>
   <hr>
-  <section class="container" *ngIf="!isEmptyUsers; else noInfo">
+  <section *ngIf="!isEmptyUsers; else noInfo">
     <div class="row active-with-click">
       <div class="col-lg-4 col-md-5 col-sm-6 col-12" *ngFor="let user of users">
         <article class="material-card Deep-Purple">
