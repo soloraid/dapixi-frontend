@@ -21,15 +21,15 @@ export class ProfileEditComponent implements OnInit {
   passwordForm: FormGroup;
   firstName: string;
   lastname: string;
-  email:string;
-  phone:string;
-  date:string;
-  password:string;
+  email: string;
+  phone: string;
+  date: string;
+  password: string;
   hide1 = true;
   hide2 = true;
   passwordHolder = '';
   errorMsg = '';
-  editSubs: Subscription;
+  editSubs: Subscription[] = [];
   isChangeName = false;
   isChangeEmail = false;
   isChangePhone = false;
@@ -62,15 +62,28 @@ export class ProfileEditComponent implements OnInit {
   }
 
   onSubmit() {
-    // if (this.isChangeName) {
-    //   this.profileService.editProfileFirstLastName(
-    //     this.firstLastNameForm.get('firstName').value,
-    //     this.firstLastNameForm.get('lastName').value
-    //   );
-    // }
-    // if (this.isChangeEmail) {
-    //   this.profileService.editProfileEmail(this.emailForm.get('email').value);
-    // }
+    this.changeName();
+    this.changeEmail();
+    this.changeDate();
+    this.changePassword();
+    this.changePhone();
+    if (this.isChangeName) {
+      console.log('here');
+      let nameSubs: Subscription = this.profileService.editProfileFirstLastName(this.firstName, this.lastname)
+        .subscribe(data => {
+          console.log(data);
+        });
+      this.editSubs.push(nameSubs);
+    }
+    if (this.isChangeEmail) {
+      console.log(this.email);
+
+
+      let emaolSubs: Subscription = this.profileService.editProfileEmail(this.email)
+        .subscribe(data => {
+          console.log(data);
+        });
+    }
     // if (this.isChangePhone) {
     //   this.profileService.editProfilePhone(this.phoneForm.get('phone').value);
     // }
@@ -104,36 +117,37 @@ export class ProfileEditComponent implements OnInit {
   changeName(): void {
     this.firstName = this.firstLastNameForm.get('firstName').value;
     this.lastname = this.firstLastNameForm.get('lastName').value;
-    if(this.lastname && this.firstName){
-      this.isChangeName=true;
+    if (this.lastname && this.firstName) {
+      this.isChangeName = true;
     }
     console.log(this.isChangeName);
     // console.log(this.firstName,'\n',this.lastname);
   }
 
   changeEmail(): void {
-    this.email=this.emailForm.get('email').value;
-    if(this.email){
-      this.isChangeEmail=true;
+    this.email = this.emailForm.get('email').value;
+    console.log(this.email);
+    if (this.email) {
+      this.isChangeEmail = true;
     }
   }
 
   changePhone(): void {
-    this.phone=this.phoneForm.get('phone').value;
-    if(this.phone){
-      this.isChangePhone=true;
+    this.phone = this.phoneForm.get('phone').value;
+    if (this.phone) {
+      this.isChangePhone = true;
     }
   }
   changeDate(): void {
-    this.date=this.dateForm.get('date').value;
-    if(this.date){
-      this.isChangeDate=true;
+    this.date = this.dateForm.get('date').value;
+    if (this.date) {
+      this.isChangeDate = true;
     }
   }
   changePassword(): void {
-    this.password=this.passwordForm.get('password').value;
-    if(this.password){
-      this.isChangePassword=true;
+    this.password = this.passwordForm.get('password').value;
+    if (this.password) {
+      this.isChangePassword = true;
     }
   }
 }

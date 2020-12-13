@@ -70,23 +70,25 @@ export class ProfileService {
   }
 
   editProfileFirstLastName(firstName: string, lastName: string) {
-    const params = new HttpParams();
+    let params = new HttpParams();
+    // console.log(firstName);
     if (firstName !== '') {
-      params.append('firstName', firstName);
+      params=params.append('firstName', firstName);
     }
     if (lastName !== '') {
-      params.append('lastName', lastName);
+      params=params.set('lastName',lastName);
     }
-    return this._http.patch(environment.api + '/user/profile', {
-      params
+    console.log(params);
+    return this._http.patch(environment.api + '/user/profile','',{
+      params:params
     });
   }
 
   editProfileEmail(email: string) {
-    const param = new HttpParams();
-    param.append('email', email);
-    return this._http.patch(environment.api + '/user/profile/email' , {
-      param
+    let param = new HttpParams();
+    param=param.append('email', email);
+    return this._http.patch(environment.api + '/user/profile/email' ,'',{
+      params:param
     });
   }
 
