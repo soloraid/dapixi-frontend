@@ -3,10 +3,11 @@
     font-family: "IRANSansWeb";
 }
 :root{
-    --bg_color:#ededed;
-    --primary_color:#ffa41b;
-    --secondary_color:#ff5151;
-    --text_color:#9818d6;
+    --bg_color:#ffffff;
+    --primary_color:#232a34;
+    --secondary_color:#05a081;
+    --text_color:#1a1a1a;
+    --text_color2: #f1f1f1;
 }
 html,body{
     background-color: var(--bg_color);
