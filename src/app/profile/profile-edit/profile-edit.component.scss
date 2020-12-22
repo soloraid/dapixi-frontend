@@ -1,17 +1,19 @@
 .stepperForm {
+  display: block;
   flex-shrink: 0;
   margin-left:auto;
   margin-right:0;
-  color: var(--bg_color);
+  color: var(--secondary_color);
   border: calc(8px + 0.2vw) solid transparent;
   background-origin: border-box;
   background-clip: content-box, border-box;
   background-size: cover;
   box-sizing: border-box;
-  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
-  border-radius: 5% 10%;
+  box-shadow: 0 0 5px 5px var(--secondary_color);
+  border-radius: 3% 7%;
+  /*
   background-image: linear-gradient(to bottom right,var(--primary_color), var(--secondary_color) , #562b7c);
-
+  */
 }
 
 .container {
@@ -22,6 +24,8 @@
 ::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: var(--secondary_color);
 }
+
+::ng-deep .mat-step-icon-state-edit
 .form-container{
   min-width: 120px;
   max-width: 100vh;
@@ -32,6 +36,47 @@
   margin-right: 10px;
 }
 
-.mat-form-field-empty.mat-form-field-label {
-  color: black;
+
+::ng-deep .mat-form-field {
+  .mat-input-element {
+    color: var(--primary_color);
+  }
+  .mat-form-field-label {
+    color: var(--primary_color);
+  }
+  .mat-form-field-underline {
+    background-color: var(--primary_color);
+  }
+  .mat-form-field-ripple {
+    background-color: var(--primary_color);
+  }
+  .mat-form-field-required-marker {
+    color: var(--primary_color);
+  }
 }
+
+//Focus
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: var(--secondary_color);
+  }
+  .mat-form-field-ripple {
+    background-color: var(--secondary_color);
+  }
+  .mat-form-field-required-marker {
+    color: var(--secondary_color);
+  }
+  .mat-input-element {
+    color: var(--secondary_color);
+  }
+}
+
+::ng-deep .mat-stepper-vertical-line {
+  display: flex;
+  flex-direction: row;
+}
+
+::ng-deep .mat-stepper-vertical{
+  font-family: "IRANSansWeb";
+}
+

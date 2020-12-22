@@ -16,6 +16,7 @@ div[class^="row"],div[class^="col"]{
 }
 form{
     border:4px var(--secondary_color) solid;
+    box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
     border-radius: 10px;
     @media (max-width:370px){
         // position: relative;
@@ -31,7 +32,7 @@ form{
     @media (max-width:370px){
         position: static;
     }
-    
+
 }
 .dropdown-menu{
     width: 100% !important;
@@ -57,7 +58,7 @@ form{
     word-wrap: normal;
     overflow-wrap: break-word;
     max-width: 100% !important;
-    
+
 }
 .selected{
     background-color: green;
@@ -69,7 +70,7 @@ form{
     max-width: 100%;
    ul{
        max-width: 100%;
-    
+
    }
 }
 ul{
