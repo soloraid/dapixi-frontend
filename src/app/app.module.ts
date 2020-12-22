@@ -53,6 +53,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 
 
@@ -109,7 +110,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatCardModule,
     MatTableModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    NgxMasonryModule
   ],
   providers: [
     {
