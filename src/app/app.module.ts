@@ -57,6 +57,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import { MainComponent } from './main/main.component';
 import { FollowPostsComponent } from './follow-posts/follow-posts.component';
 import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
+import { HotPostsComponent } from './hot-posts/hot-posts.component';
 
 
 
@@ -91,6 +92,7 @@ import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.co
     MainComponent,
     FollowPostsComponent,
     RecomendedPostsComponent,
+    HotPostsComponent,
   ],
   imports: [
     BrowserModule,

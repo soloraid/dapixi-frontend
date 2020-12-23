@@ -1,0 +1,21 @@
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+    <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
+</div>
+<ng-template #noInfo>
+    <br>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
+    </div>
+</ng-template>
+<div class="ui-main-posts" *ngIf="isExist; else noInfo">
+    <div class="d-flex justify-content-between">
+        <a [routerLink]='["/more","followed"]' class="more-link">...مشاهده بیش‌تر</a>
+        <h3>پست های دنبال شوندگان</h3>
+    </div>
+    <hr>
+    <ngx-masonry [options]="{horizontalOrder:true}" [ordered]="true">
+        <div ngxMasonryItem class="masonary-item" *ngFor="let post of hotPosts">
+            <app-post [post]="post"></app-post>
+        </div>
+    </ngx-masonry>
+</div>

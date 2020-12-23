@@ -23,6 +23,7 @@ import {CommentComponent} from './comment/comment.component';
 import { MainComponent } from './main/main.component';
 import { FollowPostsComponent } from './follow-posts/follow-posts.component';
 import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
+import { HotPostsComponent } from './hot-posts/hot-posts.component';
 
 
 
@@ -48,6 +49,10 @@ const routes: Routes = [
       {
         path: 'recommend',
         component:RecomendedPostsComponent
+      },
+      {
+        path:'hot',
+        component:HotPostsComponent
       }
     ]
   },
