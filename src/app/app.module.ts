@@ -54,6 +54,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
 import { NgxMasonryModule } from 'ngx-masonry';
+import { MainComponent } from './main/main.component';
 
 
 
@@ -85,6 +86,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
     ConfirmComponent,
     InfoComponent,
     CommentComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

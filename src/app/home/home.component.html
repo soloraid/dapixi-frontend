@@ -1,45 +1,33 @@
-<div class="container-fluid">
-  <div *ngIf="loaderService.isLoading | async" class="loader-container">
-    <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
-  </div>
-  <div class="mt-2 d-flex flex-column">
-    <br>
-    <ng-template #noInfo>
+<!-- <ng-template #noInfo>
       <br>
       <div class="alert alert-danger" role="alert">
         <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
-        <!--<p>.دوباره تلاش کنید</p>-->
       </div>
-    </ng-template>
-    <div class="ui-main-posts" *ngIf="isFollowed; else noInfo">
+    </ng-template> -->
+<!-- <div class="ui-main-posts" *ngIf="isFollowed; else noInfo">
       <div class="d-flex justify-content-between">
         <a [routerLink]='["/more","followed"]' class="more-link">...مشاهده بیش‌تر</a>
         <h3>پست های دنبال شوندگان</h3>
       </div>
       <hr>
-      <!-- <div class="row ">
-        <div class="col-md-6 col-lg-4 w-100 clearfix" *ngFor="let post of followedPosts">
-          <app-post [post]="post" class="flex-fill"></app-post>
-        </div>
-      </div> -->
       <ngx-masonry [options]="{horizontalOrder:true}" [ordered]="true">
         <div ngxMasonryItem class="masonary-item" *ngFor="let post of followedPosts">
           <app-post [post]="post"></app-post>
         </div>
       </ngx-masonry>
-    </div>
-    <div class="ui-main-posts" *ngIf="!isEmpty; else noInfo">
-      <div class="d-flex justify-content-between">
-        <a [routerLink]='["/more","latest"]' class="more-link">...مشاهده بیش‌تر</a>
-        <h3>آخرین پست‌ها</h3>
-      </div>
-      <hr>
-      <ngx-masonry [options]="{horizontalOrder:true}" [ordered]="true">
-        <div ngxMasonryItem class="masonary-item" *ngFor="let post of postView">
-          <app-post [post]="post"></app-post>
-        </div>
-      </ngx-masonry>
-    </div>
+    </div> -->
+    <div *ngIf="loaderService.isLoading | async" class="loader-container">
+      <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
   </div>
-
+<div class="ui-main-posts" *ngIf="!isEmpty">
+  <div class="d-flex justify-content-between">
+    <a [routerLink]='["/more","latest"]' class="more-link">...مشاهده بیش‌تر</a>
+    <h3>آخرین پست‌ها</h3>
+  </div>
+  <hr>
+  <ngx-masonry [options]="{horizontalOrder:true}" [ordered]="true">
+    <div ngxMasonryItem class="masonary-item" *ngFor="let post of postView">
+      <app-post [post]="post"></app-post>
+    </div>
+  </ngx-masonry>
 </div>

@@ -20,19 +20,31 @@ import { MoreComponent } from './more/more.component';
 import { ConfirmComponent } from './auth/confirm/confirm.component';
 import { InfoComponent } from './info/info.component';
 import {CommentComponent} from './comment/comment.component';
+import { MainComponent } from './main/main.component';
 
 
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'home'
+    // pathMatch: 'full',
+    component:MainComponent,
+    children:[
+      {
+        path:'',
+        pathMatch: 'full',
+        redirectTo: 'home'
+      },
+      {
+        path: 'home',
+        component: HomeComponent
+      }
+    ]
   },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
+  // {
+  //   path: 'home',
+  //   component: HomeComponent,
+  // },
   {
     path: 'comment',
     component: CommentComponent,
