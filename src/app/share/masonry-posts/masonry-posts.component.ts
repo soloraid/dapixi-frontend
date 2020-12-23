@@ -9,13 +9,24 @@ import { Post } from '../post/post.module';
   styleUrls: ['./masonry-posts.component.scss']
 })
 export class MasonryPostsComponent implements OnInit {
-  @Input() posts:Post[]=[];
-  isExist:boolean;
-  @Input() mode:string;
-  subs:Subscription
-  constructor(private _postService:PostService) { }
+  @Input() posts: Post[] = [];
+  isExist: boolean;
+  @Input() mode: string;
+  subs: Subscription;
+  value: number = 9;
+  page: number = 1;
+  constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
   }
-
+  showMore() {
+    this.subs = this._postService[this.mode](this.value,this.page).subscribe((posts:Post[])=>{
+      if(posts.length>0){
+        posts.forEach((post:Post)=>{
+          this.posts.push(post);
+        })
+      }
+    });
+    this.page+=1;
+  }
 }
