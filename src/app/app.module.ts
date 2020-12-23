@@ -58,6 +58,7 @@ import { MainComponent } from './main/main.component';
 import { FollowPostsComponent } from './follow-posts/follow-posts.component';
 import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
 import { HotPostsComponent } from './hot-posts/hot-posts.component';
+import { MasonryPostsComponent } from './share/masonry-posts/masonry-posts.component';
 
 
 
@@ -93,6 +94,7 @@ import { HotPostsComponent } from './hot-posts/hot-posts.component';
     FollowPostsComponent,
     RecomendedPostsComponent,
     HotPostsComponent,
+    MasonryPostsComponent,
   ],
   imports: [
     BrowserModule,

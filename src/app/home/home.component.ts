@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   constructor(private _authService: AuthService,
-              private postService: PostService,
+              public postService: PostService,
               public loaderService: LoaderService) {
   }
 

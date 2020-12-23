@@ -13,9 +13,10 @@
         <h3>پست های دنبال شوندگان</h3>
     </div>
     <hr>
-    <ngx-masonry [options]="{horizontalOrder:true}" [ordered]="true">
+    <!-- <ngx-masonry [options]="{horizontalOrder:true}" [ordered]="true">
         <div ngxMasonryItem class="masonary-item" *ngFor="let post of followedPosts">
             <app-post [post]="post"></app-post>
         </div>
-    </ngx-masonry>
+    </ngx-masonry> -->
+    <app-masonry-posts [posts]="followedPosts"></app-masonry-posts>
 </div>
