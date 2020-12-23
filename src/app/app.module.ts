@@ -56,6 +56,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { MainComponent } from './main/main.component';
 import { FollowPostsComponent } from './follow-posts/follow-posts.component';
+import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
 
 
 
@@ -89,6 +90,7 @@ import { FollowPostsComponent } from './follow-posts/follow-posts.component';
     CommentComponent,
     MainComponent,
     FollowPostsComponent,
+    RecomendedPostsComponent,
   ],
   imports: [
     BrowserModule,
