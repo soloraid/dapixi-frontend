@@ -55,6 +55,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { MainComponent } from './main/main.component';
+import { FollowPostsComponent } from './follow-posts/follow-posts.component';
 
 
 
@@ -87,6 +88,7 @@ import { MainComponent } from './main/main.component';
     InfoComponent,
     CommentComponent,
     MainComponent,
+    FollowPostsComponent,
   ],
   imports: [
     BrowserModule,

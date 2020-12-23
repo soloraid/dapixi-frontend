@@ -21,6 +21,7 @@ import { ConfirmComponent } from './auth/confirm/confirm.component';
 import { InfoComponent } from './info/info.component';
 import {CommentComponent} from './comment/comment.component';
 import { MainComponent } from './main/main.component';
+import { FollowPostsComponent } from './follow-posts/follow-posts.component';
 
 
 
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent
+      },
+      {
+        path: 'follow',
+        component:FollowPostsComponent
       }
     ]
   },
