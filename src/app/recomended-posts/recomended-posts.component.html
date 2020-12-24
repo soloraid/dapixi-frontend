@@ -10,7 +10,7 @@
 <div class="ui-main-posts" *ngIf="hasRecommended; else noInfo">
     <div>
         <!-- <a [routerLink]='["/more","followed"]' class="more-link">...مشاهده بیش‌تر</a> -->
-        <h3>پست های دنبال شوندگان</h3>
+        <h3>پست های پیشنهادی</h3>
     </div>
     <hr>
     <app-masonry-posts [posts]="recommendedPosts" [mode]="'getRecommenderPosts'"></app-masonry-posts>

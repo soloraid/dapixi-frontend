@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoaderService } from '../share/loader/loader.service';
 import { PostService } from '../share/post.service';
@@ -9,7 +9,7 @@ import { Post } from '../share/post/post.module';
   templateUrl: './hot-posts.component.html',
   styleUrls: ['./hot-posts.component.scss']
 })
-export class HotPostsComponent implements OnInit {
+export class HotPostsComponent implements OnInit,OnDestroy {
   hotPosts:Post[]=[];
   isExist:boolean=false;
   hotPostSubs:Subscription;
@@ -27,6 +27,9 @@ export class HotPostsComponent implements OnInit {
       }
       this.firstLaod=false;
     })
+  }
+  ngOnDestroy(){
+    this.hotPostSubs && this.hotPostSubs.unsubscribe();
   }
 
 }
