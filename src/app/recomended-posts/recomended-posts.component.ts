@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoaderService } from '../share/loader/loader.service';
 import { PostService } from '../share/post.service';
@@ -9,7 +9,7 @@ import { Post } from '../share/post/post.module';
   templateUrl: './recomended-posts.component.html',
   styleUrls: ['./recomended-posts.component.scss']
 })
-export class RecomendedPostsComponent implements OnInit {
+export class RecomendedPostsComponent implements OnInit,OnDestroy {
   recommendedPosts: Post[] = [];
   hasRecommended: boolean = false;
   recomendSubs: Subscription;
@@ -27,6 +27,9 @@ export class RecomendedPostsComponent implements OnInit {
       }
       this.firstLoad=false;
     })
+  }
+  ngOnDestroy(){
+    this.recomendSubs && this.recomendSubs.unsubscribe();
   }
 
 }
