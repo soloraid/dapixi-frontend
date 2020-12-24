@@ -66,7 +66,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
       if (this.username) {
         this.loginUser = false;
         if (this._authService.authState.value && this.username === this._authService.authState.value.username) {
-          console.log(this._authService.authState.value.username);
+          // console.log(this._authService.authState.value.username);
           this._router.navigate(['/user/profile']);
         }
       }
@@ -114,14 +114,14 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
 
       }
     });
-    console.log(this.userPosts);
+    // console.log(this.userPosts);
     // this.getPosts();
 
   }
 
   private getPosts() {
     this.postsSubs = this._postService.getPostsByUsername(this.userView.username,9).subscribe((posts: Post[]) => {
-      console.log(posts)
+      // console.log(posts)
       this.userPosts = posts;
       // this.userPosts.reverse();
       this.postsPresent=true;
@@ -130,7 +130,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   }
 
   private getCount(username: string = ''): void {
-    console.log(username);
+    // console.log(username);
     this.followsunbs = this._profile.getFollowers(username)
       .pipe(
         map((followersCount: number) => {
