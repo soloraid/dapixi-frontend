@@ -44,15 +44,17 @@ const routes: Routes = [
       },
       {
         path: 'follow',
-        component:FollowPostsComponent
+        component:FollowPostsComponent,
+        canActivate:[AuthGuard]
       },
       {
         path: 'recommend',
-        component:RecomendedPostsComponent
+        component:RecomendedPostsComponent,
+        canActivate:[AuthGuard]
       },
       {
         path:'hot',
-        component:HotPostsComponent
+        component:HotPostsComponent,
       }
     ]
   },
