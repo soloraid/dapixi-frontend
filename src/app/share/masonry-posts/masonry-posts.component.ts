@@ -11,6 +11,7 @@ import { Post } from '../post/post.module';
 export class MasonryPostsComponent implements OnInit {
   @Input() posts: Post[] = [];
   @Input() mode: string;
+  @Input() params:string;
   subs: Subscription;
   loadingImages:boolean=true;
   hasMore:boolean;
@@ -20,10 +21,18 @@ export class MasonryPostsComponent implements OnInit {
   constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
+    console.log(this.posts);
     this.setHasMore();
   }
   showMore() {
-    this.subs = this._postService[this.mode](this.value,this.page).subscribe((posts:Post[])=>{
+    let getObservable:Observable<any>;
+    console.log(this.mode);
+    if(this.params){
+      getObservable=this._postService[this.mode](this.params,this.value,this.page);
+    }else{
+      getObservable=this._postService[this.mode](this.value,this.page);
+    }
+    this.subs = getObservable.subscribe((posts:Post[])=>{
       this.loadingImages=true;
       if(posts.length>0){
         posts.forEach((post:Post)=>{
@@ -40,6 +49,7 @@ export class MasonryPostsComponent implements OnInit {
     this.loadingImages=false;
   }
   private setHasMore(posts:Post[]=this.posts){
+    console.log(posts.length)
     if(posts.length>=this.value){
       this.hasMore=true;
     }

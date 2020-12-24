@@ -29,6 +29,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   followers: number;
   following: number;
   isFollowed: boolean;
+  postsPresent:boolean=false;
   isAuth = false;
   selectedFile: File = null;
   authSubs: Subscription;
@@ -113,15 +114,17 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
 
       }
     });
+    console.log(this.userPosts);
     // this.getPosts();
 
   }
 
   private getPosts() {
-    this.postsSubs = this._postService.getPostsByUsername(this.userView.username).subscribe((posts: Post[]) => {
-      // console.log(posts)
+    this.postsSubs = this._postService.getPostsByUsername(this.userView.username,9).subscribe((posts: Post[]) => {
+      console.log(posts)
       this.userPosts = posts;
-      this.userPosts.reverse();
+      // this.userPosts.reverse();
+      this.postsPresent=true;
       // console.log(posts);
     });
   }

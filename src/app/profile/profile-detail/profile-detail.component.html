@@ -90,7 +90,8 @@
         </div>
     </div>
     <hr>
-    <div class="row">
+    <app-masonry-posts *ngIf="isPresent && postsPresent" [posts]="userPosts" [mode]="'getPostsByUsername'" [params]="userView.username"></app-masonry-posts>
+    <!-- <div class="row">
         <div class="col-md-6 col-lg-4" *ngFor="let post of userPosts |
         paginate: { id: 'pagination1', itemsPerPage: 9, currentPage: p }">
             <app-post [post]="post"></app-post>
@@ -100,5 +101,5 @@
         <pagination-controls id="pagination1" previousLabel="قبلی" nextLabel="بعدی" responsive="true" [autoHide]="true"
             (pageChange)="p = $event">
         </pagination-controls>
-    </div>
+    </div> -->
 </div>
