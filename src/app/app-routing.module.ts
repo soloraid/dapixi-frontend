@@ -1,42 +1,43 @@
-import { registerLocaleData } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AuthComponent } from './auth/auth.component';
-import { EnterComponent } from './auth/enter/enter.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { HomeComponent } from './home/home.component';
-import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.component';
-import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
-import { ProfileComponent } from './profile/profile.component';
-import { UploadPostComponent } from './upload-post/upload-post.component';
-import { PostDetailComponent } from './post-detail/post-detail.component';
-import { SearchResultComponent } from './search/search-result/search-result.component';
-import { AuthGuard } from './share/auth.guard';
-import { ReAuthGuard } from './share/re-auth.guard';
-import { ResetComponent } from './auth/reset/reset.component';
-import { Error404Component } from './error404/error404.component';
-import { Error500Component } from './error500/error500.component';
-import { MoreComponent } from './more/more.component';
-import { ConfirmComponent } from './auth/confirm/confirm.component';
-import { InfoComponent } from './info/info.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthComponent} from './auth/auth.component';
+import {EnterComponent} from './auth/enter/enter.component';
+import {RegisterComponent} from './auth/register/register.component';
+import {HomeComponent} from './home/home.component';
+import {ProfileDetailComponent} from './profile/profile-detail/profile-detail.component';
+import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
+import {ProfileComponent} from './profile/profile.component';
+import {UploadPostComponent} from './upload-post/upload-post.component';
+import {PostDetailComponent} from './post-detail/post-detail.component';
+import {SearchResultComponent} from './search/search-result/search-result.component';
+import {AuthGuard} from './share/auth.guard';
+import {ReAuthGuard} from './share/re-auth.guard';
+import {ResetComponent} from './auth/reset/reset.component';
+import {Error404Component} from './error404/error404.component';
+import {Error500Component} from './error500/error500.component';
+import {MoreComponent} from './more/more.component';
+import {ConfirmComponent} from './auth/confirm/confirm.component';
+import {InfoComponent} from './info/info.component';
 import {CommentComponent} from './comment/comment.component';
-import { MainComponent } from './main/main.component';
-import { FollowPostsComponent } from './follow-posts/follow-posts.component';
-import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
-import { HotPostsComponent } from './hot-posts/hot-posts.component';
-
+import {MainComponent} from './main/main.component';
+import {FollowPostsComponent} from './follow-posts/follow-posts.component';
+import {RecomendedPostsComponent} from './recomended-posts/recomended-posts.component';
+import {HotPostsComponent} from './hot-posts/hot-posts.component';
+import {ThirdPartyOAuthSSOService} from './third-party-oauth-sso.service';
 
 
 const routes: Routes = [
   {
     path: '',
     // pathMatch: 'full',
-    component:MainComponent,
-    children:[
+    component: MainComponent,
+    resolve: {tokens: ThirdPartyOAuthSSOService},
+    children: [
       {
-        path:'',
+        path: '',
         pathMatch: 'full',
-        redirectTo: 'home'
+        component: MainComponent
+        // redirectTo: 'home'
       },
       {
         path: 'home',
@@ -44,17 +45,17 @@ const routes: Routes = [
       },
       {
         path: 'follow',
-        component:FollowPostsComponent,
-        canActivate:[AuthGuard]
+        component: FollowPostsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'recommend',
-        component:RecomendedPostsComponent,
-        canActivate:[AuthGuard]
+        component: RecomendedPostsComponent,
+        canActivate: [AuthGuard]
       },
       {
-        path:'hot',
-        component:HotPostsComponent,
+        path: 'hot',
+        component: HotPostsComponent,
       }
     ]
   },
@@ -71,8 +72,8 @@ const routes: Routes = [
     component: MoreComponent
   },
   {
-    path:'info',
-    component:InfoComponent
+    path: 'info',
+    component: InfoComponent
   },
   {
     path: 'post-detail/:id',
@@ -104,9 +105,9 @@ const routes: Routes = [
       {
         path: 'reset',
         component: ResetComponent
-      },{
-        path:'confirm',
-        component:ConfirmComponent
+      }, {
+        path: 'confirm',
+        component: ConfirmComponent
       }
     ]
   },
