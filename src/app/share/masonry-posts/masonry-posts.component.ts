@@ -10,9 +10,9 @@ import { Post } from '../post/post.module';
 })
 export class MasonryPostsComponent implements OnInit {
   @Input() posts: Post[] = [];
-  isExist: boolean;
   @Input() mode: string;
   subs: Subscription;
+  loadingImages:boolean=true;
   value: number = 9;
   page: number = 1;
   constructor(private _postService: PostService) { }
@@ -21,6 +21,7 @@ export class MasonryPostsComponent implements OnInit {
   }
   showMore() {
     this.subs = this._postService[this.mode](this.value,this.page).subscribe((posts:Post[])=>{
+      this.loadingImages=true;
       if(posts.length>0){
         posts.forEach((post:Post)=>{
           this.posts.push(post);
@@ -28,5 +29,8 @@ export class MasonryPostsComponent implements OnInit {
       }
     });
     this.page+=1;
+  }
+  onItemsLoaded(){
+    this.loadingImages=false;
   }
 }

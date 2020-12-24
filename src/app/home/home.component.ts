@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isFollowed = false;
   isHighRated = false;
   isRecommender = false;
+  firstLoad:boolean=true;
   p = 1;
 
 
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.postView.push(posts[index]);
       }
       this.isEmpty = false;
+      this.firstLoad=false;
     });
     if (this.isAuth) {
       this.postService.getFollowedPost(9).subscribe(posts => {

@@ -12,6 +12,7 @@ import { Post } from '../share/post/post.module';
 export class FollowPostsComponent implements OnInit,OnDestroy {
   followedPosts: Post[] = [];
   hasFollow:boolean;
+  firstLoad:boolean=true;
   followPostSubs:Subscription;
   constructor(
     public loaderService:LoaderService,
@@ -24,6 +25,7 @@ export class FollowPostsComponent implements OnInit,OnDestroy {
         this.followedPosts=posts;
         this.hasFollow=true;
       }
+      this.firstLoad=false;
     })
   }
   ngOnDestroy(){

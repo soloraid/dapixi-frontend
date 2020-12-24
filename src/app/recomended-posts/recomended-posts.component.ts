@@ -12,7 +12,8 @@ import { Post } from '../share/post/post.module';
 export class RecomendedPostsComponent implements OnInit {
   recommendedPosts: Post[] = [];
   hasRecommended: boolean = false;
-  recomendSubs: Subscription
+  recomendSubs: Subscription;
+  firstLoad:boolean=true;
   constructor(
     public loaderService: LoaderService,
     private _postService: PostService
@@ -24,6 +25,7 @@ export class RecomendedPostsComponent implements OnInit {
         this.recommendedPosts = posts;
         this.hasRecommended=true;
       }
+      this.firstLoad=false;
     })
   }
 

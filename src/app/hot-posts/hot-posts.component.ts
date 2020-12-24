@@ -13,6 +13,7 @@ export class HotPostsComponent implements OnInit {
   hotPosts:Post[]=[];
   isExist:boolean=false;
   hotPostSubs:Subscription;
+  firstLaod:boolean=true;
   constructor(
     public loaderService:LoaderService,
     private _postService:PostService
@@ -24,6 +25,7 @@ export class HotPostsComponent implements OnInit {
         this.hotPosts=posts;
         this.isExist=true;
       }
+      this.firstLaod=false;
     })
   }
 
