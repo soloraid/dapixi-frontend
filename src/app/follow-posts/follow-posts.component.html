@@ -1,0 +1,17 @@
+<div *ngIf="(loaderService.isLoading | async) && firstLoad" class="loader-container">
+    <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
+</div>
+<ng-template #noInfo>
+    <br>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
+    </div>
+</ng-template>
+<div class="ui-main-posts" *ngIf="hasFollow; else noInfo">
+    <div>
+        <!-- <a [routerLink]='["/more","followed"]' class="more-link">...مشاهده بیش‌تر</a> -->
+        <h3>پست های دنبال شوندگان</h3>
+    </div>
+    <hr>
+    <app-masonry-posts [posts]="followedPosts" [mode]="'getFollowedPost'"></app-masonry-posts>
+</div>

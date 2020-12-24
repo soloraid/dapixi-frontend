@@ -15,18 +15,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   authSubsc: Subscription;
   postView: Post[] = [];
-  postRecommender: Post[] = [];
-  followedPosts: Post[] = [];
-  highRatedPosts: Post[] = [];
   isEmpty = true;
-  isFollowed = false;
-  isHighRated = false;
-  isRecommender = false;
-  p = 1;
+  firstLoad:boolean=true;
 
 
   constructor(private _authService: AuthService,
-              private postService: PostService,
+              public postService: PostService,
               public loaderService: LoaderService) {
   }
 
@@ -36,51 +30,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.postService.getLatestPost(9).subscribe(posts => {
       // console.log(posts);
-      // tslint:disable-next-line:forin
       for (const index in posts) {
         this.postView.push(posts[index]);
       }
       this.isEmpty = false;
+      this.firstLoad=false;
     });
-    if (this.isAuth) {
-      this.postService.getFollowedPost(9).subscribe(posts => {
-        // tslint:disable-next-line:forin
-        for (const index in posts) {
-          this.followedPosts.push(posts[index]);
-        }
-        if (this.followedPosts.length > 0) {
-          this.isFollowed = true;
-        } else {
-          this.isFollowed = false;
-        }
-      });
-
-      this.postService.getRecommenderPosts(3).subscribe(posts => {
-        // tslint:disable-next-line:forin
-        for (const index in posts) {
-          this.postRecommender.push(posts[index]);
-        }
-        console.log(this.postRecommender);
-        if (this.postRecommender.length > 0) {
-          this.isRecommender = true;
-        } else {
-          this.isRecommender = false;
-        }
-      });
-    }
-
-    this.postService.getHighRatedPost(9).subscribe(posts => {
-      // tslint:disable-next-line:forin
-      for (const index in posts) {
-        this.highRatedPosts.push(posts[index]);
-      }
-      if (this.highRatedPosts.length > 0) {
-        this.isHighRated = true;
-      } else {
-        this.isHighRated = false;
-      }
-    });
-
   }
 
   ngOnDestroy() {

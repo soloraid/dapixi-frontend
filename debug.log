@@ -111,3 +111,4 @@
 [1124/230047.538:ERROR:exception_snapshot_win.cc(99)] thread ID 10380 not found in process
 [1124/230047.538:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
 [1124/230047.538:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1224/120405.196:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

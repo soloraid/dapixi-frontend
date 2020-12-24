@@ -53,6 +53,12 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
+import { NgxMasonryModule } from 'ngx-masonry';
+import { MainComponent } from './main/main.component';
+import { FollowPostsComponent } from './follow-posts/follow-posts.component';
+import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
+import { HotPostsComponent } from './hot-posts/hot-posts.component';
+import { MasonryPostsComponent } from './share/masonry-posts/masonry-posts.component';
 
 
 
@@ -84,6 +90,11 @@ import {MatStepperModule} from '@angular/material/stepper';
     ConfirmComponent,
     InfoComponent,
     CommentComponent,
+    MainComponent,
+    FollowPostsComponent,
+    RecomendedPostsComponent,
+    HotPostsComponent,
+    MasonryPostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,7 +120,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatCardModule,
     MatTableModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    NgxMasonryModule
   ],
   providers: [
     {
