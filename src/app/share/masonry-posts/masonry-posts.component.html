@@ -6,7 +6,7 @@
 <div *ngIf="loadingImages" class="d-flex justify-content-center">
     <mat-spinner diameter="40"></mat-spinner>
 </div>
-<div class="row d-flex justify-content-center">
+<div *ngIf="hasMore" class="row d-flex justify-content-center">
     <div class="col-8 d-flex flex-column justify-content-center">
         <button class="w-100 outline-btn" (click)="showMore()">...بیش‌تر</button>
         <!-- <p *ngIf="end" class="text-danger text-center" ><small>پست بیش‌تری وجود ندارد</small></p> -->

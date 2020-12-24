@@ -13,11 +13,13 @@ export class MasonryPostsComponent implements OnInit {
   @Input() mode: string;
   subs: Subscription;
   loadingImages:boolean=true;
+  hasMore:boolean;
   value: number = 9;
   page: number = 1;
   constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
+    this.setHasMore();
   }
   showMore() {
     this.subs = this._postService[this.mode](this.value,this.page).subscribe((posts:Post[])=>{
@@ -32,5 +34,10 @@ export class MasonryPostsComponent implements OnInit {
   }
   onItemsLoaded(){
     this.loadingImages=false;
+  }
+  private setHasMore(posts:Post[]=this.posts){
+    if(posts.length>=this.value){
+      this.hasMore=true;
+    }
   }
 }
