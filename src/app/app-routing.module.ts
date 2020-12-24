@@ -20,19 +20,48 @@ import { MoreComponent } from './more/more.component';
 import { ConfirmComponent } from './auth/confirm/confirm.component';
 import { InfoComponent } from './info/info.component';
 import {CommentComponent} from './comment/comment.component';
+import { MainComponent } from './main/main.component';
+import { FollowPostsComponent } from './follow-posts/follow-posts.component';
+import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
+import { HotPostsComponent } from './hot-posts/hot-posts.component';
 
 
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'home'
+    // pathMatch: 'full',
+    component:MainComponent,
+    children:[
+      {
+        path:'',
+        pathMatch: 'full',
+        redirectTo: 'home'
+      },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'follow',
+        component:FollowPostsComponent,
+        canActivate:[AuthGuard]
+      },
+      {
+        path: 'recommend',
+        component:RecomendedPostsComponent,
+        canActivate:[AuthGuard]
+      },
+      {
+        path:'hot',
+        component:HotPostsComponent,
+      }
+    ]
   },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
+  // {
+  //   path: 'home',
+  //   component: HomeComponent,
+  // },
   {
     path: 'comment',
     component: CommentComponent,

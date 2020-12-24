@@ -1,0 +1,12 @@
+.masonary-item{
+    width: 33.33%;
+    @media screen and (max-width:992px){
+        width: 50%;
+    }
+    @media screen and (max-width:768px){
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+}
