@@ -24,6 +24,9 @@ export class PostComponent implements OnInit {
       this.postUrl = environment.api + '/photo' + this.post.imageUrl;
       this.isEmpty = false;
     }
+    if(this.post.title.length>20){
+      this.post.title=this.post.title.slice(0,20).concat('...')
+    }
 
   }
 

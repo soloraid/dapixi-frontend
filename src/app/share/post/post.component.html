@@ -1,8 +1,15 @@
 <div class="d-flex justify-content mb-2">
-  <div class="p-2" *ngIf="!isEmpty">
+  <div class="p-2 " *ngIf="!isEmpty">
     <a (click)="navigateToDetail()">
-      <p class="text-justify float-left" role="button">{{ post.title }}</p>
+      <!-- <p class="text-justify float-left" role="button">{{ post.title }}</p> -->
       <img src="{{ postUrl }}" alt="post_author" class="w-100 uiPost">
+      <div class="overlay d-flex justify-content-between  px-3">
+        <div>
+          <i class="fa fa-star-o pr-2" aria-hidden="true"></i>
+          <small>{{post.averageRating | number:'1.1-3'}}</small>
+        </div>
+        <p>{{ post.title }}</p>
+      </div>
     </a>
   </div>
 </div>
