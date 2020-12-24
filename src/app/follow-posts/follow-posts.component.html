@@ -8,15 +8,10 @@
     </div>
 </ng-template>
 <div class="ui-main-posts" *ngIf="hasFollow; else noInfo">
-    <div class="d-flex justify-content-between">
-        <a [routerLink]='["/more","followed"]' class="more-link">...مشاهده بیش‌تر</a>
+    <div>
+        <!-- <a [routerLink]='["/more","followed"]' class="more-link">...مشاهده بیش‌تر</a> -->
         <h3>پست های دنبال شوندگان</h3>
     </div>
     <hr>
-    <!-- <ngx-masonry [options]="{horizontalOrder:true}" [ordered]="true">
-        <div ngxMasonryItem class="masonary-item" *ngFor="let post of followedPosts">
-            <app-post [post]="post"></app-post>
-        </div>
-    </ngx-masonry> -->
     <app-masonry-posts [posts]="followedPosts" [mode]="'getFollowedPost'"></app-masonry-posts>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { PostService } from '../post.service';
 import { Post } from '../post/post.module';
@@ -8,7 +8,7 @@ import { Post } from '../post/post.module';
   templateUrl: './masonry-posts.component.html',
   styleUrls: ['./masonry-posts.component.scss']
 })
-export class MasonryPostsComponent implements OnInit {
+export class MasonryPostsComponent implements OnInit,OnDestroy {
   @Input() posts: Post[] = [];
   @Input() mode: string;
   @Input() params:string;
@@ -21,12 +21,12 @@ export class MasonryPostsComponent implements OnInit {
   constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
-    console.log(this.posts);
+    // console.log(this.posts);
     this.setHasMore();
   }
   showMore() {
     let getObservable:Observable<any>;
-    console.log(this.mode);
+    // console.log(this.mode);
     if(this.params){
       getObservable=this._postService[this.mode](this.params,this.value,this.page);
     }else{
@@ -49,9 +49,12 @@ export class MasonryPostsComponent implements OnInit {
     this.loadingImages=false;
   }
   private setHasMore(posts:Post[]=this.posts){
-    console.log(posts.length)
+    // console.log(posts.length)
     if(posts.length>=this.value){
       this.hasMore=true;
     }
+  }
+  ngOnDestroy(){
+    this.subs && this.subs.unsubscribe();
   }
 }
