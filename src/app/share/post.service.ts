@@ -77,9 +77,11 @@ export class PostService {
 
   }
 
-  getPostsByUsername(username:string){
+  getPostsByUsername(username:string,number: number = 50, page: number = 0){
     let params=new HttpParams();
     params=params.append('user',username);
+    params = params.append('size', String(number));
+    params = params.append('page', String(page));
     return this.http.get(environment.api+"/photo/posts/user",{
       params:params
     })

@@ -24,6 +24,16 @@ export class PostComponent implements OnInit {
       this.postUrl = environment.api + '/photo' + this.post.imageUrl;
       this.isEmpty = false;
     }
+    if(this.post.title.length>20){
+      const english:RegExp=new RegExp('.*[a-zA-Z0-9].*');
+      // console.log(this.post.title,english.test(this.post.title));
+      if(english.test(this.post.title)){
+        this.post.title=this.post.title.slice(0,20).concat('...')
+      }else{
+        this.post.title='...'.concat(this.post.title.slice(0,20));
+
+      }
+    }
 
   }
 

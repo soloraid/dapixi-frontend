@@ -1,80 +1,11 @@
-<div class="container-fluid">
-  <div *ngIf="loaderService.isLoading | async" class="loader-container">
-    <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
-  </div>
-  <div class="mt-2 d-flex flex-column">
-    <!-- <h4>صفحه اصلی</h4> -->
-    <br>
-    <ng-template #noInfo>
-      <br>
-      <div class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
-        <!--<p>.دوباره تلاش کنید</p>-->
-      </div>
-    </ng-template>
-    <mat-tab-group mat-align-tabs="end"
-                   class="mat-elevation-z0 mat-primary"
-                   [selectedIndex]="4"
-                   backgroundColor="warn">
-      <mat-tab label="پست های با امتیاز بالا" >
-        <div class="ui-main-posts" *ngIf="isHighRated; else noInfo" >
-          <div class="d-flex justify-content-between">
-            <a [routerLink]='["/more","highrated"]' class="more-link">...مشاهده بیش‌تر</a>
-            <!--<h3>پست های با امتیاز بالا</h3>-->
-          </div>
-          <hr>
-          <div class="row ">
-            <div class="col-md-6 col-lg-4 w-100 clearfix" *ngFor="let post of highRatedPosts">
-              <app-post [post]="post" class="flex-fill"></app-post>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="پست های دنبال شوندگان" *ngIf="isAuth">
-        <div class="ui-main-posts" *ngIf="isFollowed; else noInfo" >
-          <div class="d-flex justify-content-between">
-            <a [routerLink]='["/more","followed"]' class="more-link">...مشاهده بیش‌تر</a>
-            <!--<h3>پست های دنبال شوندگان</h3>-->
-          </div>
-          <hr>
-
-          <div class="row ">
-            <div class="col-md-6 col-lg-4 w-100 clearfix" *ngFor="let post of followedPosts">
-              <app-post [post]="post" class="flex-fill"></app-post>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="پیشنهادی ها" *ngIf="isAuth">
-        <div  class="ui-main-posts" *ngIf="isRecommender; else noInfo">
-          <div class="d-flex justify-content-between">
-            <a [routerLink]='["/more","recomended"]' class="more-link">...مشاهده بیش‌تر</a>
-          </div>
-          <hr>
-          <div class="d-flex flex-fill justify-content-between p-3 mt-5">
-            <div class="p-2" *ngFor="let post of postRecommender">
-              <app-post [post]="post"></app-post>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="آخرین پست‌ها">
-        <div class="ui-main-posts" *ngIf="!isEmpty; else noInfo">
-          <div class="d-flex justify-content-between">
-            <a [routerLink]='["/more","latest"]' class="more-link">...مشاهده بیش‌تر</a>
-           <!-- <h3>آخرین پست‌ها</h3>-->
-          </div>
-          <hr>
-          <div class="row ">
-            <div class="col-md-6 col-lg-4 w-100 clearfix" *ngFor="let post of postView">
-              <app-post [post]="post" class="flex-fill"></app-post>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
-
+<div *ngIf="(loaderService.isLoading | async) && firstLoad" class="loader-container">
+  <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
 </div>
-
-
+<div class="ui-main-posts" *ngIf="!isEmpty">
+  <div >
+    <!-- <a [routerLink]='["/more","latest"]' class="more-link">...مشاهده بیش‌تر</a> -->
+    <h3>آخرین پست‌ها</h3>
+  </div>
+  <hr>
+  <app-masonry-posts [posts]="postView" [mode]="'getLatestPost'"></app-masonry-posts>
+</div>
