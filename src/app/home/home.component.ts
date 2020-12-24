@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.postService.getLatestPost(9).subscribe(posts => {
       // console.log(posts);
-      // tslint:disable-next-line:forin
       for (const index in posts) {
         this.postView.push(posts[index]);
       }
