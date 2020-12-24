@@ -16,6 +16,7 @@ export class MasonryPostsComponent implements OnInit {
   hasMore:boolean;
   value: number = 9;
   page: number = 1;
+  end:boolean=false;
   constructor(private _postService: PostService) { }
 
   ngOnInit(): void {
@@ -28,6 +29,9 @@ export class MasonryPostsComponent implements OnInit {
         posts.forEach((post:Post)=>{
           this.posts.push(post);
         })
+      }else{
+        this.end=true;
+        this.loadingImages=false;
       }
     });
     this.page+=1;
