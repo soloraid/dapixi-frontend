@@ -25,6 +25,7 @@ export class ProfileEditComponent implements OnInit {
   emailError:string='';
   phoneForm: FormGroup;
   phoneLoading:boolean=false;
+  phoneError:string="";
   dateForm: FormGroup;
   dateLoading:boolean=false;
   passwordForm: FormGroup;
@@ -146,12 +147,18 @@ export class ProfileEditComponent implements OnInit {
 
   changePhone(): void {
     let phoneSubs:Subscription=this.profileService.editProfilePhone(this.phoneForm.get('phone').value)
-    .subscribe(data=>{
+    .subscribe(
+      data=>{
       this.phoneLoading=true;
       console.log(data);
       this.success.push("شماره همراه با موفقیت تغییر یافت");
       this.phoneLoading=false;
-    });
+      this.phoneError="";
+    },
+    (errorData:string)=>{
+      this.phoneError=errorData;
+    }
+    );
     this.editSubs.push(phoneSubs);
   }
   changeDate(): void {

@@ -9,9 +9,13 @@
       <li *ngFor="let message of errors">{{ message }}</li>
     </ul>
   </div> -->
-  <div #emailMsg  *ngIf="emailError" class="alert alert-danger pt-0 pr-1 ">
+  <div   *ngIf="emailError" class="alert alert-danger pt-0 pr-1 ">
     <a (click)="deletError($event)" class="text-danger m-0 p-0 error-toggler">X</a>
     <p class="text-danger my-0 pr-2">{{ emailError }}</p>
+  </div>
+  <div *ngIf="phoneError" class="alert alert-danger pt-0 pr-1 ">
+    <a (click)="deletError($event)" class="text-danger m-0 p-0 error-toggler">X</a>
+    <p class="text-danger my-0 pr-2">{{ phoneError }}</p>
   </div>
   <mat-vertical-stepper class="stepperForm mb-5" dir="rtl">
     <mat-step [stepControl]="firstLastNameForm" label="نام و نام خانوادگی" state="name" optional>
@@ -62,7 +66,7 @@
 
       </form>
     </mat-step>
-    <mat-step [stepControl]="phoneForm" label="شماره همراه" state="phone" optional>
+    <mat-step [stepControl]="phoneForm" label="شماره همراه" state="phone" optional [hasError]="phoneError.length>0" [errorMessage]="phoneError">
       <form [formGroup]="phoneForm">
 
         <div class="float-left">

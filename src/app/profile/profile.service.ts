@@ -113,8 +113,22 @@ export class ProfileService {
     param=param.append('mobile', phoneNumber);
     return this._http.patch(environment.api + '/user/profile/mobile','', {
       params:param
-    });
-
+    })
+    .pipe(
+      catchError((errorData:HttpErrorResponse)=>{
+        console.log(errorData);
+        if(errorData.status===400){
+          if(errorData.error && errorData.error.message){
+            console.log(errorData.error.message);
+            if(errorData.error.message===`Mobile: ${phoneNumber} has been used.`){
+              return throwError('کاربری با این شماره مبایل وجود دارد');
+            }else{
+              return throwError('خطای نامشحص در تغییر شماره مبایل');
+            }
+          }
+        }
+      })
+    );
   }
 
   editProfileDate(birthDate: string) {
