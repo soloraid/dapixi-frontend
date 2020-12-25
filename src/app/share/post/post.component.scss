@@ -1,9 +1,10 @@
+.box{
+  min-width: 100%;
+}
 .uiPost {
   height: auto;
   width: 100%;
   border-radius: 5px;
-  /*border-style: solid;
-  border-color: var(--text_color);*/
   box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
   border-width: 3px;
   /*padding: 5px;
@@ -16,6 +17,10 @@ a{
   display: block;
   position: relative;
   transition: transform 0.3s ease-in-out;
+  border-radius: 5px;
+  /*border-style: solid;
+  border-color: var(--text_color);*/
+  box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
 
   &:hover{
     // img{
