@@ -1,4 +1,15 @@
 <div class="container">
+  <div class="alert alert-success sucess" *ngIf="success.length">
+    <ul>
+      <li *ngFor="let message of success">{{ message }}</li>
+    </ul>
+  </div>
+  <!-- <div class="alert alert-danger error">
+    <ul>
+      <li>نام تغییر یافت</li>
+      <li>نام تغییر یافت</li>
+    </ul>
+  </div> -->
   <mat-vertical-stepper class="stepperForm" dir="rtl">
     <mat-step [stepControl]="firstLastNameForm"
               label="نام و نام خانوادگی" state="name" optional>
@@ -19,10 +30,11 @@
             <mat-error *ngIf="firstLastNameForm.get('lastName').hasError('minlength')">نام خانوادگی حداقل باید دو کاراکتر باشد</mat-error>
 
           </mat-form-field>
-          <div>
-            <button mat-button matTooltip="ثبت" matStepperNext (click)="changeName()">
+          <div class="submit-box">
+            <button mat-button matTooltip="ثبت"  [disabled]="firstLastNameForm.invalid || nameLoading" (click)="changeName()">
               <mat-icon>cloud_done</mat-icon>
             </button>
+            <mat-spinner *ngIf="nameLoading" diameter="25"></mat-spinner>
           </div>
         </form>
       </div>

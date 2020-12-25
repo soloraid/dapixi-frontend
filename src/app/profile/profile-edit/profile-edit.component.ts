@@ -6,6 +6,7 @@ import { ProfileService } from '../profile.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/share/user/user.mudole';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { flush } from '@angular/core/testing';
 
 @Component({
   selector: 'app-profile-edit',
@@ -18,6 +19,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 export class ProfileEditComponent implements OnInit {
   user: User;
   firstLastNameForm: FormGroup;
+  nameLoading:boolean=false;
   emailForm: FormGroup;
   phoneForm: FormGroup;
   dateForm: FormGroup;
@@ -28,6 +30,8 @@ export class ProfileEditComponent implements OnInit {
   phone: string;
   date: string;
   password: string;
+  success:string[]=[];
+  errors:string[]=[];
   hide1 = true;
   hide2 = true;
   passwordHolder = '';
@@ -75,6 +79,7 @@ export class ProfileEditComponent implements OnInit {
   private intializeForm() {
     this.firstLastNameForm.get('firstName').setValue(this.user.firstName);
     this.firstLastNameForm.get('lastName').setValue(this.user.lastName);
+    this.emailForm.get('email').setValue(this.user.email);
   }
   onSubmit() {
     this.changeName();
@@ -145,7 +150,13 @@ export class ProfileEditComponent implements OnInit {
 
   changeName(): void {
     console.log(this.firstLastNameForm);
-    console.log(this.isChangeName);
+    // console.log(this.isChangeName);
+    let nameSubs:Subscription = this.profileService.editProfileFirstLastName(this.firstLastNameForm.get('firstName').value,this.firstLastNameForm.get('lastName').value)
+    .subscribe((data=>{
+      this.nameLoading=true;
+      this.success.push('نام و نام‌خانوادگی با موفقت عوض شد');
+      this.nameLoading=false;
+    }));
     // console.log(this.firstName,'\n',this.lastname);
   }
 
