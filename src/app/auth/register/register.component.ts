@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit,OnDestroy {
       'firstName':new FormControl('',[Validators.required,Validators.minLength(2),Validators.maxLength(32)]),
       'lastName':new FormControl('',[Validators.required,Validators.minLength(2),Validators.maxLength(32)]),
       'userName':new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(32)]),
-      'phone':new FormControl('',Validators.pattern(/(09\d{9})|([+|0]989\d{9})/)),
+      'phone':new FormControl('',[Validators.pattern(/(09\d{9})|([+|0]989\d{9})/),Validators.maxLength(11)]),
       'date':new FormControl('',[Validators.required,this.dateValidator.bind(this)]),
       'email':new FormControl('',[Validators.required,Validators.email]),
       'password':new FormControl('',[Validators.required,Validators.minLength(6)]),

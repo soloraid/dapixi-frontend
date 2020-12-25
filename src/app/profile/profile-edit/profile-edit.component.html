@@ -1,57 +1,86 @@
 <div class="container">
-  <mat-vertical-stepper class="stepperForm" dir="rtl">
-    <mat-step [stepControl]="firstLastNameForm"
-              label="نام و نام خانوادگی" state="name" optional>
+  <div class="alert alert-success sucess" *ngIf="success.length">
+    <ul>
+      <li *ngFor="let message of success">{{ message }}</li>
+    </ul>
+  </div>
+  <!-- <div *ngIf="errors.length" class="alert alert-danger error">
+    <ul>
+      <li *ngFor="let message of errors">{{ message }}</li>
+    </ul>
+  </div> -->
+  <div   *ngIf="emailError" class="alert alert-danger pt-0 pr-1 ">
+    <a (click)="deletError($event)" class="text-danger m-0 p-0 error-toggler">X</a>
+    <p class="text-danger my-0 pr-2">{{ emailError }}</p>
+  </div>
+  <div *ngIf="phoneError" class="alert alert-danger pt-0 pr-1 ">
+    <a (click)="deletError($event)" class="text-danger m-0 p-0 error-toggler">X</a>
+    <p class="text-danger my-0 pr-2">{{ phoneError }}</p>
+  </div>
+  <mat-vertical-stepper class="stepperForm mb-5" dir="rtl">
+    <mat-step [stepControl]="firstLastNameForm" label="نام و نام خانوادگی" state="name" optional>
       <div class="float-left">
-        <form [formGroup]="firstLastNameForm">
-          <mat-form-field hintLabel="حداقل ۲ کاراکتر" class="full-width">
+        <form [formGroup]="firstLastNameForm" class="mb-4">
+          <mat-form-field class="full-width">
             <mat-label>نام</mat-label>
             <input matInput placeholder="نام" formControlName="firstName" class="float-left" optional>
+            <mat-error *ngIf="firstLastNameForm.get('firstName').hasError('minlength')">نام حداقل باید دو کاراکتر باشد
+            </mat-error>
           </mat-form-field>
         </form>
         <form [formGroup]="firstLastNameForm">
-          <mat-form-field hintLabel="حداقل ۲ کاراکتر" class="full-width">
+          <mat-form-field class="full-width mb-3">
             <mat-label>نام خانوادگی</mat-label>
             <input matInput placeholder="نام خانوادگی" formControlName="lastName" class="float-left" optional>
+            <mat-error *ngIf="firstLastNameForm.get('lastName').hasError('minlength')">نام خانوادگی حداقل باید دو
+              کاراکتر باشد</mat-error>
+
           </mat-form-field>
-          <div>
-            <button mat-button matTooltip="ثبت" matStepperNext (click)="changeName()">
+          <div class="submit-box">
+            <button mat-button matTooltip="ثبت" [disabled]="firstLastNameForm.invalid || nameLoading"
+              (click)="changeName()">
               <mat-icon>cloud_done</mat-icon>
             </button>
+            <mat-spinner *ngIf="nameLoading" diameter="25"></mat-spinner>
           </div>
         </form>
       </div>
     </mat-step>
-    <mat-step [stepControl]="emailForm" label="ایمیل" state="email" optional>
+    <mat-step [stepControl]="emailForm" label="ایمیل" state="email" optional [hasError]="emailError.length>0"
+[errorMessage]="emailError">
       <form [formGroup]="emailForm">
 
         <div class="float-left">
-          <mat-form-field>
+          <mat-form-field class="mb-3">
             <mat-label>ایمیل</mat-label>
-            <input matInput formControlName="email" placeholder="googlee@gmail.com" required>
-            <mat-error></mat-error>
+            <input matInput formControlName="email" placeholder="googlee@gmail.com" required class="ltr">
+            <mat-error *ngIf="emailForm.get('email').hasError('email')">ایمیل قابل قبول نیست</mat-error>
           </mat-form-field>
-          <div>
-            <button mat-button matTooltip="ثبت" matStepperNext (click)="changeEmail()">
+          <div class="submit-box">
+            <button mat-button matTooltip="ثبت" [disabled]="emailForm.invalid || emailLoading" (click)="changeEmail()">
               <mat-icon>cloud_done</mat-icon>
             </button>
+            <mat-spinner *ngIf="emailLoading" diameter="25"></mat-spinner>
           </div>
         </div>
 
       </form>
     </mat-step>
-    <mat-step [stepControl]="phoneForm" label="شماره همراه" state="phone" optional>
+    <mat-step [stepControl]="phoneForm" label="شماره همراه" state="phone" optional [hasError]="phoneError.length>0" [errorMessage]="phoneError">
       <form [formGroup]="phoneForm">
 
         <div class="float-left">
-          <mat-form-field hintLabel="۰۹۱۲۳۴۵۶۷۸۹">
+          <mat-form-field class="mb-3">
             <mat-label>شماره همراه</mat-label>
-            <input matInput formControlName="phone" required>
+            <input matInput formControlName="phone" required maxlength="11" class="ltr">
+            <mat-error *ngIf="phoneForm.get('phone').hasError('pattern')">ُفرمت شماره همراه صحیح نیست</mat-error>
+            <mat-error *ngIf="phoneForm.get('phone').hasError('maxlength')">ُطول شماره همراه زیاد است</mat-error>
           </mat-form-field>
-          <div>
-            <button mat-button matTooltip="ثبت" matStepperNext (click)="changePhone()">
+          <div class="submit-box">
+            <button mat-button matTooltip="ثبت" [disabled]="phoneForm.invalid || phoneLoading" (click)="changePhone()">
               <mat-icon>cloud_done</mat-icon>
             </button>
+            <mat-spinner *ngIf="phoneLoading" diameter="25"></mat-spinner>
           </div>
         </div>
 
@@ -61,67 +90,79 @@
       <form [formGroup]="dateForm">
 
         <div class="float-left">
-          <mat-form-field>
+          <mat-form-field hintLabel="mm/dd/yyyy" class="mb-3">
             <mat-label>
               <mat-icon>date_range</mat-icon>
             </mat-label>
-            <input matInput formControlName="date" type="date" placeholder="Ex.: 2020-1-1" required>
+            <input matInput formControlName="date" type="date" required>
+            <mat-error *ngIf="this.dateForm.get('date').hasError('today')">تاریخ تولد قابل قبول نیست!</mat-error>
           </mat-form-field>
-          <div>
-            <button mat-button matTooltip="ثبت" matStepperNext (click)="changeDate()">
+          <div class="submit-box">
+            <button mat-button matTooltip="ثبت" (click)="changeDate()" [disabled]="dateForm.invalid || dateLoading">
               <mat-icon>cloud_done</mat-icon>
             </button>
+            <mat-spinner *ngIf="dateLoading" diameter="25"></mat-spinner>
           </div>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="passwordForm" label="رمز عبور" state="password" optional>
-      <form [formGroup]="passwordForm">
-        <mat-form-field hintLabel="حداقل ۶ کاراکتر">
+      <form [formGroup]="passwordForm" class="mb-4">
+        <mat-form-field>
           <mat-label>رمز جدید</mat-label>
-          <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="password" required>
+          <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="password" required
+            (change)="onPasswordChange($event)">
           <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide1">
+            [attr.aria-pressed]="hide1">
             <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
+          <mat-error *ngIf="passwordForm.get('password').hasError('minlength')">رمز عبور حداقل باید 6 کاراکتر باشد
+          </mat-error>
         </mat-form-field>
         <form [formGroup]="passwordForm">
-          <mat-form-field hintLabel="حداقل ۶ کاراکتر">
+          <mat-form-field class="mb-2">
             <mat-label>تکرار رمز جدید</mat-label>
-            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="passwordRep"
-                   required>
+            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="passwordRep" required>
             <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide2">
+              [attr.aria-pressed]="hide2">
               <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
+            <mat-error *ngIf="passwordForm.get('passwordRep').hasError('repeat')">تکرار رمزعبور با رمزعبور مطابقت ندارد
+            </mat-error>
           </mat-form-field>
         </form>
-        <div>
-          <button mat-button matTooltip="ثبت" matStepperNext (click)="changePassword()">
+        <div class="submit-box">
+          <button mat-button matTooltip="ثبت" (click)="changePassword()"
+            [disabled]="passwordForm.invalid || passwordLoading">
             <mat-icon>cloud_done</mat-icon>
           </button>
+          <mat-spinner *ngIf="passwordLoading" diameter="25"></mat-spinner>
         </div>
       </form>
     </mat-step>
     <mat-step label="پایان" state="doneall" dir="rtl">
       <div class="float-right">
-        <div class="row">
+        <div class="text-center" *ngIf="loaderService.isLoading | async" >
+          <mat-spinner diameter="40" style="right:40%"></mat-spinner>
+          <p  class="mt-3">در حال تغییر اطلاعات</p>
+        </div>
+        <div class="row" *ngIf="!(loaderService.isLoading | async)">
           <div class="col-md-8">
             <p style="color: var(--primary_color)">بازگشت به پروفایل</p>
           </div>
           <div class="col-md-1">
-            <button mat-button matTooltip="ذخیره و بازگشت" (click)="onSubmit()">
+            <button mat-button matTooltip="ذخیره و بازگشت" (click)="finish()">
               <mat-icon>keyboard_backspace</mat-icon>
             </button>
           </div>
         </div>
       </div>
-      <div *ngIf="errorMsg" class="alert alert-danger pt-0 pr-1 ">
+      <!-- <div  class="alert alert-danger pt-0 pr-1 ">
         <a (click)="errorMsg=''" class="text-danger m-0 p-0 error-toggler">
           <mat-icon>error</mat-icon>
         </a>
         <p class="text-danger my-0 pr-2">{{ errorMsg }}</p>
-      </div>
+      </div> -->
     </mat-step>
 
     <ng-template matStepperIcon="name">

@@ -22,7 +22,7 @@
     </div>
     <div class="form-group mb-4">
         <label for="phone"> شماره همراه:( اختیاری )</label>
-        <input  type="tel" id="phone" class="form-control ltr-input" name="phone" placeholder="0912*******" formControlName="phone">
+        <input  type="tel" id="phone" class="form-control ltr-input" name="phone" placeholder="0912*******" formControlName="phone" maxlength="11">
         <p class="text-danger" *ngIf="regForm.controls['phone'].errors && regForm.controls['phone'].touched"><small>فرمت شماره همراه درست نمی‌باشد</small></p>
     </div>
     <div class="form-group mb-4">

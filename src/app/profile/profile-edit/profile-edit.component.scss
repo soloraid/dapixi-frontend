@@ -20,7 +20,22 @@
   min-width: 150px;
   max-width: 70vh;
 }
-
+.alert{
+  direction: rtl;
+  width: 80%;
+  margin: 1rem auto;
+}
+.submit-box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ltr{
+  direction: ltr;
+}
+.error-toggler:hover{
+  text-decoration: none;
+}
 ::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: var(--secondary_color);
 }
