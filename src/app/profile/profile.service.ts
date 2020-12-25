@@ -89,7 +89,23 @@ export class ProfileService {
     param=param.append('email', email);
     return this._http.patch(environment.api + '/user/profile/email' ,'',{
       params:param
-    });
+    })
+    .pipe(
+      catchError((errorData:HttpErrorResponse)=>{
+        console.log(errorData);
+        if(errorData.status===400){
+          if(errorData.error && errorData.error.message){
+            console.log(errorData.error.message);
+            if(errorData.error.message===`Email: ${email} has been used.`){
+              return throwError('کاربری با این ایمیل وجود دارد');
+            }else{
+              return throwError('خطای نامشحص در تغییر ایمیل');
+            }
+          }
+        }
+      })
+    )
+    ;
   }
 
   editProfilePhone(phoneNumber: string) {

@@ -13,7 +13,7 @@ import { flush } from '@angular/core/testing';
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss'],
   providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false,showError: true }
   }]
 })
 export class ProfileEditComponent implements OnInit {
@@ -22,11 +22,13 @@ export class ProfileEditComponent implements OnInit {
   nameLoading:boolean=false;
   emailForm: FormGroup;
   emailLoading:boolean=false;
+  emailError:string='';
   phoneForm: FormGroup;
   phoneLoading:boolean=false;
   dateForm: FormGroup;
   dateLoading:boolean=false;
   passwordForm: FormGroup;
+  passwordLoading: boolean=false;
   firstName: string;
   lastname: string;
   email: string;
@@ -105,7 +107,11 @@ export class ProfileEditComponent implements OnInit {
       return null;
     }
   }
-
+  onPasswordChange(event){
+    this.passwordHolder=event.target.value;
+    // console.log(event.target.value);
+    // console.log(this.passwordHolder);
+  }
   changeName(): void {
     console.log(this.firstLastNameForm);
     // console.log(this.isChangeName);
@@ -122,12 +128,19 @@ export class ProfileEditComponent implements OnInit {
   changeEmail(): void {
     // console.log(this.emailForm.get('email').value);
     let emailSubs:Subscription=this.profileService.editProfileEmail(this.emailForm.get('email').value)
-    .subscribe(data=>{
+    .subscribe(
+      data=>{
       this.emailLoading=true;
       console.log(data);
       this.success.push('ایمیل با موفقیت تغییر یافت');
-      this.emailLoading=false;     
-    });
+      this.emailLoading=false;  
+      this.emailError="";   
+    },
+    (errorData:string)=>{
+      // this.errors.push(errorData);
+      this.emailError=errorData;
+    }
+    );
     this.editSubs.push(emailSubs);
   }
 
@@ -148,12 +161,20 @@ export class ProfileEditComponent implements OnInit {
       console.log(data);
       this.success.push('تاریخ تولد با موفقیت عوض شد');
       this.dateLoading=false;      
-    })
+    });
+    this.editSubs.push(dateSubs);
   }
   changePassword(): void {
-    this.password = this.passwordForm.get('password').value;
-    if (this.password) {
-      this.isChangePassword = true;
-    }
+    let passwordSubs:Subscription=this.profileService.editProfilePassword(this.passwordForm.get('password').value)
+    .subscribe(data=>{
+      this.passwordLoading=true;
+      console.log(data);
+      this.success.push('رمز عبور با موفقیت تغییر یافت');
+      this.passwordLoading=false;
+    })
+  }
+  deletError(event){
+    // console.log((<HTMLElement>event.target).style.display='none');
+    (<HTMLElement>event.target).parentElement.style.display='none';
   }
 }

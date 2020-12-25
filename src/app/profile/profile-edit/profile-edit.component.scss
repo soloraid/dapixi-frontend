@@ -33,6 +33,9 @@
 .ltr{
   direction: ltr;
 }
+.error-toggler:hover{
+  text-decoration: none;
+}
 ::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: var(--secondary_color);
 }
