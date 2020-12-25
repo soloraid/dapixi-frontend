@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ import { LoaderService } from 'src/app/share/loader/loader.service';
     provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false,showError: true }
   }]
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit,OnDestroy {
   user: User;
   firstLastNameForm: FormGroup;
   nameLoading:boolean=false;
@@ -31,25 +31,12 @@ export class ProfileEditComponent implements OnInit {
   dateLoading:boolean=false;
   passwordForm: FormGroup;
   passwordLoading: boolean=false;
-  firstName: string;
-  lastname: string;
-  email: string;
-  phone: string;
-  date: string;
-  password: string;
   success:string[]=[];
-  errors:string[]=[];
+  // errors:string[]=[];
   hide1 = true;
   hide2 = true;
   passwordHolder = '';
-  errorMsg = '';
   editSubs: Subscription[] = [];
-  isChangeName = false;
-  isChangeEmail = false;
-  isChangePhone = false;
-  isChangeDate = false;
-  isChangePassword = false;
-  matcher=new ErrorStateMatcher();
 
   constructor(private profileService: ProfileService, private _router: Router,private _route:ActivatedRoute,public loaderService:LoaderService) {
   }
@@ -58,9 +45,7 @@ export class ProfileEditComponent implements OnInit {
     let userSubs: Subscription = this.profileService.getProfile()
     .subscribe((user: User) => {
       this.user = user;
-      console.log(this.user);
       this.intializeForm();
-      // this.intitForm();
     });
     this.editSubs.push(userSubs);
     this.firstLastNameForm = new FormGroup({
@@ -111,12 +96,8 @@ export class ProfileEditComponent implements OnInit {
   }
   onPasswordChange(event){
     this.passwordHolder=event.target.value;
-    // console.log(event.target.value);
-    // console.log(this.passwordHolder);
   }
   changeName(): void {
-    console.log(this.firstLastNameForm);
-    // console.log(this.isChangeName);
     let nameSubs:Subscription = this.profileService.editProfileFirstLastName(this.firstLastNameForm.get('firstName').value,this.firstLastNameForm.get('lastName').value)
     .subscribe((data=>{
       this.nameLoading=true;
@@ -133,7 +114,7 @@ export class ProfileEditComponent implements OnInit {
     .subscribe(
       data=>{
       this.emailLoading=true;
-      console.log(data);
+      // console.log(data);
       this.success.push('ایمیل با موفقیت تغییر یافت');
       this.emailLoading=false;  
       this.emailError="";   
@@ -151,7 +132,7 @@ export class ProfileEditComponent implements OnInit {
     .subscribe(
       data=>{
       this.phoneLoading=true;
-      console.log(data);
+      // console.log(data);
       this.success.push("شماره همراه با موفقیت تغییر یافت");
       this.phoneLoading=false;
       this.phoneError="";
@@ -166,7 +147,7 @@ export class ProfileEditComponent implements OnInit {
     let dateSubs:Subscription=this.profileService.editProfileDate(this.dateForm.get('date').value)
     .subscribe(data=>{
       this.dateLoading=true;
-      console.log(data);
+      // console.log(data);
       this.success.push('تاریخ تولد با موفقیت عوض شد');
       this.dateLoading=false;      
     });
@@ -176,7 +157,7 @@ export class ProfileEditComponent implements OnInit {
     let passwordSubs:Subscription=this.profileService.editProfilePassword(this.passwordForm.get('password').value)
     .subscribe(data=>{
       this.passwordLoading=true;
-      console.log(data);
+      // console.log(data);
       this.success.push('رمز عبور با موفقیت تغییر یافت');
       this.passwordLoading=false;
     })
@@ -187,5 +168,10 @@ export class ProfileEditComponent implements OnInit {
   }
   finish(){
     this._router.navigate(['../'],{relativeTo:this._route});
+  }
+  ngOnDestroy(){
+    this.editSubs.forEach((subs:Subscription)=>{
+      subs && subs.unsubscribe();
+    })
   }
 }
