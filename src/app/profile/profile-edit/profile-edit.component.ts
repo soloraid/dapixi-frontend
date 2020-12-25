@@ -25,6 +25,7 @@ export class ProfileEditComponent implements OnInit {
   phoneForm: FormGroup;
   phoneLoading:boolean=false;
   dateForm: FormGroup;
+  dateLoading:boolean=false;
   passwordForm: FormGroup;
   firstName: string;
   lastname: string;
@@ -83,6 +84,7 @@ export class ProfileEditComponent implements OnInit {
     this.firstLastNameForm.get('lastName').setValue(this.user.lastName);
     this.emailForm.get('email').setValue(this.user.email);
     this.phoneForm.get('phone').setValue(this.user.mobile);
+    this.dateForm.get('date').setValue(this.user.birthDate);
   }
 
   private dateValidator(formControl: FormControl): { [k: string]: boolean } | null {
@@ -140,10 +142,13 @@ export class ProfileEditComponent implements OnInit {
     this.editSubs.push(phoneSubs);
   }
   changeDate(): void {
-    this.date = this.dateForm.get('date').value;
-    if (this.date) {
-      this.isChangeDate = true;
-    }
+    let dateSubs:Subscription=this.profileService.editProfileDate(this.dateForm.get('date').value)
+    .subscribe(data=>{
+      this.dateLoading=true;
+      console.log(data);
+      this.success.push('تاریخ تولد با موفقیت عوض شد');
+      this.dateLoading=false;      
+    })
   }
   changePassword(): void {
     this.password = this.passwordForm.get('password').value;

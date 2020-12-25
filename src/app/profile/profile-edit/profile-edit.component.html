@@ -10,7 +10,7 @@
       <li>نام تغییر یافت</li>
     </ul>
   </div> -->
-  <mat-vertical-stepper class="stepperForm" dir="rtl">
+  <mat-vertical-stepper class="stepperForm mb-5" dir="rtl">
     <mat-step [stepControl]="firstLastNameForm"
               label="نام و نام خانوادگی" state="name" optional>
       <div class="float-left">
@@ -82,16 +82,18 @@
       <form [formGroup]="dateForm">
 
         <div class="float-left">
-          <mat-form-field>
+          <mat-form-field hintLabel="mm/dd/yyyy" class="mb-3">
             <mat-label>
               <mat-icon>date_range</mat-icon>
             </mat-label>
-            <input matInput formControlName="date" type="date" placeholder="Ex.: 2020-1-1" required>
+            <input matInput formControlName="date" type="date" required>
+            <mat-error *ngIf="this.dateForm.get('date').hasError('today')">تاریخ تولد قابل قبول نیست!</mat-error>
           </mat-form-field>
-          <div>
-            <button mat-button matTooltip="ثبت" matStepperNext (click)="changeDate()">
+          <div class="submit-box">
+            <button mat-button matTooltip="ثبت"  (click)="changeDate()" [disabled]="dateForm.invalid || dateLoading" >
               <mat-icon>cloud_done</mat-icon>
             </button>
+            <mat-spinner *ngIf="dateLoading" diameter="25"></mat-spinner>
           </div>
         </div>
       </form>
