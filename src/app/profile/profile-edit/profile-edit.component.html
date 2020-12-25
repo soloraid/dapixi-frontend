@@ -43,15 +43,16 @@
       <form [formGroup]="emailForm">
 
         <div class="float-left">
-          <mat-form-field>
+          <mat-form-field class="mb-3">
             <mat-label>ایمیل</mat-label>
-            <input matInput formControlName="email" placeholder="googlee@gmail.com" required>
-            <mat-error></mat-error>
+            <input matInput formControlName="email" placeholder="googlee@gmail.com" required class="email">
+            <mat-error *ngIf="emailForm.get('email').hasError('email')">ایمیل قابل قبول نیست</mat-error>
           </mat-form-field>
-          <div>
-            <button mat-button matTooltip="ثبت" matStepperNext (click)="changeEmail()">
+          <div class="submit-box">
+            <button mat-button matTooltip="ثبت" [disabled]="emailForm.invalid || emailLoading" (click)="changeEmail()" >
               <mat-icon>cloud_done</mat-icon>
             </button>
+            <mat-spinner *ngIf="emailLoading" diameter="25"></mat-spinner>
           </div>
         </div>
 

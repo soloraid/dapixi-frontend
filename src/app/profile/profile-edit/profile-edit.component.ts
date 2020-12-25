@@ -21,6 +21,7 @@ export class ProfileEditComponent implements OnInit {
   firstLastNameForm: FormGroup;
   nameLoading:boolean=false;
   emailForm: FormGroup;
+  emailLoading:boolean=false;
   phoneForm: FormGroup;
   dateForm: FormGroup;
   passwordForm: FormGroup;
@@ -157,15 +158,19 @@ export class ProfileEditComponent implements OnInit {
       this.success.push('نام و نام‌خانوادگی با موفقت عوض شد');
       this.nameLoading=false;
     }));
+    this.editSubs.push(nameSubs);
     // console.log(this.firstName,'\n',this.lastname);
   }
 
   changeEmail(): void {
-    this.email = this.emailForm.get('email').value;
-    console.log(this.email);
-    if (this.email) {
-      this.isChangeEmail = true;
-    }
+    // console.log(this.emailForm.get('email').value);
+    let emailSubs:Subscription=this.profileService.editProfileEmail(this.emailForm.get('email').value)
+    .subscribe(data=>{
+      this.emailLoading=true;
+      console.log(data);
+      this.success.push('ایمیل با موفقیت تغییر یافت');
+      this.emailLoading=false;     
+    })
   }
 
   changePhone(): void {

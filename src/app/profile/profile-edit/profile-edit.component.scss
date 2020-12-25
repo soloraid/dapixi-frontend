@@ -30,6 +30,10 @@
   align-items: center;
   justify-content: space-between;
 }
+.email{
+  width: 500px !important;
+  direction: ltr;
+}
 ::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: var(--secondary_color);
 }
