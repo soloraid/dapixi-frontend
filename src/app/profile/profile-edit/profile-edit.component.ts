@@ -3,10 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Subscription } from 'rxjs';
 import { ProfileService } from '../profile.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/share/user/user.mudole';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { flush } from '@angular/core/testing';
+import { LoaderService } from 'src/app/share/loader/loader.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -50,7 +51,7 @@ export class ProfileEditComponent implements OnInit {
   isChangePassword = false;
   matcher=new ErrorStateMatcher();
 
-  constructor(private profileService: ProfileService, private router: Router) {
+  constructor(private profileService: ProfileService, private _router: Router,private _route:ActivatedRoute,public loaderService:LoaderService) {
   }
 
   ngOnInit(): void {
@@ -183,5 +184,8 @@ export class ProfileEditComponent implements OnInit {
   deletError(event){
     // console.log((<HTMLElement>event.target).style.display='none');
     (<HTMLElement>event.target).parentElement.style.display='none';
+  }
+  finish(){
+    this._router.navigate(['../'],{relativeTo:this._route});
   }
 }
