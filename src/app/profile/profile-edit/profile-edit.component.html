@@ -45,7 +45,7 @@
         <div class="float-left">
           <mat-form-field class="mb-3">
             <mat-label>ایمیل</mat-label>
-            <input matInput formControlName="email" placeholder="googlee@gmail.com" required class="email">
+            <input matInput formControlName="email" placeholder="googlee@gmail.com" required class="ltr">
             <mat-error *ngIf="emailForm.get('email').hasError('email')">ایمیل قابل قبول نیست</mat-error>
           </mat-form-field>
           <div class="submit-box">
@@ -62,14 +62,17 @@
       <form [formGroup]="phoneForm">
 
         <div class="float-left">
-          <mat-form-field hintLabel="۰۹۱۲۳۴۵۶۷۸۹">
+          <mat-form-field class="mb-3">
             <mat-label>شماره همراه</mat-label>
-            <input matInput formControlName="phone" required>
+            <input matInput formControlName="phone" required maxlength="11" class="ltr">
+            <mat-error *ngIf="phoneForm.get('phone').hasError('pattern')">ُفرمت شماره همراه صحیح نیست</mat-error>
+            <mat-error *ngIf="phoneForm.get('phone').hasError('maxlength')">ُطول شماره همراه زیاد است</mat-error>
           </mat-form-field>
-          <div>
-            <button mat-button matTooltip="ثبت" matStepperNext (click)="changePhone()">
+          <div class="submit-box">
+            <button mat-button matTooltip="ثبت" [disabled]="phoneForm.invalid || phoneLoading" (click)="changePhone()">
               <mat-icon>cloud_done</mat-icon>
             </button>
+            <mat-spinner *ngIf="phoneLoading" diameter="25"></mat-spinner>
           </div>
         </div>
 
@@ -128,7 +131,7 @@
             <p style="color: var(--primary_color)">بازگشت به پروفایل</p>
           </div>
           <div class="col-md-1">
-            <button mat-button matTooltip="ذخیره و بازگشت" (click)="onSubmit()">
+            <button mat-button matTooltip="ذخیره و بازگشت" >
               <mat-icon>keyboard_backspace</mat-icon>
             </button>
           </div>

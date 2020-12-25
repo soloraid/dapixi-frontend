@@ -23,6 +23,7 @@ export class ProfileEditComponent implements OnInit {
   emailForm: FormGroup;
   emailLoading:boolean=false;
   phoneForm: FormGroup;
+  phoneLoading:boolean=false;
   dateForm: FormGroup;
   passwordForm: FormGroup;
   firstName: string;
@@ -65,7 +66,7 @@ export class ProfileEditComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email])
     });
     this.phoneForm = new FormGroup({
-      phone: new FormControl('', Validators.pattern(/(09\d{9})|([+|0]989\d{9})/))
+      phone: new FormControl('', [Validators.pattern(/(09\d{9})|([+|0]989\d{9})/),Validators.maxLength(11)])
     });
 
     this.dateForm = new FormGroup({
@@ -81,53 +82,7 @@ export class ProfileEditComponent implements OnInit {
     this.firstLastNameForm.get('firstName').setValue(this.user.firstName);
     this.firstLastNameForm.get('lastName').setValue(this.user.lastName);
     this.emailForm.get('email').setValue(this.user.email);
-  }
-  onSubmit() {
-    this.changeName();
-    this.changeEmail();
-    this.changeDate();
-    this.changePassword();
-    this.changePhone();
-    if (this.isChangeName) {
-      console.log('here');
-      let nameSubs: Subscription = this.profileService.editProfileFirstLastName(this.firstName, this.lastname)
-        .subscribe(data => {
-          console.log(data);
-        });
-      this.editSubs.push(nameSubs);
-    }
-    if (this.isChangeEmail) {
-      console.log(this.email);
-
-
-      let emailSubs: Subscription = this.profileService.editProfileEmail(this.email)
-        .subscribe(data => {
-          console.log(data);
-        });
-      this.editSubs.push(emailSubs);
-    }
-    if (this.isChangePhone) {
-      let phoneSubs = this.profileService.editProfilePhone(this.phone)
-        .subscribe(data => {
-          console.log(data);
-        });
-      this.editSubs.push(phoneSubs);
-    }
-    if (this.isChangeDate) {
-      let dateSubs = this.profileService.editProfileDate(this.date)
-        .subscribe(data => {
-          console.log(data);
-        });
-      this.editSubs.push(dateSubs);
-    }
-    if (this.isChangePassword) {
-      let passSubs: Subscription = this.profileService.editProfilePassword(this.password)
-        .subscribe(data => {
-          console.log(data)
-        });
-      this.editSubs.push(passSubs);
-    }
-    this.router.navigate(['/user/profile']);
+    this.phoneForm.get('phone').setValue(this.user.mobile);
   }
 
   private dateValidator(formControl: FormControl): { [k: string]: boolean } | null {
@@ -170,14 +125,19 @@ export class ProfileEditComponent implements OnInit {
       console.log(data);
       this.success.push('ایمیل با موفقیت تغییر یافت');
       this.emailLoading=false;     
-    })
+    });
+    this.editSubs.push(emailSubs);
   }
 
   changePhone(): void {
-    this.phone = this.phoneForm.get('phone').value;
-    if (this.phone) {
-      this.isChangePhone = true;
-    }
+    let phoneSubs:Subscription=this.profileService.editProfilePhone(this.phoneForm.get('phone').value)
+    .subscribe(data=>{
+      this.phoneLoading=true;
+      console.log(data);
+      this.success.push("شماره همراه با موفقیت تغییر یافت");
+      this.phoneLoading=false;
+    });
+    this.editSubs.push(phoneSubs);
   }
   changeDate(): void {
     this.date = this.dateForm.get('date').value;
