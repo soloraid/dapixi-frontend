@@ -4,6 +4,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Subscription } from 'rxjs';
 import { ProfileService } from '../profile.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/share/user/user.mudole';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-profile-edit',
@@ -14,6 +16,7 @@ import { Router } from '@angular/router';
   }]
 })
 export class ProfileEditComponent implements OnInit {
+  user: User;
   firstLastNameForm: FormGroup;
   emailForm: FormGroup;
   phoneForm: FormGroup;
@@ -35,11 +38,20 @@ export class ProfileEditComponent implements OnInit {
   isChangePhone = false;
   isChangeDate = false;
   isChangePassword = false;
+  matcher=new ErrorStateMatcher();
 
   constructor(private profileService: ProfileService, private router: Router) {
   }
 
   ngOnInit(): void {
+    let userSubs: Subscription = this.profileService.getProfile()
+    .subscribe((user: User) => {
+      this.user = user;
+      console.log(this.user);
+      this.intializeForm();
+      // this.intitForm();
+    });
+    this.editSubs.push(userSubs);
     this.firstLastNameForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(32)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(32)])
@@ -60,7 +72,10 @@ export class ProfileEditComponent implements OnInit {
 
     });
   }
-
+  private intializeForm() {
+    this.firstLastNameForm.get('firstName').setValue(this.user.firstName);
+    this.firstLastNameForm.get('lastName').setValue(this.user.lastName);
+  }
   onSubmit() {
     this.changeName();
     this.changeEmail();
@@ -83,27 +98,27 @@ export class ProfileEditComponent implements OnInit {
         .subscribe(data => {
           console.log(data);
         });
-        this.editSubs.push(emailSubs);
+      this.editSubs.push(emailSubs);
     }
     if (this.isChangePhone) {
-      let phoneSubs=this.profileService.editProfilePhone(this.phone)
-      .subscribe(data=>{
-        console.log(data);
-      });
+      let phoneSubs = this.profileService.editProfilePhone(this.phone)
+        .subscribe(data => {
+          console.log(data);
+        });
       this.editSubs.push(phoneSubs);
     }
     if (this.isChangeDate) {
-      let dateSubs=this.profileService.editProfileDate(this.date)
-      .subscribe(data=>{
-        console.log(data);
-      });
+      let dateSubs = this.profileService.editProfileDate(this.date)
+        .subscribe(data => {
+          console.log(data);
+        });
       this.editSubs.push(dateSubs);
     }
     if (this.isChangePassword) {
-      let passSubs:Subscription=this.profileService.editProfilePassword(this.password)
-      .subscribe(data=>{
-        console.log(data)
-      });
+      let passSubs: Subscription = this.profileService.editProfilePassword(this.password)
+        .subscribe(data => {
+          console.log(data)
+        });
       this.editSubs.push(passSubs);
     }
     this.router.navigate(['/user/profile']);
@@ -129,11 +144,7 @@ export class ProfileEditComponent implements OnInit {
   }
 
   changeName(): void {
-    this.firstName = this.firstLastNameForm.get('firstName').value;
-    this.lastname = this.firstLastNameForm.get('lastName').value;
-    if (this.lastname && this.firstName) {
-      this.isChangeName = true;
-    }
+    console.log(this.firstLastNameForm);
     console.log(this.isChangeName);
     // console.log(this.firstName,'\n',this.lastname);
   }

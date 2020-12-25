@@ -3,16 +3,21 @@
     <mat-step [stepControl]="firstLastNameForm"
               label="نام و نام خانوادگی" state="name" optional>
       <div class="float-left">
-        <form [formGroup]="firstLastNameForm">
-          <mat-form-field hintLabel="حداقل ۲ کاراکتر" class="full-width">
+        <form [formGroup]="firstLastNameForm" class="mb-4">
+          <mat-form-field  
+          hintLabel="حداقل ۲ کاراکتر" 
+          class="full-width">
             <mat-label>نام</mat-label>
-            <input matInput placeholder="نام" formControlName="firstName" class="float-left" optional>
+            <input matInput placeholder="نام" formControlName="firstName" class="float-left" optional >
+            <mat-error *ngIf="firstLastNameForm.get('firstName').hasError('minlength')">نام حداقل باید دو کاراکتر باشد</mat-error>
           </mat-form-field>
         </form>
-        <form [formGroup]="firstLastNameForm">
-          <mat-form-field hintLabel="حداقل ۲ کاراکتر" class="full-width">
+        <form [formGroup]="firstLastNameForm" >
+          <mat-form-field hintLabel="حداقل ۲ کاراکتر" class="full-width mb-3">
             <mat-label>نام خانوادگی</mat-label>
             <input matInput placeholder="نام خانوادگی" formControlName="lastName" class="float-left" optional>
+            <mat-error *ngIf="firstLastNameForm.get('lastName').hasError('minlength')">نام خانوادگی حداقل باید دو کاراکتر باشد</mat-error>
+
           </mat-form-field>
           <div>
             <button mat-button matTooltip="ثبت" matStepperNext (click)="changeName()">
