@@ -77,6 +77,8 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
         // console.log("here??");
         this.isAuth = true;
         this.getCount(this.username);
+      }else{
+        this.isAuth=false;
       }
     });
     let getObv: Observable<any>;
@@ -192,6 +194,9 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     }
     if (this.followsunbs) {
       this.followsunbs.unsubscribe();
+    }
+    if(!this._authService.isInLocal()){
+      this._authService.logOut();
     }
   }
 
