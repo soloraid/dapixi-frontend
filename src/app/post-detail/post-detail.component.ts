@@ -23,7 +23,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   isAuth: boolean;
   rateError:string="";
   constructor(private postService: PostService, private route: ActivatedRoute,
-              public loaderService: LoaderService, private authService: AuthService) {
+              public loaderService: LoaderService, public authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -52,21 +52,25 @@ export class PostDetailComponent implements OnInit,OnDestroy {
         });
       });
     }else{
-      this.rateError='برای ثبت نظر باید وارد جساب کاربری خود شوید';
+      this.rateError='برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
 
   deleteRating(): void {
-    this.id = this.route.snapshot.params.id;
-    this.postService.deleteRate(this.id).subscribe(() => {
-      this.postService.getPostByID(this.id).subscribe((post: Post) => {
-        this.post = post;
+    if(this.authService.isInLocal()){
+      this.id = this.route.snapshot.params.id;
+      this.postService.deleteRate(this.id).subscribe(() => {
+        this.postService.getPostByID(this.id).subscribe((post: Post) => {
+          this.post = post;
+        });
+        this.postService.getUsersRatePost(this.id).subscribe( (users) => {
+          this.numUsersRate = 2;
+        });
       });
-      this.postService.getUsersRatePost(this.id).subscribe( (users) => {
-        this.numUsersRate = 2;
-      });
-    });
-
+  
+    }else{
+      this.rateError='برای حذف امتیاز باید وارد حساب کاربری خود شوید';
+    }
   }
 
   ngOnDestroy(): void {
