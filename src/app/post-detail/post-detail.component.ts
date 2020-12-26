@@ -27,6 +27,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.authSub = this.authService.authState.subscribe((token: Tokens) => {
+      console.log(!!token);
       this.isAuth = !!token;
     });
     this.id = this.route.snapshot.params.id;
@@ -39,6 +40,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
 
   setRating(rate: string): void {
     this.id = this.route.snapshot.params.id;
+    console.log(this.isAuth);
     this.postService.putRate(this.id, rate).subscribe(() => {
       this.postService.getPostByID(this.id).subscribe((post: Post) => {
         this.post = post;
