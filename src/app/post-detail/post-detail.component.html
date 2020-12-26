@@ -15,19 +15,24 @@
             <div class="col-md-12" *ngIf="isAuth">
               <div class="rating">
                 <input (click)="setRating('5')" type="radio" name="rating" id="r1"
-                       [checked]="post.userRating === 5 && authService.isInLocal()">
+                       [checked]="post.userRating === 5"
+                       [disabled]="rateError.length>0">
                 <label for="r1"></label>
                 <input (click)="setRating('4')" type="radio" name="rating" id="r2"
-                       [checked]="post.userRating === 4 && authService.isInLocal()">
+                       [checked]="post.userRating === 4"
+                       [disabled]="rateError.length>0">
                 <label for="r2"></label>
                 <input (click)="setRating('3')" type="radio" name="rating" id="r3"
-                       [checked]="post.userRating === 3 && authService.isInLocal()">
+                       [checked]="post.userRating === 3"
+                       [disabled]="rateError.length>0">
                 <label for="r3"></label>
                 <input (click)="setRating('2')" type="radio" name="rating" id="r4"
-                       [checked]="post.userRating === 2 && authService.isInLocal()">
+                       [checked]="post.userRating === 2"
+                       [disabled]="rateError.length>0">
                 <label for="r4"></label>
                 <input (click)="setRating('1')" type="radio" name="rating" id="r5"
-                       [checked]="post.userRating === 1 && authService.isInLocal()">
+                       [checked]="post.userRating === 1"
+                       [disabled]="rateError.length>0">
                 <label for="r5"></label>
               </div>
               <div class="unRate">
