@@ -78,5 +78,8 @@ export class PostDetailComponent implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
+    if(!this.authService.isInLocal()){
+      this.authService.logOut();
+    }
   }
 }
