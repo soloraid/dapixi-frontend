@@ -9,11 +9,12 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthService } from './auth/auth.service';
 
 @Injectable()
 export class CatchErrorInterceptor implements HttpInterceptor {
 
-  constructor(private _router:Router) {}
+  constructor(private _router:Router,private _authService:AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request)
@@ -26,6 +27,7 @@ export class CatchErrorInterceptor implements HttpInterceptor {
           !(url.startsWith('/user') && !url.endsWith('profile'))
           ){
             console.log('here');
+            this._authService.logOut();
             this._router.navigate(['/auth']);
           }
         }

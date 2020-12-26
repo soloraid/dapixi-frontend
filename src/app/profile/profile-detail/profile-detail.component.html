@@ -88,6 +88,9 @@
         <div class="col-12 text-center" *ngIf="isAuth">
             <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>
         </div>
+        <div class="col-12 text-center" *ngIf="isAuth">
+            <p *ngIf="authError.length>0" class="text-danger"><small>{{ authError }}</small></p>
+        </div>
     </div>
     <hr>
     <app-masonry-posts *ngIf="isPresent && postsPresent" [posts]="userPosts" [mode]="'getPostsByUsername'" [params]="userView.username"></app-masonry-posts>

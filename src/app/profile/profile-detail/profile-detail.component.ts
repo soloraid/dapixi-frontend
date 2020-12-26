@@ -37,6 +37,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   postsSubs: Subscription;
   followsunbs: Subscription;
   pictureSubs: Subscription;
+  authError:string='';
   p1 = 1;
   p = 1;
   // = {
@@ -201,17 +202,25 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   // }
 
   requestToFollow(): void {
-    this._profile.follow(this.userView.username).subscribe(() => {
-      this.getCount(this.userView.username);
-      this.isFollowed = true;
-    });
+    if(this._authService.isInLocal()){
+      this._profile.follow(this.userView.username).subscribe(() => {
+        this.getCount(this.userView.username);
+        this.isFollowed = true;
+      });
+    }else{
+      this.authError='باید وارد حساب کاربری خود شوید';
+    }
   }
 
   requestToUnfollow(): void {
-    this._profile.unfollow(this.userView.username).subscribe(() => {
-      this.getCount(this.userView.username);
-      this.isFollowed = false;
-    });
+    if(this._authService.isInLocal()){
+      this._profile.unfollow(this.userView.username).subscribe(() => {
+        this.getCount(this.userView.username);
+        this.isFollowed = false;
+      });
+    }else{
+      this.authError='باید وارد حساب کاربری خود شوید';
+    }
   }
 
   onChange(event): void {
