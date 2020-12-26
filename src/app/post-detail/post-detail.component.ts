@@ -22,6 +22,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   authSub: Subscription;
   isAuth: boolean;
   rateError:string="";
+
   constructor(private postService: PostService, private route: ActivatedRoute,
               public loaderService: LoaderService, public authService: AuthService) {
   }
@@ -51,6 +52,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
           this.numUsersRate = 1;
         });
       });
+      this.rateError="";
     }else{
       this.rateError='برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
     }
@@ -67,6 +69,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
           this.numUsersRate = 2;
         });
       });
+      this.rateError="";
   
     }else{
       this.rateError='برای حذف امتیاز باید وارد حساب کاربری خود شوید';

@@ -7,6 +7,7 @@
         <mat-icon aria-hidden="false" aria-label="done icon" style="color: var(--text_color)">cloud_done</mat-icon>
       </button>
     </mat-form-field>
+    <p *ngIf="commentError.length>0" class="text-danger"><small>{{ commentError }}</small></p>
   </form>
   <mat-accordion>
     <mat-expansion-panel (opened)="panelOpenState = true"

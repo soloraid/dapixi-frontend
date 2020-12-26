@@ -25,10 +25,11 @@ export class CommentComponent implements OnInit {
   getSubs: Subscription;
   nocomment: boolean = false;
   comments: Comment[];
-  constructor(private _authService: AuthService, private _rout: ActivatedRoute, private _postService: PostService) { }
+  commentError:string="";
+  constructor(public authService: AuthService, private _rout: ActivatedRoute, private _postService: PostService) { }
 
   ngOnInit(): void {
-    this.authSubs = this._authService.authState.subscribe((token: Tokens) => {
+    this.authSubs = this.authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
     });
     this._rout.params.subscribe((data) => {
@@ -38,13 +39,18 @@ export class CommentComponent implements OnInit {
   onSubmit(cForm: NgForm) {
     console.log(this.id);
     console.log(this.sendingComment);
-    this.sendSubs = this._postService.addComment(this.id, this.sendingComment).subscribe((data) => {
-      // this.sendingComment="";
-      console.log(data);
-    });
-
-    this.getComments();
-    this.sendingComment="";
+    if(this.authService.isInLocal()){
+      this.sendSubs = this._postService.addComment(this.id, this.sendingComment).subscribe((data) => {
+        // this.sendingComment="";
+        console.log(data);
+      });
+  
+      this.getComments();
+      this.sendingComment="";
+      this.commentError="";
+    }else{
+      this.commentError='برای ثبت نظر باید وارد حساب کاربری خود شوید';
+    }
 
   }
   toggle() {
