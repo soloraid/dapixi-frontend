@@ -129,10 +129,11 @@ export class AuthService {
   }
   logOut(){
     this.authState.next(null);
+    console.log('logout');
     localStorage.removeItem('tokens');
-    // console.log(this._rout.component);
+    // console.log(this._rout);
     
-    this._router.navigate([''],{relativeTo:this._rout})
+    // this._router.navigate([''],{relativeTo:this._rout});
     if(this.logOutTimer){
       clearTimeout(this.logOutTimer);
     }
