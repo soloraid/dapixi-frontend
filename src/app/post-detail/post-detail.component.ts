@@ -21,6 +21,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   numUsersRate = 0;
   authSub: Subscription;
   isAuth: boolean;
+  rateError:string="";
   constructor(private postService: PostService, private route: ActivatedRoute,
               public loaderService: LoaderService, private authService: AuthService) {
   }
@@ -39,16 +40,20 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   }
 
   setRating(rate: string): void {
-    this.id = this.route.snapshot.params.id;
-    console.log(this.isAuth);
-    this.postService.putRate(this.id, rate).subscribe(() => {
-      this.postService.getPostByID(this.id).subscribe((post: Post) => {
-        this.post = post;
+    if(this.authService.isInLocal()){
+      this.id = this.route.snapshot.params.id;
+      // console.log(this.isAuth);
+      this.postService.putRate(this.id, rate).subscribe(() => {
+        this.postService.getPostByID(this.id).subscribe((post: Post) => {
+          this.post = post;
+        });
+        this.postService.getUsersRatePost(this.id).subscribe( users => {
+          this.numUsersRate = 1;
+        });
       });
-      this.postService.getUsersRatePost(this.id).subscribe( users => {
-        this.numUsersRate = 1;
-      });
-    });
+    }else{
+      this.rateError='برای ثبت نظر باید وارد جساب کاربری خود شوید';
+    }
   }
 
   deleteRating(): void {

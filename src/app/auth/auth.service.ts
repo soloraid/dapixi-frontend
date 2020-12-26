@@ -179,6 +179,21 @@ export class AuthService {
     })
     )
   }
+  isInLocal(){
+    const tokensTemp:{
+      _access:string,
+      _refresh:string,
+      _expireDate:string,
+      scope:string,
+      username:string
+    }=JSON.parse(localStorage.getItem('tokens'));
+    console.log("///",tokensTemp);
+    if(tokensTemp){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
 interface loginResponse {
   access_token: string;
