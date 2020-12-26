@@ -59,6 +59,7 @@ import { FollowPostsComponent } from './follow-posts/follow-posts.component';
 import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
 import { HotPostsComponent } from './hot-posts/hot-posts.component';
 import { MasonryPostsComponent } from './share/masonry-posts/masonry-posts.component';
+import { CatchErrorInterceptor } from './catch-error.interceptor';
 
 
 
@@ -132,6 +133,11 @@ import { MasonryPostsComponent } from './share/masonry-posts/masonry-posts.compo
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CatchErrorInterceptor,
       multi: true
     }
   ],
