@@ -29,7 +29,7 @@ export class CatchErrorInterceptor implements HttpInterceptor {
             console.log('here');
             if(!url.startsWith('/auth')){
               this._authService.logOut();
-              this._router.navigate(['/auth']);
+              this._router.navigate(['/auth'],{queryParams:{error:true}});
             }else{
               this._router.navigate(['/home']);
             }

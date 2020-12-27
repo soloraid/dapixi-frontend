@@ -17,6 +17,7 @@ export class EnterComponent implements OnInit,OnDestroy {
   errorMsg: string = "";
   @ViewChild('enter_form',{static:false}) enterForm:NgForm;
   username:string;
+  initError:string;
   // password:String;
   hasRemember:boolean=false;
   loginSubs:Subscription;
@@ -31,6 +32,11 @@ export class EnterComponent implements OnInit,OnDestroy {
     const usernameFirst=this._rout.snapshot.paramMap['username'];
     if(usernameFirst){
       this.username=usernameFirst;
+    }
+    const err=this._rout.snapshot.queryParamMap.get('error');
+    if(err){
+      // console.log(err);
+      this.initError=`شما از حساب کاربری خود خارج شده‌اید برای ادامه باید وارد حساب کاربری خود شوید.`
     }
     // console.log(this.enterForm);
 
