@@ -27,8 +27,12 @@ export class CatchErrorInterceptor implements HttpInterceptor {
           !(url.startsWith('/user') && !url.startsWith('/user/profile'))
           ){
             console.log('here');
-            this._authService.logOut();
-            this._router.navigate(['/auth']);
+            if(!url.startsWith('/auth')){
+              this._authService.logOut();
+              this._router.navigate(['/auth']);
+            }else{
+              this._router.navigate(['/home']);
+            }
           }
         }
         else if(error.status===500){
