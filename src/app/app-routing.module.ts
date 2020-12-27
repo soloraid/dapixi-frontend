@@ -1,29 +1,29 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AuthComponent} from './auth/auth.component';
-import {EnterComponent} from './auth/enter/enter.component';
-import {RegisterComponent} from './auth/register/register.component';
-import {HomeComponent} from './home/home.component';
-import {ProfileDetailComponent} from './profile/profile-detail/profile-detail.component';
-import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
-import {ProfileComponent} from './profile/profile.component';
-import {UploadPostComponent} from './upload-post/upload-post.component';
-import {PostDetailComponent} from './post-detail/post-detail.component';
-import {SearchResultComponent} from './search/search-result/search-result.component';
-import {AuthGuard} from './share/auth.guard';
-import {ReAuthGuard} from './share/re-auth.guard';
-import {ResetComponent} from './auth/reset/reset.component';
-import {Error404Component} from './error404/error404.component';
-import {Error500Component} from './error500/error500.component';
-import {MoreComponent} from './more/more.component';
-import {ConfirmComponent} from './auth/confirm/confirm.component';
-import {InfoComponent} from './info/info.component';
-import {CommentComponent} from './comment/comment.component';
-import {MainComponent} from './main/main.component';
-import {FollowPostsComponent} from './follow-posts/follow-posts.component';
-import {RecomendedPostsComponent} from './recomended-posts/recomended-posts.component';
-import {HotPostsComponent} from './hot-posts/hot-posts.component';
-import {ThirdPartyOAuthSSOService} from './third-party-oauth-sso.service';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
+import { EnterComponent } from './auth/enter/enter.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.component';
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UploadPostComponent } from './upload-post/upload-post.component';
+import { PostDetailComponent } from './post-detail/post-detail.component';
+import { SearchResultComponent } from './search/search-result/search-result.component';
+import { AuthGuard } from './share/auth.guard';
+import { ReAuthGuard } from './share/re-auth.guard';
+import { ResetComponent } from './auth/reset/reset.component';
+import { Error404Component } from './error404/error404.component';
+import { Error500Component } from './error500/error500.component';
+import { MoreComponent } from './more/more.component';
+import { ConfirmComponent } from './auth/confirm/confirm.component';
+import { InfoComponent } from './info/info.component';
+import { CommentComponent } from './comment/comment.component';
+import { MainComponent } from './main/main.component';
+import { FollowPostsComponent } from './follow-posts/follow-posts.component';
+import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
+import { HotPostsComponent } from './hot-posts/hot-posts.component';
+import { ThirdPartyOAuthSSOService } from './third-party-oauth-sso.service';
 
 
 const routes: Routes = [
@@ -31,13 +31,13 @@ const routes: Routes = [
     path: '',
     // pathMatch: 'full',
     component: MainComponent,
-    resolve: {tokens: ThirdPartyOAuthSSOService},
+    resolve: { tokens: ThirdPartyOAuthSSOService },
     children: [
       {
         path: '',
         pathMatch: 'full',
-        component: MainComponent
-        // redirectTo: 'home'
+        // component: MainComponent
+        redirectTo: 'home'
       },
       {
         path: 'home',
@@ -87,27 +87,37 @@ const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
     canActivate: [ReAuthGuard],
+    // canActivateChild:[ReAuthGuard],
     children: [
       {
         path: '',
         // component:AuthComponent,
         pathMatch: 'full',
-        redirectTo: 'enter'
+        redirectTo: 'enter',
+        canActivate: [ReAuthGuard],
+
       },
       {
         path: 'enter',
-        component: EnterComponent
+        component: EnterComponent,
+        canActivate: [ReAuthGuard],
+
       },
       {
         path: 'register',
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [ReAuthGuard],
+
       },
       {
         path: 'reset',
-        component: ResetComponent
+        component: ResetComponent,
+        canActivate: [ReAuthGuard],
       }, {
         path: 'confirm',
-        component: ConfirmComponent
+        component: ConfirmComponent,
+        canActivate: [ReAuthGuard],
+
       }
     ]
   },

@@ -18,10 +18,10 @@ export class MainComponent implements OnInit {
     this.route.data.subscribe((data: Data) => {
       if (data['tokens']) {
         this.auth.authState.next(data['tokens']);
+        this.router.navigate(['home'], {relativeTo: this.route});
       }
       console.log(data['tokens']);
     });
-    this.router.navigate(['home'], {relativeTo: this.route});
   }
 
 }

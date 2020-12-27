@@ -8,7 +8,7 @@
     <mat-toolbar *ngIf="(isHandset$ | async)" class="mat-tool" ><app-search mat-list-item></app-search></mat-toolbar>
     <hr>
     <mat-nav-list >
-      <a mat-list-item *ngIf="!isAuth" (click)="drawer.toggle()" href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a>
+      <a mat-list-item *ngIf="!isAuth" (click)="drawer.toggle();onAuth()"   class="nav-item">ثبت نام/ورود</a>
       <a mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user/new" href="" class="nav-item">پست جدید</a>
       <a mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user" href="" class="nav-item">پروفایل</a>
       <a mat-list-item href="#" (click)="drawer.toggle()" class="nav-item">ارتباط با ما</a>
@@ -28,7 +28,7 @@
         </button>
         <div *ngIf="!(isHandset$ | async)"
              class="pt-0">
-          <a *ngIf="!isAuth" href="" routerLink="auth" class="nav-item">ثبت نام/ورود</a>
+          <a *ngIf="!isAuth"  (click)="onAuth()" class="nav-item">ثبت نام/ورود</a>
           <a *ngIf="isAuth" (click)="onLogOut()"  class="nav-item">خروج</a>
           <a *ngIf="isAuth" routerLink="user/new" href="" class="nav-item">پست جدید</a>
           <a *ngIf="isAuth" routerLink="user" href="" class="nav-item">پروفایل</a>

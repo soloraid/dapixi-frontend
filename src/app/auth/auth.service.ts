@@ -122,6 +122,9 @@ export class AuthService {
         this.authState.next(tokens);
         const expireDuration=new Date(tokensTemp._expireDate).getTime()-new Date().getTime();
         this.autoLogOut(expireDuration);
+        if(this._router.url.startsWith('/auth')){
+          this._router.navigate(['home']);
+        }
       }else{
         localStorage.removeItem('tokens');
       }
@@ -129,10 +132,11 @@ export class AuthService {
   }
   logOut(){
     this.authState.next(null);
+    console.log('logout');
     localStorage.removeItem('tokens');
-    // console.log(this._rout.component);
+    // console.log(this._rout);
     
-    this._router.navigate([''],{relativeTo:this._rout})
+    // this._router.navigate([''],{relativeTo:this._rout});
     if(this.logOutTimer){
       clearTimeout(this.logOutTimer);
     }
@@ -177,6 +181,21 @@ export class AuthService {
       return throwError(errorString);
     })
     )
+  }
+  isInLocal(){
+    const tokensTemp:{
+      _access:string,
+      _refresh:string,
+      _expireDate:string,
+      scope:string,
+      username:string
+    }=JSON.parse(localStorage.getItem('tokens'));
+    console.log("///",tokensTemp);
+    if(tokensTemp){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
 interface loginResponse {

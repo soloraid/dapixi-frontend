@@ -21,12 +21,15 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   numUsersRate = 0;
   authSub: Subscription;
   isAuth: boolean;
+  rateError:string="";
+
   constructor(private postService: PostService, private route: ActivatedRoute,
-              public loaderService: LoaderService, private authService: AuthService) {
+              public loaderService: LoaderService, public authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.authSub = this.authService.authState.subscribe((token: Tokens) => {
+      console.log(!!token);
       this.isAuth = !!token;
     });
     this.id = this.route.snapshot.params.id;
@@ -38,31 +41,45 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   }
 
   setRating(rate: string): void {
-    this.id = this.route.snapshot.params.id;
-    this.postService.putRate(this.id, rate).subscribe(() => {
-      this.postService.getPostByID(this.id).subscribe((post: Post) => {
-        this.post = post;
+    if(this.authService.isInLocal()){
+      this.id = this.route.snapshot.params.id;
+      // console.log(this.isAuth);
+      this.postService.putRate(this.id, rate).subscribe(() => {
+        this.postService.getPostByID(this.id).subscribe((post: Post) => {
+          this.post = post;
+        });
+        this.postService.getUsersRatePost(this.id).subscribe( users => {
+          this.numUsersRate = 1;
+        });
       });
-      this.postService.getUsersRatePost(this.id).subscribe( users => {
-        this.numUsersRate = 1;
-      });
-    });
+      this.rateError="";
+    }else{
+      this.rateError='برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
+    }
   }
 
   deleteRating(): void {
-    this.id = this.route.snapshot.params.id;
-    this.postService.deleteRate(this.id).subscribe(() => {
-      this.postService.getPostByID(this.id).subscribe((post: Post) => {
-        this.post = post;
+    if(this.authService.isInLocal()){
+      this.id = this.route.snapshot.params.id;
+      this.postService.deleteRate(this.id).subscribe(() => {
+        this.postService.getPostByID(this.id).subscribe((post: Post) => {
+          this.post = post;
+        });
+        this.postService.getUsersRatePost(this.id).subscribe( (users) => {
+          this.numUsersRate = 2;
+        });
       });
-      this.postService.getUsersRatePost(this.id).subscribe( (users) => {
-        this.numUsersRate = 2;
-      });
-    });
-
+      this.rateError="";
+  
+    }else{
+      this.rateError='برای حذف امتیاز باید وارد حساب کاربری خود شوید';
+    }
   }
 
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
+    if(!this.authService.isInLocal()){
+      this.authService.logOut();
+    }
   }
 }

@@ -4,6 +4,7 @@ import {Observable, Subscription} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
 import {AuthService} from '../../auth/auth.service';
 import {Tokens} from '../../share/tokens.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-nav',
@@ -20,7 +21,7 @@ export class MainNavComponent {
     );
 
   // tslint:disable-next-line:variable-name
-  constructor(private breakpointObserver: BreakpointObserver, private _authService: AuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, private _authService: AuthService,private _router:Router) {
   }
 
 
@@ -31,9 +32,27 @@ export class MainNavComponent {
   }
 
   onLogOut() {
+    console.log(this._router.url);
     this._authService.logOut();
+    const url=this._router.url;
+    const guardedPages:string[]=[
+      '/follow',
+      '/recommend',
+      '/hot',
+      '/user/profile',
+      '/user/profile/edit',
+      '/user/new'
+    ];
+    const inGuarded=guardedPages.find((rout:string)=>{
+      return rout===url;
+    })
+    if(inGuarded){
+      this._router.navigate(['/home']);
+    }
   }
-
+  onAuth(){
+    this._router.navigate(['/auth'],{queryParams:{back:this._router.url}});
+  }
   ngOnDestroy() {
     this.authSubsc.unsubscribe();
   }
