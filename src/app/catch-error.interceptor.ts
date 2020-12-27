@@ -31,12 +31,15 @@ export class CatchErrorInterceptor implements HttpInterceptor {
             this._router.navigate(['/auth']);
           }
         }
-        else {
-          console.log('this is server side error');
-          errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+        else if(error.status===500){
+          this._router.navigate(['/500']);
         }
-        console.log(errorMsg);
-        return throwError(errorMsg);
+        // else {
+        //   console.log('this is server side error');
+        //   errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+        // }
+        // console.log(errorMsg);
+        return throwError(error);
       })
     )
   }
