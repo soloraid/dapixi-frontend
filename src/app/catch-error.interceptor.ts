@@ -24,7 +24,7 @@ export class CatchErrorInterceptor implements HttpInterceptor {
         if (error.status===401) {
           const url=this._router.url;
           if(!url.startsWith('/post-detail') && 
-          !(url.startsWith('/user') && !url.endsWith('profile'))
+          !(url.startsWith('/user') && !url.startsWith('/user/profile'))
           ){
             console.log('here');
             this._authService.logOut();
