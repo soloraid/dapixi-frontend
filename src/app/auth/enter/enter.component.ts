@@ -21,6 +21,7 @@ export class EnterComponent implements OnInit,OnDestroy {
   // password:String;
   hasRemember:boolean=false;
   loginSubs:Subscription;
+  back:string;
   ngOnInit(): void {
     const username=localStorage.getItem('username');
     // const password=localStorage.getItem('password');
@@ -34,9 +35,15 @@ export class EnterComponent implements OnInit,OnDestroy {
       this.username=usernameFirst;
     }
     const err=this._rout.snapshot.queryParamMap.get('error');
+    
     if(err){
       // console.log(err);
       this.initError=`شما از حساب کاربری خود خارج شده‌اید برای ادامه باید وارد حساب کاربری خود شوید.`
+    }
+    const back=this._rout.snapshot.queryParamMap.get('back');
+    if(back){
+      this.back=back;
+      console.log(back);
     }
     // console.log(this.enterForm);
 
@@ -57,7 +64,11 @@ export class EnterComponent implements OnInit,OnDestroy {
             localStorage.removeItem('username');
             localStorage.removeItem('password');
           }
-          this._router.navigate(['/']);
+          if(this.back){
+            this._router.navigate([this.back]);
+          }else{
+            this._router.navigate(['/']);
+          }
         },
         (errorData: string) => {
           console.log(errorData);

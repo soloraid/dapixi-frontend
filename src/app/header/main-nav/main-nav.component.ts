@@ -50,7 +50,9 @@ export class MainNavComponent {
       this._router.navigate(['/home']);
     }
   }
-
+  onAuth(){
+    this._router.navigate(['/auth'],{queryParams:{back:this._router.url}});
+  }
   ngOnDestroy() {
     this.authSubsc.unsubscribe();
   }
