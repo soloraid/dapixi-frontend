@@ -122,6 +122,9 @@ export class AuthService {
         this.authState.next(tokens);
         const expireDuration=new Date(tokensTemp._expireDate).getTime()-new Date().getTime();
         this.autoLogOut(expireDuration);
+        if(this._router.url.startsWith('/auth')){
+          this._router.navigate(['home']);
+        }
       }else{
         localStorage.removeItem('tokens');
       }
