@@ -18,18 +18,19 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   id: string;
   postUrl: string;
   isEmpty = true;
-  numUsersRate = 0;
+  numUsersRate: number;
   authSub: Subscription;
   isAuth: boolean;
-  rateError:string="";
+  isFirst = true;
+  rateError = '';
+  map: Map<string, number> = new Map<string, number>();
 
   constructor(private postService: PostService, private route: ActivatedRoute,
-              public loaderService: LoaderService, public authService: AuthService) {
+              public loaderService: LoaderService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.authSub = this.authService.authState.subscribe((token: Tokens) => {
-      console.log(!!token);
       this.isAuth = !!token;
     });
     this.id = this.route.snapshot.params.id;
@@ -37,6 +38,15 @@ export class PostDetailComponent implements OnInit,OnDestroy {
       this.postUrl = environment.api + '/photo' + post.imageUrl;
       this.post = post;
       this.isEmpty = false;
+      this.isFirst = false;
+      this.postService.getUsersRatePost(this.id).subscribe( users => {
+        // tslint:disable-next-line:forin
+        for (const member in users) {
+          this.map.set(member, users[member]);
+        }
+        console.log(this.map.size);
+        this.numUsersRate = this.map.size;
+      });
     });
   }
 
@@ -48,13 +58,19 @@ export class PostDetailComponent implements OnInit,OnDestroy {
         this.postService.getPostByID(this.id).subscribe((post: Post) => {
           this.post = post;
         });
-        this.postService.getUsersRatePost(this.id).subscribe( users => {
-          this.numUsersRate = 1;
+        this.postService.getUsersRatePost(this.id).subscribe( (users) => {
+          // tslint:disable-next-line:forin
+          this.map.clear();
+          for (const member in users) {
+            this.map.set(member, users[member]);
+          }
+          console.log(this.map.size);
+          this.numUsersRate = this.map.size;
         });
       });
-      this.rateError="";
+      this.rateError = '';
     }else{
-      this.rateError='برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
+      this.rateError = 'برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
 
@@ -66,13 +82,19 @@ export class PostDetailComponent implements OnInit,OnDestroy {
           this.post = post;
         });
         this.postService.getUsersRatePost(this.id).subscribe( (users) => {
-          this.numUsersRate = 2;
+          // tslint:disable-next-line:forin
+          this.map.clear();
+          for (const member in users) {
+            this.map.set(member, users[member]);
+          }
+          console.log(this.map.size);
+          this.numUsersRate = this.map.size;
         });
       });
-      this.rateError="";
-  
+      this.rateError = '';
+
     }else{
-      this.rateError='برای حذف امتیاز باید وارد حساب کاربری خود شوید';
+      this.rateError = 'برای حذف امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
 
