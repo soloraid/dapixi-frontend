@@ -7,6 +7,7 @@ import { AuthService } from '../auth/auth.service';
 import { PostService } from '../share/post.service';
 import { Tokens } from '../share/tokens.model';
 import { User } from '../share/user/user.mudole';
+import {LoaderService} from '../share/loader/loader.service';
 
 @Component({
   selector: 'app-comment',
@@ -26,7 +27,11 @@ export class CommentComponent implements OnInit {
   nocomment: boolean = false;
   comments: Comment[];
   commentError:string="";
-  constructor(public authService: AuthService, private _rout: ActivatedRoute, private _postService: PostService) { }
+  constructor(private authService: AuthService,
+              private _rout: ActivatedRoute,
+              private _postService: PostService,
+              public loaderService: LoaderService) {
+  }
 
   ngOnInit(): void {
     this.authSubs = this.authService.authState.subscribe((token: Tokens) => {
@@ -34,41 +39,42 @@ export class CommentComponent implements OnInit {
     });
     this._rout.params.subscribe((data) => {
       this.id = this._rout.snapshot.params['id'];
-    })
+      this.getComments();
+    });
   }
-  onSubmit(cForm: NgForm) {
+
+  onSubmit(cForm: HTMLFormElement) {
     console.log(this.id);
     console.log(this.sendingComment);
     if(this.authService.isInLocal()){
       this.sendSubs = this._postService.addComment(this.id, this.sendingComment).subscribe((data) => {
         // this.sendingComment="";
         console.log(data);
+        this.getComments();
+        this.sendingComment = '';
+        this.commentError="";
       });
-  
-      this.getComments();
-      this.sendingComment="";
-      this.commentError="";
     }else{
       this.commentError='برای ثبت نظر باید وارد حساب کاربری خود شوید';
     }
 
   }
-  toggle() {
+  /*toggle() {
     this.isOpen = !this.isOpen;
     this.getComments();
-  }
+  }*/
   private getComments() {
     console.log(this.isOpen);
-    if (this.isOpen) {
+    if (true) {
       this.getSubs = this._postService.getComments(this.id).subscribe((comments: Comment[]) => {
         if (comments.length) {
-          this.comments = comments;
+          this.comments = comments.reverse();
           this.nocomment = false;
         } else {
           this.nocomment = true;
         }
         console.log(comments);
-      })
+      });
     }
   }
 
