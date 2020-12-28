@@ -4,6 +4,11 @@
   width: 100%;
 }
 
+ul {
+  list-style-type: none;
+  margin-right: -10%;
+}
+
 .full-width {
   width: 100%;
 }
@@ -54,16 +59,16 @@
   background-color: #1a93ca;
   border-color: #198bbe
 }
-.btn-danger {
+.btnn-danger {
   color: #fff;
   background-color: var(--secondary_color);
-  border-color: #c35b5b;
+  border-color: var(--secondary_color);
 }
 
-.btn-danger:hover {
+.btnn-danger:hover {
   color: #fff;
   background-color: var(--secondary_color);
-  border-color: #5d0505
+  border-color: #04473b
 }
 .btn-circle {
   width: 30px;
@@ -92,4 +97,29 @@
     color: black;
     text-decoration: none;
   }
+}
+
+::ng-deep .mat-form-field.mat-focused {
+  .mat-form-field-label {
+    color: var(--secondary_color);
+  }
+  .mat-form-field-ripple {
+    background-color: var(--secondary_color);
+  }
+  .mat-form-field-required-marker {
+    color: var(--secondary_color);
+  }
+  .mat-input-element {
+    color: var(--text_color);
+  }
+}
+
+/*::ng-deep mat-tab-group mat-tab {
+  .mat-tab-links {
+    color: var(--secondary_color);
+  }
+}*/
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: var(--secondary_color) !important;
 }
