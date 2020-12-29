@@ -26,10 +26,10 @@ export class CommentComponent implements OnInit {
   nocomment = false;
   comments: Comment[];
   commentError = '';
-  value = 9;
+  value = 5;
   page = 1;
   end = false;
-  hasMore: boolean;
+  hasMore = false;
   constructor(private authService: AuthService,
               private route: ActivatedRoute,
               private postService: PostService,
@@ -42,18 +42,14 @@ export class CommentComponent implements OnInit {
     });
     this.route.params.subscribe((data) => {
       this.id = this.route.snapshot.params.id;
-      this.getComments();
     });
-    this.setHasMore();
+    this.getComments();
   }
 
-  onSubmit(cForm: HTMLFormElement):void {
-    console.log(this.id);
-    console.log(this.sendingComment);
-    if(this.authService.isInLocal()){
+  onSubmit(cForm: HTMLFormElement): void {
+    if (this.authService.isInLocal()){
       this.sendSubs = this.postService.addComment(this.id, this.sendingComment).subscribe((data) => {
-        // this.sendingComment="";
-        console.log(data);
+        this.comments = [];
         this.getComments();
         this.sendingComment = '';
         this.commentError = '';
@@ -68,18 +64,16 @@ export class CommentComponent implements OnInit {
     this.getComments();
   }*/
   private getComments() {
-    console.log(this.isOpen);
-    if (true) {
-      this.getSubs = this.postService.getComments(this.id, 5).subscribe((comments: Comment[]) => {
-        if (comments.length) {
-          this.comments = comments.reverse();
-          this.nocomment = false;
-        } else {
-          this.nocomment = true;
-        }
-        console.log(comments);
-      });
-    }
+    this.getSubs = this.postService.getComments(this.id, 5).subscribe((comments: Comment[]) => {
+      if (comments.length) {
+        this.comments = comments;
+        this.setHasMore();
+        this.end = false;
+        this.nocomment = false;
+      } else {
+        this.nocomment = true;
+      }
+    });
   }
 
   showMore(): void {
@@ -90,11 +84,18 @@ export class CommentComponent implements OnInit {
         comments.forEach((comment: Comment) => {
           this.comments.push(comment);
         });
+        this.setHasMore();
       } else {
+        this.hasMore = false;
         this.end = true;
       }
+      if (this.end) {
+        this.page = 1;
+      } else {
+        this.page += 1;
+      }
     });
-    this.page += 1;
+
   }
 
   private setHasMore(comments: Comment[]= this.comments): void{
