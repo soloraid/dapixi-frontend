@@ -1,6 +1,6 @@
 <div style="overflow-x: hidden;">
   <div *ngIf="isAuth">
-    <ul *ngFor="let comment of comments | slice:0:5; let i=index">
+    <ul *ngFor="let comment of comments; let i=index">
       <li>
         <div class="container-fluid">
           <span>{{ comment.username }} </span>
