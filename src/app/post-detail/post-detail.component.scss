@@ -1,29 +1,35 @@
 .uiPost {
+  transition: transform 0.3s ease-in-out;
   height: auto;
   width: 100%;
-  border-radius: 2px;
-  border-color: var(--secondary_color);
-  padding: 6px;
-  margin: 6px;
+  border-radius: 10px;
+  /*border: 2px var(--secondary_color) solid;*/
+  box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 10px 0 var(--secondary_color);
 }
 
-.detail grad {
+img:hover {
+  cursor: zoom-in;
+}
+
+.detail {
   border-radius: 2px;
-  padding: 4px;
-  margin: 4px;
+  padding: 4px 4px 4px 4px;
+  margin: 0 0 3px 0;
 }
 
 .ui-detail {
-  border-color: var(--text_color);
-  border-style: solid;
-  border-width: 4px;
+  padding: 2px;
   border-radius: 10px;
-  padding: 1px;
-  margin: 1px;
+  border: 4px var(--secondary_color) solid;
+  box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
   /*height: 550px;
   width: 1200px;*/
-
 }
+
+//.container-temp {
+//  padding: 0 4px 4px 4px;
+//  margin: 0 4px 4px 4px;
+//}
 
 .ui-content {
   height: auto;
@@ -32,38 +38,37 @@
   margin: 4px;
 }
 
-#grad {
-  background-image: conic-gradient(from 30deg at 35% 65%, ghostwhite, var(--secondary_color) 60%, var(--primary_color));
-}
 
 .unRate {
   float: right;
-  height: 46px;
+  height: 10vh;
 }
 
-.unRate:not(:checked) > input {
-  position:absolute;
-  top:-9999px;
+.btnn-danger {
+  background-color: var(--bg_color);
+  color: var(--text_color);
+  border-radius: 5px;
+  margin: 0px;
+  padding: 0px;
 }
 
-.unRate:not(:checked) > label {
-  float:right;
-  width:1em;
-  overflow:hidden;
-  white-space:nowrap;
-  cursor:pointer;
-  font-size:25px;
-  color:black;
+.btnn-danger:hover {
+  border-color: var(--bg_color);
 }
 
-.unRate:not(:checked) > label:before {
-  content: '✘ ';
-}
-.unRate > input:checked ~ .label-unRate {
-  color: var(--secondary_color);
+
+.btnn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 1px 0 10px 0;
+  margin-right: -1px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
 }
 
-@mixin star-rating( $filled-color: #F9BF3B, $empty-color: #444, $size: 25px, $width: 135px) {
+@mixin star-rating( $filled-color: #F9BF3B, $empty-color: #444, $size: 20px, $width: 125px) {
   $star--filled: ★;
   $star--empty: ☆;
   width: $width;

@@ -1,68 +1,96 @@
-<div class="container-fluid">
-  <div id="grad" class="card ui-detail shadow-lg">
-    <div *ngIf="loaderService.isLoading | async" class="loader-container">
-      <mat-spinner style="top: 50%;left: 50%" color="warn"></mat-spinner>
-    </div>
-    <div class="card-body" *ngIf="!isEmpty">
-      <div class="card-header detail">
-        <h6 class="card-title"><a>{{post.title}}</a></h6>
-        <p>
-          <a href="" [routerLink]="['/user',post.username]" class="card-link">{{post.username}}</a>
-        </p>
+ <div class="container-fluid">
+    <div id="grad" class="card ui-detail">
+      <div *ngIf="isFirst && loaderService.isLoading | async" class="loader-container">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <div class="card-body" *ngIf="!isEmpty">
+        <div class="card-header detail">
+          <h6 class="card-title"><a>{{post.title}}</a></h6>
+          <p>
+            <a href="" [routerLink]="['/user',post.username]" class="card-link">{{post.username}}</a>
+          </p>
+          <h6>{{post.categories}} :نوع عکس</h6>
+        </div>
+        <div class="row container-temp">
+          <div class="col-md-8">
+            <a [href]="postUrl" target="_blank"><img src="{{postUrl}}" alt="{{post.title}}" class="uiPost"></a>
+            <div class="container-fluid">
+              <div class="row" style="margin-top: 30px">
+                <div class="col-ms-1" *ngIf="isAuth">
+                  <div class="rating">
+                    <input (click)="setRating('5')" type="radio" name="rating" id="r1"
+                           [checked]="post.userRating === 5"
+                           [disabled]="rateError.length>0">
+                    <label for="r1"></label>
+                    <input (click)="setRating('4')" type="radio" name="rating" id="r2"
+                           [checked]="post.userRating === 4"
+                           [disabled]="rateError.length>0">
+                    <label for="r2"></label>
+                    <input (click)="setRating('3')" type="radio" name="rating" id="r3"
+                           [checked]="post.userRating === 3"
+                           [disabled]="rateError.length>0">
+                    <label for="r3"></label>
+                    <input (click)="setRating('2')" type="radio" name="rating" id="r4"
+                           [checked]="post.userRating === 2"
+                           [disabled]="rateError.length>0">
+                    <label for="r4"></label>
+                    <input (click)="setRating('1')" type="radio" name="rating" id="r5"
+                           [checked]="post.userRating === 1"
+                           [disabled]="rateError.length>0">
+                    <label for="r5"></label>
+                  </div>
+                  <div class="unRate" *ngIf="post.userRating">
+                    <button matTooltip="حذف امتیاز" type="button"
+                            class="btn btnn-danger btnn-circle" (click)="deleteRating()">
+                      <mat-icon>indeterminate_check_box</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-ms-1" *ngIf="isAuth">
+                  <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="امتیاز دهندگان" (click)="getUsersRated()">
+                    <mat-icon>people_alt</mat-icon>
+                    {{numUsersRate}}</button>
+                  <mat-menu #menu="matMenu" yPosition="below">
+                    <div mat-menu-item *ngFor="let user of usersRated">
+                      <button mat-button [routerLink]="['/user',user.username]">
 
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12" *ngIf="isAuth">
-              <div class="rating">
-                <input (click)="setRating('5')" type="radio" name="rating" id="r1"
-                       [checked]="post.userRating === 5"
-                       [disabled]="rateError.length>0">
-                <label for="r1"></label>
-                <input (click)="setRating('4')" type="radio" name="rating" id="r2"
-                       [checked]="post.userRating === 4"
-                       [disabled]="rateError.length>0">
-                <label for="r2"></label>
-                <input (click)="setRating('3')" type="radio" name="rating" id="r3"
-                       [checked]="post.userRating === 3"
-                       [disabled]="rateError.length>0">
-                <label for="r3"></label>
-                <input (click)="setRating('2')" type="radio" name="rating" id="r4"
-                       [checked]="post.userRating === 2"
-                       [disabled]="rateError.length>0">
-                <label for="r4"></label>
-                <input (click)="setRating('1')" type="radio" name="rating" id="r5"
-                       [checked]="post.userRating === 1"
-                       [disabled]="rateError.length>0">
-                <label for="r5"></label>
-              </div>
-              <div class="unRate">
-                <input (click)="deleteRating()" [checked]="post.userRating !== 0"
-                       type="radio" id="deleteRate" name="unRate" value="0">
-                <label for="deleteRate" title="text" class="label-unRate">UnStar</label>
+                        {{user.username}}<span>  ★</span>{{map.get(user.username)}}</button>
+                    </div>
+                  </mat-menu>
+                </div>
+                <div class="col-ms-2" dir="rtl" style="margin-left: 20px" *ngIf="post.averageRating">
+                  <p>{{post.averageRating | number:'1.1-3'}}  میانگین امتیاز</p>
+                </div>
               </div>
             </div>
-            <div class="col-md-12">
-              <p *ngIf="rateError.length>0" class="text-danger"><small>{{ rateError }}</small></p>
-              <h5>{{post.averageRating | number:'1.1-3'}}  میانگین امتیاز</h5>
-            </div>
-            <div class="col-md-12">
-              <h5>{{post.categories}} :نوع عکس</h5>
-            </div>
+
           </div>
+          <div class="col-md-4" dir="ltr">
+            <mat-tab-group  mat-align-tabs="end">
+              <mat-tab *ngIf="post.description">
+                <ng-template mat-tab-label>
+                  <mat-icon>description</mat-icon>
+                  توضیحات
+                </ng-template>
+                <div class="card-text col-md-12" dir="rtl">
+                <h6 style="line-height: 1.68">{{post.description}}</h6>
+              </div>
+              </mat-tab>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon>comment</mat-icon>
+                  نظرات
+                </ng-template>
+                <div class="col-md-12" dir="rtl">
+                <app-comment></app-comment>
+              </div>
+              </mat-tab>
+            </mat-tab-group>
+
+
+          </div>
+
         </div>
-
-
-
-      </div>
-      <div class="row">
-        <div class="card-img-top col-md-5"><img src="{{postUrl}}" alt="{{post.title}}" class="uiPost"></div>
-        <div class="card-text col-md-6" style="padding: 50px">
-          <h6>{{post.description}}</h6>
-        </div>
-      </div>
-      <div class="container-fluid">
-        <app-comment></app-comment>
       </div>
     </div>
   </div>
-</div>

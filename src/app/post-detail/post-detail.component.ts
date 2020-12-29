@@ -7,29 +7,32 @@ import {LoaderService} from '../share/loader/loader.service';
 import {AuthService} from '../auth/auth.service';
 import {Tokens} from '../share/tokens.model';
 import {Subscription} from 'rxjs';
+import {User} from '../share/user/user.mudole';
 
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.scss']
 })
-export class PostDetailComponent implements OnInit,OnDestroy {
+export class PostDetailComponent implements OnInit, OnDestroy {
   post: Post;
   id: string;
   postUrl: string;
   isEmpty = true;
-  numUsersRate = 0;
+  numUsersRate: number;
   authSub: Subscription;
   isAuth: boolean;
-  rateError:string="";
+  isFirst = true;
+  rateError = '';
+  map: Map<string, number> = new Map<string, number>();
+  usersRated: User[] = [];
 
   constructor(private postService: PostService, private route: ActivatedRoute,
-              public loaderService: LoaderService, public authService: AuthService) {
+              public loaderService: LoaderService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.authSub = this.authService.authState.subscribe((token: Tokens) => {
-      console.log(!!token);
       this.isAuth = !!token;
     });
     this.id = this.route.snapshot.params.id;
@@ -37,49 +40,86 @@ export class PostDetailComponent implements OnInit,OnDestroy {
       this.postUrl = environment.api + '/photo' + post.imageUrl;
       this.post = post;
       this.isEmpty = false;
+      this.isFirst = false;
+      this.postService.getUsersRatePost(this.id).subscribe( users => {
+        // tslint:disable-next-line:forin
+        for (const member in users) {
+          this.map.set(member, users[member]);
+        }
+        console.log(this.map.size);
+        this.numUsersRate = this.map.size;
+        this.getUsersRated();
+      });
     });
   }
 
   setRating(rate: string): void {
-    if(this.authService.isInLocal()){
+    if (this.authService.isInLocal()){
       this.id = this.route.snapshot.params.id;
       // console.log(this.isAuth);
       this.postService.putRate(this.id, rate).subscribe(() => {
         this.postService.getPostByID(this.id).subscribe((post: Post) => {
           this.post = post;
         });
-        this.postService.getUsersRatePost(this.id).subscribe( users => {
-          this.numUsersRate = 1;
+        this.postService.getUsersRatePost(this.id).subscribe( (users) => {
+          // tslint:disable-next-line:forin
+          this.map.clear();
+          for (const member in users) {
+            this.map.set(member, users[member]);
+          }
+          console.log(this.map.size);
+          this.numUsersRate = this.map.size;
         });
+        this.getUsersRated();
       });
-      this.rateError="";
+      this.rateError = '';
     }else{
-      this.rateError='برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
+      this.rateError = 'برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
 
   deleteRating(): void {
-    if(this.authService.isInLocal()){
+    if (this.authService.isInLocal()){
       this.id = this.route.snapshot.params.id;
       this.postService.deleteRate(this.id).subscribe(() => {
         this.postService.getPostByID(this.id).subscribe((post: Post) => {
           this.post = post;
         });
         this.postService.getUsersRatePost(this.id).subscribe( (users) => {
-          this.numUsersRate = 2;
+          // tslint:disable-next-line:forin
+          this.map.clear();
+          for (const member in users) {
+            this.map.set(member, users[member]);
+          }
+          console.log(this.map.size);
+          this.numUsersRate = this.map.size;
         });
+        this.getUsersRated();
       });
-      this.rateError="";
-  
+      this.rateError = '';
+
     }else{
-      this.rateError='برای حذف امتیاز باید وارد حساب کاربری خود شوید';
+      this.rateError = 'برای حذف امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
 
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
-    if(!this.authService.isInLocal()){
+    if (!this.authService.isInLocal()){
       this.authService.logOut();
+    }
+  }
+
+  getUsersRated(): void {
+    // tslint:disable-next-line:forin
+    this.usersRated = [];
+    for ( const username of this.map.keys()) {
+      this.postService.getProfileByUserName(username).subscribe((user: User) => {
+        this.usersRated.push(user[0]);
+      });
+    }
+    if (this.usersRated) {
+      console.log(this.usersRated);
     }
   }
 }

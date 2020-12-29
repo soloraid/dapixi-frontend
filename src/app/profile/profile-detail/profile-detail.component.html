@@ -1,6 +1,6 @@
 <div class="container profile">
     <div *ngIf="loaderService.isLoading | async">
-        <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
     <button class="profile-button share-button-no-auth mb-0 " ngxClipboard [cbContent]="link" (click)="copyLink()" *ngIf="!isAuth">
         <i class="fa fa-share-alt" aria-hidden="true"></i>

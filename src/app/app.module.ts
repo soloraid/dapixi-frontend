@@ -60,6 +60,7 @@ import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.co
 import { HotPostsComponent } from './hot-posts/hot-posts.component';
 import { MasonryPostsComponent } from './share/masonry-posts/masonry-posts.component';
 import { CatchErrorInterceptor } from './catch-error.interceptor';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -122,7 +123,8 @@ import { CatchErrorInterceptor } from './catch-error.interceptor';
     MatTableModule,
     MatTooltipModule,
     MatStepperModule,
-    NgxMasonryModule
+    NgxMasonryModule,
+    MatMenuModule
   ],
   providers: [
     {

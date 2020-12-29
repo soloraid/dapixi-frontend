@@ -114,11 +114,13 @@ export class PostService {
     // console.log('m',comment);
     return this.http.post(environment.api+'/photo/comments/posts',comment);
   }
-  getComments(id:string){
-    let params=new HttpParams();
-    params=params.append('photoId',id);
-    return this.http.get(environment.api+'/photo/comments/posts',{
-      params:params
+  getComments(id: string, num: number = 50, page: number = 0){
+    let params = new HttpParams();
+    params = params.append('size', String(num));
+    params = params.append('page', String(page));
+    params = params.append('photoId', id);
+    return this.http.get(environment.api + '/photo/comments/posts', {
+      params
     });
   }
 
