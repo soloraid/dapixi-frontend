@@ -2,12 +2,13 @@ import { Token } from '@angular/compiler/src/ml_parser/lexer';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { PostService } from '../share/post.service';
 import { Tokens } from '../share/tokens.model';
 import { User } from '../share/user/user.mudole';
 import {LoaderService} from '../share/loader/loader.service';
+import {Post} from '../share/post/post.module';
 
 @Component({
   selector: 'app-comment',
@@ -15,21 +16,23 @@ import {LoaderService} from '../share/loader/loader.service';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
-  panelOpenState = false;
-  commentsOfUsers: DateUser;
   isAuth: boolean;
   authSubs: Subscription;
   id: string;
-  sendingComment: string = "";
+  sendingComment = '';
   sendSubs: Subscription;
-  isOpen: boolean = false;
+  isOpen = false;
   getSubs: Subscription;
-  nocomment: boolean = false;
+  nocomment = false;
   comments: Comment[];
-  commentError:string="";
+  commentError = '';
+  value = 9;
+  page = 1;
+  end = false;
+  hasMore: boolean;
   constructor(private authService: AuthService,
-              private _rout: ActivatedRoute,
-              private _postService: PostService,
+              private route: ActivatedRoute,
+              private postService: PostService,
               public loaderService: LoaderService) {
   }
 
@@ -37,25 +40,26 @@ export class CommentComponent implements OnInit {
     this.authSubs = this.authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
     });
-    this._rout.params.subscribe((data) => {
-      this.id = this._rout.snapshot.params['id'];
+    this.route.params.subscribe((data) => {
+      this.id = this.route.snapshot.params.id;
       this.getComments();
     });
+    this.setHasMore();
   }
 
-  onSubmit(cForm: HTMLFormElement) {
+  onSubmit(cForm: HTMLFormElement):void {
     console.log(this.id);
     console.log(this.sendingComment);
     if(this.authService.isInLocal()){
-      this.sendSubs = this._postService.addComment(this.id, this.sendingComment).subscribe((data) => {
+      this.sendSubs = this.postService.addComment(this.id, this.sendingComment).subscribe((data) => {
         // this.sendingComment="";
         console.log(data);
         this.getComments();
         this.sendingComment = '';
-        this.commentError="";
+        this.commentError = '';
       });
     }else{
-      this.commentError='برای ثبت نظر باید وارد حساب کاربری خود شوید';
+      this.commentError = 'برای ثبت نظر باید وارد حساب کاربری خود شوید';
     }
 
   }
@@ -66,7 +70,7 @@ export class CommentComponent implements OnInit {
   private getComments() {
     console.log(this.isOpen);
     if (true) {
-      this.getSubs = this._postService.getComments(this.id).subscribe((comments: Comment[]) => {
+      this.getSubs = this.postService.getComments(this.id, 5).subscribe((comments: Comment[]) => {
         if (comments.length) {
           this.comments = comments.reverse();
           this.nocomment = false;
@@ -75,6 +79,28 @@ export class CommentComponent implements OnInit {
         }
         console.log(comments);
       });
+    }
+  }
+
+  showMore(): void {
+    let getObservable: Observable<any>;
+    getObservable = this.postService.getComments(this.id, this.value, this.page);
+    this.getSubs = getObservable.subscribe((comments: Comment[]) => {
+      if (comments.length > 0) {
+        comments.forEach((comment: Comment) => {
+          this.comments.push(comment);
+        });
+      } else {
+        this.end = true;
+      }
+    });
+    this.page += 1;
+  }
+
+  private setHasMore(comments: Comment[]= this.comments): void{
+
+    if (comments.length >= this.value){
+      this.hasMore = true;
     }
   }
 
