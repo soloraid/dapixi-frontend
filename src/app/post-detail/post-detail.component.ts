@@ -7,13 +7,14 @@ import {LoaderService} from '../share/loader/loader.service';
 import {AuthService} from '../auth/auth.service';
 import {Tokens} from '../share/tokens.model';
 import {Subscription} from 'rxjs';
+import {User} from '../share/user/user.mudole';
 
 @Component({
   selector: 'app-post-detail',
   templateUrl: './post-detail.component.html',
   styleUrls: ['./post-detail.component.scss']
 })
-export class PostDetailComponent implements OnInit,OnDestroy {
+export class PostDetailComponent implements OnInit, OnDestroy {
   post: Post;
   id: string;
   postUrl: string;
@@ -24,6 +25,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   isFirst = true;
   rateError = '';
   map: Map<string, number> = new Map<string, number>();
+  usersRated: User[] = [];
 
   constructor(private postService: PostService, private route: ActivatedRoute,
               public loaderService: LoaderService, private authService: AuthService) {
@@ -46,12 +48,13 @@ export class PostDetailComponent implements OnInit,OnDestroy {
         }
         console.log(this.map.size);
         this.numUsersRate = this.map.size;
+        this.getUsersRated();
       });
     });
   }
 
   setRating(rate: string): void {
-    if(this.authService.isInLocal()){
+    if (this.authService.isInLocal()){
       this.id = this.route.snapshot.params.id;
       // console.log(this.isAuth);
       this.postService.putRate(this.id, rate).subscribe(() => {
@@ -67,6 +70,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
           console.log(this.map.size);
           this.numUsersRate = this.map.size;
         });
+        this.getUsersRated();
       });
       this.rateError = '';
     }else{
@@ -75,7 +79,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
   }
 
   deleteRating(): void {
-    if(this.authService.isInLocal()){
+    if (this.authService.isInLocal()){
       this.id = this.route.snapshot.params.id;
       this.postService.deleteRate(this.id).subscribe(() => {
         this.postService.getPostByID(this.id).subscribe((post: Post) => {
@@ -90,6 +94,7 @@ export class PostDetailComponent implements OnInit,OnDestroy {
           console.log(this.map.size);
           this.numUsersRate = this.map.size;
         });
+        this.getUsersRated();
       });
       this.rateError = '';
 
@@ -100,8 +105,21 @@ export class PostDetailComponent implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
-    if(!this.authService.isInLocal()){
+    if (!this.authService.isInLocal()){
       this.authService.logOut();
+    }
+  }
+
+  getUsersRated(): void {
+    // tslint:disable-next-line:forin
+    this.usersRated = [];
+    for ( const username of this.map.keys()) {
+      this.postService.getProfileByUserName(username).subscribe((user: User) => {
+        this.usersRated.push(user[0]);
+      });
+    }
+    if (this.usersRated) {
+      console.log(this.usersRated);
     }
   }
 }

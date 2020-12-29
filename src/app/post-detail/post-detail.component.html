@@ -1,8 +1,8 @@
  <div class="container-fluid">
-   <div *ngIf="isFirst && loaderService.isLoading | async" class="loader-container">
-     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-   </div>
     <div id="grad" class="card ui-detail">
+      <div *ngIf="isFirst && loaderService.isLoading | async" class="loader-container">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
       <div class="card-body" *ngIf="!isEmpty">
         <div class="card-header detail">
           <h6 class="card-title"><a>{{post.title}}</a></h6>
@@ -47,9 +47,16 @@
                   </div>
                 </div>
                 <div class="col-ms-1" *ngIf="isAuth">
-                  <a matTooltip="امتیاز دهندگان" href="#">
+                  <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="امتیاز دهندگان" (click)="getUsersRated()">
                     <mat-icon>people_alt</mat-icon>
-                    {{numUsersRate}}</a>
+                    {{numUsersRate}}</button>
+                  <mat-menu #menu="matMenu" yPosition="below">
+                    <div mat-menu-item *ngFor="let user of usersRated">
+                      <button mat-button [routerLink]="['/user',user.username]">
+
+                        {{user.username}}<span>  ★</span>{{map.get(user.username)}}</button>
+                    </div>
+                  </mat-menu>
                 </div>
                 <div class="col-ms-2" dir="rtl" style="margin-left: 20px" *ngIf="post.averageRating">
                   <p>{{post.averageRating | number:'1.1-3'}}  میانگین امتیاز</p>
@@ -84,11 +91,6 @@
           </div>
 
         </div>
-        <!--<div class="row" dir="rtl">
-          <div class="container-fluid">
-            <app-comment></app-comment>
-          </div>
-        </div>-->
       </div>
     </div>
   </div>
