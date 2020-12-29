@@ -13,9 +13,14 @@
     </ul>
     <div class="row d-flex justify-content-center">
       <div *ngIf="hasMore" class="col-2 d-flex flex-column justify-content-center">
-        <button matTooltip="مشاهده بیشتر" class="btn-light btn-circle" (click)="showMore()" *ngIf="!end"><mat-icon style="color: var(--secondary_color)">expand_more</mat-icon></button>
-        <p *ngIf="end" class="text-danger text-center" ><small>نظر جدیدی یافت نمی شود.</small></p>
+        <button matTooltip="مشاهده بیشتر"
+                class="btn-light btn-circle"
+                (click)="showMore()"
+                *ngIf="!end">
+          <mat-icon style="color: var(--secondary_color)">expand_more</mat-icon>
+        </button>
       </div>
+      <p *ngIf="end" class="text-danger text-center" ><small>نظر دیگری یافت نمی شود.</small></p>
     </div>
     <div class="d-flex flex-row comment-row mb-3 py-1 m-t-0 text-center" *ngIf="nocomment">
       <div class="comment-text w-100 pt-2">
@@ -26,14 +31,14 @@
   <form #cForm ngForm *ngIf="isAuth" class="formComment" (ngSubmit)="onSubmit(cForm)">
     <p *ngIf="commentError.length>0" class="text-danger"><small>{{ commentError }}</small></p>
     <mat-form-field class="full-width">
-      <div *ngIf="loaderService.isLoading | async" class="loader-container">
-        <mat-spinner  mode="indeterminate" style="right: 105%" diameter="20"></mat-spinner>
-      </div>
       <mat-label>نظر بده</mat-label>
       <textarea matInput type="text"  [(ngModel)]="sendingComment"  placeholder=". . ." name="comment" cdkTextareaAutosize cdkAutosizeMinRows="1" style="overflow-y: hidden;"></textarea>
       <button mat-button matSuffix mat-icon-button type="submit" [disabled]="sendingComment===''">
         <mat-icon aria-hidden="false" aria-label="done icon" style="color: var(--text_color)">add_comment</mat-icon>
       </button>
+      <div *ngIf="loaderService.isLoading | async" class="loader-container">
+        <mat-progress-bar  mode="indeterminate"></mat-progress-bar>
+      </div>
     </mat-form-field>
   </form>
 </div>
