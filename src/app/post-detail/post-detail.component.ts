@@ -8,6 +8,8 @@ import {AuthService} from '../auth/auth.service';
 import {Tokens} from '../share/tokens.model';
 import {Subscription} from 'rxjs';
 import {User} from '../share/user/user.mudole';
+import {ProfileService} from '../profile/profile.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-post-detail',
@@ -25,10 +27,13 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   isFirst = true;
   rateError = '';
   map: Map<string, number> = new Map<string, number>();
-  usersRated: User[] = [];
+  usersProfPic: PictureData[] = [];
+  private pictureSubs: Subscription;
+  private picData: PictureData;
 
   constructor(private postService: PostService, private route: ActivatedRoute,
-              public loaderService: LoaderService, private authService: AuthService) {
+              public loaderService: LoaderService, private authService: AuthService,
+              private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
@@ -39,6 +44,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.postService.getPostByID(this.id).subscribe((post: Post) => {
       this.postUrl = environment.api + '/photo' + post.imageUrl;
       this.post = post;
+      console.log(post);
       this.isEmpty = false;
       this.isFirst = false;
       this.postService.getUsersRatePost(this.id).subscribe( users => {
@@ -112,14 +118,32 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
   getUsersRated(): void {
     // tslint:disable-next-line:forin
-    this.usersRated = [];
+    this.usersProfPic = [];
     for ( const username of this.map.keys()) {
-      this.postService.getProfileByUserName(username).subscribe((user: User) => {
-        this.usersRated.push(user[0]);
-      });
+      this.pictureSubs = this.profileService.getProfilePic(username)
+        .subscribe(
+          (picData: PictureData) => {
+            console.log(picData.username);
+            this.picData = new PictureData();
+            this.picData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
+            this.picData.username = picData.username;
+            this.usersProfPic.push(this.picData);
+          },
+          (errorData: HttpErrorResponse) => {
+            this.picData = new PictureData();
+            this.picData.imageUrl = '../../../assets/avatar-default.png';
+            this.picData.username = username;
+            this.usersProfPic.push(this.picData);
+          }
+        );
     }
-    if (this.usersRated) {
-      console.log(this.usersRated);
+    if (this.usersProfPic) {
+      console.log(this.usersProfPic);
     }
   }
+}
+
+class PictureData {
+  username: string;
+  imageUrl: string;
 }
