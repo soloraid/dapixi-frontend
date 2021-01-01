@@ -1,41 +1,77 @@
-import {Component, NgZone} from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BreakpointObserver} from '@angular/cdk/layout';
 import {Observable, Subscription} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
 import {AuthService} from '../../auth/auth.service';
 import {Tokens} from '../../share/tokens.model';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {ProfileService} from '../../profile/profile.service';
+import {environment} from '../../../environments/environment.prod';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.scss',]
+  styleUrls: ['./main-nav.component.scss', ]
 })
-export class MainNavComponent {
+export class MainNavComponent implements OnInit, OnDestroy{
   isAuth: boolean;
+  imageUrl: string;
   authSubsc: Subscription;
+  pictureSubs: Subscription;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 860px)')
+    .pipe(
+      map(result => result.matches),
+      shareReplay(),
+    );
+  isHandset$2: Observable<boolean> = this.breakpointObserver.observe('(max-width: 689px)')
     .pipe(
       map(result => result.matches),
       shareReplay(),
     );
 
   // tslint:disable-next-line:variable-name
-  constructor(private breakpointObserver: BreakpointObserver, private _authService: AuthService,private _router:Router) {
+  private username: string;
+
+  constructor(private breakpointObserver: BreakpointObserver,
+              private _authService: AuthService,
+              private _router: Router,
+              private profileService: ProfileService) {
   }
 
 
   ngOnInit(): void {
     this.authSubsc = this._authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
+      if ( this.isAuth) {
+        this.username = token.username;
+        this.getProfilePic();
+      }
     });
+    this.profileService.picSub.subscribe((isChange: boolean) => {
+      if (isChange) {
+        this.getProfilePic();
+      }
+    });
+  }
+
+  private getProfilePic(): void {
+    this.pictureSubs = this.profileService.getProfilePic(this.username)
+      .subscribe(
+        (picData: PictureData) => {
+          this.imageUrl = environment.api + '/photo/' + picData.imageUrl;
+        },
+        (errorData: HttpErrorResponse) => {
+          this.imageUrl = '../../../assets/avatar-default.png';
+        }
+      );
   }
 
   onLogOut() {
     console.log(this._router.url);
     this._authService.logOut();
-    const url=this._router.url;
-    const guardedPages:string[]=[
+    const url = this._router.url;
+    const guardedPages: string[] = [
       '/follow',
       '/recommend',
       '/hot',
@@ -43,17 +79,27 @@ export class MainNavComponent {
       '/user/profile/edit',
       '/user/new'
     ];
-    const inGuarded=guardedPages.find((rout:string)=>{
-      return rout===url;
-    })
-    if(inGuarded){
+    const inGuarded = guardedPages.find((rout: string) => {
+      return rout === url;
+    });
+    if (inGuarded){
       this._router.navigate(['/home']);
     }
   }
-  onAuth(){
-    this._router.navigate(['/auth'],{queryParams:{back:this._router.url}});
+  onAuth(): void{
+    this._router.navigate(['/auth'], {queryParams: {back: this._router.url}});
   }
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.authSubsc.unsubscribe();
+    this.pictureSubs.unsubscribe();
   }
+
+  onRegister(): void {
+    this._router.navigate(['/auth/register'], {queryParams: {back: this._router.url}});
+  }
+}
+
+interface PictureData {
+  username: string;
+  imageUrl: string;
 }
