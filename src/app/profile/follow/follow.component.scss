@@ -1,0 +1,32 @@
+.container-box{
+  border: 4px var(--secondary_color) solid;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
+  // background-color: var(--primary_color);
+}
+
+::ng-deep  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: var(--secondary_color);
+}
+
+.avatar-img {
+  width: 60px;
+  height: 60px;
+  margin: 10px;
+  border: 1px solid var(--secondary_color);
+  box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
+  border-radius: 50%;
+}
+
+.example-stretched-tabs {
+  max-width: 800px;
+}
+
+.container {
+  max-width: 800px;
+}
+
+.ui-username {
+  font-size: 25px;
+  text-shadow: 0 0 2px var(--primary_color);
+}

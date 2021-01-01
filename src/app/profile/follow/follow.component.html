@@ -1,0 +1,36 @@
+
+<div class="container">
+  <div class="container-box">
+    <div *ngIf="(loaderService.isLoading | async)">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div class="ui-username">
+      <p class="text-center">{{username}}</p>
+    </div>
+    <mat-tab-group class="example-stretched-tabs mat-elevation-z4" mat-align-tabs="center">
+      <mat-tab label="Short tab">
+        <ng-template mat-tab-label>
+          <mat-icon>description</mat-icon>
+          دنبال کنندگان
+        </ng-template>
+        <div dir="rtl" *ngFor="let user of userFollowers">
+          <button mat-button [routerLink]="['/user',user.username]">
+            <img [src]="user.imageUrl" alt="Avatar" class="avatar-img">
+            &nbsp;&nbsp;&nbsp;&nbsp;{{user.username}}</button>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>comment</mat-icon>
+          دنبال شوندگان
+        </ng-template>
+        <div dir="rtl" *ngFor="let user of userFollowings">
+          <button mat-button [routerLink]="['/user',user.username]">
+            <img [src]="user.imageUrl" alt="Avatar" class="avatar-img">
+            &nbsp;&nbsp;&nbsp;&nbsp;{{user.username}}</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+</div>
