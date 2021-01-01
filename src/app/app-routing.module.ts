@@ -24,6 +24,7 @@ import { FollowPostsComponent } from './follow-posts/follow-posts.component';
 import { RecomendedPostsComponent } from './recomended-posts/recomended-posts.component';
 import { HotPostsComponent } from './hot-posts/hot-posts.component';
 import { ThirdPartyOAuthSSOService } from './third-party-oauth-sso.service';
+import {FollowComponent} from './profile/follow/follow.component';
 
 
 const routes: Routes = [
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'comment',
     component: CommentComponent,
+  },
+  {
+    path: 'user/:username/following-follower',
+    component: FollowComponent,
   },
   {
     path: 'more/:type',
