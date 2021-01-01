@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import {Subject, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { environment } from '../../../src/environments/environment';
 
@@ -9,6 +9,7 @@ import { environment } from '../../../src/environments/environment';
   providedIn: 'root'
 })
 export class ProfileService {
+  picSub: Subject<boolean> = new Subject<boolean>();
 
   constructor(private _http: HttpClient, private _router: Router) { }
   getProfile() {
