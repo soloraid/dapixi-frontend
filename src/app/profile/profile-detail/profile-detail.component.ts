@@ -232,6 +232,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     this.selectedFile = (event.target.files[0] as File);
     this._postService.uploadProfilePhoto(this.selectedFile).subscribe( () => {
       this.getPicture();
+      this._profile.picSub.next(true);
     });
   }
 }
