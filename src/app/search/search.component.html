@@ -1,9 +1,8 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label style="font-family: 'IRANSansWeb';color: var(--text_color) ">جستجو</mat-label>
-    <input matInput type="search" placeholder=" نام کاربر" [(ngModel)]="searchUser" name="input">
-    <button mat-button matSuffix mat-icon-button (click)="onSearch()">
-      <mat-icon aria-hidden="false" aria-label="search icon" style="color: var(--text_color)">search</mat-icon>
-    </button>
-  </mat-form-field>
+<form class="input-group">
+  <div class="container">
+    <input class="input-group-append" type="submit" (click)="onSearch()">
+    <input dir="rtl" type="search" placeholder="جستجو . . ." [(ngModel)]="searchUser" name="input">
+    <div class="search">
+    </div>
+  </div>
 </form>
