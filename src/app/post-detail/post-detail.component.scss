@@ -7,7 +7,7 @@
   box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 10px 0 var(--secondary_color);
 }
 
-img:hover {
+.imgPost:hover {
   cursor: zoom-in;
 }
 
@@ -66,6 +66,14 @@ img:hover {
   text-align: center;
   font-size: 12px;
   line-height: 1.42857;
+}
+
+
+.avatar-img {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--secondary_color);
+  border-radius: 50%;
 }
 
 @mixin star-rating( $filled-color: #F9BF3B, $empty-color: #444, $size: 20px, $width: 125px) {

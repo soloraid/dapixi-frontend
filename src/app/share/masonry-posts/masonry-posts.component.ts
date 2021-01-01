@@ -13,7 +13,7 @@ export class MasonryPostsComponent implements OnInit,OnDestroy {
   @Input() mode: string;
   @Input() params:string;
   subs: Subscription;
-  loadingImages:boolean=true;
+  loadingImages:boolean=false;
   hasMore:boolean;
   value: number = 9;
   page: number = 1;
@@ -52,6 +52,7 @@ export class MasonryPostsComponent implements OnInit,OnDestroy {
     // console.log(posts.length)
     if(posts.length>=this.value){
       this.hasMore=true;
+      this.loadingImages = true;
     }
   }
   ngOnDestroy(){

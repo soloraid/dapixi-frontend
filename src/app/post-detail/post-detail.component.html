@@ -13,7 +13,7 @@
         </div>
         <div class="row container-temp">
           <div class="col-md-8">
-            <a [href]="postUrl" target="_blank"><img src="{{postUrl}}" alt="{{post.title}}" class="uiPost"></a>
+            <a [href]="postUrl" target="_blank"><img src="{{postUrl}}" alt="{{post.title}}" class="uiPost imgPost"></a>
             <div class="container-fluid">
               <div class="row" style="margin-top: 30px">
                 <div class="col-ms-1" *ngIf="isAuth">
@@ -50,11 +50,11 @@
                   <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="امتیاز دهندگان" (click)="getUsersRated()">
                     <mat-icon>people_alt</mat-icon>
                     {{numUsersRate}}</button>
-                  <mat-menu #menu="matMenu" yPosition="below">
-                    <div mat-menu-item *ngFor="let user of usersRated">
+                  <mat-menu #menu="matMenu">
+                    <div mat-menu-item *ngFor="let user of usersProfPic">
                       <button mat-button [routerLink]="['/user',user.username]">
-
-                        {{user.username}}<span>  ★</span>{{map.get(user.username)}}</button>
+                        <img [src]="user.imageUrl" alt="Avatar" class="avatar-img">
+                        <small>&nbsp;{{user.username}}&nbsp;&nbsp;★&nbsp;{{map.get(user.username)}}</small></button>
                     </div>
                   </mat-menu>
                 </div>
