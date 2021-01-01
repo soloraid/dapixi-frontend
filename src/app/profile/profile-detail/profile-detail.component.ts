@@ -29,7 +29,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   followers: number;
   following: number;
   isFollowed: boolean;
-  postsPresent:boolean=false;
+  postsPresent = false;
   isAuth = false;
   selectedFile: File = null;
   authSubs: Subscription;
@@ -37,7 +37,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   postsSubs: Subscription;
   followsunbs: Subscription;
   pictureSubs: Subscription;
-  authError:string='';
+  authError = '';
   p1 = 1;
   p = 1;
   // = {
@@ -78,7 +78,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
         this.isAuth = true;
         this.getCount(this.username);
       }else{
-        this.isAuth=false;
+        this.isAuth = false;
       }
     });
     let getObv: Observable<any>;
@@ -123,24 +123,24 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   }
 
   private getPosts() {
-    this.postsSubs = this._postService.getPostsByUsername(this.userView.username,9).subscribe((posts: Post[]) => {
+    this.postsSubs = this._postService.getPostsByUsername(this.userView.username, 9).subscribe((posts: Post[]) => {
       // console.log(posts)
       this.userPosts = posts;
       // this.userPosts.reverse();
-      this.postsPresent=true;
+      this.postsPresent = true;
       // console.log(posts);
     });
   }
 
   private getCount(username: string = ''): void {
     // console.log(username);
-    this.followsunbs = this._profile.getFollowers(username)
+    this.followsunbs = this._profile.getFollowersCount(username)
       .pipe(
         map((followersCount: number) => {
           return {followers: followersCount};
         }),
         mergeMap(followerObj => {
-          return this._profile.getFollowing(username)
+          return this._profile.getFollowingCount(username)
             .pipe(
               map((followingCount: number) => {
                 return {
@@ -195,36 +195,32 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     if (this.followsunbs) {
       this.followsunbs.unsubscribe();
     }
-    if(!this._authService.isInLocal()){
+    if (!this._authService.isInLocal()){
       this._authService.logOut();
     }
   }
 
-  // onBtnClick() {
-  //   if (this.loginUser) {
-  //     this._router.navigate(['edit'], { relativeTo: this._rout })
-  //   }
-  // }
-
   requestToFollow(): void {
-    if(this._authService.isInLocal()){
+    if (this._authService.isInLocal()){
       this._profile.follow(this.userView.username).subscribe(() => {
         this.getCount(this.userView.username);
         this.isFollowed = true;
+        this._profile.followSub.next(true);
       });
     }else{
-      this.authError='باید وارد حساب کاربری خود شوید';
+      this.authError = 'باید وارد حساب کاربری خود شوید';
     }
   }
 
   requestToUnfollow(): void {
-    if(this._authService.isInLocal()){
+    if (this._authService.isInLocal()){
       this._profile.unfollow(this.userView.username).subscribe(() => {
         this.getCount(this.userView.username);
         this.isFollowed = false;
+        this._profile.followSub.next(true);
       });
     }else{
-      this.authError='باید وارد حساب کاربری خود شوید';
+      this.authError = 'باید وارد حساب کاربری خود شوید';
     }
   }
 
@@ -234,6 +230,10 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
       this.getPicture();
       this._profile.picSub.next(true);
     });
+  }
+
+  navigate(): void {
+    this._router.navigate(['user', this.userView.username, 'following-follower']);
   }
 }
 

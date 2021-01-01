@@ -37,7 +37,7 @@
         <div *ngIf="isAuth" class="col-8 col-sm-4 col-md-6 col-lg-7 follow-box">
             <div class="row no-gutters  rtl">
                 <div class="col-6 col-sm-4 text-center">
-                    <a class="follow-link d-block">
+                    <a class="follow-link d-block" (click)="navigate()">
                         <div>
                             <h1>{{ followers }}</h1>
                             <p>دنبال کنندگان</p>
@@ -45,7 +45,7 @@
                     </a>
                 </div>
                 <div class="col-6 col-sm-4 text-center">
-                    <a class="follow-link d-block">
+                    <a class="follow-link d-block" (click)="navigate()">
                         <div>
                             <h1>{{ following }}</h1>
                             <p>دنبال شوندگان</p>

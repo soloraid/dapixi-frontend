@@ -61,6 +61,7 @@ import { HotPostsComponent } from './hot-posts/hot-posts.component';
 import { MasonryPostsComponent } from './share/masonry-posts/masonry-posts.component';
 import { CatchErrorInterceptor } from './catch-error.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
+import { FollowComponent } from './profile/follow/follow.component';
 
 
 
@@ -97,6 +98,7 @@ import {MatMenuModule} from '@angular/material/menu';
     RecomendedPostsComponent,
     HotPostsComponent,
     MasonryPostsComponent,
+    FollowComponent,
   ],
   imports: [
     BrowserModule,

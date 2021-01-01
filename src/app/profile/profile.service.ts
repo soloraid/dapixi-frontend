@@ -10,6 +10,7 @@ import { environment } from '../../../src/environments/environment';
 })
 export class ProfileService {
   picSub: Subject<boolean> = new Subject<boolean>();
+  followSub: Subject<boolean> = new Subject<boolean>();
 
   constructor(private _http: HttpClient, private _router: Router) { }
   getProfile() {
@@ -25,7 +26,7 @@ export class ProfileService {
         return throwError(errData);
       }));
   }
-  getFollowers(username: string = '') {
+  getFollowersCount(username: string = '') {
     let params = new HttpParams();
     if (username.length) {
       // console.log(username);
@@ -36,7 +37,30 @@ export class ProfileService {
       params
     });
   }
-  getFollowing(username: string = '') {
+
+  getFollowers(username: string = '') {
+    let params = new HttpParams();
+    if (username.length) {
+      // console.log(username);
+      params = params.append('username', username);
+      return this._http.get( environment.api + '/user/profile/followers', {
+        params
+      });
+    }
+  }
+
+  getFollowings(username: string = '') {
+    let params = new HttpParams();
+    if (username.length) {
+      // console.log(username);
+      params = params.append('username', username);
+      return this._http.get( environment.api + '/user/profile/followed-users', {
+        params
+      });
+    }
+  }
+
+  getFollowingCount(username: string = '') {
     let params = new HttpParams();
     if (username.length) {
       //  console.log('du',username);
