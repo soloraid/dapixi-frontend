@@ -77,12 +77,12 @@ export class MainNavComponent implements OnInit, OnDestroy{
       '/hot',
       '/user/profile',
       '/user/profile/edit',
-      '/user/new'
+      '/user/new',
     ];
     const inGuarded = guardedPages.find((rout: string) => {
       return rout === url;
     });
-    if (inGuarded){
+    if (inGuarded || url.endsWith('following-follower')){
       this._router.navigate(['/home']);
     }
   }

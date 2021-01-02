@@ -71,6 +71,7 @@ const routes: Routes = [
   {
     path: 'user/:username/following-follower',
     component: FollowComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'more/:type',
