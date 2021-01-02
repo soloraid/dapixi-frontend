@@ -35,9 +35,6 @@
       </div>
     </section>
     <section *ngIf="!isEmptyPosts">
-      <div *ngIf="(loaderService.isLoading | async) && firstLoad" class="loader-container">
-        <mat-spinner style="top: 35%;left: 50%"></mat-spinner>
-      </div>
       <div class="ui-main-posts">
         <app-masonry-posts [posts]="postView" [mode]="'searchByTitle'" [service]="'searchService'" [params]="title"></app-masonry-posts>
       </div>

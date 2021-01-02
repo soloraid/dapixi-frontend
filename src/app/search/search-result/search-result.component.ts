@@ -65,11 +65,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
             });
         }
         this.users = users;
-        if (users.length !== 0) {
+        if (users.length > 0) {
           this.isEmptyUsers = false;
           this.isEmpty = false;
         } else {
           this.isEmptyUsers = true;
+          this.isEmpty = true;
         }
       });
     });
@@ -82,7 +83,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.postView = [];
       this.postView = posts;
       this.firstLoad = false;
-      if (this.postView.length !== 0) {
+      if (this.postView.length > 0) {
         this.isEmptyPosts = false;
         this.isEmpty = false;
       } else {
@@ -99,11 +100,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
       this.searchService.searchByTitle(this.title, 9).subscribe((posts: Post[]) => {
         this.postView = [];
         this.postView = posts;
-        if (this.postView.length !== 0) {
+        if (this.postView.length > 0) {
           this.isEmptyPosts = false;
           this.isEmpty = false;
         } else {
           this.isEmptyPosts = true;
+          this.isEmpty = true;
         }
         this.firstLoad = false;
       });
