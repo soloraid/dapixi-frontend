@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Post} from '../share/post/post.module';
 import {environment} from '../../environments/environment';
 import {PostService} from '../share/post.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LoaderService} from '../share/loader/loader.service';
 import {AuthService} from '../auth/auth.service';
 import {Tokens} from '../share/tokens.model';
@@ -38,7 +38,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   constructor(private postService: PostService, private route: ActivatedRoute,
               public loaderService: LoaderService, private authService: AuthService,
               private profileService: ProfileService,
-              public dialog:MatDialog) {
+              public dialog:MatDialog,
+              public router:Router) {
   }
 
   ngOnInit(): void {
@@ -156,13 +157,17 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   showDialog(){
     const dialogRef=this.dialog.open(ConfirmDialogComponent);
     dialogRef.afterClosed().subscribe(result=>{
-      console.log(result);
+      if(result){
+        this.deletePost();
+      }
     })
   }
-  deletePost(){
+  private deletePost(){
     
     this.postService.deletePost(this.post.id).subscribe(data=>{
-      console.log('del',data);
+      // console.log('del',data);
+      this.router.navigate(['/']);
+      
     })
   }
 }
