@@ -73,9 +73,9 @@ export class UploadPostComponent implements OnInit,OnDestroy {
       this.addCatSubsc=this._postService
       .addCategories(postData.id,cats)
       .subscribe((data)=>{
-        console.log(data);
+        console.log('cats',data);
+        this._router.navigate(['./post-detail',postData.id]);
       })
-      this._router.navigate(['./post-detail',postData.id]);
     })
     // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
