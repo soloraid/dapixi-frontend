@@ -166,7 +166,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     
     this.postService.deletePost(this.post.id).subscribe(data=>{
       // console.log('del',data);
-      this.router.navigate(['/']);
+      this.router.navigate(['/user/profile']);
       
     })
   }
