@@ -62,6 +62,7 @@ import { MasonryPostsComponent } from './share/masonry-posts/masonry-posts.compo
 import { CatchErrorInterceptor } from './catch-error.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
 import { FollowComponent } from './profile/follow/follow.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -126,7 +127,8 @@ import { FollowComponent } from './profile/follow/follow.component';
     MatTooltipModule,
     MatStepperModule,
     NgxMasonryModule,
-    MatMenuModule
+    MatMenuModule,
+    MatAutocompleteModule
   ],
   providers: [
     {
