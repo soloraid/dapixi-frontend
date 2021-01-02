@@ -5,7 +5,7 @@
       </div>
       <div class="card-body" *ngIf="!isEmpty">
         <div class="card-header detail" [ngClass]="{'d-flex':currentUser,'justify-content-between':currentUser}">
-          <button *ngIf="currentUser" class="delete-btn" matTooltip="حذف پست" (click)="deletePost()">
+          <button *ngIf="currentUser" class="delete-btn" matTooltip="حذف پست" (click)="showDialog()">
             <mat-icon >delete_forever</mat-icon>
           </button>
           <div class="p-3">

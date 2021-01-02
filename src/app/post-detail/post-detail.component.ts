@@ -10,6 +10,8 @@ import {Subscription} from 'rxjs';
 import {User} from '../share/user/user.mudole';
 import {ProfileService} from '../profile/profile.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../share/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -35,7 +37,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
   constructor(private postService: PostService, private route: ActivatedRoute,
               public loaderService: LoaderService, private authService: AuthService,
-              private profileService: ProfileService) {
+              private profileService: ProfileService,
+              public dialog:MatDialog) {
   }
 
   ngOnInit(): void {
@@ -150,7 +153,14 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       console.log(this.usersProfPic);
     }
   }
+  showDialog(){
+    const dialogRef=this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log(result);
+    })
+  }
   deletePost(){
+    
     this.postService.deletePost(this.post.id).subscribe(data=>{
       console.log('del',data);
     })
