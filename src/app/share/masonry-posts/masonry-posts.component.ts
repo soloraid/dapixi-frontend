@@ -15,7 +15,7 @@ export class MasonryPostsComponent implements OnInit, OnDestroy {
   @Input() service: string;
   @Input() params: string;
   subs: Subscription;
-  loadingImages = false;
+  loadingImages = true;
   hasMore: boolean;
   value = 9;
   page = 1;
@@ -64,6 +64,8 @@ export class MasonryPostsComponent implements OnInit, OnDestroy {
     if (posts.length >= this.value) {
       this.hasMore = true;
       this.loadingImages = true;
+    } else {
+      this.loadingImages = false;
     }
   }
 
