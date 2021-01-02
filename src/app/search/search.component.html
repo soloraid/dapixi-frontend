@@ -1,8 +1,29 @@
 <form class="input-group">
   <div class="container">
-    <input class="input-group-append" type="submit" (click)="onSearch()">
-    <input dir="rtl" type="search" placeholder="جستجو . . ." [(ngModel)]="searchUser" name="input">
+    <input dir="rtl" type="search" placeholder="جستجو . . ." [(ngModel)]="searchInput"
+           [matAutocomplete]="auto"
+           name="input">
     <div class="search">
+    </div>
+    <div>
+      <mat-autocomplete class="dropDownMenu" dir="ltr" #auto="matAutocomplete">
+        <mat-option>
+          <div (click)="username()" class="d-flex justify-content-between">
+            <p>جستجو بر اساس نام کاربر</p>
+          </div>
+        </mat-option>
+        <mat-option>
+          <div (click)="title()" class="d-flex justify-content-between">
+            <p>جستجو براساس اسم عکس</p>
+          </div>
+        </mat-option>
+        <mat-option>
+          <div (click)="advance()" class="d-flex justify-content-start">
+            <p>جستجو پیشرفته</p>
+            <button mat-icon-button class="btn btn-group-sm btn-sm" style="margin-right: 10px; margin-top: 3px">&nbsp;&nbsp;<mat-icon>arrow_back</mat-icon></button>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
     </div>
   </div>
 </form>
