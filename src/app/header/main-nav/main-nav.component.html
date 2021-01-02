@@ -5,12 +5,20 @@
                [ngClass]="{hidden: !(isHandset$ | async)}"
                [mode]="(isHandset$ | async) ? 'over' : 'side'"
                [opened]="(isHandset$ | async) === false">
-    <mat-toolbar class="mat-tool">فهرست</mat-toolbar>
-<!--    <mat-toolbar *ngIf="(isHandset$ | async)" class="mat-tool" ><app-search mat-list-item></app-search></mat-toolbar>-->
+
+    <mat-toolbar-row class="d-flex justify-content-end">
+      <mat-toolbar *ngIf="isAuth">
+        <img [src]="imageUrl" alt="Avatar" class="avatar-img" style="margin-top: 3px; margin-right: 70px; border: 3px solid var(--secondary_color)">
+      </mat-toolbar>
+      <mat-toolbar class="mat-tool">فهرست</mat-toolbar>
+    </mat-toolbar-row>
     <hr>
     <mat-nav-list >
       <div *ngIf="(isHandset$2 | async)">
-        <div dir="ltr">
+        <div class="d-flex justify-content-start">
+          <button mat-icon-button matTooltip="خانه" routerLink="home" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
+            <mat-icon>home</mat-icon>
+          </button>
           <button mat-icon-button matTooltip="پست امتیاز بالا" routerLink="hot" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
             <mat-icon>whatshot</mat-icon>
           </button>
@@ -20,11 +28,8 @@
           <button mat-icon-button matTooltip="دنبال شوندگان" *ngIf="isAuth" routerLink="follow" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
             <mat-icon>follow_the_signs</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="خانه" routerLink="home" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
-            <mat-icon>home</mat-icon>
-          </button>
-          <hr>
         </div>
+        <hr>
       </div>
       <button mat-list-item *ngIf="!isAuth" (click)="drawer.toggle();onRegister()" class="nav-item navbar-item">
         <mat-icon>app_registration</mat-icon>
@@ -69,7 +74,7 @@
           <span class="spacer"></span>
         </div>
         <div class="row" *ngIf="isAuth &&!(isHandset$ | async)" style="font-family: 'IRANSansWeb'; color: var(--text_color2)">
-          <div class="col-ms-2">
+          <div class="col-md-3">
             <img [src]="imageUrl" alt="Avatar" class="avatar-img">
           </div>
           <div class="col-md-3">

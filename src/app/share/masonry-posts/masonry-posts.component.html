@@ -1,4 +1,4 @@
-<ngx-masonry [options]="{horizontalOrder:true}" [ordered]="true" (itemsLoaded)="onItemsLoaded()">
+<ngx-masonry [ordered]="true" (itemsLoaded)="onItemsLoaded()">
     <div ngxMasonryItem class="masonary-item" *ngFor="let post of posts">
         <app-post [post]="post"></app-post>
     </div>

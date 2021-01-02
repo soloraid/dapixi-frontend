@@ -12,7 +12,7 @@
                         maxlength="40" [(ngModel)]="title" autofocus>
                 </div>
               <div class="mb-5" *ngIf="(loaderService.isLoading | async) && imgFile && title">
-                <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                 <hr>
                 <h6>آپلود عکس. . .</h6>
               </div>
