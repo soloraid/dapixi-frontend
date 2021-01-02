@@ -26,6 +26,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   isFirst = true;
   rateError = '';
+  username:string;
+  currentUser:boolean;
   map: Map<string, number> = new Map<string, number>();
   usersProfPic: PictureData[] = [];
   private pictureSubs: Subscription;
@@ -39,12 +41,19 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authSub = this.authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
+      if(token){
+        this.username=token.username;
+      }
     });
     this.id = this.route.snapshot.params.id;
     this.postService.getPostByID(this.id).subscribe((post: Post) => {
       this.postUrl = environment.api + '/photo' + post.imageUrl;
       this.post = post;
       console.log(post);
+      if(this.isAuth){
+        this.currentUser = post.username===this.username;
+      }
+      console.log(this.currentUser);
       this.isEmpty = false;
       this.isFirst = false;
       this.postService.getUsersRatePost(this.id).subscribe( users => {

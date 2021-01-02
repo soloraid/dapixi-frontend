@@ -4,8 +4,8 @@
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
       </div>
       <div class="card-body" *ngIf="!isEmpty">
-        <div class="card-header detail d-flex justify-content-between">
-          <button class="delete-btn" matTooltip="حذف پست">
+        <div class="card-header detail" [ngClass]="{'d-flex':currentUser,'justify-content-between':currentUser}">
+          <button *ngIf="currentUser" class="delete-btn" matTooltip="حذف پست">
             <mat-icon >delete_forever</mat-icon>
           </button>
           <div class="p-3">
