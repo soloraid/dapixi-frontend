@@ -38,7 +38,7 @@ export class EnterComponent implements OnInit,OnDestroy {
     
     if(err){
       // console.log(err);
-      this.initError=`شما از حساب کاربری خود خارج شده‌اید برای ادامه باید وارد حساب کاربری خود شوید.`
+      this.initError=` برای ادامه باید وارد حساب کاربری خود شوید.`
     }
     const back=this._rout.snapshot.queryParamMap.get('back');
     if(back){

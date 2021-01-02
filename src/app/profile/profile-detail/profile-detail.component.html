@@ -76,7 +76,7 @@
     </div>
     <div class="row no-gutters rtl d-felx justify-content-center">
         <div class="col-6">
-            <button class="w-100 outline-btn main-btn" [routerLink]="['edit']" *ngIf="loginUser">ویرایش پروفایل</button>
+            <button class="w-100 outline-btn main-btn" routerLink="/user/profile/edit" *ngIf="loginUser">ویرایش پروفایل</button>
             <button class="w-100 main-btn" *ngIf="!loginUser && !isFollowed" (click)="requestToFollow()" [hidden]="!isAuth" [disabled]="authError.length>0">دنبال کردن</button>
             <button class="w-100 main-btn" *ngIf="!loginUser && isFollowed" (click)="requestToUnfollow()" [hidden]="!isAuth" [disabled]="authError.length>0">دنبال نکردن</button>
         </div>

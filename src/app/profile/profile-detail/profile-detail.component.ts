@@ -68,7 +68,8 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
         this.loginUser = false;
         if (this._authService.authState.value && this.username === this._authService.authState.value.username) {
           // console.log(this._authService.authState.value.username);
-          this._router.navigate(['/user/profile']);
+          this.loginUser=true;
+          // this._router.navigate(['/user/profile']);
         }
       }
     });
@@ -180,6 +181,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+ 
     if (this.authSubs) {
       this.authSubs.unsubscribe();
     }
