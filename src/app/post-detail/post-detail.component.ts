@@ -150,6 +150,11 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       console.log(this.usersProfPic);
     }
   }
+  deletePost(){
+    this.postService.deletePost(this.post.id).subscribe(data=>{
+      console.log('del',data);
+    })
+  }
 }
 
 class PictureData {
