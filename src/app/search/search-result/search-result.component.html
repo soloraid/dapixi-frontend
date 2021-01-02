@@ -1,34 +1,45 @@
 <div class="container-fluid">
+  <div *ngIf="(loaderService.isLoading | async)" class="loader-container">
+    <mat-spinner style="top: 35%;left: 50%"></mat-spinner>
+  </div>
   <h4>نتایج جستجو</h4>
   <hr>
-  <section *ngIf="!isEmptyUsers; else noInfo">
-    <div class="row active-with-click">
-      <div class="col-lg-4 col-md-5 col-sm-6 col-12" *ngFor="let user of users">
-        <article class="material-card Deep-Purple">
-          <h2>
-            <span>{{user.firstName}} {{user.lastName}}</span>
-            <strong>
-              <i class="fa fa-fw fa-user-circle"></i>
-              {{user.username}}
-            </strong>
-          </h2>
-          <div class="mc-content">
-            <div class="img-container">
-              <img class="avatar-preview" [src]="user.profileImageUrl">
-            </div>
-          </div>
-          <a class="mc-btn-action" [routerLink]="['/user',user.username]">
-            <i class="fa fa-address-card"></i>
-          </a>
-        </article>
-      </div>
-    </div>
-  </section>
   <ng-template #noInfo>
-    <div class="alert alert-danger" role="alert">
+    <div *ngIf="!(loaderService.isLoading | async)" class="alert alert-danger" role="alert">
       <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
       <p>.دوباره تلاش کنید</p>
     </div>
   </ng-template>
+  <div *ngIf="!isEmpty; else noInfo">
+    <section *ngIf="!isEmptyUsers">
+      <div class="row active-with-click">
+        <div class="col-lg-4 col-md-5 col-sm-6 col-12" *ngFor="let user of users">
+          <article class="material-card Deep-Purple">
+            <h2>
+              <span>{{user.firstName}} {{user.lastName}}</span>
+              <strong>
+                <i class="fa fa-fw fa-user-circle"></i>
+                {{user.username}}
+              </strong>
+            </h2>
+            <div class="mc-content">
+              <div class="img-container">
+                <img class="avatar-preview" [src]="user.profileImageUrl">
+              </div>
+            </div>
+            <a class="mc-btn-action" [routerLink]="['/user',user.username]">
+              <i class="fa fa-address-card"></i>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section *ngIf="!isEmptyPosts">
+      <div class="ui-main-posts">
+        <app-masonry-posts [posts]="postView" [mode]="'searchByTitle'" [service]="'searchService'" [params]="title"></app-masonry-posts>
+      </div>
+    </section>
+  </div>
+
 
 </div>

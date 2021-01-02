@@ -4,12 +4,17 @@
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
       </div>
       <div class="card-body" *ngIf="!isEmpty">
-        <div class="card-header detail">
-          <h6 class="card-title"><a>{{post.title}}</a></h6>
-          <p>
-            <a href="" [routerLink]="['/user',post.username]" class="card-link">{{post.username}}</a>
-          </p>
-          <h6>{{post.categories}} :نوع عکس</h6>
+        <div class="card-header detail" [ngClass]="{'d-flex':currentUser && isAuth,'justify-content-between':currentUser && isAuth}">
+          <button *ngIf="currentUser && isAuth" class="delete-btn" matTooltip="حذف پست" (click)="showDialog()">
+            <mat-icon >delete_forever</mat-icon>
+          </button>
+          <div class="p-3">
+            <h4 class="card-title p-0"><a>{{post.title}}</a></h4>
+            <p>
+              <a href="" [routerLink]="['/user',post.username]" class="card-link">@{{post.username}}</a>
+            </p>
+            <h6>{{post.categories}} :نوع عکس</h6>
+          </div>
         </div>
         <div class="row container-temp">
           <div class="col-md-8">

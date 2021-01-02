@@ -85,8 +85,25 @@ const routes: Routes = [
     component: PostDetailComponent
   },
   {
-    path: 'search-result/:name',
-    component: SearchResultComponent
+    path: 'search-result',
+    // component: SearchResultComponent,
+    children: [
+      {
+        path: 'username/:name',
+        component: SearchResultComponent,
+        data: { name: 'username' }
+      },
+      {
+        path: 'category',
+        component: SearchResultComponent,
+        data: { name: 'category' }
+      },
+      {
+        path: 'title/:title',
+        component: SearchResultComponent,
+        data: { name: 'title' }
+      },
+    ]
   },
   {
     path: 'auth',

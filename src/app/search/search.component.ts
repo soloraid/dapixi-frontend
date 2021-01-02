@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {PostService} from '../share/post.service';
+import {SearchService} from './search.service';
+import {Post} from '../share/post/post.module';
 
 @Component({
   selector: 'app-search',
@@ -8,17 +10,35 @@ import {PostService} from '../share/post.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  searchUser: string;
-
+  searchInput: string;
 
   constructor(private postService: PostService,
-              private router: Router) {
+              private router: Router,
+              private searchService: SearchService) {
   }
 
   ngOnInit(): void {
   }
 
-  onSearch(): void {
-    this.router.navigate(['/search-result', this.searchUser]);
+  username(): void {
+    this.router.navigate(['/search-result/username', this.searchInput]);
+  }
+
+  category(): void {
+    const queryParams: any = {};
+    queryParams.myArray = JSON.stringify([this.searchInput]);
+    const navigationExtras: NavigationExtras = {
+      queryParams
+    };
+    // this.searchService.searchByCategories(categories).subscribe();
+    this.router.navigate(['/search-result/category'], navigationExtras);
+  }
+
+  advance(): void {
+
+  }
+
+  title(): void {
+    this.router.navigate(['/search-result/title', this.searchInput]);
   }
 }
