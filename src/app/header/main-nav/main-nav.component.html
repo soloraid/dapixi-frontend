@@ -10,7 +10,10 @@
     <hr>
     <mat-nav-list >
       <div *ngIf="(isHandset$2 | async)">
-        <div dir="ltr">
+        <div class="d-flex justify-content-start">
+          <button mat-icon-button matTooltip="خانه" routerLink="home" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
+            <mat-icon>home</mat-icon>
+          </button>
           <button mat-icon-button matTooltip="پست امتیاز بالا" routerLink="hot" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
             <mat-icon>whatshot</mat-icon>
           </button>
@@ -20,11 +23,9 @@
           <button mat-icon-button matTooltip="دنبال شوندگان" *ngIf="isAuth" routerLink="follow" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
             <mat-icon>follow_the_signs</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="خانه" routerLink="home" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
-            <mat-icon>home</mat-icon>
-          </button>
-          <hr>
+
         </div>
+        <hr>
       </div>
       <button mat-list-item *ngIf="!isAuth" (click)="drawer.toggle();onRegister()" class="nav-item navbar-item">
         <mat-icon>app_registration</mat-icon>
