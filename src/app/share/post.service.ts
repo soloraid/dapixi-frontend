@@ -132,6 +132,11 @@ export class PostService {
       params
     });
   }
+  deletePost(id:string){
+    let params = new HttpParams();
+    params = params.append('id',id);
+    return this.http.delete(environment.api + '/photo/posts/'+id);
+  }
 }
 
 

@@ -62,8 +62,9 @@ import { MasonryPostsComponent } from './share/masonry-posts/masonry-posts.compo
 import { CatchErrorInterceptor } from './catch-error.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
 import { FollowComponent } from './profile/follow/follow.component';
+import { ConfirmDialogComponent } from './share/confirm-dialog/confirm-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
 
 
 
@@ -100,6 +101,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     HotPostsComponent,
     MasonryPostsComponent,
     FollowComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,7 +130,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatStepperModule,
     NgxMasonryModule,
     MatMenuModule,
+    MatDialogModule,
     MatAutocompleteModule
+
   ],
   providers: [
     {
