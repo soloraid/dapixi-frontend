@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label for="password">رمز عبور:</label>
-        <input ngModel  type="password" class="form-control" name="password" required minlength="6">
+        <input ngModel id="password" type="password" class="form-control" name="password" required minlength="6">
     </div>
     <div class="form-check pr-2">
         <input [ngModel]="hasRemember" type="checkbox" class="form-check-input" name="remember" id="remember">
@@ -23,8 +23,8 @@
     <div class="row justify-content-center">
         <div class="col-12 col-sm-7 col-md-8 col-xl-6 text-center">
             <button type="submit" class="btn mx-0" [disabled]="enter_form.invalid || (loaderService.isLoading | async)">ورود</button>
-            <a href="http://94.184.176.106/oauth2/authorize/google?redirect_uri=/">ورود با گوگل</a><br/>
-            <a href="http://94.184.176.106/oauth2/authorize/github?redirect_uri=/">ورود با گیتهاب</a>
+            <a href="{{domain}}/oauth2/authorize/google?redirect_uri=/">ورود با گوگل</a><br/>
+            <a href="{{domain}}/oauth2/authorize/github?redirect_uri=/">ورود با گیتهاب</a>
             <a class="form-link" [routerLink]="['../register']">حساب ندارید؟ثبت نام</a>
             <a class="form-link" href="" [routerLink]="['../reset']">رمز عبور خود را فراموش کرده‌اید؟</a>
             <div *ngIf="loaderService.isLoading | async">
