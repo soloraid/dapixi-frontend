@@ -1,7 +1,7 @@
 import {Location} from '@angular/common';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Route} from '@angular/compiler/src/core';
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {map, mergeMap} from 'rxjs/operators';
@@ -20,6 +20,8 @@ import {User} from '../../share/user/user.mudole';
   styleUrls: ['./profile-detail.component.scss']
 })
 export class ProfileDetailComponent implements OnInit, OnDestroy {
+  @ViewChild('inputFile', {static: false})
+  InputVar: ElementRef;
   userView: User;
   username: string;
   loginUser = true;
@@ -40,12 +42,6 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   authError = '';
   p1 = 1;
   p = 1;
-  // = {
-  //   img: "https://via.placeholder.com/150",
-  //   name: "علی قیومی",
-  //   username: "@a",
-  //   email: "a@a.com"
-  // }
   copied = false;
   link: string;
 
@@ -228,9 +224,11 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
 
   onChange(event): void {
     this.selectedFile = (event.target.files[0] as File);
+    console.log(this.selectedFile);
     this._postService.uploadProfilePhoto(this.selectedFile).subscribe( () => {
       this.getPicture();
       this._profile.picSub.next(true);
+      this.InputVar.nativeElement.value = '';
     });
   }
 
