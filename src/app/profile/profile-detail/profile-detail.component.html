@@ -84,10 +84,14 @@
             <button class="w-100 main-btn" *ngIf="!loginUser && !isFollowed" (click)="requestToFollow()" [hidden]="!isAuth" [disabled]="authError.length>0">دنبال کردن</button>
             <button class="w-100 main-btn" *ngIf="!loginUser && isFollowed" (click)="requestToUnfollow()" [hidden]="!isAuth" [disabled]="authError.length>0">دنبال نکردن</button>
         </div>
-        <div class="col-2 d-felx justify-content-end pr-2" *ngIf="isAuth">
-            <button class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
-                <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </button>
+        <div class="col-2 d-flex justify-content-start pr-2" *ngIf="isAuth">
+          <button matTooltip="کپی لینگ پروفایل" class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+          </button>
+          <button *ngIf="!loginUser && isFollowed" class="profile-button share-button mb-1" (click)="changeNotification()">
+            <mat-icon matTooltip="خاموش کردن" *ngIf="isNotifON">notifications_on</mat-icon>
+            <mat-icon matTooltip="روشن کردن" *ngIf="!isNotifON">notifications_off</mat-icon>
+          </button>
         </div>
         <div class="col-12 text-center" *ngIf="isAuth">
             <p class="m-0" *ngIf="copied"><small>لینک پرفایل کپی شد</small></p>

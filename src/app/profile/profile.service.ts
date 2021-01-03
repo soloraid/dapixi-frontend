@@ -176,4 +176,16 @@ export class ProfileService {
   deleteProfilePic(): any {
     return this._http.delete( environment.api + '/photo/profile/picture');
   }
+
+  getCurrentStatusNotification() {
+    return this._http.get(environment.api + '/user/profile/notifications');
+  }
+
+  setNotification(currentStatue: boolean) {
+    let params = new HttpParams();
+    params = params.append('notifyEnable', String(currentStatue));
+    return this._http.patch(environment.api + '/user/profile/notifications', '', {
+      params
+    });
+  }
 }

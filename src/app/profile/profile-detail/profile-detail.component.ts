@@ -39,11 +39,13 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   postsSubs: Subscription;
   followsunbs: Subscription;
   pictureSubs: Subscription;
+  notifSubs: Subscription;
   authError = '';
   p1 = 1;
   p = 1;
   copied = false;
   link: string;
+  isNotifON = false;
 
   constructor(
     public http: HttpClient,
@@ -116,7 +118,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     });
     // console.log(this.userPosts);
     // this.getPosts();
-
+    this.notification();
   }
 
   private getPosts() {
@@ -196,6 +198,9 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     if (!this._authService.isInLocal()){
       this._authService.logOut();
     }
+    if (this.notifSubs) {
+      this.notifSubs.unsubscribe();
+    }
   }
 
   requestToFollow(): void {
@@ -216,6 +221,9 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
         this.getCount(this.userView.username);
         this.isFollowed = false;
         this._profile.followSub.next(true);
+        this._profile.setNotification(false).subscribe((isNotif: boolean) => {
+          this.isNotifON = isNotif;
+        });
       });
     }else{
       this.authError = 'باید وارد حساب کاربری خود شوید';
@@ -240,6 +248,21 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     this._profile.deleteProfilePic().subscribe( () => {
       this.getPicture();
       this._profile.picSub.next(true);
+    });
+  }
+
+  private notification(): void {
+    let observe: Observable<any>;
+    observe = this._profile.getCurrentStatusNotification();
+    this.notifSubs = observe.subscribe((isNotif: boolean) => {
+      this.isNotifON = isNotif;
+    });
+  }
+
+  changeNotification(): void {
+    this.notification();
+    this.notifSubs = this._profile.setNotification(!this.isNotifON).subscribe((isNotif: boolean) => {
+      this.isNotifON = isNotif;
     });
   }
 }
