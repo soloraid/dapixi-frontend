@@ -37,7 +37,7 @@
       <mat-label>نظر بده</mat-label>
       <textarea matInput type="text"  [(ngModel)]="sendingComment"  placeholder=". . ." name="comment" cdkTextareaAutosize cdkAutosizeMinRows="1" style="overflow-y: hidden;"></textarea>
       <button mat-button matSuffix mat-icon-button type="submit" [disabled]="sendingComment===''">
-        <mat-icon aria-hidden="false" aria-label="done icon" style="color: var(--text_color)">add_comment</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="done icon" style="color: var(--text_color)">insert_comment</mat-icon>
       </button>
       <div *ngIf="loaderService.isLoading | async" class="loader-container">
         <mat-progress-bar  mode="indeterminate"></mat-progress-bar>
