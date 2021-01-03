@@ -11,7 +11,8 @@ import { Tokens } from '../share/tokens.model';
 })
 export class InfoComponent implements OnInit {
   authSubs:Subscription;
-  isAuth:boolean
+  isAuth:boolean;
+  msgSubs:Subscription;
   constructor(private _authService:AuthService) { }
 
   ngOnInit(): void {
@@ -20,7 +21,10 @@ export class InfoComponent implements OnInit {
     })
   }
   onSubmit(form:NgForm){
-    console.log(form.value.title,form.value.message);
+    // console.log(form.value.title,form.value.message);
+    this.msgSubs = this._authService.sendMessage(form.value.title,form.value.message).subscribe(data=>{
+      console.log(data);
+    })
   }
 
 }
