@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {LoaderService} from '../share/loader/loader.service';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {AuthService} from "../auth/auth.service";
+import { Tokens } from '../share/tokens.model';
 import { ProfileService } from '../profile/profile.service';
 import { Subscription } from 'rxjs';
 import { User } from '../share/user/user.mudole';
-import { Tokens } from '../share/tokens.model';
 
 @Component({
   selector: 'app-main',
@@ -13,23 +13,23 @@ import { Tokens } from '../share/tokens.model';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-
+  profileSubs:Subscription
   constructor(public loaderService: LoaderService, private route: ActivatedRoute
-    , private auth: AuthService, private router: Router
-    ,private _profileService:ProfileService) {
+    , private auth: AuthService, private router: Router,private _profileService:ProfileService) {
   }
-  profileSubs:Subscription;
+
   ngOnInit(): void {
     this.route.data.subscribe((data: Data) => {
       if (data['tokens']) {
-        let token:Tokens=data['token'];
+        let token:Tokens=data['tokens'];
+        this.auth.authState.next(token);
         this.profileSubs=this._profileService.getProfile().subscribe((user:User)=>{
           token.username=user.username;
-          this.auth.authState.next(data['tokens']);
+          this.auth.authState.next(token);
           this.router.navigate(['home'], {relativeTo: this.route});
+          console.log(token);
         })
       }
-      // console.log(data['tokens']);
     });
   }
 
