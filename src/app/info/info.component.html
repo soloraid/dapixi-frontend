@@ -9,19 +9,19 @@
           <p>
             . پیام خود را در کار زیر بنویسید و ما به شما پاسخ خواهیم داد
           </p>
-          <form role="form" method="post" id="reused_form">
+          <form #msgForm="ngForm" role="form" id="reused_form" (ngSubmit)="onSubmit(msgForm)">
             <div class="row" dir="rtl">
               <div class="col-sm-6 form-group">
-                <label for="name">
+                <label for="title">
                    عنوان :</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name" name="title" ngModel required>
               </div>
             </div>
             <div class="row" dir="rtl">
               <div class="col-sm-12 mr-lg-0 form-group">
                 <label for="message">
                    پیام :</label>
-                <textarea class="form-control" type="textarea" id="message" name="message" maxlength="6000" rows="7"></textarea>
+                <textarea class="form-control" type="textarea" id="message" name="message" maxlength="6000" rows="7" ngModel required></textarea>
               </div>
             </div>
             <div class="row">

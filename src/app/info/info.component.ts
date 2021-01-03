@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-info',
@@ -10,6 +11,9 @@ export class InfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  onSubmit(form:NgForm){
+    console.log(form.value.title,form.value.message);
   }
 
 }
