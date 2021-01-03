@@ -172,4 +172,8 @@ export class ProfileService {
     });
 
   }
+
+  deleteProfilePic(): any {
+    return this._http.delete( environment.api + '/photo/profile/picture');
+  }
 }

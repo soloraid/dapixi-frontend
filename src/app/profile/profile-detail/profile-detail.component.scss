@@ -138,10 +138,10 @@
   margin: 50px auto;
   .avatar-edit {
     position: absolute;
-    right: 12px;
+    right: 15px;
     z-index: 1;
     top: 10px;
-    input {
+    a {
       display: none;
       + label {
         display: inline-block;
@@ -149,14 +149,14 @@
         height: 34px;
         margin-bottom: 0;
         border-radius: 100%;
-        background: #FFFFFF;
+        background: var(--bg_color);
         border: 1px solid transparent;
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+        box-shadow: 0px 2px 4px 0px var(--primary_color);
         cursor: pointer;
         font-weight: normal;
         transition: all .2s ease-in-out;
         &:hover {
-          background: #f1f1f1;
+          background: var(--bg_color);
           border-color: #d6d6d6;
         }
         &:after {
@@ -213,4 +213,10 @@
       background-position: center;
     }
   }
+}
+
+input[type="file"] {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
 }
