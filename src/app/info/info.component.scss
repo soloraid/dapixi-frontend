@@ -4,6 +4,18 @@
   transform: translate3d(0, 0, 0);
   transform-style: preserve-3d;
 }
+input.ng-invalid.ng-touched,textarea.ng-invalid.ng-touched{
+  border: 2px solid red;
+}
+.btn {
+  background-color: var(--secondary_color);
+  color: var(--text_color);
+  border: 0px;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 5px 30px 5px 30px;
+
+}
 .container-cards:after {
   position: relative;
   bottom: -27px;
@@ -115,6 +127,6 @@ a {
   box-shadow: 0 10px 20px 0 var(--primary_color), 0 5px 10px 0 var(--secondary_color);
 }
 
-.form-container {
-  //background-color: var(--primary_color);
-}
+// .form-container {
+//   //background-color: var(--primary_color);
+// }

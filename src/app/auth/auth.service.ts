@@ -182,6 +182,14 @@ export class AuthService {
     })
     )
   }
+  sendMessage(title:string,message:string){
+    let params=new HttpParams();
+    params = params.append('title',title);
+    params = params.append('content',message);
+    return this._http.post(environment.api+'/auth/user/support',{},{
+      params:params
+    })
+  }
   isInLocal(){
     const tokensTemp:{
       _access:string,
