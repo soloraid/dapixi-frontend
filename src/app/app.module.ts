@@ -5,25 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { AuthComponent } from './auth/auth.component';
+
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileDetailComponent } from './profile/profile-detail/profile-detail.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
 import { PostComponent } from './share/post/post.component';
-import { EnterComponent } from './auth/enter/enter.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UploadPostComponent } from './upload-post/upload-post.component';
 import { DropdownDirective } from './share/dropdown.directive';
 import { ClipboardModule } from 'ngx-clipboard';
-import { HttpClientModule, HTTP_INTERCEPTORS, ɵHttpInterceptingHandler } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorInterceptor } from './auth/auth-interceptor.interceptor';
 import { SearchComponent } from './search/search.component';
 import { SearchResultComponent } from './search/search-result/search-result.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ResetComponent } from './auth/reset/reset.component';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './header/main-nav/main-nav.component';
@@ -65,8 +63,9 @@ import { FollowComponent } from './profile/follow/follow.component';
 import { ConfirmDialogComponent } from './share/confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { SocialsComponent } from './auth/socials/socials.component';
 import { AuthModule } from './auth/auth.module';
+import { ProfileModule } from './profile/profile.module';
+import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module';
 
 
 
@@ -78,11 +77,8 @@ import { AuthModule } from './auth/auth.module';
     HeaderComponent,
     HomeComponent,
     ConfirmDialogComponent,
-    ProfileComponent,
-    ProfileDetailComponent,
-    ProfileEditComponent,
     PostDetailComponent,
-    PostComponent,
+    // PostComponent,
     UploadPostComponent,
     DropdownDirective,
     SearchComponent,
@@ -97,8 +93,8 @@ import { AuthModule } from './auth/auth.module';
     FollowPostsComponent,
     RecomendedPostsComponent,
     HotPostsComponent,
-    MasonryPostsComponent,
-    FollowComponent
+    // MasonryPostsComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -129,7 +125,9 @@ import { AuthModule } from './auth/auth.module';
     MatMenuModule,
     MatDialogModule,
     MatAutocompleteModule,
-    AuthModule
+    AuthModule,
+    MasonryPostsModule,
+    ProfileModule
 
   ],
   providers: [

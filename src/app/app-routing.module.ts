@@ -69,11 +69,6 @@ const routes: Routes = [
     component: CommentComponent,
   },
   {
-    path: 'user/:username/following-follower',
-    component: FollowComponent,
-    canActivate:[AuthGuard]
-  },
-  {
     path: 'more/:type',
     component: MoreComponent
   },
@@ -106,43 +101,7 @@ const routes: Routes = [
       },
     ]
   },
-  {
-    path: 'user',
-    component: ProfileComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'profile',
-        pathMatch: 'full',
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'profile',
-        component: ProfileDetailComponent,
-        canActivate: [AuthGuard]
-        // children:[
-        //   {
-        //     path:'edit',
-        //     component:ProfileEditComponent
-        //   }
-        // ]
-      },
-      {
-        path: 'profile/edit',
-        component: ProfileEditComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'new',
-        component: UploadPostComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: ':username',
-        component: ProfileDetailComponent
-      }
-    ]
-  },
+
   {
     path: '404',
     component: Error404Component
