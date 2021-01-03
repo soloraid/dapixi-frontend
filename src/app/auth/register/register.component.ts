@@ -12,7 +12,6 @@ import {environment} from '../../../environments/environment';
     styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-    domain = environment.domain;
     regForm: FormGroup;
     passwordHolder = '';
     errorMsg = '';
