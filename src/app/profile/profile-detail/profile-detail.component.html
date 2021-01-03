@@ -17,7 +17,7 @@
             </div>
             <mat-menu class="dropDownMenu" #profilePic>
               <div mat-menu-item>
-                <input (change)="onChange($event)"  type='file' id="imageUpload" accept="image/*" />
+                <input #inputFile (change)="onChange($event)"  type='file' id="imageUpload" accept="image/*" />
                 <label for="imageUpload" style="cursor: pointer;font-family: 'IRANSansWeb';"><mat-icon>file_upload</mat-icon>آپلود عکس </label>
               </div>
               <div mat-menu-item>
