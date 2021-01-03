@@ -1,36 +1,46 @@
 <form #enter_form="ngForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="errorMsg"  class="alert alert-danger pt-0 pr-1 ">
-        <a (click)="errorMsg=''" class="text-danger m-0 p-0 error-toggler">X</a>
-        <p  class="text-danger my-0 pr-2">{{ errorMsg }}</p>
-    </div>
-    <div *ngIf="initError"  class="alert alert-danger pt-0 pr-1 ">
-        <a (click)="initError=''" class="text-danger m-0 p-0 error-toggler">X</a>
-        <p  class="text-danger my-0 pr-2">{{ initError }}</p>
-    </div>
-    <div class="form-group">
-        <label for="username">شناسه کاربری:</label>
-        <input [ngModel]="username" id=username type="text" class="form-control" name="username" required>
-    </div>
-    <div class="form-group">
-        <label for="password">رمز عبور:</label>
-        <input ngModel  type="password" class="form-control" name="password" required minlength="6">
-    </div>
-    <div class="form-check pr-2">
-        <input [ngModel]="hasRemember" type="checkbox" class="form-check-input" name="remember" id="remember">
-        <label for="remember" class="form-check-label mr-4">مرا به خاطر بسپار</label>
-    </div>
+  <div *ngIf="errorMsg" class="alert alert-danger pt-0 pr-1 ">
+    <a (click)="errorMsg=''" class="text-danger m-0 p-0 error-toggler">X</a>
+    <p class="text-danger my-0 pr-2">{{ errorMsg }}</p>
+  </div>
+  <div *ngIf="initError" class="alert alert-danger pt-0 pr-1 ">
+    <a (click)="initError=''" class="text-danger m-0 p-0 error-toggler">X</a>
+    <p class="text-danger my-0 pr-2">{{ initError }}</p>
+  </div>
+  <div class="form-group">
+    <label for="username">شناسه کاربری:</label>
+    <input [ngModel]="username" id=username type="text" class="form-control"
+           name="username" required>
+  </div>
+  <div class="form-group">
+    <label for="password">رمز عبور:</label>
+    <input ngModel id="password" type="password" class="form-control"
+           name="password" required minlength="6">
+  </div>
+  <div class="form-check pr-2">
+    <input [ngModel]="hasRemember" type="checkbox" class="form-check-input"
+           name="remember" id="remember">
+    <label for="remember" class="form-check-label mr-4">مرا به خاطر
+      بسپار</label>
+  </div>
 
-    <div class="row justify-content-center">
-        <div class="col-12 col-sm-7 col-md-8 col-xl-6 text-center">
-            <button type="submit" class="btn mx-0" [disabled]="enter_form.invalid || (loaderService.isLoading | async)">ورود</button>
-            <a href="http://94.184.176.106/oauth2/authorize/google?redirect_uri=/">ورود با گوگل</a><br/>
-            <a href="http://94.184.176.106/oauth2/authorize/github?redirect_uri=/">ورود با گیتهاب</a>
-            <a class="form-link" [routerLink]="['../register']">حساب ندارید؟ثبت نام</a>
-            <a class="form-link" href="" [routerLink]="['../reset']">رمز عبور خود را فراموش کرده‌اید؟</a>
-            <div *ngIf="loaderService.isLoading | async">
-              <mat-spinner diameter="40" style="right:40%"></mat-spinner>
-            </div>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-7 col-md-8 col-xl-6 text-center">
+      <button type="submit" class="btn mx-0"
+              [disabled]="enter_form.invalid || (loaderService.isLoading | async)">
+        ورود
+      </button>
+      <a class="form-link" href="" [routerLink]="['../reset']"
+         style="font-size: 0.85rem">رمز عبور خود را فراموش کرده‌اید؟</a>
+      <a class="form-link" [routerLink]="['../register']"
+         style="font-size: 0.85rem">حساب ندارید؟ ثبت نام</a>
+      <hr>
+      <p>ورود با حساب اجتماعی</p>
+      <app-socials></app-socials>
+      <div *ngIf="loaderService.isLoading | async">
+        <mat-spinner diameter="40" style="right:40%"></mat-spinner>
+      </div>
     </div>
+  </div>
 
 </form>
