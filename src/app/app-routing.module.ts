@@ -107,45 +107,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'auth',
-    component: AuthComponent,
-    canActivate: [ReAuthGuard],
-    // canActivateChild:[ReAuthGuard],
-    children: [
-      {
-        path: '',
-        // component:AuthComponent,
-        pathMatch: 'full',
-        redirectTo: 'enter',
-        canActivate: [ReAuthGuard],
-
-      },
-      {
-        path: 'enter',
-        component: EnterComponent,
-        canActivate: [ReAuthGuard],
-
-      },
-      {
-        path: 'register',
-        component: RegisterComponent,
-        canActivate: [ReAuthGuard],
-
-      },
-      {
-        path: 'reset',
-        component: ResetComponent,
-        canActivate: [ReAuthGuard],
-      }, {
-        path: 'confirm',
-        component: ConfirmComponent,
-        canActivate: [ReAuthGuard],
-
-      }
-    ]
-  },
-
-  {
     path: 'user',
     component: ProfileComponent,
     children: [
@@ -190,10 +151,10 @@ const routes: Routes = [
     path: '500',
     component: Error500Component
   },
-  {
-    path: '**',
-    component: Error404Component
-  }
+  // {
+  //   path: '**',
+  //   component: Error404Component
+  // }
 ];
 
 @NgModule({
