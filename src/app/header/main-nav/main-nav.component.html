@@ -8,7 +8,7 @@
 
     <mat-toolbar-row class="d-flex justify-content-end">
       <mat-toolbar *ngIf="isAuth">
-        <img [src]="imageUrl" alt="Avatar" class="avatar-img" style="margin-top: 3px; margin-right: 70px; border: 3px solid var(--secondary_color)">
+        <img *ngIf="imageUrl" [src]="imageUrl" alt="Avatar" class="avatar-img" style="margin-top: 3px; margin-right: 70px; border: 3px solid var(--primary_color)">
       </mat-toolbar>
       <mat-toolbar class="mat-tool">فهرست</mat-toolbar>
     </mat-toolbar-row>
@@ -75,7 +75,7 @@
         </div>
         <div class="row" *ngIf="isAuth &&!(isHandset$ | async)" style="font-family: 'IRANSansWeb'; color: var(--text_color2)">
           <div class="col-md-3">
-            <img [src]="imageUrl" alt="Avatar" class="avatar-img">
+            <img *ngIf="imageUrl" [src]="imageUrl" alt="Avatar" class="avatar-img">
           </div>
           <div class="col-md-3">
             <button  mat-icon-button class="btn btnn-circle btn-circle" [matMenuTriggerFor]="menu" style="margin-left: -15%">

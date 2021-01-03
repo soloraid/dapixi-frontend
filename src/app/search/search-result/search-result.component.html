@@ -17,7 +17,7 @@
             <div class="card-item" *ngFor="let user of users">
               <div class="card-header">
                 <div class="card-header__bg"></div>
-                <img [src]="user.profileImageUrl" class="card-header__img">
+                <img *ngIf="user.profileImageUrl" [src]="user.profileImageUrl" class="card-header__img">
                 <div class="card-header__text">
                         <span class="card-header__name">
                             {{user.firstName}} {{user.lastName}}
