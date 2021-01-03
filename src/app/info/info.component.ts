@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { LoaderService } from '../share/loader/loader.service';
 import { Tokens } from '../share/tokens.model';
 
 @Component({
@@ -13,7 +14,9 @@ export class InfoComponent implements OnInit {
   authSubs:Subscription;
   isAuth:boolean;
   msgSubs:Subscription;
-  constructor(private _authService:AuthService) { }
+  send:boolean=false;
+  error:boolean=false;
+  constructor(private _authService:AuthService,public loaderService:LoaderService) { }
 
   ngOnInit(): void {
     this.authSubs=this._authService.authState.subscribe((token:Tokens)=>{
@@ -22,8 +25,18 @@ export class InfoComponent implements OnInit {
   }
   onSubmit(form:NgForm){
     // console.log(form.value.title,form.value.message);
-    this.msgSubs = this._authService.sendMessage(form.value.title,form.value.message).subscribe(data=>{
+    this.send=false;
+    this.error=false;
+    this.msgSubs = this._authService.sendMessage(form.value.title,form.value.message).subscribe(
+      data=>{
       console.log(data);
+      this.send=true;
+      this.error=false;
+      form.reset();
+    },
+    errData=>{
+      this.error=true;
+      this.send=false;
     })
   }
 
