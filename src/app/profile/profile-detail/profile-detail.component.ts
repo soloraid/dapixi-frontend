@@ -181,7 +181,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
- 
+
     if (this.authSubs) {
       this.authSubs.unsubscribe();
     }
@@ -236,6 +236,13 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
 
   navigate(): void {
     this._router.navigate(['user', this.userView.username, 'following-follower']);
+  }
+
+  deletePic(): void {
+    this._profile.deleteProfilePic().subscribe( () => {
+      this.getPicture();
+      this._profile.picSub.next(true);
+    });
   }
 }
 
