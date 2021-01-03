@@ -47,9 +47,10 @@
     <div class="row justify-content-center">
         <div class="col-sm-6 text-center">
             <button type="submit" class="btn mx-0" [disabled]="regForm.invalid || (loaderService.isLoading | async)">ثبت نام</button>
-          <a href="http://94.184.176.106/oauth2/authorize/google?redirect_uri=/">ثبت نام با گوگل</a><br/>
-          <a href="http://94.184.176.106/oauth2/authorize/github?redirect_uri=/">ثبت نام با گیتهاب</a>
-          <a class="change" [routerLink]="['../enter']">حساب دارید؟ورود</a>
+          <a class="change" [routerLink]="['../enter']" style="font-size: 0.85rem">حساب دارید؟ ورود</a>
+          <hr>
+          <p>ثبت نام و ورود با حساب اجتماعی</p>
+          <app-socials></app-socials>
           <div *ngIf="loaderService.isLoading | async">
             <mat-spinner diameter="40" color="warn" style="right:40%"></mat-spinner>
           </div>

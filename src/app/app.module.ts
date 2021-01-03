@@ -65,6 +65,7 @@ import { FollowComponent } from './profile/follow/follow.component';
 import { ConfirmDialogComponent } from './share/confirm-dialog/confirm-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { SocialsComponent } from './auth/socials/socials.component';
 
 
 
@@ -102,6 +103,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MasonryPostsComponent,
     FollowComponent,
     ConfirmDialogComponent,
+    SocialsComponent,
   ],
   imports: [
     BrowserModule,
