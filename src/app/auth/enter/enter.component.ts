@@ -6,13 +6,13 @@ import {AuthService} from '../auth.service';
 import {LoaderService} from '../../share/loader/loader.service';
 import {environment} from '../../../environments/environment';
 
+
 @Component({
   selector: 'app-enter',
   templateUrl: './enter.component.html',
   styleUrls: ['./enter.component.scss']
 })
 export class EnterComponent implements OnInit, OnDestroy {
-  domain = environment.domain;
 
   constructor(private _authService: AuthService, private _router: Router,
               private _rout: ActivatedRoute, public loaderService: LoaderService) {
