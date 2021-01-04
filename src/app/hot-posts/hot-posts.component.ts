@@ -20,7 +20,7 @@ export class HotPostsComponent implements OnInit,OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.hotPostSubs=this._postService.getHighRatedPost(9).subscribe((posts:Post[])=>{
+    this.hotPostSubs=this._postService.getHighRatedPost().subscribe((posts:Post[])=>{
       if(posts.length>0){
         this.hotPosts=posts;
         this.isExist=true;
