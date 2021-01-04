@@ -80,27 +80,27 @@ const routes: Routes = [
     path: 'post-detail/:id',
     component: PostDetailComponent
   },
-  {
-    path: 'search-result',
-    // component: SearchResultComponent,
-    children: [
-      {
-        path: 'username/:name',
-        component: SearchResultComponent,
-        data: { name: 'username' }
-      },
-      {
-        path: 'category',
-        component: SearchResultComponent,
-        data: { name: 'category' }
-      },
-      {
-        path: 'title/:title',
-        component: SearchResultComponent,
-        data: { name: 'title' }
-      },
-    ]
-  },
+  // {
+  //   path: 'search-result',
+  //   // component: SearchResultComponent,
+  //   children: [
+  //     {
+  //       path: 'username/:name',
+  //       component: SearchResultComponent,
+  //       data: { name: 'username' }
+  //     },
+  //     {
+  //       path: 'category',
+  //       component: SearchResultComponent,
+  //       data: { name: 'category' }
+  //     },
+  //     {
+  //       path: 'title/:title',
+  //       component: SearchResultComponent,
+  //       data: { name: 'title' }
+  //     },
+  //   ]
+  // },
 
   {
     path: '404',

@@ -67,6 +67,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
 import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module';
 import { MainModule } from './main/main.module';
+import { SearchResultModule } from './search/search-result/search-result.module';
 
 
 
@@ -82,7 +83,7 @@ import { MainModule } from './main/main.module';
     // UploadPostComponent,
     // DropdownDirective,
     SearchComponent,
-    SearchResultComponent,
+    // SearchResultComponent,
     MainNavComponent,
     Error404Component,
     Error500Component,
@@ -128,7 +129,8 @@ import { MainModule } from './main/main.module';
     AuthModule,
     MasonryPostsModule,
     ProfileModule,
-    MainModule
+    MainModule,
+    SearchResultModule
 
   ],
   providers: [
