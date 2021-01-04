@@ -76,10 +76,10 @@ const routes: Routes = [
     path: 'info',
     component: InfoComponent
   },
-  {
-    path: 'post-detail/:id',
-    component: PostDetailComponent
-  },
+  // {
+  //   path: 'post-detail/:id',
+  //   component: PostDetailComponent
+  // },
   // {
   //   path: 'search-result',
   //   // component: SearchResultComponent,

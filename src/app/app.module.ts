@@ -68,6 +68,7 @@ import { ProfileModule } from './profile/profile.module';
 import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module';
 import { MainModule } from './main/main.module';
 import { SearchResultModule } from './search/search-result/search-result.module';
+import { PostDetailModule } from './post-detail/post-detail.module';
 
 
 
@@ -77,8 +78,8 @@ import { SearchResultModule } from './search/search-result/search-result.module'
   declarations: [
     AppComponent,
     HeaderComponent,
-    ConfirmDialogComponent,
-    PostDetailComponent,
+    // ConfirmDialogComponent,
+    // PostDetailComponent,
     // PostComponent,
     // UploadPostComponent,
     // DropdownDirective,
@@ -89,7 +90,7 @@ import { SearchResultModule } from './search/search-result/search-result.module'
     Error500Component,
     MoreComponent,
     InfoComponent,
-    CommentComponent,
+    // CommentComponent,
     // MainComponent,
     // FollowPostsComponent,
     // RecomendedPostsComponent,
@@ -130,8 +131,8 @@ import { SearchResultModule } from './search/search-result/search-result.module'
     MasonryPostsModule,
     ProfileModule,
     MainModule,
-    SearchResultModule
-
+    SearchResultModule,
+    PostDetailModule
   ],
   providers: [
     {
