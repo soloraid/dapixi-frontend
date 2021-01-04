@@ -77,7 +77,6 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     });
     this.authSubs = this._authService.authState.subscribe((data: Tokens) => {
       if (data) {
-        // console.log("here??");
         this.isAuth = true;
         this.getCount(this.username);
       } else {
@@ -87,23 +86,10 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     let getObv: Observable<any>;
     if (this.loginUser) {
       getObv = this._profile.getProfile();
-      // this._profile.getProfile().subscribe((user: User) => {
-      //   this.userView = user;
-      // const index = this.link.indexOf('profile');
-      // this.link = this.link.slice(0, index) + this.userView.username;
-      //   this.isPresent = true;
-      //   this.getPosts();
-      //   this.getCount();
-      // })
+
     } else {
       getObv = this._profile.getProfileByUsername(this.username);
-      // this._profile.getProfileByUsername(this.username).subscribe((user: User) => {
-      //   this.userView = user;
-      //   this.isPresent = true;
-      //   this.getPosts();
-      //   this.getCount(this.username);
 
-      // })
     }
     this.mainSubs = getObv.subscribe((user: User) => {
       this.userView = user;
@@ -116,27 +102,21 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
       if (this.loginUser) {
         const index = this.link.indexOf('profile');
         this.link = this.link.slice(0, index) + this.userView.username;
-        // this.getCount();
 
       }
     });
-    // console.log(this.userPosts);
-    // this.getPosts();
+
     this.notification();
   }
 
   private getPosts() {
     this.postsSubs = this._postService.getPostsByUsername(this.userView.username, 9).subscribe((posts: Post[]) => {
-      // console.log(posts)
       this.userPosts = posts;
-      // this.userPosts.reverse();
       this.postsPresent = true;
-      // console.log(posts);
     });
   }
 
   private getCount(username: string = ''): void {
-    // console.log(username);
     this.followsunbs = this._profile.getFollowersCount(username)
       .pipe(
         map((followersCount: number) => {
@@ -155,12 +135,10 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(data => {
-        // console.log(data);
         this.followers = data.followers;
         this.following = data.following;
       });
-    // this.followsunbs=this._profile.getFollowing()
-    // .subscribe(data=>console.log(data));
+
   }
 
   private getPicture(): void {

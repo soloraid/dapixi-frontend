@@ -14,6 +14,7 @@ import {LoaderService} from '../share/loader/loader.service';
 export class HomeComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   authSubsc: Subscription;
+  postsSubs: Subscription;
   postView: Post[] = [];
   isEmpty = true;
   firstLoad:boolean=true;
@@ -28,8 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.authSubsc = this._authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
     });
-    this.postService.getLatestPost(9).subscribe(posts => {
-      // console.log(posts);
+    this.postsSubs = this.postService.getLatestPost(9).subscribe(posts => {
       for (const index in posts) {
         this.postView.push(posts[index]);
       }
@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.authSubsc.unsubscribe();
+    this.postsSubs && this.postsSubs.unsubscribe();
   }
 
 }

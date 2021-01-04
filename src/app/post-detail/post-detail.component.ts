@@ -23,7 +23,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   postUrl: string;
   isEmpty = true;
   numUsersRate: number;
-  authSub: Subscription;
+  subs:Subscription[]=[];
   isAuth: boolean;
   isFirst = true;
   rateError = '';
@@ -31,7 +31,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   currentUser: boolean;
   map: Map<string, number> = new Map<string, number>();
   usersProfPic: PictureData[] = [];
-  private pictureSubs: Subscription;
+  
   private picData: PictureData;
 
   constructor(private postService: PostService, private route: ActivatedRoute,
@@ -42,54 +42,54 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.authSub = this.authService.authState.subscribe((token: Tokens) => {
+    let authSub : Subscription = this.authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
       if (token) {
         this.username = token.username;
       }
     });
+    this.subs.push(authSub);
     this.id = this.route.snapshot.params.id;
-    this.postService.getPostByID(this.id).subscribe((post: Post) => {
+    let postSubs:Subscription = this.postService.getPostByID(this.id).subscribe((post: Post) => {
       this.postUrl = environment.api + '/photo' + post.imageUrl;
       this.post = post;
-      console.log(post);
-      if (this.isAuth) {
-        this.currentUser = post.username === this.username;
+      if(this.isAuth){
+        this.currentUser = post.username===this.username;
       }
-      console.log(this.currentUser);
       this.isEmpty = false;
       this.isFirst = false;
-      this.postService.getUsersRatePost(this.id).subscribe(users => {
+      let userRateSubs:Subscription = this.postService.getUsersRatePost(this.id).subscribe( users => {
         // tslint:disable-next-line:forin
         for (const member in users) {
           this.map.set(member, users[member]);
         }
-        console.log(this.map.size);
         this.numUsersRate = this.map.size;
         this.getUsersRated();
       });
+      this.subs.push(userRateSubs);
     });
+    this.subs.push(postSubs);
   }
 
   setRating(rate: string): void {
     if (this.authService.isInLocal()) {
       this.id = this.route.snapshot.params.id;
-      // console.log(this.isAuth);
-      this.postService.putRate(this.id, rate).subscribe(() => {
-        this.postService.getPostByID(this.id).subscribe((post: Post) => {
+      let putRateSubs :Subscription =  this.postService.putRate(this.id, rate).subscribe(() => {
+        let postSubs2:Subscription = this.postService.getPostByID(this.id).subscribe((post: Post) => {
           this.post = post;
         });
-        this.postService.getUsersRatePost(this.id).subscribe((users) => {
-          // tslint:disable-next-line:forin
+        this.subs.push(postSubs2);
+        let userRateSubs2 = this.postService.getUsersRatePost(this.id).subscribe( (users) => {
           this.map.clear();
           for (const member in users) {
             this.map.set(member, users[member]);
           }
-          console.log(this.map.size);
           this.numUsersRate = this.map.size;
         });
+        this.subs.push(userRateSubs2);
         this.getUsersRated();
       });
+      this.subs.push(putRateSubs);
       this.rateError = '';
     } else {
       this.rateError = 'برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
@@ -99,21 +99,23 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   deleteRating(): void {
     if (this.authService.isInLocal()) {
       this.id = this.route.snapshot.params.id;
-      this.postService.deleteRate(this.id).subscribe(() => {
-        this.postService.getPostByID(this.id).subscribe((post: Post) => {
+      let deleteRateSubs:Subscription = this.postService.deleteRate(this.id).subscribe(() => {
+        let postSubs3:Subscription = this.postService.getPostByID(this.id).subscribe((post: Post) => {
           this.post = post;
         });
-        this.postService.getUsersRatePost(this.id).subscribe((users) => {
+        this.subs.push(postSubs3);
+        let userRateSubs3:Subscription = this.postService.getUsersRatePost(this.id).subscribe( (users) => {
           // tslint:disable-next-line:forin
           this.map.clear();
           for (const member in users) {
             this.map.set(member, users[member]);
           }
-          console.log(this.map.size);
           this.numUsersRate = this.map.size;
         });
+        this.subs.push(userRateSubs3);
         this.getUsersRated();
       });
+      this.subs.push(deleteRateSubs);
       this.rateError = '';
 
     } else {
@@ -122,20 +124,18 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authSub.unsubscribe();
-    if (!this.authService.isInLocal()) {
-      this.authService.logOut();
-    }
+    this.subs.forEach((sub:Subscription)=>{
+      sub && sub.unsubscribe();
+    })
   }
 
   getUsersRated(): void {
     // tslint:disable-next-line:forin
     this.usersProfPic = [];
-    for (const username of this.map.keys()) {
-      this.pictureSubs = this.profileService.getProfilePic(username)
+    for ( const username of this.map.keys()) {
+      let pictureSubs :Subscription = this.profileService.getProfilePic(username)
         .subscribe(
           (picData: PictureData) => {
-            console.log(picData.username);
             this.picData = new PictureData();
             if (picData.imageUrl.startsWith('/files')) {
               this.picData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
@@ -152,28 +152,28 @@ export class PostDetailComponent implements OnInit, OnDestroy {
             this.usersProfPic.push(this.picData);
           }
         );
+        this.subs.push(pictureSubs);
     }
     if (this.usersProfPic) {
       console.log(this.usersProfPic);
     }
   }
-
-  showDialog() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+  showDialog(){
+    const dialogRef=this.dialog.open(ConfirmDialogComponent);
+    let showDialogSubs:Subscription = dialogRef.afterClosed().subscribe(result=>{
+      if(result){
         this.deletePost();
       }
-    })
+    });
+    this.subs.push(showDialogSubs);
   }
-
-  private deletePost() {
-
-    this.postService.deletePost(this.post.id).subscribe(data => {
-      // console.log('del',data);
+  private deletePost(){
+    
+    let deletePostSubs:Subscription = this.postService.deletePost(this.post.id).subscribe(data=>{
       this.router.navigate(['/user/profile']);
-
-    })
+      
+    });
+    this.subs.push(deletePostSubs);
   }
 }
 

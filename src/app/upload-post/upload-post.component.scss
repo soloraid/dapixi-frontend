@@ -6,8 +6,6 @@ div[class^="row"],div[class^="col"]{
 .upload-box{
     direction: rtl;
     position: relative;
-    // border:4px var(--secondary_color) solid;
-    // width: 80%;
 }
 .btn{
     background-color: var(--secondary_color);
@@ -19,7 +17,6 @@ form{
     box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
     border-radius: 10px;
     @media (max-width:370px){
-        // position: relative;
         overflow-wrap: break-word;;
     }
 }
@@ -37,7 +34,6 @@ form{
 .dropdown-menu{
     width: 100% !important;
     text-align: center;
-    // overflow-x: hidden;
     max-height: 400px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -83,7 +79,6 @@ ul{
     margin: 5px;
     padding: 2px 10px;
     max-width: 100%;
-    // overflow: hidden;
     word-wrap:normal;
     overflow-wrap: break-word;
 

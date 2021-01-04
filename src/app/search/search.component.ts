@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {NavigationExtras, Router} from '@angular/router';
 import {PostService} from '../share/post.service';
 import {SearchService} from './search.service';
-import {Post} from '../share/post/post.module';
 
 @Component({
   selector: 'app-search',
@@ -30,7 +29,6 @@ export class SearchComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       queryParams
     };
-    // this.searchService.searchByCategories(categories).subscribe();
     this.router.navigate(['/search-result/category'], navigationExtras);
   }
 

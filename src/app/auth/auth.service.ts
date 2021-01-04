@@ -32,10 +32,6 @@ export class AuthService {
       }
     ).pipe(
       catchError((errorData: HttpErrorResponse) => {
-        // let errorString:string;
-        // if(errorData.error.error_description==='Bad credentials'){
-        //   errorString="رمز عبور و شناسه کاربری مطابقت ندارند";
-        // }else if()
         let description
         if (errorData.error && errorData.error.error_description) {
           description = errorData.error.error_description;
@@ -59,8 +55,6 @@ export class AuthService {
         const expireDate=new Date(new Date().getTime()+expireDuration);
         this.autoLogOut(expireDuration);
         const token = new Tokens(data.access_token, data.refresh_token,expireDate, data.scope,username);
-        // token.username=username;
-         console.log(token);
         this.authState.next(token);
         localStorage.setItem('tokens', JSON.stringify(token));
       })
@@ -72,7 +66,6 @@ export class AuthService {
       firstName: firstName,
       lastName: lastName,
       password: password,
-      // mobile: mobile,
       email: email,
       birthDate: birthDate
     }
@@ -83,13 +76,11 @@ export class AuthService {
       environment.api + '/auth/user',
       body
     ).pipe(catchError((errorData:HttpErrorResponse)=>{
-      console.log(errorData.error.message);
       let description
       if (errorData.error && errorData.error.message) {
         description = errorData.error.message;
       }
       let errorString: string = '';
-      console.log(description)
       switch (description) {
         case `Username ${username} has already been used`:
           errorString = `کاربر با این شناسه وجود دارد`;
@@ -132,11 +123,7 @@ export class AuthService {
   }
   logOut(){
     this.authState.next(null);
-    console.log('logout');
     localStorage.removeItem('tokens');
-    // console.log(this._rout);
-    
-    // this._router.navigate([''],{relativeTo:this._rout});
     if(this.logOutTimer){
       clearTimeout(this.logOutTimer);
     }
@@ -147,12 +134,10 @@ export class AuthService {
     },expireDuration)
   }
   forgetPassword(email:string){
-    // console.log(email);
     let params=new HttpParams();
     params=params.append('email',email);
     return this._http.post(environment.api+'/auth/user/forgot-password/','',{params:params})
     .pipe(catchError((errorData:HttpErrorResponse)=>{
-      console.log(errorData);
       let description
       if (errorData.error && errorData.error.message) {
         description = errorData.error.message;
@@ -161,10 +146,8 @@ export class AuthService {
         description = errorData.error.error_description;
       }
       let errorString: string = '';
-      console.log(description)
       switch (description) {
         case `No User with email ${email} Exists!`:
-          console.log('here');
           errorString = `چنین ایمیلی ثبت نشده‌است`;
           break;
         case 'You should verify your email first - go to your email and verify':
@@ -177,7 +160,6 @@ export class AuthService {
           errorString = 'خطای نامشخص لطفا بعدا تلاش کنید';
 
       }
-      console.log(errorString);
       return throwError(errorString);
     })
     )
@@ -198,7 +180,6 @@ export class AuthService {
       scope:string,
       username:string
     }=JSON.parse(localStorage.getItem('tokens'));
-    console.log("///",tokensTemp);
     if(tokensTemp){
       return true;
     }else{

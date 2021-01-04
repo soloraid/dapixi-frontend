@@ -1,13 +1,8 @@
 .box{
-    // position: absolute;
-    // top: 50vh;
-    // margin-top: 50vh;
-    // transform: translateY(-50%);
+
     overflow-y: hidden;
 }
-// app-search{
-//     width: 100%;
-// }
+
 .img404{
     width: 100%;
     
@@ -16,9 +11,7 @@
 h5{
     direction: rtl;
     font-weight: bold;
-    // font-size: 1rem;
     @media (min-width:575px){
         font-size: 1.8rem;
-        // color: red;
     }
 }

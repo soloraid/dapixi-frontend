@@ -35,8 +35,7 @@ export class PostService {
     let params = new HttpParams();
     params = params.append('size', String(number));
     params = params.append('page', String(page));
-    /*params = params.append('from', '2020-10-1');
-    params = params.append('to', '2020-12-9');*/
+
     return this.http.get(environment.api + '/photo/hot/posts', {
       params
     });
@@ -63,7 +62,6 @@ export class PostService {
     return this.http.get(environment.api + '/photo/posts/' + id)
       .pipe(
         catchError((errData: HttpErrorResponse) => {
-          console.log(errData);
           if (errData.status == 404) {
             this._router.navigate(['/404']);
           }
@@ -111,7 +109,6 @@ export class PostService {
       photoId:id,
       content:content
     }
-    // console.log('m',comment);
     return this.http.post(environment.api+'/photo/comments/posts',comment);
   }
   getComments(id: string, num: number = 50, page: number = 0){

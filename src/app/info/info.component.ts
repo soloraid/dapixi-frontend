@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -10,7 +10,7 @@ import { Tokens } from '../share/tokens.model';
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss']
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent implements OnInit,OnDestroy {
   authSubs:Subscription;
   isAuth:boolean;
   msgSubs:Subscription;
@@ -24,12 +24,10 @@ export class InfoComponent implements OnInit {
     })
   }
   onSubmit(form:NgForm){
-    // console.log(form.value.title,form.value.message);
     this.send=false;
     this.error=false;
     this.msgSubs = this._authService.sendMessage(form.value.title,form.value.message).subscribe(
       data=>{
-      console.log(data);
       this.send=true;
       this.error=false;
       form.reset();
@@ -38,6 +36,9 @@ export class InfoComponent implements OnInit {
       this.error=true;
       this.send=false;
     })
+  }
+  ngOnDestroy(){
+    this.msgSubs && this.msgSubs.unsubscribe();
   }
 
 }

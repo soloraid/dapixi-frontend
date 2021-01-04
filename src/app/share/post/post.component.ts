@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from './post.module';
 import {environment} from '../../../environments/environment';
-import {ActivatedRoute, Router} from '@angular/router';
-import {PostService} from '../post.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -26,7 +25,6 @@ export class PostComponent implements OnInit {
     }
     if(this.post.title.length>20){
       const english:RegExp=new RegExp('.*[a-zA-Z0-9].*');
-      // console.log(this.post.title,english.test(this.post.title));
       if(english.test(this.post.title)){
         this.post.title=this.post.title.slice(0,20).concat('...')
       }else{

@@ -25,8 +25,11 @@ export class MasonryPostsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // console.log(this.posts);
-    this.setHasMore();
+    if(this.posts.length){
+      this.setHasMore();
+    }else{
+      this.loadingImages=false;
+    }
   }
 
   showMore(): void {
@@ -60,12 +63,9 @@ export class MasonryPostsComponent implements OnInit, OnDestroy {
   }
 
   private setHasMore(posts: Post[] = this.posts): void {
-    // console.log(posts.length)
     if (posts.length >= this.value) {
       this.hasMore = true;
       this.loadingImages = true;
-    } else {
-      this.loadingImages = false;
     }
   }
 

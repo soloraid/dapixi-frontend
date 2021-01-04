@@ -14,7 +14,6 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   imgFile:File;
   title:string="";
   description:string="";
-  //catOpen:boolean=false;
   @ViewChild('file_label') label:ElementRef;
   fileErr:boolean=false;
   allCats:category[];
@@ -26,7 +25,6 @@ export class UploadPostComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
-      console.log(cats);
       this.allCats=cats.map((cat,index):category=>{
         const newCat:category={
           id:index,
@@ -35,23 +33,15 @@ export class UploadPostComponent implements OnInit,OnDestroy {
         }
         return  newCat
       });
-      console.log(this.allCats);
     })
   }
-  //   @HostListener('document:click',['$event']) closCat(event){
-  //     console.log((<HTMLElement>event.target).tagName);
-  //   if((<HTMLElement>event.target).tagName.){
-  //     // this.catOpen=false;
-  //   }
-  // }
+
   onChange(event){
-    console.log(event.target.files);
 
     const files=event.target.files;
     let labelStr="تصویری انتخاب نشده است";
     if(files.length){
       this.imgFile=event.target.files[0];
-      // console.log(this.imgFile.type.startsWith('image'));
       if(this.imgFile.type.startsWith('image')){
         labelStr=this.imgFile.name;
       }else{
@@ -60,37 +50,28 @@ export class UploadPostComponent implements OnInit,OnDestroy {
       }
     }
     this.label.nativeElement.innerHTML=labelStr;
-    // console.log(this.label);
   }
   onSubmit(){
-    console.log(this.imgFile,this.description,this.title);
     this.uploadSubc=this._postService.addPsot(this.imgFile,this.title,this.description)
     .subscribe((postData:PostData)=>{
-      console.log(postData);
       let cats:string[]=this.selectedCats.map((cat)=>{
         return cat.name;
       })
       this.addCatSubsc=this._postService
       .addCategories(postData.id,cats)
       .subscribe((data)=>{
-        console.log('cats',data);
         this._router.navigate(['./post-detail',postData.id]);
       })
     })
-    // console.log(this.selectedCats.length===0,Boolean(this.selectedCats))
   }
   addCat(id):boolean{
-    console.log(id);
-    // console.log(this.allCats[+index]);
     if(this.selectedCats.length<4){
       const index=this.allCats.findIndex((cat)=>{
         return cat.id===id;
       });
-      console.log(index);
       this.allCats[index].selected=true;
       const selected={...this.allCats[index]};
       this.selectedCats.push(selected);
-      console.log(this.selectedCats);
       return true;
     }else{
       return false;
@@ -102,7 +83,6 @@ export class UploadPostComponent implements OnInit,OnDestroy {
     const changeCat=this.allCats.find((c)=>{
       return c.id===id;
     });
-    console.log(changeCat);
     changeCat.selected=false;
   }
   ngOnDestroy(){
@@ -116,9 +96,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
       this.uploadSubc.unsubscribe();
     }
   }
-  // toggleCats(){
-  //   this.catOpen=!this.catOpen;
-  // }
+
 
 }
 interface category{

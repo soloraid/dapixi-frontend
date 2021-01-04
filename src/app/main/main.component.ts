@@ -3,9 +3,8 @@ import {LoaderService} from '../share/loader/loader.service';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {AuthService} from "../auth/auth.service";
 import { Tokens } from '../share/tokens.model';
-import { ProfileService } from '../profile/profile.service';
 import { Subscription } from 'rxjs';
-import { User } from '../share/user/user.mudole';
+
 
 @Component({
   selector: 'app-main',
@@ -15,7 +14,7 @@ import { User } from '../share/user/user.mudole';
 export class MainComponent implements OnInit {
   profileSubs:Subscription
   constructor(public loaderService: LoaderService, private route: ActivatedRoute
-    , private auth: AuthService, private router: Router,private _profileService:ProfileService) {
+    , private auth: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,12 +22,8 @@ export class MainComponent implements OnInit {
       if (data['tokens']) {
         let token:Tokens=data['tokens'];
         this.auth.authState.next(token);
-        this.profileSubs=this._profileService.getProfile().subscribe((user:User)=>{
-          token.username=user.username;
-          this.auth.authState.next(token);
-          this.router.navigate(['home'], {relativeTo: this.route});
-          console.log(token);
-        })
+        this.router.navigate(['home'], {relativeTo: this.route});
+        console.log(token);
       }
     });
   }
