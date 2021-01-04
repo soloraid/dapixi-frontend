@@ -1,21 +1,18 @@
-import { Token } from '@angular/compiler/src/ml_parser/lexer';
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { PostService } from '../share/post.service';
 import { Tokens } from '../share/tokens.model';
-import { User } from '../share/user/user.mudole';
 import {LoaderService} from '../share/loader/loader.service';
-import {Post} from '../share/post/post.module';
+
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnInit {
+export class CommentComponent implements OnInit,OnDestroy {
   isAuth: boolean;
   authSubs: Subscription;
   id: string;
@@ -59,10 +56,6 @@ export class CommentComponent implements OnInit {
     }
 
   }
-  /*toggle() {
-    this.isOpen = !this.isOpen;
-    this.getComments();
-  }*/
   private getComments() {
     this.getSubs = this.postService.getComments(this.id, 5).subscribe((comments: Comment[]) => {
       if (comments.length) {
@@ -103,6 +96,10 @@ export class CommentComponent implements OnInit {
     if (comments.length >= this.value){
       this.hasMore = true;
     }
+  }
+  ngOnDestroy(){
+    this.sendSubs && this.sendSubs.unsubscribe();
+    this.getSubs && this.getSubs.unsubscribe();
   }
 
 }
