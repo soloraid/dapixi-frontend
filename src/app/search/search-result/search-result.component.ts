@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {PostService} from '../../share/post.service';
 import {User} from '../../share/user/user.mudole';
 import {ProfileService} from '../../profile/profile.service';
 import {environment} from '../../../environments/environment.prod';
@@ -90,7 +89,6 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         this.isEmptyPosts = true;
       }
     });
-    // console.log(JSON.parse(categories));
   }
 
   private getByTitle(): void {

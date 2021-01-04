@@ -15,7 +15,6 @@ export class SearchService {
 
   searchByFirstLastname(firstname: string = '', lastname: string = ''): any {
     let params = new HttpParams();
-    // console.log(firstName);
     if (firstname !== '') {
       params = params.append('firstName', firstname);
     }
