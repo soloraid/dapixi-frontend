@@ -15,7 +15,7 @@ import { InfoComponent } from "./info.component";
         MatProgressSpinnerModule,
         RouterModule.forChild([
             {
-                path: 'info',
+                path: '',
                 component: InfoComponent
             }
         ])
