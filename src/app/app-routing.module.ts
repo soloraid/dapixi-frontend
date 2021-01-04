@@ -72,10 +72,10 @@ const routes: Routes = [
     path: 'more/:type',
     component: MoreComponent
   },
-  {
-    path: 'info',
-    component: InfoComponent
-  },
+  // {
+  //   path: 'info',
+  //   component: InfoComponent
+  // },
   // {
   //   path: 'post-detail/:id',
   //   component: PostDetailComponent

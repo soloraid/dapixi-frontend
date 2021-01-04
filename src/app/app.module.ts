@@ -69,6 +69,7 @@ import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module'
 import { MainModule } from './main/main.module';
 import { SearchResultModule } from './search/search-result/search-result.module';
 import { PostDetailModule } from './post-detail/post-detail.module';
+import { InfoModule } from './info/info.module';
 
 
 
@@ -89,7 +90,7 @@ import { PostDetailModule } from './post-detail/post-detail.module';
     Error404Component,
     Error500Component,
     MoreComponent,
-    InfoComponent,
+    // InfoComponent,
     // CommentComponent,
     // MainComponent,
     // FollowPostsComponent,
@@ -132,7 +133,8 @@ import { PostDetailModule } from './post-detail/post-detail.module';
     ProfileModule,
     MainModule,
     SearchResultModule,
-    PostDetailModule
+    PostDetailModule,
+    InfoModule
   ],
   providers: [
     {
