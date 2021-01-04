@@ -12,9 +12,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
-  styleUrls: ['./main-nav.component.scss', ]
+  styleUrls: ['./main-nav.component.scss',]
 })
-export class MainNavComponent implements OnInit, OnDestroy{
+export class MainNavComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   imageUrl: string;
   authSubsc: Subscription;
@@ -43,7 +43,7 @@ export class MainNavComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.authSubsc = this._authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
-      if ( this.isAuth) {
+      if (this.isAuth) {
         this.username = token.username;
         this.getProfilePic();
       }
@@ -64,6 +64,7 @@ export class MainNavComponent implements OnInit, OnDestroy{
           } else {
             this.imageUrl = picData.imageUrl;
           }
+          this.profileService.picSub.next(true);
         },
         (errorData: HttpErrorResponse) => {
           this.imageUrl = '../../../assets/avatar-default.png';
@@ -86,13 +87,15 @@ export class MainNavComponent implements OnInit, OnDestroy{
     const inGuarded = guardedPages.find((rout: string) => {
       return rout === url;
     });
-    if (inGuarded || url.endsWith('following-follower')){
+    if (inGuarded || url.endsWith('following-follower')) {
       this._router.navigate(['/home']);
     }
   }
-  onAuth(): void{
+
+  onAuth(): void {
     this._router.navigate(['/auth'], {queryParams: {back: this._router.url}});
   }
+
   ngOnDestroy(): void {
     this.authSubsc.unsubscribe();
     this.pictureSubs.unsubscribe();
