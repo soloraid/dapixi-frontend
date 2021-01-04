@@ -53,10 +53,6 @@ const routes: Routes = [
     path: '500',
     component: Error500Component
   },
-  // {
-  //   path: '**',
-  //   component: Error404Component
-  // }
 ];
 
 @NgModule({

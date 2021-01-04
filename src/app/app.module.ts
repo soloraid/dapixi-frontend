@@ -24,13 +24,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CatchErrorInterceptor } from './catch-error.interceptor';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { AuthModule } from './auth/auth.module';
-import { ProfileModule } from './profile/profile.module';
+
 import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module';
 import { MainModule } from './main/main.module';
-import { SearchResultModule } from './search/search-result/search-result.module';
-import { PostDetailModule } from './post-detail/post-detail.module';
-import { InfoModule } from './info/info.module';
 
 
 
@@ -59,13 +55,8 @@ import { InfoModule } from './info/info.module';
     MatTooltipModule,
     MatMenuModule,
     MatAutocompleteModule,
-    // AuthModule,
     MasonryPostsModule,
-    // ProfileModule,
     MainModule,
-    SearchResultModule,
-    // PostDetailModule,
-    // InfoModule
   ],
   providers: [
     {
