@@ -15,6 +15,7 @@ import { RouterModule } from "@angular/router";
 import { ClipboardModule } from "ngx-clipboard";
 import { NgxMasonryModule } from "ngx-masonry";
 import { AuthGuard } from "../share/auth.guard";
+import { DropdownDirective } from "../share/dropdown.directive";
 import { MasonryPostsModule } from "../share/masonry-posts/masonary-posts.module";
 import { MasonryPostsComponent } from "../share/masonry-posts/masonry-posts.component";
 import { PostComponent } from "../share/post/post.component";
@@ -29,7 +30,9 @@ import { ProfileComponent } from "./profile.component";
         ProfileComponent,
         ProfileDetailComponent,
         ProfileEditComponent,
-        FollowComponent
+        FollowComponent,
+        UploadPostComponent,
+        DropdownDirective,
     ],
     imports: [
         CommonModule,
@@ -38,6 +41,7 @@ import { ProfileComponent } from "./profile.component";
         MatProgressSpinnerModule,
         MatProgressBarModule,
         MatMenuModule,
+        // DropdownDirective,
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,

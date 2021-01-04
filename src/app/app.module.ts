@@ -79,8 +79,8 @@ import { MainModule } from './main/main.module';
     ConfirmDialogComponent,
     PostDetailComponent,
     // PostComponent,
-    UploadPostComponent,
-    DropdownDirective,
+    // UploadPostComponent,
+    // DropdownDirective,
     SearchComponent,
     SearchResultComponent,
     MainNavComponent,
@@ -148,6 +148,9 @@ import { MainModule } from './main/main.module';
       multi: true
     }
   ],
+  // exports:[
+  //   DropdownDirective
+  // ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
