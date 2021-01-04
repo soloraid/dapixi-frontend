@@ -66,6 +66,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
 import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module';
+import { MainModule } from './main/main.module';
 
 
 
@@ -75,7 +76,6 @@ import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module'
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomeComponent,
     ConfirmDialogComponent,
     PostDetailComponent,
     // PostComponent,
@@ -89,10 +89,10 @@ import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module'
     MoreComponent,
     InfoComponent,
     CommentComponent,
-    MainComponent,
-    FollowPostsComponent,
-    RecomendedPostsComponent,
-    HotPostsComponent,
+    // MainComponent,
+    // FollowPostsComponent,
+    // RecomendedPostsComponent,
+    // HotPostsComponent,
     // MasonryPostsComponent,
     
   ],
@@ -127,7 +127,8 @@ import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module'
     MatAutocompleteModule,
     AuthModule,
     MasonryPostsModule,
-    ProfileModule
+    ProfileModule,
+    MainModule
 
   ],
   providers: [

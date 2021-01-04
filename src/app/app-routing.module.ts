@@ -28,38 +28,38 @@ import {FollowComponent} from './profile/follow/follow.component';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    // pathMatch: 'full',
-    component: MainComponent,
-    resolve: { tokens: ThirdPartyOAuthSSOService },
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        // component: MainComponent
-        redirectTo: 'home'
-      },
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: 'follow',
-        component: FollowPostsComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'recommend',
-        component: RecomendedPostsComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'hot',
-        component: HotPostsComponent,
-      }
-    ]
-  },
+  // {
+  //   path: '',
+  //   // pathMatch: 'full',
+  //   component: MainComponent,
+  //   resolve: { tokens: ThirdPartyOAuthSSOService },
+  //   children: [
+  //     {
+  //       path: '',
+  //       pathMatch: 'full',
+  //       // component: MainComponent
+  //       redirectTo: 'home'
+  //     },
+  //     {
+  //       path: 'home',
+  //       component: HomeComponent
+  //     },
+  //     {
+  //       path: 'follow',
+  //       component: FollowPostsComponent,
+  //       canActivate: [AuthGuard]
+  //     },
+  //     {
+  //       path: 'recommend',
+  //       component: RecomendedPostsComponent,
+  //       canActivate: [AuthGuard]
+  //     },
+  //     {
+  //       path: 'hot',
+  //       component: HotPostsComponent,
+  //     }
+  //   ]
+  // },
   // {
   //   path: 'home',
   //   component: HomeComponent,
