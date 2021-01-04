@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { RouterModule } from "@angular/router";
+import { Error404Component } from "../error404/error404.component";
 import { FollowPostsComponent } from "../follow-posts/follow-posts.component";
 import { HomeComponent } from "../home/home.component";
 import { HotPostsComponent } from "../hot-posts/hot-posts.component";
@@ -53,6 +54,10 @@ import { MainComponent } from "./main.component";
                   {
                     path: 'hot',
                     component: HotPostsComponent,
+                  },
+                  {
+                      path: '**',
+                      component:Error404Component
                   }
                 ]
               },
