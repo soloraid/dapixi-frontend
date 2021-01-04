@@ -88,7 +88,7 @@
           <button matTooltip="کپی لینگ پروفایل" class="profile-button share-button mb-0" ngxClipboard [cbContent]="link" (click)="copyLink()">
             <i class="fa fa-share-alt" aria-hidden="true"></i>
           </button>
-          <button *ngIf="!loginUser && isFollowed" class="profile-button share-button mb-1" (click)="changeNotification()">
+          <button *ngIf="isAuth && loginUser" class="profile-button share-button mb-1" (click)="changeNotification()">
             <mat-icon matTooltip="خاموش کردن" *ngIf="isNotifON">notifications_on</mat-icon>
             <mat-icon matTooltip="روشن کردن" *ngIf="!isNotifON">notifications_off</mat-icon>
           </button>
