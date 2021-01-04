@@ -20,6 +20,13 @@ const routes: Routes = [
       )
   },
   {
+    path:'post-detail/:id',
+    loadChildren:() => 
+      import('./post-detail/post-detail.module').then(
+        m => m.PostDetailModule
+      )
+  },
+  {
     path: '404',
     component: Error404Component
   },

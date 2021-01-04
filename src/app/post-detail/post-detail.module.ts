@@ -37,7 +37,7 @@ import { PostDetailComponent } from "./post-detail.component";
         FormsModule,
         RouterModule.forChild([
             {
-                path: 'post-detail/:id',
+                path: '',
                 component: PostDetailComponent
             }
         ])
