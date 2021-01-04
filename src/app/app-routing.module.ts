@@ -6,6 +6,13 @@ import { Error500Component } from './error500/error500.component';
 
 const routes: Routes = [
   {
+    path:'auth',
+    loadChildren:() =>
+      import('./auth/auth.module').then(
+        m => m.AuthModule
+      )
+  },
+  {
     path: '404',
     component: Error404Component
   },

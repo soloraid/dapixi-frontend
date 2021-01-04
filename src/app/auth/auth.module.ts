@@ -32,7 +32,7 @@ import { SocialsComponent } from "./socials/socials.component";
         RouterModule.forChild(
             [
                 {
-                    path: 'auth',
+                    path: '',
                     component: AuthComponent,
                     canActivate: [ReAuthGuard],
                     // canActivateChild:[ReAuthGuard],
