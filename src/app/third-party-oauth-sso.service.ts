@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {
-  ActivatedRoute,
   ActivatedRouteSnapshot,
   Resolve,
   Router,
@@ -25,10 +24,11 @@ export class ThirdPartyOAuthSSOService implements Resolve<Tokens> {
     const accessToken: string = route.queryParamMap.get('access_token');
     const refreshToken: string = route.queryParamMap.get('refresh_token');
     const expiresIn: number = +route.queryParamMap.get('expires_in');
+    const username : string = route.queryParamMap.get('username');
     if (!accessToken) {
       return null;
     }
-    const tokens: Tokens = new Tokens(accessToken, refreshToken, new Date(new Date().getTime() + expiresIn * 1000));
+    const tokens: Tokens = new Tokens(accessToken, refreshToken, new Date(new Date().getTime() + expiresIn * 1000),'webclient',username);
     // this.service.authState.next(tokens);
     localStorage.setItem('tokens', JSON.stringify(tokens));
     return tokens;

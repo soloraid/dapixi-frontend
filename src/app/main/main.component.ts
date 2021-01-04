@@ -23,12 +23,8 @@ export class MainComponent implements OnInit {
       if (data['tokens']) {
         let token:Tokens=data['tokens'];
         this.auth.authState.next(token);
-        this.profileSubs=this._profileService.getProfile().subscribe((user:User)=>{
-          token.username=user.username;
-          this.auth.authState.next(token);
-          this.router.navigate(['home'], {relativeTo: this.route});
-          console.log(token);
-        })
+        this.router.navigate(['home'], {relativeTo: this.route});
+        console.log(token);
       }
     });
   }
