@@ -57,7 +57,12 @@ export class SearchResultComponent implements OnInit, OnDestroy {
         // tslint:disable-next-line:forin
         for (const index in users) {
           this.profileService.getProfilePic(users[index].username).subscribe((picData: PictureData) => {
-              users[index].profileImageUrl = environment.api + '/photo/' + picData.imageUrl;
+              if (picData.imageUrl.startsWith('/files')) {
+                users[index].profileImageUrl = environment.api + '/photo/' + picData.imageUrl;
+              } else {
+                users[index].profileImageUrl = picData.imageUrl;
+              }
+
             },
             (errorData: HttpErrorResponse) => {
               users[index].profileImageUrl = '../../../assets/avatar-default.png';
