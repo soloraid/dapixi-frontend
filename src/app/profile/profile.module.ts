@@ -84,14 +84,18 @@ import { ProfileComponent } from "./profile.component";
                     {
                         path: ':username',
                         component: ProfileDetailComponent
+                    },             {
+                        path: ':username/following-follower',
+                        component: FollowComponent,
+                        canActivate: [AuthGuard]
                     }
                 ]
             },
-            {
-                path: 'user/:username/following-follower',
-                component: FollowComponent,
-                canActivate: [AuthGuard]
-            }
+            // {
+            //     path: 'user/:username/following-follower',
+            //     component: FollowComponent,
+            //     canActivate: [AuthGuard]
+            // }
         ])
     ]
 })
