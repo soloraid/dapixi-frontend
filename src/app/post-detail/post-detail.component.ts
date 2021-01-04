@@ -23,7 +23,6 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   postUrl: string;
   isEmpty = true;
   numUsersRate: number;
-  // authSub: Subscription;
   subs:Subscription[]=[];
   isAuth: boolean;
   isFirst = true;
@@ -33,7 +32,6 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   map: Map<string, number> = new Map<string, number>();
   usersProfPic: PictureData[] = [];
   
-  // private pictureSubs: Subscription;
   private picData: PictureData;
 
   constructor(private postService: PostService, private route: ActivatedRoute,
@@ -138,7 +136,6 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       let pictureSubs :Subscription = this.profileService.getProfilePic(username)
         .subscribe(
           (picData: PictureData) => {
-            console.log(picData.username);
             this.picData = new PictureData();
             this.picData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
             this.picData.username = picData.username;
