@@ -19,7 +19,6 @@ export class ProfileService {
   getProfileByUsername(username: string) {
     return this._http.get(environment.api + '/user/u/' + username)
       .pipe(catchError((errData: HttpErrorResponse) => {
-        console.log(errData);
         if (errData.status == 404) {
           this._router.navigate(['/404']);
         }
@@ -29,9 +28,7 @@ export class ProfileService {
   getFollowersCount(username: string = '') {
     let params = new HttpParams();
     if (username.length) {
-      // console.log(username);
       params = params.append('username', username);
-      console.log('r', params);
     }
     return this._http.get(environment.api + '/user/profile/followers/count', {
       params
@@ -41,7 +38,6 @@ export class ProfileService {
   getFollowers(username: string = '') {
     let params = new HttpParams();
     if (username.length) {
-      // console.log(username);
       params = params.append('username', username);
       return this._http.get( environment.api + '/user/profile/followers', {
         params
@@ -52,7 +48,6 @@ export class ProfileService {
   getFollowings(username: string = '') {
     let params = new HttpParams();
     if (username.length) {
-      // console.log(username);
       params = params.append('username', username);
       return this._http.get( environment.api + '/user/profile/followed-users', {
         params
@@ -63,9 +58,7 @@ export class ProfileService {
   getFollowingCount(username: string = '') {
     let params = new HttpParams();
     if (username.length) {
-      //  console.log('du',username);
       params = params.append('username', username);
-      // console.log('d',params)
     }
     return this._http.get(environment.api + '/user/profile/followed-users/count', {
       params
@@ -96,7 +89,6 @@ export class ProfileService {
 
   editProfileFirstLastName(firstName: string, lastName: string) {
     let params = new HttpParams();
-    // console.log(firstName);
     if (firstName !== '') {
       params=params.append('firstName', firstName);
     }
@@ -117,10 +109,8 @@ export class ProfileService {
     })
     .pipe(
       catchError((errorData:HttpErrorResponse)=>{
-        console.log(errorData);
         if(errorData.status===400){
           if(errorData.error && errorData.error.message){
-            console.log(errorData.error.message);
             if(errorData.error.message===`Email: ${email} has been used.`){
               return throwError('کاربری با این ایمیل وجود دارد');
             }else{
@@ -141,10 +131,8 @@ export class ProfileService {
     })
     .pipe(
       catchError((errorData:HttpErrorResponse)=>{
-        console.log(errorData);
         if(errorData.status===400){
           if(errorData.error && errorData.error.message){
-            console.log(errorData.error.message);
             if(errorData.error.message===`Mobile: ${phoneNumber} has been used.`){
               return throwError('کاربری با این شماره مبایل وجود دارد');
             }else{

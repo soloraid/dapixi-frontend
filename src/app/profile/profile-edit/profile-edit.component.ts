@@ -5,8 +5,6 @@ import { Subscription } from 'rxjs';
 import { ProfileService } from '../profile.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/share/user/user.mudole';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { flush } from '@angular/core/testing';
 import { LoaderService } from 'src/app/share/loader/loader.service';
 
 @Component({
@@ -105,16 +103,13 @@ export class ProfileEditComponent implements OnInit,OnDestroy {
       this.nameLoading=false;
     }));
     this.editSubs.push(nameSubs);
-    // console.log(this.firstName,'\n',this.lastname);
   }
 
   changeEmail(): void {
-    // console.log(this.emailForm.get('email').value);
     let emailSubs:Subscription=this.profileService.editProfileEmail(this.emailForm.get('email').value)
     .subscribe(
       data=>{
       this.emailLoading=true;
-      // console.log(data);
       this.success.push('ایمیل با موفقیت تغییر یافت');
       this.emailLoading=false;  
       this.emailError="";   
@@ -132,7 +127,6 @@ export class ProfileEditComponent implements OnInit,OnDestroy {
     .subscribe(
       data=>{
       this.phoneLoading=true;
-      // console.log(data);
       this.success.push("شماره همراه با موفقیت تغییر یافت");
       this.phoneLoading=false;
       this.phoneError="";
@@ -147,7 +141,6 @@ export class ProfileEditComponent implements OnInit,OnDestroy {
     let dateSubs:Subscription=this.profileService.editProfileDate(this.dateForm.get('date').value)
     .subscribe(data=>{
       this.dateLoading=true;
-      // console.log(data);
       this.success.push('تاریخ تولد با موفقیت عوض شد');
       this.dateLoading=false;      
     });
@@ -157,13 +150,12 @@ export class ProfileEditComponent implements OnInit,OnDestroy {
     let passwordSubs:Subscription=this.profileService.editProfilePassword(this.passwordForm.get('password').value)
     .subscribe(data=>{
       this.passwordLoading=true;
-      // console.log(data);
       this.success.push('رمز عبور با موفقیت تغییر یافت');
       this.passwordLoading=false;
-    })
+    });
+    this.editSubs.push(passwordSubs);
   }
   deletError(event){
-    // console.log((<HTMLElement>event.target).style.display='none');
     (<HTMLElement>event.target).parentElement.style.display='none';
   }
   finish(){
