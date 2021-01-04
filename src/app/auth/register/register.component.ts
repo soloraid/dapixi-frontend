@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../auth.service';
 import {LoaderService} from '../../share/loader/loader.service';
-import {environment} from '../../../environments/environment';
+
 
 @Component({
     selector: 'app-register',
@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     errorMsg = '';
     signUpSubs: Subscription;
 
-    // loginSubs:Subscription;
     constructor(private _authService: AuthService, private router: Router, public loaderService: LoaderService) {
     }
 
@@ -37,8 +36,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     onPasswordChange(event) {
         this.passwordHolder = event.target.value;
-        // console.log(event.target.value);
-        // console.log(this.passwordHolder);
+
     }
 
     onSubmit() {
@@ -52,27 +50,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
             this.regForm.get('date').value
         ).subscribe(
             (data) => {
-                console.log(data);
                 this._authService.confirmation.next(this.regForm.get('email').value);
                 this.router.navigate(['/auth/confirm'])
-                // this.loginSubs=this._authService
-                // .login(this.regForm.get('userName').value,this.regForm.get('password').value)
-                // .subscribe((data)=>{
-                //   this.router.navigate(['']);
-                // });
+
             },
             (errorData: string) => {
                 this.errorMsg = errorData;
-                // setTimeout(()=>{
-                //   this.errorMsg="";
-                // },5000);
-                // console.log(errorData);
+
             }
         )
     }
 
     minError(formControlName: string) {
-        // console.log('v',this.regForm.controls[formControlName].errors);
         if (this.regForm.controls[formControlName].errors && this.regForm.controls[formControlName].errors['minlength']) {
             if (this.regForm.controls[formControlName].errors['minlength'] && this.regForm.controls[formControlName].touched) {
                 return true;
@@ -104,9 +93,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this.signUpSubs) {
             this.signUpSubs.unsubscribe();
-            // if(this.loginSubs){
-            //   this.loginSubs.unsubscribe();
-            // }
         }
     }
 }

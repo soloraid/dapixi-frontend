@@ -1,5 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {LoaderService} from '../../share/loader/loader.service';
@@ -10,7 +9,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss']
 })
-export class ResetComponent implements OnInit {
+export class ResetComponent implements OnInit,OnDestroy {
   resetForm:FormGroup;
   passwordHolder:string='';
   confirm:boolean=false;
@@ -24,17 +23,17 @@ export class ResetComponent implements OnInit {
     })
   }
   onSubmit(){
-    console.log(this.resetForm.get('email').value);
     this.subs=this._authService.forgetPassword(this.resetForm.get('email').value)
     .subscribe(data=>{
-      console.log(data);
       this.confirm=true;
     },
     (errorData:string)=>{
-      console.log('t',errorData);
       this.errMsg=errorData;
     }
     )
+  }
+  ngOnDestroy(){
+    this.subs && this.subs.unsubscribe();
   }
 
 }

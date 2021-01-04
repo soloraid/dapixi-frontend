@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressSpinnerModule, MatSpinner } from "@angular/material/progress-spinner";
 import { RouterModule } from "@angular/router";
-import { ConfirmDialogComponent } from "../share/confirm-dialog/confirm-dialog.component";
 import { ReAuthGuard } from "../share/re-auth.guard";
 import { AuthComponent } from "./auth.component";
 import { ConfirmComponent } from "./confirm/confirm.component";
