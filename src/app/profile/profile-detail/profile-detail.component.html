@@ -28,7 +28,7 @@
               </div>
             </mat-menu>
             <div class="avatar-preview">
-              <div id="imagePreview" [ngStyle]="{'background-image':'url(' + pictureUrl + ')'}" >
+              <div *ngIf="pictureUrl" id="imagePreview" [ngStyle]="{'background-image':'url(' + pictureUrl + ')'}" >
               </div>
             </div>
           </div>

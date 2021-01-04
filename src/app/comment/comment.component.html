@@ -3,8 +3,8 @@
     <ul *ngFor="let comment of comments; let i=index">
       <li>
         <div class="container-fluid">
-          <span>{{ comment.username }} </span>
-          <div class="align-content-md-center">{{ comment.content }} </div>
+          <span><small>{{ comment.username }}</small> </span>
+          <div class="align-content-md-center"><small>{{ comment.content }}</small> </div>
           <span style="font-size: 30%" class="text-muted float-right">{{ comment.creationDate }} </span>
           <br>
         </div>

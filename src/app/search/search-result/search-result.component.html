@@ -12,27 +12,28 @@
   </ng-template>
   <div *ngIf="!isEmpty; else noInfo">
     <section *ngIf="!isEmptyUsers">
-      <div class="row active-with-click">
-        <div class="col-lg-4 col-md-5 col-sm-6 col-12" *ngFor="let user of users">
-          <article class="material-card Deep-Purple">
-            <h2>
-              <span>{{user.firstName}} {{user.lastName}}</span>
-              <strong>
-                <i class="fa fa-fw fa-user-circle"></i>
-                {{user.username}}
-              </strong>
-            </h2>
-            <div class="mc-content">
-              <div class="img-container">
-                <img class="avatar-preview" [src]="user.profileImageUrl">
+        <div class="card">
+          <div class="card-container">
+            <div class="card-item" *ngFor="let user of users">
+              <div class="card-header">
+                <div class="card-header__bg"></div>
+                <img *ngIf="user.profileImageUrl" [src]="user.profileImageUrl" class="card-header__img">
+                <div class="card-header__text">
+                        <span class="card-header__name">
+                            {{user.firstName}} {{user.lastName}}
+                        </span>
+                  <span class="card-header__username">
+                    <i class="fa fa-fw fa-user-circle"></i>
+                            {{user.username}}
+                        </span>
+                  <a class="mc-btn-action" [routerLink]="['/user',user.username]">
+                    <i matTooltip="پروفایل" class="material-icons" style="color: var(--primary_color)">face</i>
+                  </a>
+                </div>
               </div>
             </div>
-            <a class="mc-btn-action" [routerLink]="['/user',user.username]">
-              <i class="fa fa-address-card"></i>
-            </a>
-          </article>
+          </div>
         </div>
-      </div>
     </section>
     <section *ngIf="!isEmptyPosts">
       <div class="ui-main-posts">
