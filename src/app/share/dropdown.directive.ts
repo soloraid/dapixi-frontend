@@ -9,7 +9,7 @@ export class DropdownDirective {
     const targetElement: HTMLElement = (<HTMLElement>event.target);
     const menu: HTMLElement = this.element.nativeElement.nextElementSibling;
     if (!targetElement.classList.contains('dropdown-item')) {
-      if (menu.classList.contains('show')) {
+      if (menu && menu.classList.contains('show')) {
         menu.classList.remove('show');
       } else {
         if ((<HTMLElement>event.target).classList.contains('dropdown-toggle')) {
