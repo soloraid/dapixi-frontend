@@ -49,29 +49,23 @@ import { InfoModule } from './info/info.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-
     HttpClientModule,
-
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
-
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-
     MatTooltipModule,
-
     MatMenuModule,
-
     MatAutocompleteModule,
-    AuthModule,
+    // AuthModule,
     MasonryPostsModule,
-    ProfileModule,
+    // ProfileModule,
     MainModule,
     SearchResultModule,
-    PostDetailModule,
-    InfoModule
+    // PostDetailModule,
+    // InfoModule
   ],
   providers: [
     {

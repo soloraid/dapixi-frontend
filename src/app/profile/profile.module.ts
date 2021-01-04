@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
-import { MatFormFieldControl, MatFormFieldModule } from "@angular/material/form-field";
+import {  MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";
@@ -13,12 +13,9 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { RouterModule } from "@angular/router";
 import { ClipboardModule } from "ngx-clipboard";
-import { NgxMasonryModule } from "ngx-masonry";
 import { AuthGuard } from "../share/auth.guard";
 import { DropdownDirective } from "../share/dropdown.directive";
 import { MasonryPostsModule } from "../share/masonry-posts/masonary-posts.module";
-import { MasonryPostsComponent } from "../share/masonry-posts/masonry-posts.component";
-import { PostComponent } from "../share/post/post.component";
 import { UploadPostComponent } from "../upload-post/upload-post.component";
 import { FollowComponent } from "./follow/follow.component";
 import { ProfileDetailComponent } from "./profile-detail/profile-detail.component";
@@ -53,13 +50,14 @@ import { ProfileComponent } from "./profile.component";
         MatTooltipModule,
         RouterModule.forChild([
             {
-                path: 'user',
+                path: '',
                 component: ProfileComponent,
                 children: [
                     {
                         path: '',
                         redirectTo: 'profile',
                         pathMatch: 'full',
+                        component:ProfileComponent,
                         canActivate: [AuthGuard]
                     },
                     {

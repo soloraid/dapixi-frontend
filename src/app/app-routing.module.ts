@@ -6,6 +6,11 @@ import { Error500Component } from './error500/error500.component';
 
 const routes: Routes = [
   {
+    path:'',
+    pathMatch:'full',
+    redirectTo:'home'
+  },
+  {
     path:'auth',
     loadChildren:() =>
       import('./auth/auth.module').then(
@@ -25,6 +30,13 @@ const routes: Routes = [
       import('./post-detail/post-detail.module').then(
         m => m.PostDetailModule
       )
+  },
+  {
+    path:'user',
+    loadChildren:() => 
+    import('./profile/profile.module').then(
+      m => m.ProfileModule
+    )
   },
   {
     path: '404',
