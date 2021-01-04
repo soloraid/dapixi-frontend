@@ -41,7 +41,11 @@ export class FollowComponent implements OnInit, OnDestroy {
           (picData: Data) => {
             this.tempData = new Data();
             this.tempData.username = picData.username;
-            this.tempData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
+            if (picData.imageUrl.startsWith('/files')) {
+              this.tempData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
+            } else {
+              this.tempData.imageUrl = picData.imageUrl;
+            }
             if ( method === 'followers') {
               this.userFollowers.push(this.tempData);
             }

@@ -7,11 +7,10 @@ import {LoaderService} from '../share/loader/loader.service';
 import {AuthService} from '../auth/auth.service';
 import {Tokens} from '../share/tokens.model';
 import {Subscription} from 'rxjs';
-import {User} from '../share/user/user.mudole';
 import {ProfileService} from '../profile/profile.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../share/confirm-dialog/confirm-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../share/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -28,8 +27,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   isFirst = true;
   rateError = '';
-  username:string;
-  currentUser:boolean;
+  username: string;
+  currentUser: boolean;
   map: Map<string, number> = new Map<string, number>();
   usersProfPic: PictureData[] = [];
   private pictureSubs: Subscription;
@@ -38,15 +37,15 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   constructor(private postService: PostService, private route: ActivatedRoute,
               public loaderService: LoaderService, private authService: AuthService,
               private profileService: ProfileService,
-              public dialog:MatDialog,
-              public router:Router) {
+              public dialog: MatDialog,
+              public router: Router) {
   }
 
   ngOnInit(): void {
     this.authSub = this.authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
-      if(token){
-        this.username=token.username;
+      if (token) {
+        this.username = token.username;
       }
     });
     this.id = this.route.snapshot.params.id;
@@ -54,13 +53,13 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       this.postUrl = environment.api + '/photo' + post.imageUrl;
       this.post = post;
       console.log(post);
-      if(this.isAuth){
-        this.currentUser = post.username===this.username;
+      if (this.isAuth) {
+        this.currentUser = post.username === this.username;
       }
       console.log(this.currentUser);
       this.isEmpty = false;
       this.isFirst = false;
-      this.postService.getUsersRatePost(this.id).subscribe( users => {
+      this.postService.getUsersRatePost(this.id).subscribe(users => {
         // tslint:disable-next-line:forin
         for (const member in users) {
           this.map.set(member, users[member]);
@@ -73,14 +72,14 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   setRating(rate: string): void {
-    if (this.authService.isInLocal()){
+    if (this.authService.isInLocal()) {
       this.id = this.route.snapshot.params.id;
       // console.log(this.isAuth);
       this.postService.putRate(this.id, rate).subscribe(() => {
         this.postService.getPostByID(this.id).subscribe((post: Post) => {
           this.post = post;
         });
-        this.postService.getUsersRatePost(this.id).subscribe( (users) => {
+        this.postService.getUsersRatePost(this.id).subscribe((users) => {
           // tslint:disable-next-line:forin
           this.map.clear();
           for (const member in users) {
@@ -92,19 +91,19 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         this.getUsersRated();
       });
       this.rateError = '';
-    }else{
+    } else {
       this.rateError = 'برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
 
   deleteRating(): void {
-    if (this.authService.isInLocal()){
+    if (this.authService.isInLocal()) {
       this.id = this.route.snapshot.params.id;
       this.postService.deleteRate(this.id).subscribe(() => {
         this.postService.getPostByID(this.id).subscribe((post: Post) => {
           this.post = post;
         });
-        this.postService.getUsersRatePost(this.id).subscribe( (users) => {
+        this.postService.getUsersRatePost(this.id).subscribe((users) => {
           // tslint:disable-next-line:forin
           this.map.clear();
           for (const member in users) {
@@ -117,14 +116,14 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       });
       this.rateError = '';
 
-    }else{
+    } else {
       this.rateError = 'برای حذف امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
 
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
-    if (!this.authService.isInLocal()){
+    if (!this.authService.isInLocal()) {
       this.authService.logOut();
     }
   }
@@ -132,13 +131,17 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   getUsersRated(): void {
     // tslint:disable-next-line:forin
     this.usersProfPic = [];
-    for ( const username of this.map.keys()) {
+    for (const username of this.map.keys()) {
       this.pictureSubs = this.profileService.getProfilePic(username)
         .subscribe(
           (picData: PictureData) => {
             console.log(picData.username);
             this.picData = new PictureData();
-            this.picData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
+            if (picData.imageUrl.startsWith('/files')) {
+              this.picData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
+            } else {
+              this.picData.imageUrl = picData.imageUrl;
+            }
             this.picData.username = picData.username;
             this.usersProfPic.push(this.picData);
           },
@@ -154,20 +157,22 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       console.log(this.usersProfPic);
     }
   }
-  showDialog(){
-    const dialogRef=this.dialog.open(ConfirmDialogComponent);
-    dialogRef.afterClosed().subscribe(result=>{
-      if(result){
+
+  showDialog() {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
         this.deletePost();
       }
     })
   }
-  private deletePost(){
-    
-    this.postService.deletePost(this.post.id).subscribe(data=>{
+
+  private deletePost() {
+
+    this.postService.deletePost(this.post.id).subscribe(data => {
       // console.log('del',data);
       this.router.navigate(['/user/profile']);
-      
+
     })
   }
 }
