@@ -44,6 +44,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   followsunbs: Subscription;
   pictureSubs: Subscription;
   notifSubs: Subscription;
+  deletPicSubs:Subscription;
   authError = '';
   p1 = 1;
   p = 1;
@@ -69,9 +70,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
       if (this.username) {
         this.loginUser = false;
         if (this._authService.authState.value && this.username === this._authService.authState.value.username) {
-          // console.log(this._authService.authState.value.username);
           this.loginUser = true;
-          // this._router.navigate(['/user/profile']);
         }
       }
     });
@@ -187,6 +186,9 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     if (this.notifSubs) {
       this.notifSubs.unsubscribe();
     }
+    if(this.deletPicSubs){
+      this.deletPicSubs.unsubscribe();
+    }
   }
 
   requestToFollow(): void {
@@ -218,7 +220,6 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
 
   onChange(event): void {
     this.selectedFile = (event.target.files[0] as File);
-    console.log(this.selectedFile);
     this._postService.uploadProfilePhoto(this.selectedFile).subscribe(() => {
       this.getPicture();
       this._profile.picSub.next(true);
@@ -231,7 +232,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   }
 
   deletePic(): void {
-    this._profile.deleteProfilePic().subscribe(() => {
+    this.deletPicSubs = this._profile.deleteProfilePic().subscribe(() => {
       this.getPicture();
       this._profile.picSub.next(true);
     });
