@@ -9,8 +9,8 @@ import {Tokens} from '../share/tokens.model';
 import {Subscription} from 'rxjs';
 import {ProfileService} from '../profile/profile.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../share/confirm-dialog/confirm-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmDialogComponent} from '../share/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -27,8 +27,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   isFirst = true;
   rateError = '';
-  username:string;
-  currentUser:boolean;
+  username: string;
+  currentUser: boolean;
   map: Map<string, number> = new Map<string, number>();
   usersProfPic: PictureData[] = [];
   
@@ -37,15 +37,15 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   constructor(private postService: PostService, private route: ActivatedRoute,
               public loaderService: LoaderService, private authService: AuthService,
               private profileService: ProfileService,
-              public dialog:MatDialog,
-              public router:Router) {
+              public dialog: MatDialog,
+              public router: Router) {
   }
 
   ngOnInit(): void {
     let authSub : Subscription = this.authService.authState.subscribe((token: Tokens) => {
       this.isAuth = !!token;
-      if(token){
-        this.username=token.username;
+      if (token) {
+        this.username = token.username;
       }
     });
     this.subs.push(authSub);
@@ -72,7 +72,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   }
 
   setRating(rate: string): void {
-    if (this.authService.isInLocal()){
+    if (this.authService.isInLocal()) {
       this.id = this.route.snapshot.params.id;
       let putRateSubs :Subscription =  this.postService.putRate(this.id, rate).subscribe(() => {
         let postSubs2:Subscription = this.postService.getPostByID(this.id).subscribe((post: Post) => {
@@ -91,13 +91,13 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       });
       this.subs.push(putRateSubs);
       this.rateError = '';
-    }else{
+    } else {
       this.rateError = 'برای ثبت امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
 
   deleteRating(): void {
-    if (this.authService.isInLocal()){
+    if (this.authService.isInLocal()) {
       this.id = this.route.snapshot.params.id;
       let deleteRateSubs:Subscription = this.postService.deleteRate(this.id).subscribe(() => {
         let postSubs3:Subscription = this.postService.getPostByID(this.id).subscribe((post: Post) => {
@@ -118,7 +118,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       this.subs.push(deleteRateSubs);
       this.rateError = '';
 
-    }else{
+    } else {
       this.rateError = 'برای حذف امتیاز باید وارد حساب کاربری خود شوید';
     }
   }
@@ -137,7 +137,11 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         .subscribe(
           (picData: PictureData) => {
             this.picData = new PictureData();
-            this.picData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
+            if (picData.imageUrl.startsWith('/files')) {
+              this.picData.imageUrl = environment.api + '/photo/' + picData.imageUrl;
+            } else {
+              this.picData.imageUrl = picData.imageUrl;
+            }
             this.picData.username = picData.username;
             this.usersProfPic.push(this.picData);
           },

@@ -1,5 +1,11 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {map, mergeMap} from 'rxjs/operators';
@@ -63,7 +69,9 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
       if (this.username) {
         this.loginUser = false;
         if (this._authService.authState.value && this.username === this._authService.authState.value.username) {
-          this.loginUser=true;
+          // console.log(this._authService.authState.value.username);
+          this.loginUser = true;
+          // this._router.navigate(['/user/profile']);
         }
       }
     });
@@ -71,7 +79,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
       if (data) {
         this.isAuth = true;
         this.getCount(this.username);
-      }else{
+      } else {
         this.isAuth = false;
       }
     });
@@ -137,7 +145,11 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     this.pictureSubs = this._profile.getProfilePic(this.userView.username)
       .subscribe(
         (picData: PictureData) => {
-          this.pictureUrl = environment.api + '/photo/' + picData.imageUrl;
+          if (picData.imageUrl.startsWith('/files')) {
+            this.pictureUrl = environment.api + '/photo/' + picData.imageUrl;
+          } else {
+            this.pictureUrl = picData.imageUrl;
+          }
         },
         (errorData: HttpErrorResponse) => {
           this.pictureUrl = '../../../assets/avatar-default.png';
@@ -169,7 +181,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
     if (this.followsunbs) {
       this.followsunbs.unsubscribe();
     }
-    if (!this._authService.isInLocal()){
+    if (!this._authService.isInLocal()) {
       this._authService.logOut();
     }
     if (this.notifSubs) {
@@ -178,19 +190,19 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   }
 
   requestToFollow(): void {
-    if (this._authService.isInLocal()){
+    if (this._authService.isInLocal()) {
       this._profile.follow(this.userView.username).subscribe(() => {
         this.getCount(this.userView.username);
         this.isFollowed = true;
         this._profile.followSub.next(true);
       });
-    }else{
+    } else {
       this.authError = 'باید وارد حساب کاربری خود شوید';
     }
   }
 
   requestToUnfollow(): void {
-    if (this._authService.isInLocal()){
+    if (this._authService.isInLocal()) {
       this._profile.unfollow(this.userView.username).subscribe(() => {
         this.getCount(this.userView.username);
         this.isFollowed = false;
@@ -199,14 +211,15 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
           this.isNotifON = isNotif;
         });
       });
-    }else{
+    } else {
       this.authError = 'باید وارد حساب کاربری خود شوید';
     }
   }
 
   onChange(event): void {
     this.selectedFile = (event.target.files[0] as File);
-    this._postService.uploadProfilePhoto(this.selectedFile).subscribe( () => {
+    console.log(this.selectedFile);
+    this._postService.uploadProfilePhoto(this.selectedFile).subscribe(() => {
       this.getPicture();
       this._profile.picSub.next(true);
       this.InputVar.nativeElement.value = '';
@@ -218,7 +231,7 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
   }
 
   deletePic(): void {
-    this._profile.deleteProfilePic().subscribe( () => {
+    this._profile.deleteProfilePic().subscribe(() => {
       this.getPicture();
       this._profile.picSub.next(true);
     });
