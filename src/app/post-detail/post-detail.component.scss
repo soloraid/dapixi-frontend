@@ -15,11 +15,10 @@
   border-radius: 2px;
   padding: 4px 4px 4px 4px;
   margin: 0 0 3px 0;
-  
 }
 
 .ui-detail {
-  padding: 2px;
+  //padding: 2px;
   border-radius: 10px;
   border: 4px var(--secondary_color) solid;
   box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
@@ -27,10 +26,19 @@
   width: 1200px;*/
 }
 
-//.container-temp {
-//  padding: 0 4px 4px 4px;
-//  margin: 0 4px 4px 4px;
-//}
+.card-body {
+  margin-top: -16px;
+}
+
+.container {
+  max-width: 850px;
+  @media (max-width: 1500px) {
+    max-width: 700px;
+  }
+  @media (max-width: 1200px) {
+    max-width: 600px;
+  }
+}
 
 .ui-content {
   height: auto;
@@ -87,6 +95,11 @@
   height: 30px;
   border: 2px solid var(--secondary_color);
   border-radius: 50%;
+}
+::ng-deep .mat-tab-label, .mat-tab-label-active{
+  min-width: 0!important;
+  padding: 3px!important;
+  margin: 3px!important;
 }
 
 @mixin star-rating( $filled-color: #F9BF3B, $empty-color: #444, $size: 20px, $width: 125px) {
