@@ -64,7 +64,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
           } else {
             this.imageUrl = picData.imageUrl;
           }
-          this.profileService.picSub.next(true);
+          // this.profileService.picSub.next(true);
         },
         (errorData: HttpErrorResponse) => {
           this.imageUrl = '../../../assets/avatar-default.png';
