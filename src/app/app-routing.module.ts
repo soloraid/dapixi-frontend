@@ -39,6 +39,13 @@ const routes: Routes = [
     )
   },
   {
+    path:'search-result',
+    loadChildren:() => 
+    import('./search/search-result/search-result.module').then(
+      m => m.SearchResultModule
+    )
+  },
+  {
     path: '404',
     component: Error404Component
   },

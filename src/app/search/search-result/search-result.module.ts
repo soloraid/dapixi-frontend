@@ -15,7 +15,7 @@ import { SearchResultComponent } from "./search-result.component";
         MasonryPostsModule,
         RouterModule.forChild([
             {
-                path: 'search-result',
+                path: '',
                 // component: SearchResultComponent,
                 children: [
                     {
