@@ -169,12 +169,14 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.subs.push(showDialogSubs);
   }
   showPicture(){
-    console.log(document.documentElement.clientWidth);
+    console.log(document.documentElement.clientHeight);
     const baseWidt=document.documentElement.clientWidth;
     const padding=(15*baseWidt)/screen.width;
     const dialogRef=this.dialog.open(FullPictureComponent,
       {
-      maxWidth: baseWidt - padding
+      maxWidth: baseWidt - padding,
+      maxHeight: document.documentElement.clientHeight - 15
+      // height: "680px"
     }
     );
     dialogRef.componentInstance.src=this.postUrl;
