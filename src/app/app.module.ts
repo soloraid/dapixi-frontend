@@ -27,6 +27,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module';
 import { MainModule } from './main/main.module';
+import { FullPictureComponent } from './share/full-picture/full-picture.component';
 
 
 
@@ -40,6 +41,7 @@ import { MainModule } from './main/main.module';
     MainNavComponent,
     Error404Component,
     Error500Component,
+    
   ],
   imports: [
     BrowserModule,

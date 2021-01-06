@@ -9,8 +9,9 @@ import {Tokens} from '../share/tokens.model';
 import {Subscription} from 'rxjs';
 import {ProfileService} from '../profile/profile.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../share/confirm-dialog/confirm-dialog.component';
+import { FullPictureComponent } from '../share/full-picture/full-picture.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -166,6 +167,17 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.subs.push(showDialogSubs);
+  }
+  showPicture(){
+    console.log(document.documentElement.clientWidth);
+    const baseWidt=document.documentElement.clientWidth;
+    const padding=(15*baseWidt)/screen.width;
+    const dialogRef=this.dialog.open(FullPictureComponent,
+      {
+      maxWidth: baseWidt - padding
+    }
+    );
+    dialogRef.componentInstance.src=this.postUrl;
   }
   private deletePost(){
     
