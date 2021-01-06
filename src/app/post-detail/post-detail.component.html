@@ -7,7 +7,8 @@
 
        <div class="row">
          <div class="col-md-7 p-0 m-0">
-           <a [href]="postUrl" target="_blank"><img src="{{postUrl}}" alt="{{post.title}}" class="uiPost imgPost"></a>
+           <a (click)="showPicture()"><img src="{{postUrl}}" alt="{{post.title}}" class="uiPost imgPost"></a>
+           <!-- [href]="postUrl" target="_blank" -->
            <div class="container-fluid">
              <div class="row" style="margin-top: 15px; margin-left: 5px">
                <div class="col-ms-1" *ngIf="isAuth">

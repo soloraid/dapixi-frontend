@@ -14,13 +14,15 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { RouterModule } from "@angular/router";
 import { CommentComponent } from "../comment/comment.component";
 import { ConfirmDialogComponent } from "../share/confirm-dialog/confirm-dialog.component";
+import { FullPictureComponent } from "../share/full-picture/full-picture.component";
 import { PostDetailComponent } from "./post-detail.component";
 
 @NgModule({
     declarations: [
         ConfirmDialogComponent,
         PostDetailComponent,
-        CommentComponent
+        CommentComponent,
+        FullPictureComponent
     ],
     imports: [
         CommonModule,
