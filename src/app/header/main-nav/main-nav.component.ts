@@ -1,13 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {Observable, Subscription} from 'rxjs';
-import {map, shareReplay} from 'rxjs/operators';
-import {AuthService} from '../../auth/auth.service';
-import {Tokens} from '../../share/tokens.model';
-import {Router} from '@angular/router';
-import {ProfileService} from '../../profile/profile.service';
-import {environment} from '../../../environments/environment.prod';
-import {HttpErrorResponse} from '@angular/common/http';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Observable, Subscription } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { AuthService } from '../../auth/auth.service';
+import { Tokens } from '../../share/tokens.model';
+import { Router } from '@angular/router';
+import { ProfileService } from '../../profile/profile.service';
+import { environment } from '../../../environments/environment.prod';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PostService } from 'src/app/share/post.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -19,6 +20,9 @@ export class MainNavComponent implements OnInit, OnDestroy {
   imageUrl: string;
   authSubsc: Subscription;
   pictureSubs: Subscription;
+  catSubsc: Subscription;
+  categories: string[];
+  catShow: boolean = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 860px)')
     .pipe(
       map(result => result.matches),
@@ -34,9 +38,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
   private username: string;
 
   constructor(private breakpointObserver: BreakpointObserver,
-              private _authService: AuthService,
-              private _router: Router,
-              private profileService: ProfileService) {
+    private _authService: AuthService,
+    private _router: Router,
+    private profileService: ProfileService,
+    private _postService: PostService) {
   }
 
 
@@ -53,6 +58,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
         this.getProfilePic();
       }
     });
+    this.catSubsc = this._postService.getCategories().subscribe((cats: string[]) => {
+      this.categories = cats;
+    })
+
   }
 
   private getProfilePic(): void {
@@ -93,16 +102,30 @@ export class MainNavComponent implements OnInit, OnDestroy {
   }
 
   onAuth(): void {
-    this._router.navigate(['/auth'], {queryParams: {back: this._router.url}});
+    this._router.navigate(['/auth'], { queryParams: { back: this._router.url } });
   }
+  toggleCat() {
+    console.log('c');
+    this.catShow = !this.catShow;
+  }
+  @HostListener('document:click', ['$event']) toggling(event: Event) {
+    const targetElement: HTMLElement = (<HTMLElement>event.target);
+    console.log(targetElement);
+    if (!(targetElement.id === 'cat-btn' || targetElement.id === 'cat-icon')) {
+      if (this.catShow) {
+        this.catShow = !this.catShow;
+      }
 
+    }
+  }
   ngOnDestroy(): void {
     this.authSubsc.unsubscribe();
     this.pictureSubs.unsubscribe();
+    this.catSubsc.unsubscribe();
   }
 
   onRegister(): void {
-    this._router.navigate(['/auth/register'], {queryParams: {back: this._router.url}});
+    this._router.navigate(['/auth/register'], { queryParams: { back: this._router.url } });
   }
 }
 

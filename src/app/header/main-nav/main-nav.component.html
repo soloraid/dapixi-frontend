@@ -1,31 +1,33 @@
-
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav side-mat-toolbar" fixedInViewport
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [ngClass]="{hidden: !(isHandset$ | async)}"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [ngClass]="{hidden: !(isHandset$ | async)}"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
 
     <mat-toolbar-row class="d-flex justify-content-end">
       <mat-toolbar *ngIf="isAuth">
-        <img *ngIf="imageUrl" [src]="imageUrl" alt="Avatar" class="avatar-img" style="margin-top: 3px; margin-right: 70px; border: 3px solid var(--primary_color)">
+        <img *ngIf="imageUrl" [src]="imageUrl" alt="Avatar" class="avatar-img"
+          style="margin-top: 3px; margin-right: 70px; border: 3px solid var(--primary_color)">
       </mat-toolbar>
       <mat-toolbar class="mat-tool">فهرست</mat-toolbar>
     </mat-toolbar-row>
     <hr>
-    <mat-nav-list >
+    <mat-nav-list>
       <div *ngIf="(isHandset$2 | async)">
         <div class="d-flex justify-content-start">
-          <button mat-icon-button matTooltip="خانه" routerLink="home" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
+          <button mat-icon-button matTooltip="خانه" routerLink="home" class="btn btnn-circle btn-circle"
+            (click)="drawer.toggle()">
             <mat-icon>home</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="پست امتیاز بالا" routerLink="hot" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
+          <button mat-icon-button matTooltip="پست امتیاز بالا" routerLink="hot" class="btn btnn-circle btn-circle"
+            (click)="drawer.toggle()">
             <mat-icon>whatshot</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="پیشنهادی" *ngIf="isAuth" routerLink="recommend" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
+          <button mat-icon-button matTooltip="پیشنهادی" *ngIf="isAuth" routerLink="recommend"
+            class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
             <mat-icon>recommend</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="دنبال شوندگان" *ngIf="isAuth" routerLink="follow" class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
+          <button mat-icon-button matTooltip="دنبال شوندگان" *ngIf="isAuth" routerLink="follow"
+            class="btn btnn-circle btn-circle" (click)="drawer.toggle()">
             <mat-icon>follow_the_signs</mat-icon>
           </button>
         </div>
@@ -33,69 +35,75 @@
       </div>
       <button mat-list-item *ngIf="!isAuth" (click)="drawer.toggle();onRegister()" class="nav-item navbar-item">
         <mat-icon>app_registration</mat-icon>
-        ثبت نام&nbsp;</button>
+        ثبت نام&nbsp;
+      </button>
       <button mat-list-item *ngIf="!isAuth" (click)="drawer.toggle();onAuth()" class="nav-item navbar-item">
         <mat-icon>login</mat-icon>
-        &nbsp;ورود</button>
-      <button mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user/new" href="" class="nav-item navbar-item">
-        <mat-icon>add</mat-icon><span>پست جدید&nbsp;</span></button>
-      <button mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user" href="" class="nav-item navbar-item">
+        &nbsp;ورود
+      </button>
+      <button mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user/new" href=""
+        class="nav-item navbar-item">
+        <mat-icon>add</mat-icon><span>پست جدید&nbsp;</span>
+      </button>
+      <button mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user" href=""
+        class="nav-item navbar-item">
         <mat-icon>portrait</mat-icon>
-        <span>&nbsp;پروفایل</span></button>
-      <button mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user/profile/edit" href="" class="nav-item navbar-item">
+        <span>&nbsp;پروفایل</span>
+      </button>
+      <button mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user/profile/edit" href=""
+        class="nav-item navbar-item">
         <mat-icon>edit</mat-icon>
-        <span>&nbsp;ویرایش پروفایل</span></button>
+        <span>&nbsp;ویرایش پروفایل</span>
+      </button>
       <button mat-list-item href="#" (click)="drawer.toggle()" routerLink="/info" class="nav-item navbar-item">
         <mat-icon>info</mat-icon>
-        <span>درباره ما&nbsp;</span></button>
+        <span>درباره ما&nbsp;</span>
+      </button>
       <button mat-list-item *ngIf="isAuth" (click)="onLogOut()" href="" class="nav-item navbar-item">
         <mat-icon>logout</mat-icon>
-        <span>&nbsp;خروج</span></button>
+        <span>&nbsp;خروج</span>
+      </button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="main-page">
     <mat-toolbar class="uiNav">
-      <mat-toolbar-row>
-        <button
-          class="btn btn-circle"
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="(isHandset$ | async)"
-          style="color: var(--bg_color)">
+      <mat-toolbar-row class="uiNav-row">
+        <button class="btn btn-circle" type="button" aria-label="Toggle sidenav" mat-icon-button
+          (click)="drawer.toggle()" *ngIf="(isHandset$ | async)" style="color: var(--bg_color)">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <div *ngIf="!isAuth &&!(isHandset$ | async)"
-             class="pt-0">
+        <div *ngIf="!isAuth &&!(isHandset$ | async)" class="pt-0">
           <button (click)="onRegister()" class="btn btn-custom">ثبت نام</button>
           <button (click)="onAuth()" class="btn btn-custom">ورود</button>
           <button routerLink="info" class="btn btn-link" style="margin-right: 20px">درباره ما</button>
           <span class="spacer"></span>
         </div>
-        <div class="row" *ngIf="isAuth &&!(isHandset$ | async)" style="font-family: 'IRANSansWeb'; color: var(--text_color2)">
+        <div class="row" *ngIf="isAuth &&!(isHandset$ | async)"
+          style="font-family: 'IRANSansWeb'; color: var(--text_color2)">
           <div class="col-md-3">
             <img *ngIf="imageUrl" [src]="imageUrl" alt="Avatar" class="avatar-img">
+            <!--  -->
           </div>
           <div class="col-md-3">
-            <button  mat-icon-button class="btn btnn-circle btn-circle" [matMenuTriggerFor]="menu" style="margin-left: -15%">
+            <button mat-icon-button class="btn btnn-circle btn-circle" [matMenuTriggerFor]="menu"
+              style="margin-left: -15%">
               <mat-icon>arrow_drop_down</mat-icon>
             </button>
           </div>
           <div class="col-md-5">
             <button routerLink="info" class="btn btn-link">درباره ما</button>
           </div>
-
+          <!--  -->
           <mat-menu #menu="matMenu">
             <a mat-menu-item routerLink="user/new">
               <mat-icon>add</mat-icon>
               <span>پست جدید</span>
             </a>
-            <a mat-menu-item  routerLink="user">
+            <a mat-menu-item routerLink="user">
               <mat-icon>portrait</mat-icon>
               <span>پروفایل</span>
             </a>
-            <a mat-menu-item  [routerLink]="['user/profile/edit']">
+            <a mat-menu-item [routerLink]="['user/profile/edit']">
               <mat-icon>edit</mat-icon>
               <span>ویرایش پروفایل</span>
             </a>
@@ -110,13 +118,21 @@
         </div>
         <span class="spacer"></span>
         <div *ngIf="!(isHandset$2 | async)">
+          <!-- <button  mat-icon-button class="btn btnn-circle btn-circle" [matMenuTriggerFor]="menu" style="margin-right: 0px;">
+            <mat-icon>arrow_drop_down</mat-icon>
+          </button> -->
+          <button mat-icon-button matTooltip="دسته‌بندی‌ها" id="cat-btn" class="btn btnn-circle btn-circle " (click)="toggleCat()" >
+            <mat-icon id="cat-icon">category</mat-icon>
+          </button>
           <button mat-icon-button matTooltip="پست امتیاز بالا" routerLink="hot" class="btn btnn-circle btn-circle">
             <mat-icon>whatshot</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="پیشنهادی" *ngIf="isAuth" routerLink="recommend" class="btn btnn-circle btn-circle">
+          <button mat-icon-button matTooltip="پیشنهادی" *ngIf="isAuth" routerLink="recommend"
+            class="btn btnn-circle btn-circle">
             <mat-icon>recommend</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="دنبال شوندگان" *ngIf="isAuth" routerLink="/follow" class="btn btnn-circle btn-circle">
+          <button mat-icon-button matTooltip="دنبال شوندگان" *ngIf="isAuth" routerLink="/follow"
+            class="btn btnn-circle btn-circle">
             <mat-icon>follow_the_signs</mat-icon>
           </button>
           <button mat-icon-button matTooltip="خانه" routerLink="/home" class="btn btnn-circle btn-circle">
@@ -125,12 +141,20 @@
           <span class="spacer"></span>
         </div>
         <a href="#" routerLink="home" class="navbar-brand p-0 m-0 ml-1 align-content-md-center">
-          <img
-          src="/assets/logo_noback_green.png" alt="LogoBrand" class="responsive p-0 m-0 d-none d-sm-inline">
-          <img
-          src="/assets/logo_noback_green.png" alt="LogoBrand" class="responsive p-0 m-0 d-inline d-sm-none"
-          >
+          <img src="/assets/logo_noback_green.png" alt="LogoBrand" class="responsive p-0 m-0 d-none d-sm-inline">
+          <img src="/assets/logo_noback_green.png" alt="LogoBrand" class="responsive p-0 m-0 d-inline d-sm-none">
         </a>
+      </mat-toolbar-row>
+      <mat-toolbar-row class="cat-menu" *ngIf="!(isHandset$2 | async) && catShow">
+        <div class="container">
+          <div class="row">
+            <div *ngFor="let cat of categories" class="col-3">
+              <a href="" class="my-4">
+                {{ cat }}
+              </a>
+            </div>
+          </div>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
     <br>

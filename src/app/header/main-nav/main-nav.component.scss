@@ -1,5 +1,34 @@
+
 .sidenav-container {
   height: 100%;
+}
+.uiNav {
+  position: fixed;
+  z-index: 100;
+  padding: 0% !important;
+  // background-color: var(--primary_color);
+  font-family: "IRANSansWeb";
+  text-align: right;
+  padding: 2px;
+  max-width: 100vw;
+  max-height: 100vh;
+  &-row{
+    background-color: var(--primary_color);
+
+  }
+}
+.cat-menu{
+  background-color: lighten(#232a34, $amount: 3%);
+  // direction: rtl;
+  height: auto;
+  max-height: 50vh;
+  overflow-y: scroll;
+  .container{
+    width: 100%;
+    direction: rtl;
+    // height: 100%;
+  }
+  
 }
 
 .sidenav {
