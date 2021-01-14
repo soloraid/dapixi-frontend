@@ -104,19 +104,37 @@ export class MainNavComponent implements OnInit, OnDestroy {
   onAuth(): void {
     this._router.navigate(['/auth'], { queryParams: { back: this._router.url } });
   }
-  toggleCat() {
-    console.log('c');
-    this.catShow = !this.catShow;
-  }
-  @HostListener('document:click', ['$event']) toggling(event: Event) {
-    const targetElement: HTMLElement = (<HTMLElement>event.target);
-    console.log(targetElement);
-    if (!(targetElement.id === 'cat-btn' || targetElement.id === 'cat-icon')) {
-      if (this.catShow) {
-        this.catShow = !this.catShow;
+  @HostListener('document:mousemove', ['$event']) toggling(event: MouseEvent) {
+    // console.log(event.target);
+    // console.log(event['path']);
+    const path: [] = event['path'];
+    const inCat = path.some((element) => {
+      const pathElement: HTMLElement = (<HTMLElement>element);
+      return (pathElement.id === 'cat-btn' || pathElement.id === 'cat-menu');
+    })
+    // console.log(inCat, this.catShow);
+    if (this.catShow) {
+      if (!inCat) {
+        this.catShow = false;
       }
-
+    } else {
+      if (inCat) {
+        // console.log('here');
+        this.catShow = true;
+      }
     }
+    // path.forEach((element)=>{
+    //   const pathElement:HTMLElement = (<HTMLElement>element);
+    //   console.log(pathElement);
+    // })
+    // const targetElement: HTMLElement = (<HTMLElement>event.target);
+    // console.log(targetElement);
+    // if (!(targetElement.id === 'cat-btn' || targetElement.id === 'cat-icon')) {
+    //   if (this.catShow) {
+    //     this.catShow = !this.catShow;
+    //   }
+
+    // }
   }
   ngOnDestroy(): void {
     this.authSubsc.unsubscribe();

@@ -117,14 +117,14 @@
           <app-search></app-search>
         </div>
         <span class="spacer"></span>
-        <div *ngIf="!(isHandset$2 | async)">
+        <div  *ngIf="!(isHandset$2 | async)" id="icon-big">
           <!-- <button  mat-icon-button class="btn btnn-circle btn-circle" [matMenuTriggerFor]="menu" style="margin-right: 0px;">
             <mat-icon>arrow_drop_down</mat-icon>
           </button> -->
-          <button mat-icon-button matTooltip="دسته‌بندی‌ها" id="cat-btn" class="btn btnn-circle btn-circle " (click)="toggleCat()" >
+          <button mat-icon-button matTooltip="دسته‌بندی‌ها" id="cat-btn" class="btn btnn-circle "  >
             <mat-icon id="cat-icon">category</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="پست امتیاز بالا" routerLink="hot" class="btn btnn-circle btn-circle">
+          <button mat-icon-button matTooltip="پست امتیاز بالا" routerLink="hot" class="btn btnn-circle">
             <mat-icon>whatshot</mat-icon>
           </button>
           <button mat-icon-button matTooltip="پیشنهادی" *ngIf="isAuth" routerLink="recommend"
@@ -132,10 +132,10 @@
             <mat-icon>recommend</mat-icon>
           </button>
           <button mat-icon-button matTooltip="دنبال شوندگان" *ngIf="isAuth" routerLink="/follow"
-            class="btn btnn-circle btn-circle">
+            class="btn btnn-circle">
             <mat-icon>follow_the_signs</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="خانه" routerLink="/home" class="btn btnn-circle btn-circle">
+          <button mat-icon-button matTooltip="خانه" routerLink="/home" class="btn btnn-circle">
             <mat-icon>home</mat-icon>
           </button>
           <span class="spacer"></span>
@@ -145,7 +145,7 @@
           <img src="/assets/logo_noback_green.png" alt="LogoBrand" class="responsive p-0 m-0 d-inline d-sm-none">
         </a>
       </mat-toolbar-row>
-      <mat-toolbar-row class="cat-menu" *ngIf="!(isHandset$2 | async) && catShow">
+      <mat-toolbar-row id="cat-menu"  *ngIf="!(isHandset$2 | async) && catShow">
         <div class="container">
           <div class="row">
             <div *ngFor="let cat of categories" class="col-3">

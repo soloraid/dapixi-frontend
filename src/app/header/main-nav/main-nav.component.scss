@@ -17,7 +17,7 @@
 
   }
 }
-.cat-menu{
+#cat-menu{
   background-color: lighten(#232a34, $amount: 3%);
   // direction: rtl;
   height: auto;
@@ -29,6 +29,19 @@
     // height: 100%;
   }
   
+}
+#icon-big{
+  height: 100%;
+  // display: flex;
+  // justify-content: space-between;
+  button{
+    // border-radius: 0% !important;
+    height: 100%;
+    width: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    // width: 100%;
+  }
 }
 
 .sidenav {
