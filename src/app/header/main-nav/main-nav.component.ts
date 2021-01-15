@@ -155,8 +155,13 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
   }
   selectCat(index:number){
+    console.log(index);
     console.log(this.categories[index]);
     this._router.navigate(['categories',this.categories[index]]);
+  }
+  selectCatfromSideNav(node){
+    console.log(node);
+    this._router.navigate(['categories',node.name]);
   }
   ngOnDestroy(): void {
     this.authSubsc.unsubscribe();
@@ -180,5 +185,6 @@ interface tree {
 interface ExampleFlatNode {
   expandable: boolean;
   name: string;
+
   level: number;
 }

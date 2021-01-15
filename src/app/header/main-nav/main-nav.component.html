@@ -40,7 +40,7 @@
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding class="pl-0 tree-node">
             <!-- use a disabled button to provide padding for tree leaf -->
             <!-- <button class="tree-btn" mat-icon-button disabled></button> -->
-            <button mat-list-item (click)="drawer.toggle()" class="nav-item navbar-item pl-0">
+            <button mat-list-item (click)="drawer.toggle();selectCatfromSideNav(node)" class="nav-item navbar-item pl-0">
               {{ node.name }}
             </button>
           </mat-tree-node>
