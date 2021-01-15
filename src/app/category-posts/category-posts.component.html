@@ -14,5 +14,5 @@
         <h3>{{ title }}</h3>
     </div>
     <hr>
-    <!-- <app-masonry-posts [posts]="followedPosts" [mode]="'getFollowedPost'"></app-masonry-posts> -->
+    <app-masonry-posts [posts]="categoryPosts" [service]="'searchService'" [mode]="'searchByCategories'" [params]="[title]"></app-masonry-posts>
 </div>

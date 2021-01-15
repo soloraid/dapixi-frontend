@@ -36,7 +36,7 @@ export class SearchService {
     });
   }
 
-  searchByCategories(categories: string[], num: number = 50, page: number = 0 ): any {
+  searchByCategories(categories: string[], num: number = 50, page: number = 0 ) {
     const category = new Category();
     category.categories = categories;
     let params = new HttpParams();
