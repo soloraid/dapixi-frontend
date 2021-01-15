@@ -26,14 +26,18 @@
   overflow-y: scroll;
   position: absolute;
   top: 64px;
-  &::-webkit-scrollbar{
-    width: 1px;
+  &::-webkit-scrollbar {
+    width: 5px;               /* width of the entire scrollbar */
   }
-  &::-webkit-scrollbar-track{
-    color: lighten(#232a34, $amount: 7%);
+  
+  &::-webkit-scrollbar-track {
+    background: lighten(#232a34, $amount: 3%);        /* color of the tracking area */
   }
-  &::-webkit-scrollbar-thumb{
-    background-color: var(--primary_color);
+  
+  &::-webkit-scrollbar-thumb {
+    background-color:var(--secondary_color);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid var(--secondary_color);  /* creates padding around scroll thumb */
   }
   // z-inde;
   .container-fluid{
