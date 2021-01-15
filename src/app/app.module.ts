@@ -29,6 +29,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module';
 import { MainModule } from './main/main.module';
 import { FullPictureComponent } from './share/full-picture/full-picture.component';
+import { CategoryPostsComponent } from './category-posts/category-posts.component';
 
 
 
@@ -41,8 +42,7 @@ import { FullPictureComponent } from './share/full-picture/full-picture.componen
     SearchComponent,
     MainNavComponent,
     Error404Component,
-    Error500Component,
-    
+    Error500Component,    
   ],
   imports: [
     BrowserModule,
