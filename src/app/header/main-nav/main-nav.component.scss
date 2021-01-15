@@ -15,12 +15,13 @@
   max-height: 100vh;
   &-row{
     background-color: var(--primary_color);
-
+    z-index: 101;
   }
 }
 #cat-menu{
   background-color: lighten(#232a34, $amount: 3%);
   // direction: rtl;
+  padding-right: 0.2rem;
   height: auto;
   max-height: 50vh;
   overflow-y: scroll;
@@ -28,7 +29,7 @@
   top: 64px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-
+  transform: translateY(-15px);
   &::-webkit-scrollbar {
     width: 5px;               /* width of the entire scrollbar */
   }
