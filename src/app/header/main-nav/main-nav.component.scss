@@ -39,12 +39,26 @@
   // display: flex;
   // justify-content: space-between;
   button{
-    // border-radius: 0% !important;
+    box-sizing: border-box;
+    border-radius: 0% !important;
     height: 100%;
-    width: auto;
+    width: 40px !important;
     margin-top: 0;
     margin-bottom: 0;
+
     // width: 100%;
+    &:hover{
+      color: white;
+      .icon{
+        transform: scale(1.1);
+
+      }
+      // outline-bottom: 2px white solid;
+
+    }
+    :focus{
+      outline: none;
+    }
   }
 }
 
