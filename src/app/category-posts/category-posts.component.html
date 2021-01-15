@@ -4,7 +4,7 @@
 </div>
 <ng-template #noInfo>
     <br>
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger" role="alert" *ngIf="!firstLoad">
         <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
     </div>
 </ng-template>

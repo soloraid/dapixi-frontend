@@ -157,6 +157,8 @@ export class MainNavComponent implements OnInit, OnDestroy {
   selectCatFromBig(index:number){
     console.log(index);
     console.log(this.categories[index]);
+    this.catShow=false;
+
     this._router.navigate(['categories',this.categories[index]]);
   }
   selectCatfromSideNav(node){
