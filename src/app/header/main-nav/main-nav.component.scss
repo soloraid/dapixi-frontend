@@ -22,17 +22,37 @@
   background-color: lighten(#232a34, $amount: 3%);
   // direction: rtl;
   height: auto;
-  // max-height: 50vh;
-  // overflow-y: scroll;
+  max-height: 50vh;
+  overflow-y: scroll;
   position: absolute;
   top: 64px;
+  &::-webkit-scrollbar{
+    width: 1px;
+  }
+  &::-webkit-scrollbar-track{
+    color: lighten(#232a34, $amount: 7%);
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: var(--primary_color);
+  }
   // z-inde;
-  .container{
-    width: 100%;
+  .container-fluid{
+    // width: 100%;
+    // height: 100%;
     direction: rtl;
+    // overflow-y: visible;
     // height: 100%;
   }
   
+}
+.cat-link{
+  width: 100%;
+  height: 100%;
+  &:hover{
+    text-decoration: none;
+    background-color: lighten(#232a34, $amount: 5%);
+    color: white;
+  }
 }
 #icon-big{
   height: 100%;
@@ -42,7 +62,7 @@
     box-sizing: border-box;
     border-radius: 0% !important;
     height: 100%;
-    width: 40px !important;
+    width: 45px !important;
     margin-top: 0;
     margin-bottom: 0;
 
@@ -56,8 +76,9 @@
       // outline-bottom: 2px white solid;
 
     }
-    :focus{
-      outline: none;
+    &:focus{
+      outline-color: transparent;
+      // color: red;
     }
   }
 }

@@ -145,11 +145,12 @@
           <img src="/assets/logo_noback_green.png" alt="LogoBrand" class="responsive p-0 m-0 d-inline d-sm-none">
         </a>
       </mat-toolbar-row>
-      <mat-toolbar-row id="cat-menu"  *ngIf="!(isHandset$2 | async) && catShow" >
-        <div class="container">
+      <mat-toolbar-row id="cat-menu"  *ngIf="!(isHandset$2 | async)" >
+        <!-- !(isHandset$2 | async) && catShow -->
+        <div class="container-fluid">
           <div class="row">
             <div *ngFor="let cat of categories" class="col-3">
-              <a href="" class="my-4">
+              <a href="" class="my-4 cat-link d-flex align-items-center">
                 {{ cat }}
               </a>
             </div>
