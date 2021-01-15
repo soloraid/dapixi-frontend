@@ -9,6 +9,8 @@ import { ProfileService } from '../../profile/profile.service';
 import { environment } from '../../../environments/environment.prod';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PostService } from 'src/app/share/post.service';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 @Component({
   selector: 'app-main-nav',
@@ -37,6 +39,24 @@ export class MainNavComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:variable-name
   private username: string;
 
+  private _transformer = (node: tree, level: number) => {
+    return {
+      expandable: !!node.children && node.children.length > 0,
+      name: node.title,
+      level: level,
+    };
+  }
+
+  treeControl = new FlatTreeControl<ExampleFlatNode>(
+    node => node.level, node => node.expandable);
+
+  treeFlattener = new MatTreeFlattener(
+    this._transformer, node => node.level, node => node.expandable, node => node.children);
+
+  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+
+
+  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
   constructor(private breakpointObserver: BreakpointObserver,
     private _authService: AuthService,
     private _router: Router,
@@ -60,6 +80,15 @@ export class MainNavComponent implements OnInit, OnDestroy {
     });
     this.catSubsc = this._postService.getCategories().subscribe((cats: string[]) => {
       this.categories = cats;
+      this.dataSource.data =[
+        {
+          title:'دسته‌بندی‌ها',
+          children:cats.map((cat:string)=>{
+            return {title:cat}
+          })
+        }
+      ] ;
+
     })
 
   }
@@ -150,4 +179,13 @@ export class MainNavComponent implements OnInit, OnDestroy {
 interface PictureData {
   username: string;
   imageUrl: string;
+}
+interface tree {
+  title: string;
+  children?: tree[];
+}
+interface ExampleFlatNode {
+  expandable: boolean;
+  name: string;
+  level: number;
 }

@@ -1,4 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
+  <!--  -->
   <mat-sidenav #drawer class="sidenav side-mat-toolbar" fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [ngClass]="{hidden: !(isHandset$ | async)}"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
@@ -33,6 +34,34 @@
         </div>
         <hr>
       </div>
+      <div class="pl-4">
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" mat-list-item>
+          <!-- This is the tree node template for leaf nodes -->
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding class="pl-0 tree-node">
+            <!-- use a disabled button to provide padding for tree leaf -->
+            <!-- <button class="tree-btn" mat-icon-button disabled></button> -->
+            <button mat-list-item (click)="drawer.toggle()" class="nav-item navbar-item pl-0">
+              {{ node.name }}
+            </button>
+          </mat-tree-node>
+          <!-- This is the tree node template for expandable nodes -->
+          <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding class="tree-node">
+            <mat-icon class="mr-3">category</mat-icon>
+  
+            {{node.name}}
+            <button class="tree-btn" mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+              <mat-icon class="mat-icon-ltr-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+          </mat-tree-node>
+        </mat-tree>
+      </div>
+      <hr>
+      <!-- <button mat-list-item  (click)="drawer.toggle()" class="nav-item navbar-item">
+        <mat-icon>category</mat-icon>
+        دسته‌بندی‌ها&nbsp;
+      </button> -->
       <button mat-list-item *ngIf="!isAuth" (click)="drawer.toggle();onRegister()" class="nav-item navbar-item">
         <mat-icon>app_registration</mat-icon>
         ثبت نام&nbsp;
@@ -117,11 +146,11 @@
           <app-search></app-search>
         </div>
         <span class="spacer"></span>
-        <div  *ngIf="!(isHandset$2 | async)" id="icon-big">
+        <div *ngIf="!(isHandset$2 | async)" id="icon-big">
           <!-- <button  mat-icon-button class="btn btnn-circle btn-circle" [matMenuTriggerFor]="menu" style="margin-right: 0px;">
             <mat-icon>arrow_drop_down</mat-icon>
           </button> -->
-          <button mat-icon-button matTooltip="دسته‌بندی‌ها" id="cat-btn" class="btn btnn-circle "  >
+          <button mat-icon-button matTooltip="دسته‌بندی‌ها" id="cat-btn" class="btn btnn-circle ">
             <mat-icon class="icon" id="cat-icon">category</mat-icon>
           </button>
           <button mat-icon-button matTooltip="پست امتیاز بالا" routerLink="hot" class="btn btnn-circle">
@@ -145,7 +174,7 @@
           <img src="/assets/logo_noback_green.png" alt="LogoBrand" class="responsive p-0 m-0 d-inline d-sm-none">
         </a>
       </mat-toolbar-row>
-      <mat-toolbar-row id="cat-menu"  *ngIf="!(isHandset$2 | async)" >
+      <mat-toolbar-row id="cat-menu" *ngIf="!(isHandset$2 | async)">
         <!-- !(isHandset$2 | async) && catShow -->
         <div class="container-fluid">
           <div class="row">

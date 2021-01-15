@@ -22,6 +22,7 @@
   background-color: lighten(#232a34, $amount: 3%);
   // direction: rtl;
   padding-right: 0.2rem;
+  padding-left: 0.2rem;
   height: auto;
   max-height: 50vh;
   overflow-y: scroll;
@@ -98,6 +99,7 @@
 
 .sidenav .mat-toolbar {
   background: inherit;
+  overflow-x: hidden;
 
 }
 
@@ -212,4 +214,11 @@ span {
 .navbar-item {
   overflow: hidden;
   background-color: var(--bg_color);
+}
+.tree-btn{
+  background-color: transparent;
+  margin: 0;
+}
+.tree-node{
+  width: 100%;
 }
