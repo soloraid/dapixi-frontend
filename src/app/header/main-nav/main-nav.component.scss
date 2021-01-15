@@ -3,7 +3,8 @@
   height: 100%;
 }
 .uiNav {
-  position: fixed;
+  position: sticky;
+  top: 0;
   z-index: 100;
   padding: 0% !important;
   // background-color: var(--primary_color);
@@ -21,8 +22,11 @@
   background-color: lighten(#232a34, $amount: 3%);
   // direction: rtl;
   height: auto;
-  max-height: 50vh;
-  overflow-y: scroll;
+  // max-height: 50vh;
+  // overflow-y: scroll;
+  position: absolute;
+  top: 64px;
+  // z-inde;
   .container{
     width: 100%;
     direction: rtl;
