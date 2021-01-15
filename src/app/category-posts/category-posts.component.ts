@@ -20,11 +20,12 @@ export class CategoryPostsComponent implements OnInit {
   ngOnInit(): void {
     this.routSubs=this._route.params.subscribe(()=>{
       this.title=this._route.snapshot.params.title;
+      this.postSubs=this.searchService.searchByCategories([this.title],9).subscribe((posts:Post[])=>{
+        this.categoryPosts=posts;
+        console.log(posts);
+      })
     });
-    this.postSubs=this.searchService.searchByCategories([this.title]).subscribe((posts:Post[])=>{
-      this.categoryPosts=posts;
-      console.log(posts);
-    })
+
   }
 
 }

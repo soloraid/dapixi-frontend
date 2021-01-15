@@ -8,7 +8,7 @@
         <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
     </div>
 </ng-template>
-<div class="ui-main-posts" *ngIf="true">
+<div class="ui-main-posts" *ngIf="categoryPosts.length>0; else noInfo">
     <!-- hasFollow; else noInfo -->
     <div>
         <h3>{{ title }}</h3>
