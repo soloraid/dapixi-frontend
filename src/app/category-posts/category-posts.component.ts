@@ -15,14 +15,18 @@ export class CategoryPostsComponent implements OnInit {
   routSubs:Subscription;
   categoryPosts:Post[]=[];
   postSubs:Subscription;
+  firstLoad:boolean=true;
   constructor(public loaderService:LoaderService,private _route:ActivatedRoute,private searchService:SearchService) { }
 
   ngOnInit(): void {
     this.routSubs=this._route.params.subscribe(()=>{
       this.title=this._route.snapshot.params.title;
       this.postSubs=this.searchService.searchByCategories([this.title],9).subscribe((posts:Post[])=>{
-        this.categoryPosts=posts;
-        console.log(posts);
+        if(posts.length>0){
+          this.categoryPosts=posts;
+        }
+        this.firstLoad=false;
+        // console.log(posts);
       })
     });
 
