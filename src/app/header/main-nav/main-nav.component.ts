@@ -152,18 +152,11 @@ export class MainNavComponent implements OnInit, OnDestroy {
         this.catShow = true;
       }
     }
-    // path.forEach((element)=>{
-    //   const pathElement:HTMLElement = (<HTMLElement>element);
-    //   console.log(pathElement);
-    // })
-    // const targetElement: HTMLElement = (<HTMLElement>event.target);
-    // console.log(targetElement);
-    // if (!(targetElement.id === 'cat-btn' || targetElement.id === 'cat-icon')) {
-    //   if (this.catShow) {
-    //     this.catShow = !this.catShow;
-    //   }
 
-    // }
+  }
+  selectCat(index:number){
+    console.log(this.categories[index]);
+    this._router.navigate(['categories',this.categories[index]]);
   }
   ngOnDestroy(): void {
     this.authSubsc.unsubscribe();

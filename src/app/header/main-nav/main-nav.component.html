@@ -178,8 +178,8 @@
         <!-- !(isHandset$2 | async) && catShow -->
         <div class="container-fluid">
           <div class="row">
-            <div *ngFor="let cat of categories" class=" col-sm-4 col-lg-3 pr-0">
-              <a href="" class="my-4 cat-link d-flex align-items-center">
+            <div *ngFor="let cat of categories;let i=index" class=" col-sm-4 col-lg-3 pr-0">
+              <a  class="my-4 cat-link d-flex align-items-center" (click)="selectCat(i)">
                 {{ cat }}
               </a>
             </div>
