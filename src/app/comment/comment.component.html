@@ -3,10 +3,20 @@
     <ul *ngFor="let comment of comments; let i=index">
       <li>
         <div class="container-fluid">
-          <span><small>{{ comment.username }}</small> </span>
-          <div class="align-content-md-center"><small>{{ comment.content }}</small> </div>
-          <span style="font-size: 30%" class="text-muted float-right">{{ comment.creationDate }} </span>
-          <br>
+          <div class="row">
+            <div class="col-md-8">
+              <span><small>{{ comment.username }}</small> </span>
+              <div class="align-content-md-center"><small>{{ comment.content }}</small> </div>
+              <span style="font-size: 30%" class="text-muted float-right">
+                {{ comment.creationDate | dateAgo }} </span>
+              <br>
+            </div>
+            <div class="col-md-4">
+              <button matTooltip="حذف نظر" type="button" class="btn btn-danger btn-circle" (click)="deleteComment(comment.id)" *ngIf="isLoginUser(comment.username)">
+                <mat-icon style="font-size: 12px; padding-top: 3px; padding-left: 7px">clear</mat-icon></button>
+            </div>
+          </div>
+
         </div>
         <mat-divider></mat-divider>
       </li>

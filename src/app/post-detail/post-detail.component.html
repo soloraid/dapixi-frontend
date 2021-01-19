@@ -71,6 +71,8 @@
                  <a href="" [routerLink]="['/user',post.username]" class="card-link">@{{post.username}}</a>
                </p>
                <small>{{post.categories}} :نوع عکس</small>
+               <br>
+               <small> زمان انتشار: {{post.creationDate | dateAgo}}</small>
              </div>
            </div>
            <mat-tab-group size=""  mat-align-tabs="center">
