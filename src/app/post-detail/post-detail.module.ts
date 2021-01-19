@@ -16,13 +16,15 @@ import { CommentComponent } from "../comment/comment.component";
 import { ConfirmDialogComponent } from "../share/confirm-dialog/confirm-dialog.component";
 import { FullPictureComponent } from "../share/full-picture/full-picture.component";
 import { PostDetailComponent } from "./post-detail.component";
+import {DateAgoPipe} from '../share/pipes/date-ago.pipe';
 
 @NgModule({
     declarations: [
         ConfirmDialogComponent,
         PostDetailComponent,
         CommentComponent,
-        FullPictureComponent
+        FullPictureComponent,
+        DateAgoPipe,
     ],
     imports: [
         CommonModule,
