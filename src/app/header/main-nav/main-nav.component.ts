@@ -169,7 +169,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
   }
   selectCatfromSideNav(node){
     console.log('node',node);
-    this._router.navigate(['categories',node.name]);
+    const catObject=this.categories.find((cat:category)=>{
+      return cat.persian === node.name;
+    })
+    this._router.navigate(['categories',catObject.english]);
   }
   ngOnDestroy(): void {
     this.authSubsc.unsubscribe();

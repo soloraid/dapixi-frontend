@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {catchError} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {throwError} from 'rxjs';
+import { Category } from './category.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-
+  private categoriesPairs:Category[]=[];
   constructor(private http: HttpClient, private _router: Router) {
   }
 
@@ -44,9 +45,27 @@ export class PostService {
   getCategories() {
     return this.http.get(environment.api + '/photo/categories');
   }
-  
+
+  getCategoriesPairs(){
+    if(this.categoriesPairs.length>0){
+      return this.categoriesPairs.slice();
+    }else{
+      this.getCategoriesMap();
+    }
+  }
   getCategoriesMap() {
-    return this.http.get(environment.api + '/photo/categories/persian');
+    return this.http.get(environment.api + '/photo/categories/persian').pipe(
+      tap(categoriesMap=>{
+        
+        for(const catName in categoriesMap){
+          const newCat:Category={
+            english:catName,
+            persian:categoriesMap[catName]
+          }
+          this.categoriesPairs.push(newCat);
+        }
+      })
+      );
   }
   
 
