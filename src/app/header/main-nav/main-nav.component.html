@@ -34,7 +34,7 @@
         </div>
         <hr>
       </div>
-      <div class="pl-4">
+      <div class="pl-4" *ngIf="(isHandset$2 | async)" >
         <!-- fasfasfasfasf -->
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" mat-list-item>
           <!-- This is the tree node template for leaf nodes -->
