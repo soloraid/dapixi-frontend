@@ -28,7 +28,7 @@ export class MasonryPostsComponent implements OnInit, OnDestroy,OnChanges {
 
   ngOnInit(): void {
     // console.log('m',this.posts);
-    this.initialize();
+    // this.initialize();
     // this.roureSubs=this._router.events.subscribe((data)=>{
     //   if(data instanceof NavigationEnd){
     //     this.loadingImages=true;
