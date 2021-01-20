@@ -21,6 +21,7 @@ import { FollowComponent } from "./follow/follow.component";
 import { ProfileDetailComponent } from "./profile-detail/profile-detail.component";
 import { ProfileEditComponent } from "./profile-edit/profile-edit.component";
 import { ProfileComponent } from "./profile.component";
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -48,6 +49,7 @@ import { ProfileComponent } from "./profile.component";
         ClipboardModule,
         MatButtonModule,
         MatTooltipModule,
+        MatDialogModule,
         RouterModule.forChild([
             {
                 path: '',
