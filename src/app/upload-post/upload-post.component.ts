@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PostService } from '../share/post.service';
 import {LoaderService} from '../share/loader/loader.service';
+import { Category } from '../share/category.type';
 
 @Component({
   selector: 'app-upload-post',
@@ -16,8 +17,8 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   description:string="";
   @ViewChild('file_label') label:ElementRef;
   fileErr:boolean=false;
-  allCats:category[]=[];
-  selectedCats:category[]=[];
+  allCats:Selectablecategory[]=[];
+  selectedCats:Selectablecategory[]=[];
   catSubsc:Subscription;
   // catMap:Map<string,string>=new Map();
   uploadSubc:Subscription;
@@ -26,21 +27,32 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   constructor(private _postService:PostService,private _router:Router, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    this.catSubsc=this._postService.getCategoriesMap().subscribe((catPairs)=>{
-      let counter=0;
-      for(const catPair in catPairs){
-        // this.catMap.set(catPair,catPairs[catPair]);
-        const newCat:category={
-          id: counter,
-          persian: catPairs[catPair],
-          english: catPair,
-          selected:false
-        }
-        this.allCats.push(newCat);
-        counter++;
+    this.allCats=this._postService
+    .getCategoriesPairs()
+    .map((categoriPair,index):Selectablecategory=>{
+      const newCat:Selectablecategory={
+        id:index,
+        persian:categoriPair.persian,
+        english:categoriPair.english,
+        selected:false
       }
-      console.log(this.allCats);
-    })
+      return newCat
+    });
+    // this.catSubsc=this._postService.getCategoriesMap().subscribe((catPairs)=>{
+    //   let counter=0;
+    //   for(const catPair in catPairs){
+    //     // this.catMap.set(catPair,catPairs[catPair]);
+    //     const newCat:category={
+    //       id: counter,
+    //       persian: catPairs[catPair],
+    //       english: catPair,
+    //       selected:false
+    //     }
+    //     this.allCats.push(newCat);
+    //     counter++;
+    //   }
+    //   console.log(this.allCats);
+    // })
     // this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
     //   this.allCats=cats.map((cat,index):category=>{
     //     const newCat:category={
@@ -116,7 +128,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
 
 
 }
-interface category{
+interface Selectablecategory{
   id:number;
   persian:string;
   english:string;
