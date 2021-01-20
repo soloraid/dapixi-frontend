@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { PostService } from '../share/post.service';
 import { Tokens } from '../share/tokens.model';
 import {LoaderService} from '../share/loader/loader.service';
+import {User} from '../share/user/user.mudole';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {LoaderService} from '../share/loader/loader.service';
   templateUrl: './comment.component.html',
   styleUrls: ['./comment.component.scss']
 })
-export class CommentComponent implements OnInit,OnDestroy {
+export class CommentComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   authSubs: Subscription;
   id: string;
@@ -27,6 +28,7 @@ export class CommentComponent implements OnInit,OnDestroy {
   page = 1;
   end = false;
   hasMore = false;
+  loginUser: boolean;
   constructor(private authService: AuthService,
               private route: ActivatedRoute,
               private postService: PostService,
@@ -102,6 +104,25 @@ export class CommentComponent implements OnInit,OnDestroy {
     this.getSubs && this.getSubs.unsubscribe();
   }
 
+  deleteComment(id: string) {
+    this.postService.deleteComment(id).subscribe( () => {
+      this.comments = [];
+      this.hasMore = false;
+      this.getComments();
+    });
+  }
+
+  isLoginUser(username: string): boolean {
+    this.route.params.subscribe(() => {
+      if (username) {
+        this.loginUser = false;
+        if (this.authService.authState.value && username === this.authService.authState.value.username) {
+          this.loginUser = true;
+        }
+      }
+    });
+    return this.loginUser;
+  }
 }
 
 interface DateUser {

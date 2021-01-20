@@ -140,6 +140,17 @@
         </div>
       </form>
     </mat-step>
+    <mat-step label="حذف اکانت" state="deleteAccount" optional>
+      <div class="float-left">
+        <!--<mat-error *ngIf="this.dateForm.get('date').hasError('today')">تاریخ تولد قابل قبول نیست!</mat-error>-->
+        <div class="submit-box">
+          <button mat-button matTooltip="حذف اکانت" (click)="showDialog()">
+            <mat-icon >delete_forever</mat-icon>
+          </button>
+          <mat-spinner *ngIf="dateLoading" diameter="25"></mat-spinner>
+        </div>
+      </div>
+    </mat-step>
     <mat-step label="پایان" state="doneall" dir="rtl">
       <div class="float-right">
         <div class="text-center" *ngIf="loaderService.isLoading | async" >

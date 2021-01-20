@@ -134,6 +134,14 @@ export class PostService {
     params = params.append('id',id);
     return this.http.delete(environment.api + '/photo/posts/'+id);
   }
+
+  deleteComment(id: string): any {
+    let params = new HttpParams();
+    params = params.append('commentId', id);
+    return this.http.delete(environment.api + '/photo/comments/posts' ,  {
+      params
+    });
+  }
 }
 
 

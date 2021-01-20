@@ -176,4 +176,8 @@ export class ProfileService {
       params
     });
   }
+
+  deleteProfile() {
+    return this._http.delete(environment.api + '/user/profile');
+  }
 }
