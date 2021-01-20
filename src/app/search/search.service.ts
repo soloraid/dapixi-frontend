@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private _router:Router) { }
 
   searchByUsername(userName: string): any {
     return this.http.get(environment.api + '/user/search/u/' + userName);
@@ -36,15 +39,23 @@ export class SearchService {
     });
   }
 
-  searchByCategories(categories: string[], num: number = 50, page: number = 0 ): any {
+  searchByCategories(categories: string[], num: number = 50, page: number = 0 ) {
     const category = new Category();
     category.categories = categories;
+    
+    
     let params = new HttpParams();
     params = params.append('size', String(num));
     params = params.append('page', String(page));
     return this.http.post( environment.api + '/photo/search/posts', category, {
       params
-    } );
+    } )
+    .pipe(
+      catchError((errData:HttpErrorResponse)=>{
+        this._router.navigate(['404']);
+        return throwError(errData);
+      })
+    );
   }
 
 

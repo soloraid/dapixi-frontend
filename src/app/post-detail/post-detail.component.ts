@@ -156,7 +156,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         this.subs.push(pictureSubs);
     }
     if (this.usersProfPic) {
-      console.log(this.usersProfPic);
+      
     }
   }
   showDialog(){
@@ -169,7 +169,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.subs.push(showDialogSubs);
   }
   showPicture(){
-    console.log(document.documentElement.clientHeight);
+    
     const baseWidt=document.documentElement.clientWidth;
     const padding=(15*baseWidt)/screen.width;
     const dialogRef=this.dialog.open(FullPictureComponent,
