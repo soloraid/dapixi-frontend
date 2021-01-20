@@ -32,7 +32,7 @@ export class CategoryPostsComponent implements OnInit,OnDestroy {
           this.categoryPosts = posts;
         }
         this.firstLoad = false;
-        // console.log(posts);
+        console.log('c',posts);
         if (this._postService.getCategoriesPairs()) {
           this.categories = this._postService.getCategoriesPairs();
         } else {
