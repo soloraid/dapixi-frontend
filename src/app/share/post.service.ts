@@ -50,7 +50,7 @@ export class PostService {
     if(this.categoriesPairs.length>0){
       return this.categoriesPairs.slice();
     }else{
-      this.getCategoriesMap();
+      return null;
     }
   }
   getCategoriesMap() {

@@ -11,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { PostService } from 'src/app/share/post.service';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { Category } from 'src/app/share/category.type';
 
 @Component({
   selector: 'app-main-nav',
@@ -23,7 +24,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   authSubsc: Subscription;
   pictureSubs: Subscription;
   catSubsc: Subscription;
-  categories: category[]=[];
+  categories: Category[]=[];
   catShow: boolean = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 860px)')
     .pipe(
@@ -78,24 +79,38 @@ export class MainNavComponent implements OnInit, OnDestroy {
         this.getProfilePic();
       }
     });
-    this.catSubsc = this._postService.getCategoriesMap().subscribe((catPairs: string[]) => {
-      for(const catsPair in catPairs){
-        const cat:category={
-          persian:catPairs[catsPair],
-          english:catsPair
-        }
-        this.categories.push(cat)
-      }
+
+    if(this._postService.getCategoriesPairs()){
+      this.categories=this._postService.getCategoriesPairs();
       this.dataSource.data =[
         {
           title:'دسته‌بندی‌ها',
-          children:this.categories.map((cat:category)=>{
+          children:this.categories.map((cat:Category)=>{
             return {title:cat.persian}
           })
         }
       ] ;
+    }else{
+      this.catSubsc = this._postService.getCategoriesMap().subscribe((catPairs: string[]) => {
+        for(const catsPair in catPairs){
+          const cat:Category={
+            persian:catPairs[catsPair],
+            english:catsPair
+          }
+          this.categories.push(cat)
+        }
+        this.dataSource.data =[
+          {
+            title:'دسته‌بندی‌ها',
+            children:this.categories.map((cat:category)=>{
+              return {title:cat.persian}
+            })
+          }
+        ] ;
+  
+      })
 
-    })
+    }
 
   }
 
@@ -169,7 +184,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   }
   selectCatfromSideNav(node){
     console.log('node',node);
-    const catObject=this.categories.find((cat:category)=>{
+    const catObject=this.categories.find((cat:Category)=>{
       return cat.persian === node.name;
     })
     this._router.navigate(['categories',catObject.english]);
