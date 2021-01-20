@@ -36,7 +36,7 @@
                                 <button *ngFor="let cat of allCats" id="cat.id" class="dropdown-item m-0 px-0 py-1"
                                     (click)="addCat(cat.id)" [ngClass]="{'selected':cat.selected}"
                                     [disabled]="cat.selected || selectedCats.length===4">
-                                    {{ cat.name }}
+                                    {{ cat.persian }}
                                 </button>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                         <ul class="list-inline">
                             <li *ngFor="let cat of selectedCats;let i=index" class="list-inline-item cat">
                                 <a role="button" (click)="removeCat(i)">
-                                    <small>{{ cat.name }}</small>
+                                    <small>{{ cat.persian }}</small>
                                 </a>
                             </li>
                         </ul>

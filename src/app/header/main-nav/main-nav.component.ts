@@ -23,7 +23,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   authSubsc: Subscription;
   pictureSubs: Subscription;
   catSubsc: Subscription;
-  categories: string[];
+  categories: category[]=[];
   catShow: boolean = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 860px)')
     .pipe(
@@ -78,13 +78,19 @@ export class MainNavComponent implements OnInit, OnDestroy {
         this.getProfilePic();
       }
     });
-    this.catSubsc = this._postService.getCategories().subscribe((cats: string[]) => {
-      this.categories = cats;
+    this.catSubsc = this._postService.getCategoriesMap().subscribe((catPairs: string[]) => {
+      for(const catsPair in catPairs){
+        const cat:category={
+          persian:catPairs[catsPair],
+          english:catsPair
+        }
+        this.categories.push(cat)
+      }
       this.dataSource.data =[
         {
           title:'دسته‌بندی‌ها',
-          children:cats.map((cat:string)=>{
-            return {title:cat}
+          children:this.categories.map((cat:category)=>{
+            return {title:cat.persian}
           })
         }
       ] ;
@@ -159,10 +165,10 @@ export class MainNavComponent implements OnInit, OnDestroy {
     console.log(this.categories[index]);
     this.catShow=false;
 
-    this._router.navigate(['categories',this.categories[index]]);
+    this._router.navigate(['categories',this.categories[index].english]);
   }
   selectCatfromSideNav(node){
-    console.log(node);
+    console.log('node',node);
     this._router.navigate(['categories',node.name]);
   }
   ngOnDestroy(): void {
@@ -189,4 +195,8 @@ interface ExampleFlatNode {
   name: string;
 
   level: number;
+}
+interface category{
+  persian:string,
+  english:string
 }

@@ -19,20 +19,21 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   allCats:category[]=[];
   selectedCats:category[]=[];
   catSubsc:Subscription;
-  catMap:Map<string,string>=new Map();
+  // catMap:Map<string,string>=new Map();
   uploadSubc:Subscription;
   addCatSubsc:Subscription;
-  tempSubs:Subscription;
+  // tempSubs:Subscription;
   constructor(private _postService:PostService,private _router:Router, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.catSubsc=this._postService.getCategoriesMap().subscribe((catPairs)=>{
       let counter=0;
       for(const catPair in catPairs){
-        this.catMap.set(catPair,catPairs[catPair]);
+        // this.catMap.set(catPair,catPairs[catPair]);
         const newCat:category={
           id: counter,
-          name: catPairs[catPair],
+          persian: catPairs[catPair],
+          english: catPair,
           selected:false
         }
         this.allCats.push(newCat);
@@ -71,7 +72,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
     this.uploadSubc=this._postService.addPsot(this.imgFile,this.title,this.description)
     .subscribe((postData:PostData)=>{
       let cats:string[]=this.selectedCats.map((cat)=>{
-        return cat.name;
+        return cat.english;
       })
       this.addCatSubsc=this._postService
       .addCategories(postData.id,cats)
@@ -117,7 +118,8 @@ export class UploadPostComponent implements OnInit,OnDestroy {
 }
 interface category{
   id:number;
-  name:string;
+  persian:string;
+  english:string;
   selected:boolean;
 }
 interface PostData {
