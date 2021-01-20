@@ -27,24 +27,14 @@ export class MasonryPostsComponent implements OnInit, OnDestroy,OnChanges {
   }
 
   ngOnInit(): void {
-    // console.log('m',this.posts);
-    // this.initialize();
-    // this.roureSubs=this._router.events.subscribe((data)=>{
-    //   if(data instanceof NavigationEnd){
-    //     this.loadingImages=true;
-    //     // this.hasMore=false;
-    //     // this.initialize();
-    //     console.log('rh');
-    //   }
-    // });
   }
   ngOnChanges(){
-    console.log('c');
+    
     this.initialize();
   }
   private initialize(){
-    console.log('m',this.posts);
-    console.log('l',this.loadingImages);
+    
+    
     this.loadingImages=true;
     if(this.posts.length){
       this.setHasMore();
@@ -52,15 +42,15 @@ export class MasonryPostsComponent implements OnInit, OnDestroy,OnChanges {
       this.loadingImages=false;
     }
   }
-  // ngOnChanges(){
-  //   console.log('lh-------------');
-  //   console.log(this.posts);
-  //   console.log(this.params);
-  //   console.log(this.mode);
-  //   console.log(this.service)
+  
+  
+  
+  
+  
+  
     
     
-  // }
+  
 
   showMore(): void {
     let getObservable: Observable<any>;
@@ -71,7 +61,7 @@ export class MasonryPostsComponent implements OnInit, OnDestroy,OnChanges {
         getObservable = this.postService[this.mode](this.value, this.page);
       }
     } else {
-      // console.log(this.mode,this.params);
+      
       getObservable = this.searchService[this.mode](this.params, this.value, this.page);
     }
 
@@ -94,19 +84,19 @@ export class MasonryPostsComponent implements OnInit, OnDestroy,OnChanges {
   }
 
   private setHasMore(posts: Post[] = this.posts): void {
-    console.log('len',this.posts.length);
+    
     if (posts.length >= this.value) {
       this.hasMore = true;
       this.loadingImages = true;
     }else{
       this.hasMore=false;
     }
-    console.log('h',this.hasMore);
+    
   }
 
   ngOnDestroy(): void {
     this.subs && this.subs.unsubscribe();
     this.roureSubs && this.roureSubs.unsubscribe();
-    console.log('d');
+    
   }
 }

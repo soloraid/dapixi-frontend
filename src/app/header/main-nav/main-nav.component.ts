@@ -133,7 +133,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
   }
 
   onLogOut() {
-    console.log(this._router.url);
+    
     this._authService.logOut();
     const url = this._router.url;
     const guardedPages: string[] = [
@@ -156,35 +156,32 @@ export class MainNavComponent implements OnInit, OnDestroy {
     this._router.navigate(['/auth'], { queryParams: { back: this._router.url } });
   }
   @HostListener('document:mousemove', ['$event']) toggling(event: MouseEvent) {
-    // console.log(event.target);
-    // console.log(event['path']);
+    // 
+    // 
     const path: [] = event['path'];
     const inCat = path.some((element) => {
       const pathElement: HTMLElement = (<HTMLElement>element);
       return (pathElement.id === 'cat-btn' || pathElement.id === 'cat-menu');
     })
-    // console.log(inCat, this.catShow);
+    // 
     if (this.catShow) {
       if (!inCat) {
         this.catShow = false;
       }
     } else {
       if (inCat) {
-        // console.log('here');
+        // 
         this.catShow = true;
       }
     }
 
   }
   selectCatFromBig(index:number){
-    console.log(index);
-    console.log(this.categories[index]);
     this.catShow=false;
-
     this._router.navigate(['categories',this.categories[index].english]);
   }
   selectCatfromSideNav(node){
-    console.log('node',node);
+    
     const catObject=this.categories.find((cat:Category)=>{
       return cat.persian === node.name;
     })

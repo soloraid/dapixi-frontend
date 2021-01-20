@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
     this._authService.autoLogIn();
     if(!this._postService.getCategoriesPairs()){
       this._postService.getCategoriesMap().subscribe(
-        ()=>console.log(this._postService.getCategoriesPairs())
         )
     }
   }

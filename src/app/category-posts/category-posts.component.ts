@@ -32,7 +32,7 @@ export class CategoryPostsComponent implements OnInit,OnDestroy {
           this.categoryPosts = posts;
         }
         this.firstLoad = false;
-        console.log('c',posts);
+        
         if (this._postService.getCategoriesPairs()) {
           this.categories = this._postService.getCategoriesPairs();
         } else {
@@ -51,7 +51,7 @@ export class CategoryPostsComponent implements OnInit,OnDestroy {
           return category.english===this.englishTitle;
         })
         this.title=cat.persian;
-        console.log(this.title)
+        
       })
     });
 

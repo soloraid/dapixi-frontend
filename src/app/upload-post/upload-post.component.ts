@@ -77,7 +77,7 @@ export class UploadPostComponent implements OnInit,OnDestroy {
     //     this.allCats.push(newCat);
     //     counter++;
     //   }
-    //   console.log(this.allCats);
+    //   
     // })
     // this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
     //   this.allCats=cats.map((cat,index):category=>{
