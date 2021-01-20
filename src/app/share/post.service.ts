@@ -44,6 +44,11 @@ export class PostService {
   getCategories() {
     return this.http.get(environment.api + '/photo/categories');
   }
+  
+  getCategoriesMap() {
+    return this.http.get(environment.api + '/photo/categories/persian');
+  }
+  
 
   addPsot(file: File, title: string, description: string) {
     const body = new FormData();

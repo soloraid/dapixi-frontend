@@ -16,24 +16,40 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   description:string="";
   @ViewChild('file_label') label:ElementRef;
   fileErr:boolean=false;
-  allCats:category[];
+  allCats:category[]=[];
   selectedCats:category[]=[];
   catSubsc:Subscription;
+  catMap:Map<string,string>=new Map();
   uploadSubc:Subscription;
   addCatSubsc:Subscription;
+  tempSubs:Subscription;
   constructor(private _postService:PostService,private _router:Router, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
-      this.allCats=cats.map((cat,index):category=>{
+    this.catSubsc=this._postService.getCategoriesMap().subscribe((catPairs)=>{
+      let counter=0;
+      for(const catPair in catPairs){
+        this.catMap.set(catPair,catPairs[catPair]);
         const newCat:category={
-          id:index,
-          name:cat,
+          id: counter,
+          name: catPairs[catPair],
           selected:false
         }
-        return  newCat
-      });
+        this.allCats.push(newCat);
+        counter++;
+      }
+      console.log(this.allCats);
     })
+    // this.catSubsc=this._postService.getCategories().subscribe((cats:string[])=>{
+    //   this.allCats=cats.map((cat,index):category=>{
+    //     const newCat:category={
+    //       id:index,
+    //       name:cat,
+    //       selected:false
+    //     }
+    //     return  newCat
+    //   });
+    // })
   }
 
   onChange(event){
