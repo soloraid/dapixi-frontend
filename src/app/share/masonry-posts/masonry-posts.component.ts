@@ -71,6 +71,7 @@ export class MasonryPostsComponent implements OnInit, OnDestroy,OnChanges {
         getObservable = this.postService[this.mode](this.value, this.page);
       }
     } else {
+      // console.log(this.mode,this.params);
       getObservable = this.searchService[this.mode](this.params, this.value, this.page);
     }
 

@@ -39,6 +39,8 @@ export class SearchService {
   searchByCategories(categories: string[], num: number = 50, page: number = 0 ) {
     const category = new Category();
     category.categories = categories;
+    console.log(category);
+    
     let params = new HttpParams();
     params = params.append('size', String(num));
     params = params.append('page', String(page));
