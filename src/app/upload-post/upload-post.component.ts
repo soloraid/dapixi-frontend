@@ -27,17 +27,43 @@ export class UploadPostComponent implements OnInit,OnDestroy {
   constructor(private _postService:PostService,private _router:Router, public loaderService: LoaderService) { }
 
   ngOnInit(): void {
-    this.allCats=this._postService
-    .getCategoriesPairs()
-    .map((categoriPair,index):Selectablecategory=>{
-      const newCat:Selectablecategory={
-        id:index,
-        persian:categoriPair.persian,
-        english:categoriPair.english,
-        selected:false
-      }
-      return newCat
-    });
+    if(this._postService.getCategoriesPairs()){
+      this.allCats=this._postService
+      .getCategoriesPairs()
+      .map((categoriPair,index):Selectablecategory=>{
+        const newCat:Selectablecategory={
+          id:index,
+          persian:categoriPair.persian,
+          english:categoriPair.english,
+          selected:false
+        }
+        return newCat
+      });
+    }else{
+      this.catSubsc = this._postService.getCategoriesMap().subscribe((catPairs: string[]) => {
+        // for(const catsPair in catPairs){
+        //   const cat:Category={
+        //     persian:catPairs[catsPair],
+        //     english:catsPair
+        //   }
+        //   this.categories.push(cat)
+        // }
+        // this.categories=this._postService.getCategoriesPairs();
+        this.allCats=this._postService
+        .getCategoriesPairs()
+        .map((categoriPair,index):Selectablecategory=>{
+          const newCat:Selectablecategory={
+            id:index,
+            persian:categoriPair.persian,
+            english:categoriPair.english,
+            selected:false
+          }
+          return newCat
+        });
+      })
+
+    }
+
     // this.catSubsc=this._postService.getCategoriesMap().subscribe((catPairs)=>{
     //   let counter=0;
     //   for(const catPair in catPairs){

@@ -56,14 +56,18 @@ export class PostService {
   getCategoriesMap() {
     return this.http.get(environment.api + '/photo/categories/persian').pipe(
       tap(categoriesMap=>{
-        
+        let catTemp:Category[]=[];
         for(const catName in categoriesMap){
           const newCat:Category={
             english:catName,
             persian:categoriesMap[catName]
           }
-          this.categoriesPairs.push(newCat);
+          catTemp.push(newCat);
         }
+        this.categoriesPairs=catTemp;
+        this.categoriesPairs.sort((a:Category,b:Category)=>{
+          return a.persian.localeCompare(b.persian);
+        })
       })
       );
   }

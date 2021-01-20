@@ -15,9 +15,11 @@ export class AppComponent implements OnInit {
   constructor(private _authService:AuthService,private _postService:PostService){}
   ngOnInit(){
     this._authService.autoLogIn();
-    this._postService.getCategoriesMap().subscribe(
-      ()=>console.log(this._postService.getCategoriesPairs())
-      )
+    if(!this._postService.getCategoriesPairs()){
+      this._postService.getCategoriesMap().subscribe(
+        ()=>console.log(this._postService.getCategoriesPairs())
+        )
+    }
   }
 
 

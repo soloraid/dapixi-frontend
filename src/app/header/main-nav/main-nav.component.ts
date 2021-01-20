@@ -92,13 +92,14 @@ export class MainNavComponent implements OnInit, OnDestroy {
       ] ;
     }else{
       this.catSubsc = this._postService.getCategoriesMap().subscribe((catPairs: string[]) => {
-        for(const catsPair in catPairs){
-          const cat:Category={
-            persian:catPairs[catsPair],
-            english:catsPair
-          }
-          this.categories.push(cat)
-        }
+        // for(const catsPair in catPairs){
+        //   const cat:Category={
+        //     persian:catPairs[catsPair],
+        //     english:catsPair
+        //   }
+        //   this.categories.push(cat)
+        // }
+        this.categories=this._postService.getCategoriesPairs();
         this.dataSource.data =[
           {
             title:'دسته‌بندی‌ها',
