@@ -73,5 +73,6 @@ export class MasonryPostsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs && this.subs.unsubscribe();
+    console.log('d');
   }
 }
