@@ -1,1 +1,10 @@
-<p>new-collection works!</p>
+<mat-dialog-content>
+  <input dir="rtl" type="text"  id="title" class="input" [(ngModel)]="title">
+  <label for="title">
+    &nbsp;&nbsp;:اسم کلکسیون
+  </label>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button class="outline-btn" [mat-dialog-close]="false">انصراف</button>
+  <button class="outline-btn" [mat-dialog-close]="title" [disabled]="!title">تایید</button>
+</mat-dialog-actions>
