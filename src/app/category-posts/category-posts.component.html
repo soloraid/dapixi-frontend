@@ -1,0 +1,18 @@
+<div *ngIf="(loaderService.isLoading | async) && firstLoad " class="loader-container">
+    <!-- && firstLoad -->
+    <mat-spinner style="top: 35%;left: 50%"></mat-spinner>
+</div>
+<ng-template #noInfo>
+    <br>
+    <div class="alert alert-danger" role="alert" *ngIf="!firstLoad">
+        <h4 class="alert-heading">!نتیجه ای یافت نشد</h4>
+    </div>
+</ng-template>
+<div class="ui-main-posts" *ngIf="categoryPosts.length>0; else noInfo">
+    <!-- hasFollow; else noInfo -->
+    <div>
+        <h3>{{ title }}</h3>
+    </div>
+    <hr>
+    <app-masonry-posts [posts]="categoryPosts" [service]="'searchService'" [mode]="'searchByCategories'" [params]="[englishTitle]"></app-masonry-posts>
+</div>

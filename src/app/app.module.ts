@@ -24,10 +24,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CatchErrorInterceptor } from './catch-error.interceptor';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatTreeModule} from '@angular/material/tree';
 
 import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module';
 import { MainModule } from './main/main.module';
 import { FullPictureComponent } from './share/full-picture/full-picture.component';
+import { CategoryPostsComponent } from './category-posts/category-posts.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
@@ -59,6 +61,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MasonryPostsModule,
     MainModule,
+    MatTreeModule
     MatSnackBarModule
   ],
   providers: [

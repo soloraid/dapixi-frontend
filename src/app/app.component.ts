@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { PostService } from './share/post.service';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,17 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   @HostListener('window:storage', ['$event']) checkLocal(){
     this._authService.autoLogIn();
   }
-  constructor(private _authService:AuthService){}
+  constructor(private _authService:AuthService,private _postService:PostService){}
   ngOnInit(){
     this._authService.autoLogIn();
-    // window.addEventListener('storage')
+    if(!this._postService.getCategoriesPairs()){
+      this._postService.getCategoriesMap().subscribe(
+        )
+    }
   }
 
 

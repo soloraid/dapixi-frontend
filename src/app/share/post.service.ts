@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {catchError} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {throwError} from 'rxjs';
+import { Category } from './category.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-
+  private categoriesPairs:Category[]=[];
   constructor(private http: HttpClient, private _router: Router) {
   }
 
@@ -44,6 +45,33 @@ export class PostService {
   getCategories() {
     return this.http.get(environment.api + '/photo/categories');
   }
+
+  getCategoriesPairs(){
+    if(this.categoriesPairs.length>0){
+      return this.categoriesPairs.slice();
+    }else{
+      return null;
+    }
+  }
+  getCategoriesMap() {
+    return this.http.get(environment.api + '/photo/categories/persian').pipe(
+      tap(categoriesMap=>{
+        let catTemp:Category[]=[];
+        for(const catName in categoriesMap){
+          const newCat:Category={
+            english:catName,
+            persian:categoriesMap[catName]
+          }
+          catTemp.push(newCat);
+        }
+        this.categoriesPairs=catTemp;
+        this.categoriesPairs.sort((a:Category,b:Category)=>{
+          return a.persian.localeCompare(b.persian);
+        })
+      })
+      );
+  }
+  
 
   addPsot(file: File, title: string, description: string) {
     const body = new FormData();
