@@ -17,6 +17,7 @@ import { ConfirmDialogComponent } from "../share/confirm-dialog/confirm-dialog.c
 import { FullPictureComponent } from "../share/full-picture/full-picture.component";
 import { PostDetailComponent } from "./post-detail.component";
 import {DateAgoPipe} from '../share/pipes/date-ago.pipe';
+import {PipeModule} from '../share/pipes/pipe.module';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,6 @@ import {DateAgoPipe} from '../share/pipes/date-ago.pipe';
         PostDetailComponent,
         CommentComponent,
         FullPictureComponent,
-        DateAgoPipe,
     ],
     imports: [
         CommonModule,
@@ -39,6 +39,7 @@ import {DateAgoPipe} from '../share/pipes/date-ago.pipe';
         MatInputModule,
         MatDividerModule,
         FormsModule,
+        PipeModule,
         RouterModule.forChild([
             {
                 path: '',
