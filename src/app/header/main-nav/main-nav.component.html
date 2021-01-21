@@ -48,7 +48,7 @@
           <!-- This is the tree node template for expandable nodes -->
           <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding class="tree-node">
             <mat-icon class="mr-3">category</mat-icon>
-  
+
             {{node.name}}
             <button class="tree-btn" mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
               <mat-icon class="mat-icon-ltr-mirror">
@@ -85,6 +85,11 @@
         <mat-icon>edit</mat-icon>
         <span>&nbsp;ویرایش پروفایل</span>
       </button>
+      <button mat-list-item *ngIf="isAuth" (click)="drawer.toggle()" routerLink="user/profile/collections" href=""
+        class="nav-item navbar-item">
+        <mat-icon>collections_bookmark</mat-icon>
+        <span>&nbsp;کلکسیون ها</span>
+      </button>
       <button mat-list-item href="#" (click)="drawer.toggle()" routerLink="/info" class="nav-item navbar-item">
         <mat-icon>info</mat-icon>
         <span>درباره ما&nbsp;</span>
@@ -99,7 +104,8 @@
     <mat-toolbar class="uiNav">
       <mat-toolbar-row class="uiNav-row">
         <button class="btn btn-circle" type="button" aria-label="Toggle sidenav" mat-icon-button
-          (click)="drawer.toggle()" *ngIf="(isHandset$ | async)" style="color: var(--bg_color)">
+          (click)="drawer.toggle()" *ngIf="(isHandset$ | async)"
+                style="border-radius: 50%;color: var(--bg_color);padding: 0; margin: 0;">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <div *ngIf="!isAuth &&!(isHandset$ | async)" class="pt-0">
@@ -136,6 +142,10 @@
             <a mat-menu-item [routerLink]="['user/profile/edit']">
               <mat-icon>edit</mat-icon>
               <span>ویرایش پروفایل</span>
+            </a>
+            <a mat-menu-item [routerLink]="['user/profile/collections']">
+              <mat-icon>collections_bookmark</mat-icon>
+              <span>کلکسیون ها</span>
             </a>
             <a mat-menu-item (click)="onLogOut()">
               <mat-icon>logout</mat-icon>
