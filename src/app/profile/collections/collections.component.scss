@@ -1,0 +1,58 @@
+.btnn {
+  margin: 2px;
+}
+
+.btn-plus
+{
+  background-color: var(--primary_color);
+  color: var(--bg_color);
+
+  &:hover {
+    background-color: var(--text_color);
+  }
+}
+
+.btn-dangers
+{
+  background-color: var(--tertiary_color);
+  color: var(--bg_color);
+
+  &:hover {
+    background-color: #4c1102;
+    color: #9b9fa4;
+  }
+}
+
+.collections {
+  height: auto;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 var(--text_color), 0 6px 20px 0 var(--secondary_color);
+  border: 3px solid  var(--secondary_color);
+
+}
+
+
+.input {
+  max-width: 150px;
+  width: 60%;
+  font-size: 1.2em;
+  border: 2px solid var(--primary_color);
+  border-radius: 20px;
+  padding: 3px;
+  overflow: hidden;
+}
+
+input {
+  max-width: 150px;
+  width: 60%;
+  outline: none;
+  &:focus {
+    border: 2px solid var(--tertiary_color);
+    border-radius: 20px;
+  }
+}
+
+button {
+  outline: none;
+}
