@@ -120,10 +120,10 @@ button {
     bottom: 0;
     left: 0;
     width: 650px;
-    @media (max-width: 1120px) {
+    @media (max-width: 1275px) {
       width: 345px;
     }
-    @media (max-width: 495px) {
+    @media (max-width: 990px) {
       width: 190px;
     }
     height: 30px;
@@ -149,10 +149,10 @@ button {
       width: 650px;
       opacity: 1;
       cursor: text;
-      @media (max-width: 1120px) {
+      @media (max-width: 1275px) {
         width: 345px;
       }
-      @media (max-width: 495px) {
+      @media (max-width: 990px) {
         width: 190px;
       }
 
@@ -161,10 +161,10 @@ button {
       right: -1235px;
       background: var(--secondary_color);
       z-index: 6;
-      @media (max-width: 1120px) {
+      @media (max-width: 1275px) {
         right: -654px;
       }
-      @media (max-width: 495px) {
+      @media (max-width: 990px) {
         right: -320px;
       }
       &::before {

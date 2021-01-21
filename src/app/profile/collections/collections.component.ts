@@ -10,6 +10,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar/snack-bar-config';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Tokens} from '../../share/tokens.model';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-collections',
@@ -17,7 +19,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./collections.component.scss']
 })
 export class CollectionsComponent implements OnInit, OnDestroy {
-  isAuth = true;
+  isAuth = false;
   collections: Collection [] = [];
   isEmpty = true;
   isEdit: boolean[] = [];
@@ -29,6 +31,7 @@ export class CollectionsComponent implements OnInit, OnDestroy {
   actMessage = 'x';
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  authSub: Subscription;
 
 
   constructor(public loaderService: LoaderService,
@@ -36,10 +39,15 @@ export class CollectionsComponent implements OnInit, OnDestroy {
               private profileService: ProfileService,
               private route: ActivatedRoute,
               private snackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    // tslint:disable-next-line:no-unused-expression
+    this.authSub = this.authService.authState.subscribe((token: Tokens) => {
+      this.isAuth = !!token;
+    });
     this.getCollections();
   }
 
@@ -54,7 +62,11 @@ export class CollectionsComponent implements OnInit, OnDestroy {
           this.errMessage = 'کلکسیون ساخته شد!';
           this.openSnackBar();
         }, (errorData: HttpErrorResponse) => {
-          this.errMessage = 'کلکسیونی به این نام موجود است!';
+          if (this.isAuth) {
+            this.errMessage = 'کلکسیونی به این نام موجود است!';
+          } else {
+            this.errMessage = 'امکان تغییر نمی باشد!';
+          }
           this.openSnackBar();
         });
       }
@@ -80,7 +92,11 @@ export class CollectionsComponent implements OnInit, OnDestroy {
       this.errMessage = 'نام کلکسیون تغییر یافت.';
       this.openSnackBar();
     }, (errorData: HttpErrorResponse) => {
-      this.errMessage = 'کلکسیونی به این نام موجود است!';
+      if (this.isAuth) {
+        this.errMessage = 'کلکسیونی به این نام موجود است!';
+      } else {
+        this.errMessage = 'امکان تغییر نمی باشد!';
+      }
       this.openSnackBar();
     });
   }
@@ -126,6 +142,9 @@ export class CollectionsComponent implements OnInit, OnDestroy {
     }
     if (this.showDialogSubs) {
       this.showDialogSubs.unsubscribe();
+    }
+    if (this.authSub) {
+      this.authSub.unsubscribe();
     }
   }
 }

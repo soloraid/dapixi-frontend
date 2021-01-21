@@ -6,6 +6,7 @@ import { PostService } from '../share/post.service';
 import { Tokens } from '../share/tokens.model';
 import {LoaderService} from '../share/loader/loader.service';
 import {User} from '../share/user/user.mudole';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -29,10 +30,13 @@ export class CommentComponent implements OnInit, OnDestroy {
   end = false;
   hasMore = false;
   loginUser: boolean;
+  private actMessage = 'x';
+  private errMessage = '';
   constructor(private authService: AuthService,
               private route: ActivatedRoute,
               private postService: PostService,
-              public loaderService: LoaderService) {
+              public loaderService: LoaderService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -108,7 +112,9 @@ export class CommentComponent implements OnInit, OnDestroy {
     this.postService.deleteComment(id).subscribe( () => {
       this.comments = [];
       this.hasMore = false;
+      this.errMessage = ' نظر مورد نظر حذف شد.';
       this.getComments();
+      this.openSnackBar();
     });
   }
 
@@ -123,6 +129,15 @@ export class CommentComponent implements OnInit, OnDestroy {
     });
     return this.loginUser;
   }
+  private openSnackBar(): void {
+    this.snackBar.open(this.errMessage, this.actMessage, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      direction: 'rtl',
+    });
+  }
+
 }
 
 interface DateUser {
