@@ -177,7 +177,61 @@ export class ProfileService {
     });
   }
 
-  deleteProfile() {
+  deleteProfile(): any {
     return this._http.delete(environment.api + '/user/profile');
+  }
+
+  getCollections(): any {
+    return this._http.get(environment.api + '/photo/collections/mine');
+  }
+
+  deleteCollection(collectionId: string): any {
+    let params = new HttpParams();
+    params = params.append('collectionId', collectionId);
+    return this._http.delete(environment.api + '/photo/collections/mine', {
+      params
+    });
+  }
+
+  createCollection(title: string): any {
+    const body = new Coll(title);
+    return this._http.post(environment.api + '/photo/collections/mine', body);
+  }
+
+  editTitleCollection(collectionId: string, newTitle: string): any {
+    let params = new HttpParams();
+    params = params.append('collectionId', collectionId);
+    params = params.append('newTitle', newTitle);
+    return this._http.patch(environment.api + '/photo/collections/mine', '', {
+      params
+    });
+  }
+
+  addPhotoToCollection(collectionId: string, photoId: string): any {
+    let params = new HttpParams();
+    params = params.append('photoId', photoId);
+    return this._http.put( environment.api + '/photo/collections/mine/' + collectionId, '' , {
+      params
+    });
+  }
+
+  deletePhotoOfCollection(collectionId: string, photoId: string): any {
+    let params = new HttpParams();
+    params = params.append('photoId', photoId);
+    return this._http.delete( environment.api + '/photo/collections/mine/' + collectionId,  {
+      params
+    });
+  }
+
+  getCollection(collectionId: string): any {
+    return this._http.get(environment.api + '/photo/collections/mine/' + collectionId);
+  }
+}
+
+class Coll {
+  title: string;
+
+  constructor(title: string) {
+    this.title = title;
   }
 }
