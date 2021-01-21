@@ -30,6 +30,7 @@ import { MasonryPostsModule } from './share/masonry-posts/masonary-posts.module'
 import { MainModule } from './main/main.module';
 import { FullPictureComponent } from './share/full-picture/full-picture.component';
 import { CategoryPostsComponent } from './category-posts/category-posts.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -42,7 +43,7 @@ import { CategoryPostsComponent } from './category-posts/category-posts.componen
     SearchComponent,
     MainNavComponent,
     Error404Component,
-    Error500Component,    
+    Error500Component,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +62,7 @@ import { CategoryPostsComponent } from './category-posts/category-posts.componen
     MasonryPostsModule,
     MainModule,
     MatTreeModule
+    MatSnackBarModule
   ],
   providers: [
     {

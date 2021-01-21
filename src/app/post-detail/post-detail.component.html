@@ -43,13 +43,26 @@
                </div>
                <div class="col-ms-1" *ngIf="isAuth">
                  <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="امتیاز دهندگان" (click)="getUsersRated()">
-                   <mat-icon>people_alt</mat-icon>
+                   <mat-icon style="margin-bottom: 15px">people_alt</mat-icon>
                    {{numUsersRate}}</button>
                  <mat-menu #menu="matMenu">
                    <div mat-menu-item *ngFor="let user of usersProfPic">
                      <button mat-button [routerLink]="['/user',user.username]">
                        <img [src]="user.imageUrl" alt="Avatar" class="avatar-img">
                        <small>&nbsp;{{user.username}}&nbsp;&nbsp;★&nbsp;{{map.get(user.username)}}</small></button>
+                   </div>
+                 </mat-menu>
+                 <button mat-icon-button matTooltip="اضافه به کلکسیون" [matMenuTriggerFor]="menu2" (click)="getCollections()">
+                   <mat-icon style="margin-bottom: 15px">library_add</mat-icon>
+                 </button>
+                 <mat-menu #menu2="matMenu">
+                   <div mat-menu-item>
+                     <button mat-button (click)="createCollection()">
+                       <small>&nbsp;اضافه به کلکسیون جدید&nbsp;&nbsp;</small></button>
+                   </div>
+                   <div mat-menu-item *ngFor="let item of collections">
+                     <button mat-button (click)="addToCollection(item)">
+                       <small>&nbsp;{{item.title}}&nbsp;&nbsp;</small></button>
                    </div>
                  </mat-menu>
                </div>

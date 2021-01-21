@@ -1,0 +1,24 @@
+<div class="container collection">
+  <br><br>
+  <h3 class="ui-username text-center">{{title}}</h3>
+  <hr>
+  <ng-template #noInfo>
+    <div *ngIf="!(loaderService.isLoading | async)" class="alert alert-danger" role="alert">
+      <h4 class="alert-heading" dir="rtl">هیچ عکسی در کلکسیون موجود نیست!</h4>
+    </div>
+  </ng-template>
+  <mdb-carousel class="carousel" *ngIf="!isEmpty; else noInfo" >
+    <mdb-carousel-item *ngFor="let item of collect;">
+      <div class="container col-md-6 w-100" >
+        <a (click)="showPicture(item.imageUrl)">
+          <img class="d-block w-100" src="{{item.imageUrl}}" alt="photo">
+        </a>
+      </div>
+      <div class="carousel-caption carousel-indicators">
+        <button mat-icon-button matTooltip="حذف عکس" class="btn-custom1" (click)="deletePhoto(item)"><mat-icon>delete_forever</mat-icon></button>
+      </div>
+    </mdb-carousel-item>
+  </mdb-carousel>
+  <br><br>
+</div>
+

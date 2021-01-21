@@ -252,6 +252,10 @@ export class ProfileDetailComponent implements OnInit, OnDestroy {
       this.isNotifON = isNotif;
     });
   }
+
+  navigateToCollections(): void {
+    this._router.navigate(['user/profile/collections']);
+  }
 }
 
 interface PictureData {

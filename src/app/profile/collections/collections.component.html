@@ -1,0 +1,33 @@
+<div class="container collections" *ngIf="isAuth">
+  <br>
+  <div class="col-12" dir="rtl">
+    <div class="row justify-content-start">
+      <h3><small>کلکسیون&nbsp;&nbsp;</small></h3>
+      <button mat-icon-button matTooltip="ساخت کلکسیون" (click)="newCollection()" class="btn-plus"><mat-icon>add</mat-icon></button>
+    </div>
+  </div>
+  <hr>
+  <ng-template #noInfo>
+    <div *ngIf="!(loaderService.isLoading | async)" class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">کلکسیونی ساخته نشده است</h4>
+    </div>
+  </ng-template>
+  <div class="col-12" *ngIf="!isEmpty; else noInfo">
+    <div class="col-12" *ngFor="let collection of collections; let i = index">
+      <h3 *ngIf="!isEdit[i]; else edit">{{collection.title}}</h3>
+      <p *ngIf="!isEdit[i]"><small dir="rtl">{{collection.creationDate | dateAgo}}</small></p>
+      <ng-template #edit>
+        <button mat-icon-button matTooltip="انصراف" (click)="setEdit(false, i)" class="btnn btn-dangers"><mat-icon>close</mat-icon></button>
+        <button mat-icon-button matTooltip="ثبت" (click)="editCollection(collection.id)" [disabled]="!newTitle" class="btnn btn-plus"><mat-icon>post_add</mat-icon></button>
+        <input type="search" id="newTitle" dir="rtl" class="input" [(ngModel)]="newTitle">
+        <label for="newTitle">&nbsp;&nbsp; :انتخاب عنوان جدید</label>
+      </ng-template>
+      <div class="row">
+        <button mat-icon-button matTooltip="حذف کلکسیون" (click)="deleteCollection(collection.id)" class="btnn btn-dangers"><mat-icon>delete_forever</mat-icon></button>
+        <button mat-icon-button matTooltip="ویرایش عنوان" (click)="setEdit(true, i)" class="btnn btn-plus"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button matTooltip="نمایش کلکسیون" (click)="navigateToCollection(collection)" class="btnn btn-plus"><mat-icon>read_more</mat-icon></button>
+      </div>
+      <hr>
+    </div>
+  </div>
+</div>

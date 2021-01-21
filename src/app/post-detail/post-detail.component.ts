@@ -12,6 +12,10 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from '../share/confirm-dialog/confirm-dialog.component';
 import { FullPictureComponent } from '../share/full-picture/full-picture.component';
+import {Collection} from '../profile/collections/Collection.module';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar/snack-bar-config';
+import {NewCollectionComponent} from '../profile/collections/new-collection/new-collection.component';
 
 @Component({
   selector: 'app-post-detail',
@@ -32,14 +36,21 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   currentUser: boolean;
   map: Map<string, number> = new Map<string, number>();
   usersProfPic: PictureData[] = [];
-  
+  collections: Collection[] = [];
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   private picData: PictureData;
+  private errMessage = '';
+  private actMessage = 'x';
+  private showDialogSubs: Subscription;
 
   constructor(private postService: PostService, private route: ActivatedRoute,
               public loaderService: LoaderService, private authService: AuthService,
               private profileService: ProfileService,
               public dialog: MatDialog,
-              public router: Router) {
+              public router: Router,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -182,12 +193,70 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     dialogRef.componentInstance.src=this.postUrl;
   }
   private deletePost(){
-    
+
     let deletePostSubs:Subscription = this.postService.deletePost(this.post.id).subscribe(data=>{
       this.router.navigate(['/user/profile']);
-      
+
     });
     this.subs.push(deletePostSubs);
+  }
+
+  getCollections(): void {
+    if (this.authService.isInLocal()) {
+      let subsCollections: Subscription = this.profileService.getCollections().subscribe((collections: Collection[]) => {
+        this.collections = [];
+        this.collections = collections.reverse();
+      });
+      this.subs.push(subsCollections);
+    } else {
+      this.rateError = 'برای مشاهده کلکسیون ها باید وارد حساب کاربری خود شوید';
+    }
+  }
+
+  addToCollection(collection: Collection): void {
+    if (this.authService.isInLocal()) {
+      const subsAdd: Subscription = this.profileService.addPhotoToCollection(collection.id, this.id).subscribe( () => {
+        this.errMessage =   ' عکس به کلکسیون '  + collection.title + ' اضافه شد. ';
+        this.openSnackBar();
+      }, (err: HttpErrorResponse) => {
+        this.errMessage =  ' عکس قبلا در کلکسیون '  + collection.title +  ' اضافه شده است. ';
+        this.openSnackBar();
+      });
+      this.subs.push(subsAdd);
+    } else {
+      this.rateError = 'برای اضافه کردن به کلکسیون ها باید وارد حساب کاربری خود شوید';
+    }
+  }
+
+  private openSnackBar(): void {
+    this.snackBar.open(this.errMessage, this.actMessage, {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      direction: 'rtl',
+    });
+  }
+
+  createCollection(): void {
+    const dialogRef = this.dialog.open(NewCollectionComponent);
+    this.showDialogSubs = dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        let createTitle = '';
+        createTitle = result;
+        this.profileService.createCollection(createTitle).subscribe( () => {
+          this.profileService.getCollections().subscribe((collections: Collection[]) => {
+            this.collections = [];
+            this.collections = collections.reverse();
+            this.addToCollection(this.collections[0]);
+            this.errMessage = 'کلکسیون ساخته شد و عکس به آن اضافه شد!';
+            this.openSnackBar();
+          });
+        }, (errorData: HttpErrorResponse) => {
+          this.errMessage = 'کلکسیونی به این نام موجود است دوباره تلاش کنید!';
+          this.openSnackBar();
+        });
+      }
+    });
   }
 }
 

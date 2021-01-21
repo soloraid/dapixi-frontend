@@ -16,7 +16,7 @@ export class DateAgoPipe implements PipeTransform {
       const seconds = Math.floor((+new Date() -  +creationDate) / 1000);
       if (seconds < 59)
       {
-        return 'الان';
+        return 'هم اکنون';
       }
       const intervals = {
         سال: 31536000,

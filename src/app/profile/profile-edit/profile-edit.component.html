@@ -144,8 +144,9 @@
       <div class="float-left">
         <!--<mat-error *ngIf="this.dateForm.get('date').hasError('today')">تاریخ تولد قابل قبول نیست!</mat-error>-->
         <div class="submit-box">
-          <button mat-button matTooltip="حذف اکانت" (click)="showDialog()">
-            <mat-icon >delete_forever</mat-icon>
+          <p class="text-danger"><small>در صورت حذف اکانت تمام اطلاعات شما حذف خواهد شد.</small></p>
+          <button mat-button matTooltip="حذف اکانت" (click)="showDialog()" style="outline: none;margin-bottom: 12px">
+            <mat-icon style="color: var(--tertiary_color) ">delete_forever</mat-icon>
           </button>
           <mat-spinner *ngIf="dateLoading" diameter="25"></mat-spinner>
         </div>
