@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-collection.component.scss']
 })
 export class NewCollectionComponent implements OnInit {
+  title: string;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }
