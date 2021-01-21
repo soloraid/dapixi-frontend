@@ -61,7 +61,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatAutocompleteModule,
     MasonryPostsModule,
     MainModule,
-    MatTreeModule
+    MatTreeModule,
     MatSnackBarModule
   ],
   providers: [
