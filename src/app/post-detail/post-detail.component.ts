@@ -219,7 +219,18 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         this.errMessage =   ' عکس به کلکسیون '  + collection.title + ' اضافه شد. ';
         this.openSnackBar();
       }, (err: HttpErrorResponse) => {
-        this.errMessage =  ' عکس قبلا در کلکسیون '  + collection.title +  ' اضافه شده است. ';
+        if(err.status ===400){
+          this.errMessage =  ' عکس قبلا در کلکسیون '  + collection.title +  ' اضافه شده است. ';
+        }else if(err.status===404){
+          console.log(err);
+          if(err.error.message.startsWith('No photo with id')){
+            this.errMessage = 'این عکس حذف شده‌است';
+          }else if(err.error.message.startsWith('no collection with id')){
+            this.errMessage = 'این کلکسیون حذف شده است';
+          }else{
+            this.errMessage='خطای نا مشخص'
+          }
+        }
         this.openSnackBar();
       });
       this.subs.push(subsAdd);
