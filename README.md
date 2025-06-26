@@ -95,7 +95,7 @@ Dapixi-frontend uses the **Jasmine** testing framework with **Karma** test runne
 To run all unit tests:
 
   ```sh
-  npm test0
+  npm test
   ```
 
 
